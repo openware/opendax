@@ -1,0 +1,76 @@
+version: '3.6'
+
+services:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ../config/mysql/my.cnf:/etc/mysql/my.cnf
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+
+  coinhub:
+    image: rubykube/coinhub
+
+  redis:
+    image: redis:4.0.10
+    restart: always
+    volumes:
+      - redis_data:/data
+
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    restart: always
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: rabbitmq.wb.local'
+      traefik.port: 15672
+
+  vault:
+    image: vault:0.10.2
+    restart: always
+    environment:
+      SKIP_SETCAP: 1
+      VAULT_TOKEN: changeme
+      VAULT_DEV_ROOT_TOKEN_ID: changeme
+      VAULT_ADDR: http://vault:8200
+
+  auth:
+    image: quay.io/openware/authz-dummy:0.1.1
+    ports:
+      - "8005:8005"
+    environment:
+      DUMMY_USER_EMAIL: "admin@barong.io"
+      DUMMY_USER_UID: "U123456789"
+      DUMMY_USER_ROLE: "admin"
+      DUMMY_USER_LEVEL: 3
+      DUMMY_USER_STATE: "active"
+      DUMMY_JWT_PRIVKEY_FILE: "/secrets/rsa-key"
+    volumes:
+      - ./secrets:/secrets:ro
+
+  gateway:
+    image: quay.io/datawire/ambassador:0.40.0
+    ports:
+      - "8080:80"
+    depends_on:
+      - auth
+    volumes:
+      - ./gateway:/ambassador/ambassador-config/:ro
+    entrypoint:
+      - sh
+      - -exc
+      - |
+        # Allow accessing host's 0.0.0.0 so we can connect to a local peatio
+        # from the gateway container
+        ip -4 route list match 0/0 | awk '{print $$3" peatio.local"}' >> /etc/hosts
+        # Continue with the default entrypoint
+        ./entrypoint.sh
+
+volumes:
+  db_data:
+  rabbitmq_data:
+  redis_data:

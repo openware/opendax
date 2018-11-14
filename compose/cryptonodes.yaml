@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  geth:
+    image: ethereum/client-go:stable
+    restart: always
+    command: |
+      --syncmode=full
+      --rinkeby
+      --rpc
+      --rpcaddr=0.0.0.0
+      --rpcport=8545
+      --port=30303
+      --rpcapi="db,personal,eth,net,web3"
+      --rpccorsdomain="*"
+      --rpcvhosts="*"
+    volumes:
+      - eth-data:/root/.ethereum/
+    expose:
+      - "8545"
+      - "30303"
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: eth.wb.local'
+      traefik.port: 8545
+
+  bitcoind:
+    image: kylemanna/bitcoind
+    restart: always
+    volumes:
+      - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
+      - btc-data:/bitcoin
+    expose:
+      - "18332"
+      - "18333"
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: btc.wb.local'
+      traefik.port: 18332
+
+volumes:
+  eth-data:
+  btc-data:

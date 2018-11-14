@@ -1,0 +1,44 @@
+version: '3.6'
+
+services:
+  peatio:
+    image: rubykube/peatio:1.9.1-rc.20
+    depends_on:
+      - proxy
+      - db
+      - redis
+      - rabbitmq
+      - barong
+      - ranger
+      - geth
+      - coinhub
+    env_file:
+      - ../config/peatio.env
+    expose:
+      - "8000"
+    volumes:
+      - ../config/peatio/seed:/opt/peatio/config/seed
+      - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
+      - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: api.wb.local'
+      traefik.port: 8000
+    command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
+
+  barong:
+    image: rubykube/barong:1.8.36
+    depends_on:
+      - proxy
+      - db
+      - vault
+    env_file:
+      - ../config/barong.env
+    volumes:
+      - ../config/barong:/opt/barong/config:ro
+    expose:
+      - "8001"
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: auth.wb.local'
+      traefik.port: 8001

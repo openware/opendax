@@ -1,0 +1,10 @@
+- key:               eth-rinkeby
+  name:              Ethereum Rinkeby
+  client:            ethereum
+  server:            http://geth:8545
+  height:            2756436
+  min_confirmations: 6
+  explorer:
+    address:         https://rinkeby.etherscan.io/address/#{address}
+    transaction:     https://rinkeby.etherscan.io/tx/#{txid}
+  status:            active

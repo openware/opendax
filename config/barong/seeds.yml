@@ -1,0 +1,155 @@
+# List of Barong administrators.
+#
+# Other parameters that you can set here can be found in Account,
+# Profile and Phone models (e.g. app/models/account.rb...); all the
+# model properties are listed at the very bottom of this models files.
+#
+# Note: email is the only required field here.
+accounts:
+  - account:
+      email: admin@barong.io
+      password: "Chah5YohWm"
+      role: admin
+      state: active
+      level: 3
+  - account:
+      email: philliparuais@gmail.com
+      password: "aikohMai7oh"
+      role: admin
+      state: active
+      level: 3
+    phone:
+      country: "FR"
+      number: "33755882002"
+    profile:
+      dob: "1982-12-22"
+      first_name: "Phillipa"
+      last_name: "Ruais"
+      address: "62 boulevard d'Alsace"
+      postcode: "78140"
+      city: "Velizy-Villacoublay"
+      country: "FR"
+  - account:
+      email: antoinepelletier@gmail.com
+      password: "dous8Roh8aang"
+      role: member
+      state: active
+      level: 0
+    phone:
+      country: "FR"
+      number: "33755882189"
+    profile:
+      dob: "1961-11-14"
+      first_name: "Antoine"
+      last_name: "Pelletier"
+      address: "94 rue Charles Corbeau"
+      postcode: "76400"
+      city: "Fecamp"
+      country: "FR"
+  - account:
+      email: cecilevaillancourt@gmail.com
+      password: "mooC6yaebie"
+      role: member
+      state: active
+      level: 1
+    phone:
+      country: "FR"
+      number: "40729371571"
+    profile:
+      dob: "1984-05-22"
+      first_name: "Cecile"
+      last_name: "Vaillancourt"
+      address: "45 rue Saint Germain"
+      postcode: "92230"
+      city: "Gennevilliers"
+      country: "FR"
+  - account:
+      email: charmaineouellet@gmail.com
+      password: "aeR2yahquei"
+      role: member
+      state: active
+      level: 2
+    phone:
+      country: "FR"
+      number: "447383453439"
+    profile:
+      dob: "1988-05-25"
+      first_name: "Charmaine"
+      last_name: "Ouellet"
+      address: "22 rue du President Roosevelt"
+      postcode: "49400"
+      city: "Saumur"
+      country: "FR"
+  - account:
+      email: ramonlmccourt@gmail.com
+      password: "Ucie8chiepah"
+      role: member
+      state: active
+      level: 3
+    phone:
+      country: "US"
+      number: "17542058966"
+    profile:
+      dob: "1964-08-14"
+      first_name: "Ramon"
+      last_name: "McCourt"
+      address: "224 Spirit Drive"
+      postcode: "32008"
+      city: "Branford"
+      country: "US"
+  - account:
+      email: amyjbriggs@gmail.com
+      password: "Ahniexa9"
+      role: member
+      state: active
+      level: 3
+    phone:
+      country: "US"
+      number: "17722002528"
+    profile:
+      dob: "1968-12-22"
+      first_name: "Amy"
+      last_name: "Briggs"
+      address: "3848 Mount Tabor"
+      postcode: "10601"
+      city: "White Plains"
+      country: "US"
+  - account:
+      email: davidtmoore@gmail.com
+      password: "Ozeiphib5"
+      role: member
+      state: active
+      level: 3
+    phone:
+      country: "US"
+      number: "19706823057"
+    profile:
+      dob: "1935-10-27"
+      first_name: "David"
+      last_name: "Moore"
+      address: "41 Aviation Way"
+      postcode: "90071"
+      city: "Los Angeles"
+      country: "US"
+
+# List of applications that will use Barong OAuth.
+# You can set any Doorkeeper::Application property here.
+#
+# Note: in production env, `redirect_uri` can only be a 'https' url.
+applications:
+  - name: "Peatio"
+    redirect_uri: "http://api.wb.local/auth/barong/callback"
+    skipauth: true
+    uid: "a68be319fca51caca60eed5711226e568bd1c1d13ff452b945515f1a6ffbaca4"
+    secret: "ab80e2c843861c4d23e63f5472cd1c9ee6f55e388863e21f22b03a9093977f29"
+
+levels:
+  - key: email
+    value: verified
+    description: "User clicked on the confirmation link"
+  - key: phone
+    value: verified
+    description: "User entered a valid code from sms"
+  - key: document
+    value: verified
+    description: "User personal documents have been verified"

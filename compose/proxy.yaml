@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  proxy:
+    image: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../config/traefik.toml:/etc/traefik/traefik.toml:ro
+      - ../config/acme.json:/acme.json
+    networks:
+      default:
+        aliases:
+          - api.wb.local
+          - auth.wb.local
+          - ws.ranger.wb.local
+          - pma.wb.local
+          - eth.wb.local
+          - monitor.wb.local
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: monitor.wb.local'
+      traefik.port: 8080

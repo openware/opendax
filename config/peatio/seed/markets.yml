@@ -1,0 +1,19 @@
+- id:            usdeth
+  ask_unit:      usd
+  bid_unit:      eth
+  ask_fee:       0.0015
+  bid_fee:       0.0015
+  ask_precision: 8
+  bid_precision: 8
+  position:      100
+  enabled:       true
+
+- id:            eurusd
+  ask_unit:      eur
+  bid_unit:      usd
+  ask_fee:       0.0015
+  bid_fee:       0.0015
+  ask_precision: 8
+  bid_precision: 8
+  position:      100
+  enabled:       true
