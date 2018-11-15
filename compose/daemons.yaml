@@ -8,10 +8,8 @@ x-daemon: &peatio-daemon
     - db
     - redis
     - rabbitmq
-    - geth
-    - barong
+    # - geth
     - ranger
-    - coinhub
   env_file:
     - ../config/peatio.env
   volumes:

@@ -1,0 +1,16 @@
+---
+apiVersion: ambassador/v0
+kind: Mapping
+name: peatio_api_mapping
+host: www.wb.local
+prefix: /api/peatio/v2/
+rewrite: /api/v2/
+service: peatio:8000
+---
+apiVersion: ambassador/v0
+kind: Mapping
+name: peatio_app_mapping
+host: peatio.wb.local
+prefix: /
+rewrite: /
+service: peatio:8000

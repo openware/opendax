@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  gateway:
+    image: quay.io/datawire/ambassador:0.40.0
+    depends_on:
+      - auth
+    volumes:
+      - ../config/gateway:/ambassador/ambassador-config/:ro
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'HostRegexp: {www,peatio}.wb.local'
+      traefik.port: 80

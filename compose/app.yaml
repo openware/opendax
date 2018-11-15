@@ -2,16 +2,14 @@ version: '3.6'
 
 services:
   peatio:
-    image: rubykube/peatio:1.9.1-rc.20
+    image: rubykube/peatio:2.0.0.alpha
     depends_on:
       - proxy
       - db
       - redis
       - rabbitmq
-      - barong
       - ranger
-      - geth
-      - coinhub
+      # - geth
     env_file:
       - ../config/peatio.env
     expose:
@@ -20,25 +18,20 @@ services:
       - ../config/peatio/seed:/opt/peatio/config/seed
       - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
       - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: api.wb.local'
-      traefik.port: 8000
+    # labels:
+    #   traefik.enable: true
+    #   traefik.frontend.rule: 'Host: api.wb.local'
+    #   traefik.port: 8000
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
-  barong:
-    image: rubykube/barong:1.8.36
-    depends_on:
-      - proxy
-      - db
-      - vault
-    env_file:
-      - ../config/barong.env
+  auth:
+    image: quay.io/openware/authz-dummy:0.1.1
+    environment:
+      DUMMY_USER_EMAIL: "admin@barong.io"
+      DUMMY_USER_UID: "U123456789"
+      DUMMY_USER_ROLE: "admin"
+      DUMMY_USER_LEVEL: 3
+      DUMMY_USER_STATE: "active"
+      DUMMY_JWT_PRIVKEY_FILE: "/secrets/barong.key"
     volumes:
-      - ../config/barong:/opt/barong/config:ro
-    expose:
-      - "8001"
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: auth.wb.local'
-      traefik.port: 8001
+      - ../config/keys:/secrets:ro

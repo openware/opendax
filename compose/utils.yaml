@@ -1,23 +1,6 @@
 version: '3.6'
 
 services:
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    depends_on:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_USER: root
-      PMA_PASSWORD: changeme
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: pma.wb.local'
-      traefik.port: 80
-
   mailcatcher:
     image: schickling/mailcatcher
     labels:

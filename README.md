@@ -1,2 +1,3 @@
-# mikrokube
-Minimal stack for VM deployment
+# Mikro
+
+> Minimal stack for VM deployment.

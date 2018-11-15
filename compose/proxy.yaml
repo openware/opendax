@@ -13,10 +13,10 @@ services:
     networks:
       default:
         aliases:
-          - api.wb.local
-          - auth.wb.local
+          - www.wb.local
+          - peatio.wb.local
+          - barong.wb.local
           - ws.ranger.wb.local
-          - pma.wb.local
           - eth.wb.local
           - monitor.wb.local
     labels:
