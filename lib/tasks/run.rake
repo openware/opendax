@@ -4,7 +4,7 @@ namespace :run do
     task :deps do
         puts '----- Starting dependencies -----'
         sh 'docker-compose up -d vault db redis rabbitmq mailcatcher ranger'
-        sh 'docker-compose run --rm vault secrets enable totp'
+        sh 'docker-compose run --rm vault secrets enable totp || echo Vault already enabled'
         sleep 3
     end
 
