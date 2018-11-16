@@ -9,5 +9,5 @@ services:
       - ../config/gateway:/ambassador/ambassador-config/:ro
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'HostRegexp: {www,peatio}.wb.local'
+      traefik.frontend.rule: 'Host: www.wb.local, peatio.wb.local'
       traefik.port: 80
