@@ -3,9 +3,17 @@ apiVersion: ambassador/v0
 kind: Mapping
 name: peatio_api_mapping
 host: www.wb.local
-prefix: /api/peatio/v2/
+prefix: /api/v2/peatio
 rewrite: /api/v2/
 service: peatio:8000
+---
+apiVersion: ambassador/v0
+kind: Mapping
+name: barong_api_mapping
+host: www.wb.local
+prefix: /api/v2/barong
+rewrite: /api/v2/
+service: barong:8001
 ---
 apiVersion: ambassador/v0
 kind: Mapping
@@ -14,3 +22,11 @@ host: peatio.wb.local
 prefix: /
 rewrite: /
 service: peatio:8000
+---
+apiVersion: ambassador/v0
+kind: Mapping
+name: barong_app_mapping
+host: barong.wb.local
+prefix: /
+rewrite: /
+service: barong:8001

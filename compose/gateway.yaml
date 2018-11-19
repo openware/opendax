@@ -7,7 +7,11 @@ services:
       - auth
     volumes:
       - ../config/gateway:/ambassador/ambassador-config/:ro
+    ports:
+      - '8081:80'
+      - '8877:8877'
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: www.wb.local, peatio.wb.local'
+      traefik.frontend.rule: 'Host: www.wb.local, peatio.wb.local, barong.wb.local'
+      traefik.frontend.rule: 'PathPrefix: /api/'
       traefik.port: 80

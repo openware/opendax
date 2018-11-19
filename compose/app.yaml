@@ -8,7 +8,7 @@ services:
       - db
       - redis
       - rabbitmq
-      - ranger
+        #  - ranger
       # - geth
     env_file:
       - ../config/peatio.env
@@ -35,3 +35,27 @@ services:
       DUMMY_JWT_PRIVKEY_FILE: "/secrets/barong.key"
     volumes:
       - ../config/keys:/secrets:ro
+
+  barong:
+    image: quay.io/openware/barong2
+    env_file:
+      - ../config/barong.env
+    ports:
+      - "8001:8001"
+    volumes:
+      - ../config/keys:/secrets:ro
+
+  mikroapp:
+    image: node:11
+    volumes:
+      - ../../mikroapp:/home/node
+    command:
+      - sh
+      - -c
+      - |
+        cd /home/node
+        yarn start
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: www.wb.local'
+      traefik.port: 3000
