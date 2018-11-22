@@ -8,8 +8,7 @@ services:
       - db
       - redis
       - rabbitmq
-        #  - ranger
-      # - geth
+      - geth
     env_file:
       - ../config/peatio.env
     expose:
@@ -44,18 +43,3 @@ services:
       - "8001:8001"
     volumes:
       - ../config/keys:/secrets:ro
-
-  mikroapp:
-    image: node:11
-    volumes:
-      - ../../mikroapp:/home/node
-    command:
-      - sh
-      - -c
-      - |
-        cd /home/node
-        yarn start
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: www.wb.local'
-      traefik.port: 3000

@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+  frontend:
+    image: node:11
+    volumes:
+      - ../vendor/frontend:/home/node
+    command:
+      - sh
+      - -c
+      - |
+        cd /home/node
+        yarn start
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: www.wb.local'
+      traefik.port: 3000
+  control-tower:
+    image: node:11
+    volumes:
+      - ../vendor/control-panel:/home/node
+    command:
+      - sh
+      - -c
+      - |
+        cd /home/node
+        yarn start
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: admin.wb.local'
+      traefik.port: 3000
