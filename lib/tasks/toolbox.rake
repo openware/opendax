@@ -1,7 +1,3 @@
-require 'yaml'
-require 'erb'
-require 'base64'
-
 namespace :toolbox do
   desc 'Run the toolbox'
   task :run do

@@ -1,6 +1,4 @@
-require 'erb'
 require 'openssl'
-require 'base64'
 
 namespace :config do
   desc 'Render configuration files'
