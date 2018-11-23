@@ -8,7 +8,6 @@ services:
       - db
       - redis
       - rabbitmq
-      - geth
     env_file:
       - ../config/peatio.env
     expose:

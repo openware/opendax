@@ -10,9 +10,10 @@ services:
       - -c
       - |
         cd /home/node
-        yarn start
+        node scripts/server.js
     labels:
       traefik.enable: true
+      traefik.frontend.priority: 20
       traefik.frontend.rule: "Host: www.${APP_DOMAIN}"
       traefik.port: 3000
 
