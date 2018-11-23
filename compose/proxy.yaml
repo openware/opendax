@@ -18,6 +18,7 @@ services:
           - barong.wb.local
           - ws.ranger.wb.local
           - eth.wb.local
+          - tower.wb.local
           - monitor.wb.local
     labels:
       traefik.enable: true

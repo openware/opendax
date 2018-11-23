@@ -13,12 +13,13 @@ services:
         yarn start
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: www.wb.local'
+      traefik.frontend.rule: "Host: www.${APP_DOMAIN}"
       traefik.port: 3000
-  control-tower:
+
+  tower:
     image: node:11
     volumes:
-      - ../vendor/control-panel:/home/node
+      - ../vendor/tower:/home/node
     command:
       - sh
       - -c
@@ -27,5 +28,5 @@ services:
         yarn start
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: admin.wb.local'
+      traefik.frontend.rule: "Host: tower.${APP_DOMAIN}"
       traefik.port: 3000
