@@ -3,3 +3,4 @@ app:
   domain: "app.local"
 vendor:
   frontend: "git@github.com:rubykube/mikroapp.git"
+  tower: "git@github.com:openware/tower"
