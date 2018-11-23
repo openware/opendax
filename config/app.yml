@@ -1,0 +1,5 @@
+app:
+  name: "Mikro"
+  domain: "app.local"
+vendor:
+  frontend: "git@github.com:rubykube/mikroapp.git"
