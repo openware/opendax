@@ -1,8 +1,8 @@
 require 'openssl'
 
-namespace :config do
-  desc 'Render configuration files'
-  task :render do
+namespace :render do
+  desc 'Generate the RSA keys used during the installation'
+  task :keys do
     puts 'Generating the RSA keys'
     ['./config/keys/barong.key', './config/keys/toolbox.key'].each do |file|
       unless File.exist?(file)
@@ -10,7 +10,10 @@ namespace :config do
         File.open(file, 'w') { |file| file.puts(key) }
       end
     end
+  end
 
+  desc 'Render configuration files'
+  task :config => :keys do
     barong_key = OpenSSL::PKey::RSA.new(File.read('./config/keys/barong.key'), '')
     toolbox_key = OpenSSL::PKey::RSA.new(File.read('./config/keys/toolbox.key'), '')
 
