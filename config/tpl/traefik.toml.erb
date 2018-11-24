@@ -1,0 +1,33 @@
+logLevel = "INFO"
+defaultEntryPoints = [<%= '"https",' if CONFIG['ssl']['enabled'] %>"http"]
+
+[api]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+<% if CONFIG['ssl']['enabled'] -%>
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+<% end -%>
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "local"
+watch = true
+exposedbydefault = false
+
+<% if CONFIG['ssl']['enabled'] -%>
+[acme]
+email = "<%= CONFIG['ssl']['email'] %>"
+storage = "acme.json"
+entryPoint = "https"
+OnHostRule = true
+usebindportip = true
+
+[acme.httpChallenge]
+entryPoint = "http"
+<% end -%>

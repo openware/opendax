@@ -24,7 +24,7 @@ namespace :render do
 
     puts 'Rendering the config templates'
     Dir['config/tpl/*.erb'].each do |file|
-      result = ERB.new(File.read(file)).result(binding)
+      result = ERB.new(File.read(file), nil, '-').result(binding)
       File.write(File.join('config', file.split('/').last.sub('.erb', '')), result)
     end
   end

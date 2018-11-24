@@ -1,6 +1,9 @@
 app:
   name: "Mikro"
   domain: "app.local"
+ssl:
+  enabled: true
+  email: "support@example.com"
 vendor:
   frontend: "git@github.com:rubykube/mikroapp.git"
   tower: "git@github.com:openware/tower"
