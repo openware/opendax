@@ -4,7 +4,7 @@ services:
   gateway:
     image: quay.io/datawire/ambassador:0.40.0
     depends_on:
-      - auth
+      - barong
     volumes:
       - ../config/gateway:/ambassador/ambassador-config/:ro
     ports:

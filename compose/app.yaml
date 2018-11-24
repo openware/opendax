@@ -22,18 +22,6 @@ services:
       # traefik.port: 8000
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
-  auth:
-    image: quay.io/openware/authz-dummy:0.1.1
-    environment:
-      DUMMY_USER_EMAIL: "admin@barong.io"
-      DUMMY_USER_UID: "U123456789"
-      DUMMY_USER_ROLE: "admin"
-      DUMMY_USER_LEVEL: 3
-      DUMMY_USER_STATE: "active"
-      DUMMY_JWT_PRIVKEY_FILE: "/secrets/barong.key"
-    volumes:
-      - ../config/keys:/secrets:ro
-
   barong:
     image: quay.io/openware/barong2
     env_file:
