@@ -3,16 +3,9 @@ require 'openssl'
 namespace :config do
   desc 'Render configuration files'
   task :render do
-    files = [
-      'config/peatio.env',
-      'config/barong.env',
-      'config/ranger.env',
-      'config/toolbox.yaml',
-      'config/peatio/management_api_v1.yml'
-    ]
-
+    puts 'Generating the RSA keys'
     ['./config/keys/barong.key', './config/keys/toolbox.key'].each do |file|
-      unless File.exists?(file)
+      unless File.exist?(file)
         key = OpenSSL::PKey::RSA.generate(2048)
         File.open(file, 'w') { |file| file.puts(key) }
       end
@@ -26,9 +19,10 @@ namespace :config do
     @toolbox_jwt_private_key = Base64.urlsafe_encode64(toolbox_key.to_pem)
     @toolbox_jwt_public_key  = Base64.urlsafe_encode64(toolbox_key.public_key.to_pem)
 
-    files.each do |file|
-      result = ERB.new(File.read("#{file}.erb")).result(binding)
-      File.write(file, result)
+    puts 'Rendering the config templates'
+    Dir['config/tpl/*.erb'].each do |file|
+      result = ERB.new(File.read(file)).result(binding)
+      File.write(File.join('config', file.split('/').last.sub('.erb', '')), result)
     end
   end
 end
