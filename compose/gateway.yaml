@@ -12,6 +12,6 @@ services:
       - '8877:8877'
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: www.wb.local, peatio.wb.local, barong.wb.local; PathPrefix: /api/'
+      traefik.frontend.rule: 'Host: www.${APP_DOMAIN}, peatio.${APP_DOMAIN}, barong.${APP_DOMAIN}; PathPrefix: /api/'
       traefik.frontend.priority: 80
       traefik.port: 80

@@ -5,5 +5,5 @@ services:
     image: schickling/mailcatcher
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: mail.wb.local'
+      traefik.frontend.rule: 'Host: mail.${APP_DOMAIN}'
       traefik.port: 1080

@@ -17,9 +17,6 @@ services:
       - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
       - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
     labels: {}
-      # traefik.enable: true
-      #      traefik.frontend.rule: 'Host: peatio.wb.local'
-      # traefik.port: 8000
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:

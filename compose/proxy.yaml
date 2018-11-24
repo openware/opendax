@@ -13,14 +13,14 @@ services:
     networks:
       default:
         aliases:
-          - www.wb.local
-          - peatio.wb.local
-          - barong.wb.local
-          - ws.ranger.wb.local
-          - eth.wb.local
-          - tower.wb.local
-          - monitor.wb.local
+          - www.${APP_DOMAIN}
+          - peatio.${APP_DOMAIN}
+          - barong.${APP_DOMAIN}
+          - ws.ranger.${APP_DOMAIN}
+          - eth.${APP_DOMAIN}
+          - tower.${APP_DOMAIN}
+          - monitor.${APP_DOMAIN}
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: monitor.wb.local'
+      traefik.frontend.rule: 'Host: monitor.${APP_DOMAIN}'
       traefik.port: 8080

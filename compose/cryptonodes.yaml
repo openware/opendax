@@ -21,7 +21,7 @@ services:
       - "30303"
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: eth.wb.local'
+      traefik.frontend.rule: 'Host: eth.${APP_DOMAIN}'
       traefik.port: 8545
 
 volumes:
