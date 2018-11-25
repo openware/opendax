@@ -3,7 +3,7 @@ config/peatio/management_api_v1.yml
 config/toolbox.yaml
 config/traefik.toml
 config/*.env
-config/keys/*
-!config/keys/.gitkeep
+config/secrets/*
+!config/secrets/.gitkeep
 vendor/
 !vendor/.gitkeep

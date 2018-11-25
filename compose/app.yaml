@@ -20,10 +20,10 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:
-    image: quay.io/openware/barong2
+    image: rubykube/barong:2.0.1-alpha
     env_file:
       - ../config/barong.env
     ports:
       - "8001:8001"
     volumes:
-      - ../config/keys:/secrets:ro
+      - ../config/secrets:/secrets:ro

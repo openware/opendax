@@ -6,9 +6,9 @@
 # All values must be presented in PEM format and be URL-safe Base64 encoded.
 #
 keychain:
-  toolbox:
+  barong:
     algorithm: RS256
-    value: <%= @toolbox_jwt_public_key %>
+    value: <%= @jwt_public_key %>
 #
 # Keeps all the JWT verification options.
 # The documentation is available at https://github.com/jwt/ruby-jwt#support-for-reserved-claim-names.
@@ -30,17 +30,17 @@ jwt: {}
 #
 scopes:
   read_deposits:
-    permitted_signers: ['toolbox']
-    mandatory_signers: ['toolbox']
+    permitted_signers: ['barong']
+    mandatory_signers: ['barong']
   write_deposits:
-    permitted_signers: ['toolbox']
-    mandatory_signers: ['toolbox']
+    permitted_signers: ['barong']
+    mandatory_signers: ['barong']
   read_withdraws:
-    permitted_signers: ['toolbox']
-    mandatory_signers: ['toolbox']
+    permitted_signers: ['barong']
+    mandatory_signers: ['barong']
   write_withdraws:
-    permitted_signers: ['toolbox']
-    mandatory_signers: ['toolbox']
+    permitted_signers: ['barong']
+    mandatory_signers: ['barong']
   read_accounts:
-    permitted_signers: ['toolbox']
-    mandatory_signers: ['toolbox']
+    permitted_signers: ['barong']
+    mandatory_signers: ['barong']

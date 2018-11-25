@@ -131,7 +131,7 @@ namespace :service do
 
     def start
       puts '----- Starting the frontend -----'
-      sh 'docker-compose up -d frontend'
+      sh 'docker-compose up -d frontend tower'
     end
 
     def stop
