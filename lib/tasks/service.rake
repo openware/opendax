@@ -126,7 +126,7 @@ namespace :service do
   end
 
   desc 'Run the frontend application'
-  task :frontend, [:command] do |task, args|
+  task :frontend, [:command] => ['vendor:clone'] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
@@ -143,7 +143,7 @@ namespace :service do
   end
 
   desc 'Run the tower application'
-  task :tower, [:command] do |task, args|
+  task :tower, [:command] => ['vendor:clone'] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
@@ -164,7 +164,7 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      puts '----- Starting Utils -----'
+      puts '----- Starting utils -----'
       sh 'docker-compose up -d mailcatcher'
     end
 
@@ -181,19 +181,22 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      Rake::Task["config:render"].invoke
-      Rake::Task["proxy"].invoke
+      Rake::Task["render:config"].invoke
+      Rake::Task["service:proxy"].invoke('start')
       Rake::Task["service:backend"].invoke('start')
       Rake::Task["service:setup"].invoke('start')
       Rake::Task["service:app"].invoke('start')
       Rake::Task["service:frontend"].invoke('start')
+      Rake::Task["service:tower"].invoke('start')
     end
 
     def stop
+      Rake::Task["service:proxy"].invoke('stop')
       Rake::Task["service:backend"].invoke('stop')
       Rake::Task["service:setup"].invoke('stop')
       Rake::Task["service:app"].invoke('stop')
       Rake::Task["service:frontend"].invoke('stop')
+      Rake::Task["service:tower"].invoke('stop')
     end
 
     @switch.call(args, method(:start), method(:stop))
