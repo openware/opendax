@@ -125,18 +125,35 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc 'Run frontend'
+  desc 'Run the frontend application'
   task :frontend, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
-      puts '----- Starting frontend -----'
+      puts '----- Starting the frontend -----'
       sh 'docker-compose up -d frontend'
     end
 
     def stop
-      puts '----- Stopping frontend -----'
+      puts '----- Stopping the frontend -----'
       sh 'docker-compose rm -fs frontend'
+    end
+
+    @switch.call(args, method(:start), method(:stop))
+  end
+
+  desc 'Run the tower application'
+  task :tower, [:command] do |task, args|
+    args.with_defaults(:command => 'start')
+
+    def start
+      puts '----- Starting the tower -----'
+      sh 'docker-compose up -d tower'
+    end
+
+    def stop
+      puts '----- Stopping the tower -----'
+      sh 'docker-compose rm -fs tower'
     end
 
     @switch.call(args, method(:start), method(:stop))
