@@ -114,12 +114,12 @@ namespace :service do
 
     def start
       puts '----- Starting app -----'
-      sh 'docker-compose up -d peatio proxy gateway barong'
+      sh 'docker-compose up -d peatio barong gateway'
     end
 
     def stop
       puts '----- Stopping app -----'
-      sh 'docker-compose rm -fs peatio proxy gateway barong'
+      sh 'docker-compose rm -fs peatio barong gateway'
     end
 
     @switch.call(args, method(:start), method(:stop))
