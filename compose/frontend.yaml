@@ -30,5 +30,5 @@ services:
     labels:
       traefik.enable: true
       traefik.frontend.priority: 40
-      traefik.frontend.rule: 'Host: www.${APP_DOMAIN}; PathPrefix: /tower'
+      traefik.frontend.rule: 'Host: tower.${APP_DOMAIN}'
       traefik.port: 3000
