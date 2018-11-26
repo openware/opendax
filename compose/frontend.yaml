@@ -29,5 +29,6 @@ services:
         yarn start
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "Host: tower.${APP_DOMAIN}"
+      traefik.frontend.priority: 40
+      traefik.frontend.rule: 'Host: www.${APP_DOMAIN}; PathPrefix: /tower'
       traefik.port: 3000

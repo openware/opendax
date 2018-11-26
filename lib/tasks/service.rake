@@ -15,7 +15,7 @@ namespace :service do
     end
   end
 
-  desc 'Run Traefik(reverse-proxy)'
+  desc 'Run Traefik (reverse-proxy)'
   task :proxy, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 

@@ -5,41 +5,15 @@
 # model properties are listed at the very bottom of this models files.
 #
 # Note: email is the only required field here.
-accounts:
-  - account:
-      email: admin@barong.io
-      password: "Chah5YohWm"
-      role: admin
-      state: active
-      level: 3
-  - account:
-      email: johndoe@barong.io
-      password: "Mikro12345"
-      role: admin
-      state: active
-      level: 3
-    phone:
-      country: "FR"
-      number: "33755882002"
-    profile:
-      dob: "1998-23-01"
-      first_name: "John"
-      last_name: "Doe"
-      address: "123 Main St"
-      postcode: "00000"
-      city: "Vashington"
-      country: "USA"
-
-# List of applications that will use Barong OAuth.
-# You can set any Doorkeeper::Application property here.
-#
-# Note: in production env, `redirect_uri` can only be a 'https' url.
-applications:
-  - name: "Peatio"
-    redirect_uri: "http://www.wb.local/auth/barong/callback"
-    skipauth: true
-    uid: "a68be319fca51caca60eed5711226e568bd1c1d13ff452b945515f1a6ffbaca4"
-    secret: "ab80e2c843861c4d23e63f5472cd1c9ee6f55e388863e21f22b03a9093977f29"
+users:
+  - email: admin@barong.io
+    role: admin
+    state: active
+    level: 3
+  - email: john@barong.io
+    role: member
+    state: active
+    level: 3
 
 levels:
   - key: email
