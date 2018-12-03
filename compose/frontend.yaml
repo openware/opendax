@@ -3,6 +3,7 @@ version: '3.6'
 services:
   frontend:
     image: node:11
+    user: "${UID}:${GID}"
     volumes:
       - ../vendor/frontend:/home/node
     command:
@@ -10,25 +11,20 @@ services:
       - -c
       - |
         cd /home/node
-        node scripts/server.js
-    labels:
-      traefik.enable: true
-      traefik.frontend.priority: 20
-      traefik.frontend.rule: "Host: www.${APP_DOMAIN}"
-      traefik.port: 3000
-
-  tower:
-    image: node:11
-    volumes:
-      - ../vendor/tower:/home/node
-    command:
-      - sh
-      - -c
-      - |
-        cd /home/node
+        yarn
         yarn start
     labels:
       traefik.enable: true
-      traefik.frontend.priority: 40
-      traefik.frontend.rule: 'Host: tower.${APP_DOMAIN}'
+      traefik.frontend.rule: "PathPrefix:/;Host:www.${APP_DOMAIN}"
       traefik.port: 3000
+
+  tower:
+    image: quay.io/openware/wio:latest
+    user: "${UID}:${GID}"
+    command: "-h 0.0.0.0:8080 -d /home/app/build -s 1"
+    volumes:
+      - ../vendor/tower:/home/app
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/tower;Host:www.${APP_DOMAIN}"
+      traefik.port: 8080

@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   peatio:
-    image: rubykube/peatio:2.0.0.alpha
+    image: rubykube/peatio:2.0.1-alpha
     depends_on:
       - proxy
       - db
@@ -20,7 +20,7 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:
-    image: rubykube/barong:2.0.2-alpha
+    image: rubykube/barong:2.0.4-alpha
     env_file:
       - ../config/barong.env
     ports:
