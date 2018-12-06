@@ -2,10 +2,55 @@
 
 > Minimal stack for VM deployment.
 
-## Install Mikro
+## Getting started
+
+### Install ruby with rvm
 
 ```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/rubykube/mikro/master/bin/install)"
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+```
+
+### Bundle install depedencies
+
+```
+bundle
+rake -T
+```
+
+### Clone default Frontend
+
+```
+rake vendor:clone
+```
+
+### Build tower
+
+```
+cd vendor/tower
+yarn
+yarn build
+```
+
+### Run everything
+
+```
+rake service:all
+```
+
+Insert in file `/etc/hosts`
+```
+0.0.0.0 www.app.local
+0.0.0.0 peatio.app.local
+0.0.0.0 tower.app.local
+0.0.0.0 monitor.app.local
+```
+
+You can login on `www.app.local` with the following default users from seeds.yaml
+```
+Seeded users:
+Email: admin@barong.io, password: 0lDHd9ufs9t@
+Email: john@barong.io, password: Am8icnzEI3d!
 ```
 
 ## Usage
@@ -76,3 +121,9 @@ All the components with external endpoints are accessible by their respective su
 - `monitor.base.domain` - Traefik's dashboard useful for monitoring which components are enabled
 - `ws.ranger.base.domain` - Ranger's WebSocket endpoint **[Optional]**
 - `eth.base.domain` - Geth JSON RPC API **[Optional]**
+
+## Installer tool
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/rubykube/microkube/master/bin/install)"
+```

@@ -19,9 +19,9 @@ services:
       traefik.port: 3000
 
   tower:
-    image: quay.io/openware/wio:latest
+    image: quay.io/openware/wio:0.1.0
     user: "${UID}:${GID}"
-    command: "-h 0.0.0.0:8080 -d /home/app/build -s 1"
+    command: "-d /home/app/build -s 1"
     volumes:
       - ../vendor/tower:/home/app
     labels:
