@@ -1,4 +1,5 @@
 require 'openssl'
+require 'pathname'
 
 TEMPLATE_PATH = Pathname.new('./config/templates')
 TEMPLATE_FILES = Rake::FileList["#{TEMPLATE_PATH}/**/*.erb"]
