@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   peatio:
-    image: rubykube/peatio:2.0.2-alpha
+    image: rubykube/peatio:2.0.3-alpha
     depends_on:
       - proxy
       - db
