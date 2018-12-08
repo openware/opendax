@@ -5,5 +5,5 @@ ssl:
   enabled: true
   email: "support@example.com"
 vendor:
-  frontend: "git@github.com:rubykube/mikroapp.git"
-  tower: "git@github.com:openware/tower.git"
+  frontend: "https://github.com/rubykube/mikroapp.git"
+  tower: "https://github.com/openware/tower.git"
