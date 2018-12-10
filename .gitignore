@@ -1,4 +1,5 @@
 config/acme.json
+config/gateway/mapping.yaml
 config/peatio/management_api_v1.yml
 config/toolbox.yaml
 config/traefik.toml
