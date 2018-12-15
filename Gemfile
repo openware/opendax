@@ -9,3 +9,9 @@ gem 'rake'
 
 gem 'barong'
 gem 'peatio'
+
+# webhook server deps
+gem 'sinatra'
+gem 'puma'
+gem 'rspec'
+gem 'jwt'
