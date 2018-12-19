@@ -1,2 +1,9 @@
+SECRET=$(ruby -rsecurerandom -e 'puts SecureRandom.hex(20)')
 
-puts "Mirko install package"
+sed s/GENERATED_HMAC_SECRET/${SECRET}/g templates/webhook.service > webhook.service
+
+sed -i s#MICROKUBE_DIRECTORY#${PWD}#g webhook.service
+
+echo "Generated Secret: ${SECRET}"
+
+sudo mv ./webhook.service /etc/systemd/system/webhook.service
