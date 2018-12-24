@@ -13,4 +13,5 @@ services:
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/api/;Host:www.${APP_DOMAIN},peatio.${APP_DOMAIN}"
+      traefik.frontend.rule: "PathPrefix:/;Host:peatio.${APP_DOMAIN}"
       traefik.port: 80
