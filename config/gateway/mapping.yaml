@@ -9,6 +9,21 @@ service: peatio:8000
 ---
 apiVersion: ambassador/v0
 kind: Mapping
+name: peatio_admin_mapping
+host: www.app.local
+prefix: /admin
+rewrite: ""
+service: peatio:8000
+---
+apiVersion: ambassador/v0
+kind: Mapping
+name: peatio_assets_mapping
+host: www.app.local
+prefix: /assets
+service: peatio:8000
+---
+apiVersion: ambassador/v0
+kind: Mapping
 name: barong_api_mapping
 host: www.app.local
 prefix: /api/v2/barong
