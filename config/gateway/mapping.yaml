@@ -19,7 +19,8 @@ apiVersion: ambassador/v0
 kind: Mapping
 name: peatio_assets_mapping
 host: www.app.local
-prefix: /assets
+prefix: /assets/
+rewrite: ""
 service: peatio:8000
 ---
 apiVersion: ambassador/v0
