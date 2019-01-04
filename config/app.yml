@@ -4,6 +4,3 @@ app:
 ssl:
   enabled: true
   email: "support@example.com"
-vendor:
-  frontend: "https://github.com/rubykube/mikroapp.git"
-  tower: "https://github.com/openware/tower.git"
