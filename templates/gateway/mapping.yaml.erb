@@ -6,6 +6,8 @@ host: www.<%= CONFIG['app']['domain'] %>
 prefix: /api/v2/peatio
 rewrite: /api/v2/
 service: peatio:8000
+cors:
+  origins: *
 ---
 apiVersion: ambassador/v0
 kind: Mapping
@@ -14,6 +16,8 @@ host: www.<%= CONFIG['app']['domain'] %>
 prefix: /api/v2/barong
 rewrite: /api/v2/
 service: barong:8001
+cors:
+  origins: *
 ---
 apiVersion: ambassador/v0
 kind: Mapping
