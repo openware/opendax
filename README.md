@@ -1,4 +1,4 @@
-# Mikro
+# MicroKube
 
 > Minimal stack for VM deployment.
 
@@ -16,12 +16,6 @@ curl -sSL https://get.rvm.io | bash -s stable
 ```
 bundle
 rake -T
-```
-
-### Clone default Frontend
-
-```
-rake vendor:clone
 ```
 
 ### Build tower
@@ -57,7 +51,7 @@ Email: john@barong.io, password: Am8icnzEI3d!
 
 ### Initial configuration
 
-All the Mikro deployment files have their confguration stored in `config/app.yml`.
+All the MicroKube deployment files have their confguration stored in `config/app.yml`.
 
 Feel free to fill it out with correct values:
 
@@ -73,11 +67,11 @@ Feel free to fill it out with correct values:
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
     Note: be sure to append all the subdomains based on app.domain to your
-    /etc/hosts file if you're running Mikro locally
+    /etc/hosts file if you're running MicroKube locally
 
 ### Bringing up the stack
 
-The Mikro stack can be brought up using two ways:
+The MicroKube stack can be brought up using two ways:
 
 1. Bootstrap all the components at once using `rake service:all[start]`
 2. Start every component one by one using `rake service:*component*[start]`

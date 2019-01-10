@@ -8,7 +8,6 @@ x-daemon: &peatio-daemon
     - db
     - redis
     - rabbitmq
-    # - geth
     - ranger
   env_file:
     - ../config/peatio.env
