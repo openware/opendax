@@ -1,5 +1,5 @@
 config/acme.json
-config/frontend/env.js
+config/frontend/*.js
 config/gateway/mapping.yaml
 config/peatio/management_api_v1.yml
 config/toolbox.yaml
