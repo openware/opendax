@@ -12,6 +12,8 @@ services:
 
   tower:
     image: "${TOWER_IMAGE}"
+    volumes:
+      - ../config/frontend/tower.js:/home/app/env.js
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/tower;Host:www.${APP_DOMAIN}"
