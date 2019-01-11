@@ -1,7 +1,7 @@
 version: '3.6'
 
 x-daemon: &peatio-daemon
-  image: rubykube/peatio:1.9.1-rc.20
+  image: "${PEATIO_IMAGE}"
   restart: always
   depends_on:
     - peatio
