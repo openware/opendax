@@ -13,13 +13,13 @@ services:
     networks:
       default:
         aliases:
-          - www.app.local
-          - peatio.app.local
-          - ws.ranger.app.local
-          - eth.app.local
-          - tower.app.local
-          - monitor.app.local
+          - www.<%= CONFIG['app']['domain'] %>
+          - peatio.<%= CONFIG['app']['domain'] %>
+          - ws.ranger.<%= CONFIG['app']['domain'] %>
+          - eth.<%= CONFIG['app']['domain'] %>
+          - tower.<%= CONFIG['app']['domain'] %>
+          - monitor.<%= CONFIG['app']['domain'] %>
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: monitor.app.local'
+      traefik.frontend.rule: 'Host: monitor.<%= CONFIG['app']['domain'] %>'
       traefik.port: 8080

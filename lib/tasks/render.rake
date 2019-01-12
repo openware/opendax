@@ -21,7 +21,7 @@ namespace :render do
   def output(file)
     path = Pathname.new(file)
     outfile = path.relative_path_from(TEMPLATE_PATH).sub('.erb', '')
-    return File.join('config', outfile)
+    return File.join('.', outfile)
   end
 
   def render(source, target)

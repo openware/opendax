@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  gateway:
+    image: quay.io/datawire/ambassador:0.40.2
+    depends_on:
+      - barong
+    volumes:
+      - ../config/gateway:/ambassador/ambassador-config/:ro
+    ports:
+      - '8081:80'
+      - '8877:8877'
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:www.${APP_DOMAIN}"
+      traefik.port: 80
