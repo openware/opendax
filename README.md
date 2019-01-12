@@ -18,14 +18,6 @@ bundle
 rake -T
 ```
 
-### Build tower
-
-```
-cd vendor/tower
-yarn
-yarn build
-```
-
 ### Run everything
 
 ```
@@ -61,8 +53,8 @@ Feel free to fill it out with correct values:
 | `app.domain`      | Base domain name to be used                      |
 | `ssl.enabled`     | Enable SSL certificate generation                |
 | `ssl.email`       | Email address to use for SSL generation requests |
-| `vendor.frontend` | Frontend application Git repo URL                |
-| `vendor.tower`    | Tower application Git repo URL                   |
+| `images`          | Application images tags                          |
+| `vendor`          | Frontend application Git repo URL                |
 
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
@@ -115,6 +107,25 @@ All the components with external endpoints are accessible by their respective su
 - `monitor.base.domain` - Traefik's dashboard useful for monitoring which components are enabled
 - `ws.ranger.base.domain` - Ranger's WebSocket endpoint **[Optional]**
 - `eth.base.domain` - Geth JSON RPC API **[Optional]**
+
+## Using Vendor
+
+Fill in the list of vendor to clone in app.yaml
+
+#### Render compose file
+```
+rm compose/vendor.yaml
+rake render:config
+```
+
+Review the generated file
+
+#### Clone the vendors and start
+```
+source ./bin/set-env.sh
+rake vendor:clone
+docker-compose -f compose/vendor.yaml up -d
+```
 
 ## Installer tool
 

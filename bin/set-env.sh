@@ -1,3 +1,3 @@
-export UID=${UID}
-export GID=${GID}
+export UID=$(id -u)
+export GID=$(id -g)
 alias dc=docker-compose

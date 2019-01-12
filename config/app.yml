@@ -11,4 +11,3 @@ images:
   tower: rubykube/tower:0.1.1
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
-  tower: https://github.com/rubykube/tower.git

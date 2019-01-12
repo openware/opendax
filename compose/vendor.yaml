@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+  frontend:
+    image: node:11
+    user: "${UID}:${GID}"
+    volumes:
+      - ../vendor/frontend:/home/node
+    command:
+      - sh
+      - -c
+      - |
+        cd /home/node
+        yarn
+        yarn start
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/;Host:www.app.local"
+      traefik.port: 3000
