@@ -7,5 +7,7 @@ config/traefik.toml
 config/*.env
 config/secrets/*
 !config/secrets/.gitkeep
+config/peatio/seed/*
+!config/peatio/seed/.gitkeep
 vendor/
 !vendor/.gitkeep

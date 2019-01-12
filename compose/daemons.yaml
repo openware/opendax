@@ -76,7 +76,7 @@ services:
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/k.rb"
 
   ranger:
-    image: rubykube/peatio:1.9.1-rc.20
+    image: "${PEATIO_IMAGE}"
     depends_on:
       - rabbitmq
     env_file:
