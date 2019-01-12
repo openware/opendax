@@ -1,8 +1,11 @@
 namespace :vendor do
-  desc 'Clone the frontend and tower repositories into vendor/'
+  desc 'Clone the frontend apps repos into vendor/'
   task :clone do
-    puts '----- Cloning frontend and tower repos -----'
-    sh "git clone #{CONFIG['vendor']['frontend']} vendor/frontend" unless File.exist? 'vendor/frontend'
-    sh "git clone #{CONFIG['vendor']['tower']} vendor/tower" unless File.exist? 'vendor/tower'
+    puts '----- Clone the frontend apps repos -----'
+    puts
+    CONFIG['vendor'].each do |name, repo_url|
+      sh "git clone #{repo_url} vendor/#{name}"
+      puts
+    end
   end
 end
