@@ -1,5 +1,5 @@
 ---
-apiVersion: ambassador/v0
+apiVersion: ambassador/v1
 kind: Mapping
 name: peatio_api_mapping
 host: www.<%= CONFIG['app']['domain'] %>
@@ -7,7 +7,7 @@ prefix: /api/v2/peatio
 rewrite: /api/v2/
 service: peatio:8000
 ---
-apiVersion: ambassador/v0
+apiVersion: ambassador/v1
 kind: Mapping
 name: barong_api_mapping
 host: www.<%= CONFIG['app']['domain'] %>
@@ -15,7 +15,7 @@ prefix: /api/v2/barong
 rewrite: /api/v2/
 service: barong:8001
 ---
-apiVersion: ambassador/v0
+apiVersion: ambassador/v1
 kind: Mapping
 name: peatio_app_mapping
 host: www.<%= CONFIG['app']['domain'] %>
@@ -23,7 +23,7 @@ prefix: /admin
 rewrite: /admin
 service: peatio:8000
 ---
-apiVersion: ambassador/v0
+apiVersion: ambassador/v1
 kind: Mapping
 name: peatio_assets_mapping
 host: www.<%= CONFIG['app']['domain'] %>

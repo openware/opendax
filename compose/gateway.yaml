@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   gateway:
-    image: quay.io/datawire/ambassador:0.40.2
+    image: quay.io/datawire/ambassador:0.50.0-rc3
     depends_on:
       - barong
     volumes:
