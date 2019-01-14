@@ -1,6 +1,6 @@
 require 'jwt'
 
-module Microkube
+module MicroKube
 
   class Error < StandardError
   end
@@ -10,13 +10,13 @@ module Microkube
       @secret = params[:secret]
       @expire = params[:expire] || 600
 
-      raise Microkube::Error.new unless @secret
-      raise Microkube::Error.new unless @expire > 0
+      raise MicroKube::Error.new unless @secret
+      raise MicroKube::Error.new unless @expire > 0
     end
 
     def generate!(params)
-      raise Microkube::Error.new unless params[:service]
-      raise Microkube::Error.new unless params[:image]
+      raise MicroKube::Error.new unless params[:service]
+      raise MicroKube::Error.new unless params[:image]
 
       token = params.merge({
         'iat': Time.now.to_i,

@@ -1,8 +1,12 @@
 require 'sinatra/base'
 require 'json'
+require 'yaml'
+
 require_relative 'payload'
+require_relative 'renderer'
 
 class Webhook < Sinatra::Base
+  CONFIG_PATH = 'config/app.yml'.freeze
 
   set :show_exceptions, false
 
@@ -11,7 +15,13 @@ class Webhook < Sinatra::Base
     @services = %w[barong peatio frontend tower]
     secret = ENV['WEBHOOK_JWT_SECRET']
     raise 'WEBHOOK_JWT_SECRET is not set' if secret.to_s.empty?
-    @decoder = Microkube::Payload.new(secret: secret)
+    @decoder = MicroKube::Payload.new(secret: secret)
+  end
+
+  def update_config(service, image)
+    config = YAML.load_file(CONFIG_PATH)
+    config["images"][service] = image
+    File.open(CONFIG_PATH, 'w') {|f| f.write config.to_yaml }
   end
 
   before do
@@ -41,8 +51,14 @@ class Webhook < Sinatra::Base
       return answer(404, 'invalid image') unless $?.success?
     end
 
-    image_tag = "#{service.upcase}_IMAGE=#{image}"
-    system "#{image_tag} docker-compose up -Vd #{service}"
+    if $?.success?
+      update_config(service, image)
+
+      renderer = MicroKube::Renderer.new
+      renderer.render
+
+      system "docker-compose up -Vd #{service}"
+    end
 
     return answer(500, 'could not restart container') unless $?.success?
     return answer(200, "service #{service} updated with image #{image}")

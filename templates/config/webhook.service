@@ -1,5 +1,5 @@
 [Unit]
-Description=Microkube Webhook service
+Description=MicroKube Webhook service
 
 [Service]
 User=app
