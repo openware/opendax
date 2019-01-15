@@ -21,7 +21,7 @@ module MicroKube
     def render_file(file, out_file)
       puts "Rendering #{out_file}"
 
-      @config = config
+      @config ||= config
       @barong_key ||= OpenSSL::PKey::RSA.new(File.read(JWT_KEY), '')
       @jwt_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
       @jwt_public_key  ||= Base64.urlsafe_encode64(@barong_key.public_key.to_pem)

@@ -2,6 +2,7 @@ require 'microkube/renderer'
 
 describe MicroKube::Renderer do
   let(:renderer) { MicroKube::Renderer.new }
+  let(:fake_erb_result) { { 'data' => 'this is fake data'} }
   let(:config) do
     {
       'app' => {
@@ -29,6 +30,13 @@ describe MicroKube::Renderer do
     expect(renderer.config).to eq(config)
   end
 
+  describe '.config' do
+    it 'should load configuration' do
+      allow(YAML).to receive(:load_file).and_return(config)
+      expect(renderer.config).to eq(config)
+    end
+  end
+
   describe '.generate_keys' do
     it 'should create file with RSA key' do
       renderer.generate_keys
@@ -38,7 +46,12 @@ describe MicroKube::Renderer do
 
   describe '.render_file' do
     it 'should render file' do
-      renderer.generate_keys
+      expect(renderer).to receive(:config).once
+      expect(ERB).to receive(:new).once.and_call_original
+      expect_any_instance_of(ERB).to receive(:result).once.and_return(fake_erb_result)
+      expect(File).to receive(:write).with('./config/peatio.env', fake_erb_result).once.and_call_original
+
+      renderer.render_file('./templates/config/peatio.env.erb', './config/peatio.env')
     end
   end
 
@@ -58,7 +71,7 @@ describe MicroKube::Renderer do
     it 'should call exact amount of helper functions' do
       number_of_files = Dir.glob('./templates/**/*.erb').length
 
-      expect(renderer).to receive(:generate_keys)
+      expect(renderer).to receive(:generate_keys).once
       expect(renderer).to receive(:render_file).exactly(number_of_files).times
       expect(renderer).to receive(:template_name).exactly(number_of_files).times
 
