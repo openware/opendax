@@ -181,7 +181,7 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      renderer = MicroKube::Renderer.new
+      renderer = Microkube::Renderer.new
       renderer.render
 
       Rake::Task["service:proxy"].invoke('start')

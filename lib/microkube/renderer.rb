@@ -3,8 +3,8 @@ require 'pathname'
 require 'yaml'
 require 'base64'
 
-module MicroKube
-  # Renderer is class for rendering MicroKube templates.
+module Microkube
+  # Renderer is class for rendering Microkube templates.
   class Renderer
     TEMPLATE_PATH  = Pathname.new('./templates')
 

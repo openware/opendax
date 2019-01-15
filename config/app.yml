@@ -1,5 +1,5 @@
 app:
-  name: "MicroKube"
+  name: "Microkube"
   domain: "app.local"
 ssl:
   enabled: true

@@ -1,12 +1,12 @@
 require 'microkube/renderer'
 
-describe MicroKube::Renderer do
-  let(:renderer) { MicroKube::Renderer.new }
+describe Microkube::Renderer do
+  let(:renderer) { Microkube::Renderer.new }
   let(:fake_erb_result) { { 'data' => 'this is fake data'} }
   let(:config) do
     {
       'app' => {
-        'name' => 'MicroKube',
+        'name' => 'Microkube',
         'domain' => 'app.test'
       },
       'ssl' => {

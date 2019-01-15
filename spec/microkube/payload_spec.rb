@@ -1,10 +1,10 @@
 require 'microkube/payload'
 
-describe MicroKube::Payload do
+describe Microkube::Payload do
   let(:secret) { 'myTailorIsRich42' }
-  let(:encoder) { MicroKube::Payload.new(secret: secret) }
+  let(:encoder) { Microkube::Payload.new(secret: secret) }
   let(:valid_decoder) { encoder }
-  let(:invalid_decoder) { MicroKube::Payload.new(secret: 'randomSecret') }
+  let(:invalid_decoder) { Microkube::Payload.new(secret: 'randomSecret') }
   let(:service) { 'barong' }
   let(:image) { 'rubykube/barong:2.0.8-alpha' }
   let(:jwt) { encoder.generate!(service: service, image: image) }
@@ -31,7 +31,7 @@ describe MicroKube::Payload do
   end
 
   it 'defines an API' do
-    pgen = MicroKube::Payload.new(secret: '0x42', expire: 600)
+    pgen = Microkube::Payload.new(secret: '0x42', expire: 600)
     token = pgen.generate!(service: service, image: image)
     pgen.decode!(token)
     pgen.safe_decode(token)
@@ -39,7 +39,7 @@ describe MicroKube::Payload do
 
   it 'expire time should be configurable' do
     exp_time = 4200
-    exp_coder = MicroKube::Payload.new(secret: 'ab', expire: exp_time)
+    exp_coder = Microkube::Payload.new(secret: 'ab', expire: exp_time)
     encoded = exp_coder.generate!(service: service, image: image)
     decoded = exp_coder.decode!(encoded)
     computed_exp = decoded['exp'] - decoded['iat']
