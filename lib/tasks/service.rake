@@ -1,5 +1,5 @@
 namespace :service do
-  ENV['APP_DOMAIN'] = CONFIG['app']['domain']
+  ENV['APP_DOMAIN'] = @config['app']['domain']
 
   @switch = Proc.new do |args, start, stop|
     case args.command

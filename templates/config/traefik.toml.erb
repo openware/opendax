@@ -1,12 +1,12 @@
 logLevel = "INFO"
-defaultEntryPoints = [<%= '"https",' if CONFIG['ssl']['enabled'] %>"http"]
+defaultEntryPoints = [<%= '"https",' if @config['ssl']['enabled'] %>"http"]
 
 [api]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-<% if CONFIG['ssl']['enabled'] -%>
+<% if @config['ssl']['enabled'] -%>
   [entryPoints.https]
   address = ":443"
   [entryPoints.https.tls]
@@ -20,9 +20,9 @@ domain = "local"
 watch = true
 exposedbydefault = false
 
-<% if CONFIG['ssl']['enabled'] -%>
+<% if @config['ssl']['enabled'] -%>
 [acme]
-email = "<%= CONFIG['ssl']['email'] %>"
+email = "<%= @config['ssl']['email'] %>"
 storage = "acme.json"
 entryPoint = "https"
 OnHostRule = true

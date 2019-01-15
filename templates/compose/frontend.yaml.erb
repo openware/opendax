@@ -2,20 +2,20 @@ version: '3.6'
 
 services:
   frontend:
-    image: "<%= CONFIG['images']['frontend'] %>"
+    image: "<%= @config['images']['frontend'] %>"
     volumes:
       - ../config/frontend/env.js:/home/node/public/env.js
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/;Host:www.<%= CONFIG['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/;Host:www.<%= @config['app']['domain'] %>"
       traefik.port: 3000
 
   tower:
-    image: "<%= CONFIG['images']['tower'] %>"
+    image: "<%= @config['images']['tower'] %>"
     volumes:
       - ../config/frontend/tower.js:/home/app/env.js
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/tower;Host:www.<%= CONFIG['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/tower;Host:www.<%= @config['app']['domain'] %>"
       traefik.port: 8080
 

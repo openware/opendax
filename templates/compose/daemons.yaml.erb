@@ -1,7 +1,7 @@
 version: '3.6'
 
 x-daemon: &peatio-daemon
-  image: "<%= CONFIG['images']['peatio'] %>"
+  image: "<%= @config['images']['peatio'] %>"
   restart: always
   depends_on:
     - peatio
@@ -76,13 +76,13 @@ services:
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/k.rb"
 
   ranger:
-    image: "<%= CONFIG['images']['peatio'] %>"
+    image: "<%= @config['images']['peatio'] %>"
     depends_on:
       - rabbitmq
     env_file:
       - ../config/ranger.env
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: ranger.<%= CONFIG['app']['domain'] %>'
+      traefik.frontend.rule: 'Host: ranger.<%= @config['app']['domain'] %>'
       traefik.port: 8080
     command: bash -c "bundle exec peatio service start ranger"

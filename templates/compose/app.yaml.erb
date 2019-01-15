@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   peatio:
-    image: "<%= CONFIG['images']['peatio'] %>"
+    image: "<%= @config['images']['peatio'] %>"
     depends_on:
       - proxy
       - db
@@ -20,7 +20,7 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:
-    image: "<%= CONFIG['images']['barong'] %>"
+    image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
     ports:

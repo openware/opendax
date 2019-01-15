@@ -12,5 +12,5 @@ services:
       - '8877:8877'
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:www.<%= CONFIG['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:www.<%= @config['app']['domain'] %>"
       traefik.port: 80

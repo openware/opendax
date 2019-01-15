@@ -23,7 +23,7 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: rabbitmq.<%= CONFIG['app']['domain'] %>'
+      traefik.frontend.rule: 'Host: rabbitmq.<%= @config['app']['domain'] %>'
       traefik.port: 15672
 
   vault:

@@ -3,7 +3,7 @@ namespace :vendor do
   task :clone do
     puts '----- Clone the frontend apps repos -----'
     puts
-    CONFIG['vendor'].each do |name, repo_url|
+    @config['vendor'].each do |name, repo_url|
       sh "git clone #{repo_url} vendor/#{name}"
       puts
     end

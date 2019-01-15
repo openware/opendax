@@ -21,7 +21,7 @@ services:
       - "30303"
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: eth.<%= CONFIG['app']['domain'] %>'
+      traefik.frontend.rule: 'Host: eth.<%= @config['app']['domain'] %>'
       traefik.port: 8545
 
 volumes:
