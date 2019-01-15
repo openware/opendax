@@ -7,8 +7,7 @@ module MicroKube
   class Renderer
     TEMPLATE_PATH  = Pathname.new('./templates')
 
-    JWT_KEYS = %w(config/secrets/barong.key)
-    CONFIG   = YAML.load_file('./config/app.yml')
+    JWT_KEY = 'config/secrets/barong.key'.freeze
 
     def render
       generate_keys
@@ -21,7 +20,8 @@ module MicroKube
     def render_file(file, out_file)
       puts "Rendering #{out_file}"
 
-      @barong_key ||= OpenSSL::PKey::RSA.new(File.read('config/secrets/barong.key'), '')
+      @config = config
+      @barong_key ||= OpenSSL::PKey::RSA.new(File.read(JWT_KEY), '')
       @jwt_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
       @jwt_public_key  ||= Base64.urlsafe_encode64(@barong_key.public_key.to_pem)
 
@@ -37,12 +37,12 @@ module MicroKube
     end
 
     def generate_keys
-      # puts 'Generating RSA keys'
+      key = OpenSSL::PKey::RSA.generate(2048)
+      File.open(JWT_KEY, 'w') { |file| file.puts(key) }
+    end
 
-      JWT_KEYS.each do |key_file|
-        key = OpenSSL::PKey::RSA.generate(2048)
-        File.open(key_file, 'w') { |file| file.puts(key) }
-      end
+    def config
+      YAML.load_file('./config/app.yml')
     end
   end
 end
