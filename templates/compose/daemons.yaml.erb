@@ -81,10 +81,8 @@ services:
       - rabbitmq
     env_file:
       - ../config/ranger.env
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: ranger.<%= @config['app']['domain'] %>'
-      traefik.port: 8080
+    ports:
+      - "8080:8080"
     command: bash -c "bundle exec peatio service start ranger"
 
   postmaster:
