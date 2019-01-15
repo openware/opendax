@@ -1,6 +1,7 @@
 require 'openssl'
 require 'pathname'
 require 'yaml'
+require 'base64'
 
 module MicroKube
   # Renderer is class for rendering MicroKube templates.
