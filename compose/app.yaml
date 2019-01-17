@@ -20,7 +20,7 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:
-    image: "rubykube/barong:2.0.23-alpha"
+    image: "rubykube/barong:2.0.31-alpha"
     env_file:
       - ../config/barong.env
     ports:

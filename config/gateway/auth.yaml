@@ -3,7 +3,7 @@ kind: AuthService
 name: authentication
 auth_service: barong:8001
 proto: http
-path_prefix: /api/v2/identity/sessions/authorize
+path_prefix: /api/v2/auth
 allowed_authorization_headers:
   - "Authorization"
 allowed_request_headers:
