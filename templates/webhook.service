@@ -4,7 +4,7 @@ Description=MicroKube Webhook service
 [Service]
 User=app
 Environment="WEBHOOK_JWT_SECRET=GENERATED_HMAC_SECRET"
-ExecStart=/usr/local/bin/bundle exec rackup config.ru
+ExecStart=/bin/bash -c "source ~/.rvm/scripts/rvm; bundle exec rackup config.ru"
 Type=simple
 Restart=always
 WorkingDirectory=MICROKUBE_DIRECTORY

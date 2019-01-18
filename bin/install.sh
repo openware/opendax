@@ -8,7 +8,7 @@ install_core() {
   sudo bash <<EOS
 apt-get update
 apt-get upgrade -y -q
-apt-get install -y -q git tmux dirmngr htop curl libmariadbclient-dev-compat build-essential
+apt-get install -y -q git tmux dirmngr dbus htop curl libmariadbclient-dev-compat build-essential
 EOS
 }
 
@@ -56,6 +56,8 @@ install_microkube() {
   rake service:daemons
   rake service:cryptonodes
   rake geth:import
+
+  ./bin/install_webhook
 EOS
 }
 
