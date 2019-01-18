@@ -10,6 +10,7 @@ gem 'rake'
 gem 'sshkey' # SSH key generation gem
 
 # webhook server deps
+gem 'rack'
 gem 'sinatra'
 gem 'puma'
 gem 'rspec'
