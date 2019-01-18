@@ -1,34 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    amq-protocol (2.3.0)
-    amqp (1.8.0)
-      amq-protocol (>= 2.2.0)
-      eventmachine
-    barong (0.1.0)
-    bunny (2.12.0)
-      amq-protocol (~> 2.3, >= 2.3.0)
-    clamp (1.3.0)
     diff-lcs (1.3)
-    em-websocket (0.5.1)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.6.0)
-    eventmachine (1.2.7)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    http_parser.rb (0.6.0)
     jwt (2.1.0)
     multipart-post (2.0.0)
     mustermann (1.0.3)
-    mysql2 (0.5.2)
-    peatio (0.4.4)
-      amqp
-      bunny
-      clamp
-      em-websocket
-      eventmachine
-      jwt
-      mysql2
     puma (3.12.0)
     rack (2.0.6)
     rack-protection (2.0.4)
@@ -59,10 +37,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  barong
   faraday
   jwt
-  peatio
   puma
   rake
   rspec

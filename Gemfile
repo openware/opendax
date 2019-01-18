@@ -9,9 +9,6 @@ gem 'rake'
 
 gem 'sshkey' # SSH key generation gem
 
-gem 'barong'
-gem 'peatio'
-
 # webhook server deps
 gem 'sinatra'
 gem 'puma'
