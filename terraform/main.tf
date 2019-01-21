@@ -51,7 +51,7 @@ resource "google_compute_instance" "microkube" {
   }
 
   provisioner "remote-exec" {
-    script = "./bin/install.sh"
+    script = "../bin/install.sh"
 
     connection {
       type        = "ssh"
