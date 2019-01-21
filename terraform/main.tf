@@ -39,6 +39,17 @@ resource "google_compute_instance" "microkube" {
     sshKeys = "${var.ssh_user}:${file("${var.ssh_public_key}")}"
   }
 
+  provisioner "file" {
+    source      = "../config/app.yml"
+    destination = "/home/${var.ssh_user}/app.yml"
+
+    connection {
+      type        = "ssh"
+      user        = "${var.ssh_user}"
+      private_key = "${file("${var.ssh_private_key}")}"
+    }
+  }
+
   provisioner "remote-exec" {
     script = "./bin/install.sh"
 
