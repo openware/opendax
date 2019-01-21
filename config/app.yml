@@ -11,3 +11,11 @@ images:
   tower: rubykube/tower:0.1.1
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
+terraform:
+  credentials: "~/safe/microkube.json"
+  project: "example-microkube"
+  region: "europe-west4"
+  zone: "europe-west4-a"
+  instance_name: "microkube-cloud"
+  machine_type: "n1-standard-4"
+  image: "debian-cloud/debian-9"

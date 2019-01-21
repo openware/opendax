@@ -9,9 +9,10 @@ module Microkube
     TEMPLATE_PATH  = Pathname.new('./templates')
 
     JWT_KEY = 'config/secrets/barong.key'.freeze
+    SSH_KEY = 'config/secrets/kite.key'.freeze
 
     def render
-      generate_keys
+      render_keys
 
       Dir.glob("#{TEMPLATE_PATH}/**/*.erb").each do |file|
         render_file(file, template_name(file))
@@ -37,9 +38,15 @@ module Microkube
       File.join('.', out_path)
     end
 
-    def generate_keys
+    def render_keys
+      generate_key(JWT_KEY)
+      generate_key(SSH_KEY, public: true)
+    end
+
+    def generate_key(filename, public: false)
       key = OpenSSL::PKey::RSA.generate(2048)
-      File.open(JWT_KEY, 'w') { |file| file.puts(key) }
+      File.open(filename, 'w') { |file| file.puts(key) }
+      File.open("#{filename}.pub", 'w') { |file| file.puts(key.public_key) } if public
     end
 
     def config

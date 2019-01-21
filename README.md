@@ -127,6 +127,18 @@ rake vendor:clone
 docker-compose -f compose/vendor.yaml up -d
 ```
 
+## Terraform Infrastructure as Code Provisioning
+
+You can easily bring up Microkube from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
+
+To do this, just follow these simple steps:
+  - Fill `app.yml` with correct values
+  - Run `rake terraform:apply`
+  - Access your VM from the GCP Cloud Console
+  - Have fun using it!
+
+To destroy the provisioned infrastructure, just run `rake terraform:destroy`
+
 ## Installer tool
 
 ```

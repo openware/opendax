@@ -37,10 +37,25 @@ describe Microkube::Renderer do
     end
   end
 
-  describe '.generate_keys' do
-    it 'should create file with RSA key' do
-      renderer.generate_keys
+  describe '.generate_key' do
+    it 'should generate a private RSA key by default' do
+      renderer.generate_key('config/secrets/barong.key')
       expect(File).to exist('config/secrets/barong.key')
+    end
+
+    it 'should generate a public RSA key in addition when the flag is passed' do
+      renderer.generate_key('config/secrets/kite.key')
+      expect(File).to exist('config/secrets/kite.key')
+      expect(File).to exist('config/secrets/kite.key.pub')
+    end
+  end
+
+  describe '.render_keys' do
+    it 'should create files with private and public RSA keys' do
+      renderer.render_keys
+      expect(File).to exist('config/secrets/barong.key')
+      expect(File).to exist('config/secrets/kite.key')
+      expect(File).to exist('config/secrets/kite.key.pub')
     end
   end
 
@@ -71,7 +86,7 @@ describe Microkube::Renderer do
     it 'should call exact amount of helper functions' do
       number_of_files = Dir.glob('./templates/**/*.erb').length
 
-      expect(renderer).to receive(:generate_keys).once
+      expect(renderer).to receive(:render_keys).once
       expect(renderer).to receive(:render_file).exactly(number_of_files).times
       expect(renderer).to receive(:template_name).exactly(number_of_files).times
 
