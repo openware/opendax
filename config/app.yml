@@ -12,6 +12,11 @@ images:
   postmaster: quay.io/shal/pigeon:v0.0.2
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
+storage:
+  provider: "Google"
+  bucketName: "microkube-barong-docs-bucket"
+  accessKey: "**********"
+  secretKey: "**********"
 terraform:
   credentials: "~/safe/microkube.json"
   project: "example-microkube"
