@@ -9,7 +9,7 @@ images:
   barong: rubykube/barong:2.0.35-alpha
   frontend: rubykube/mikroapp:0.1.5
   tower: rubykube/tower:0.1.1
-  postmaster: quay.io/shal/pigeon:v0.0.2
+  postmaster: quay.io/openware/postmaster:0.0.1
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
 storage:
