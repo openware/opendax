@@ -6,3 +6,6 @@ config:
     origins: "*"
     methods: POST, GET, OPTIONS
     max_age: "3600"
+  buffer:
+    max_request_bytes: 100000000
+    max_request_time: 5000
