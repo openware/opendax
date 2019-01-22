@@ -86,3 +86,11 @@ services:
       traefik.frontend.rule: 'Host: ranger.<%= @config['app']['domain'] %>'
       traefik.port: 8080
     command: bash -c "bundle exec peatio service start ranger"
+
+  postmaster:
+    image: "<%= @config['images']['postmaster'] %>"
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ../config/postmaster.env
+
