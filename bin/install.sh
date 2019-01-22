@@ -53,6 +53,7 @@ install_microkube() {
   rake service:all
   rake service:daemons
   rake service:cryptonodes
+  rake geth:import
 EOS
 }
 

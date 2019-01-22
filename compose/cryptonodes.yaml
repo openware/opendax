@@ -15,7 +15,7 @@ services:
       --rpccorsdomain="*"
       --rpcvhosts="*"
     volumes:
-      - eth-data:/root/.ethereum/
+      - ../data/geth:/root/.ethereum/
     expose:
       - "8545"
       - "30303"
@@ -23,6 +23,3 @@ services:
       traefik.enable: true
       traefik.frontend.rule: 'Host: eth.app.local'
       traefik.port: 8545
-
-volumes:
-  eth-data:
