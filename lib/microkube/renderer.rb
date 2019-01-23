@@ -1,4 +1,5 @@
 require 'openssl'
+require 'sshkey'
 require 'pathname'
 require 'yaml'
 require 'base64'
@@ -6,7 +7,7 @@ require 'base64'
 module Microkube
   # Renderer is class for rendering Microkube templates.
   class Renderer
-    TEMPLATE_PATH  = Pathname.new('./templates')
+    TEMPLATE_PATH = Pathname.new('./templates')
 
     JWT_KEY = 'config/secrets/barong.key'.freeze
     SSH_KEY = 'config/secrets/kite.key'.freeze
@@ -44,9 +45,9 @@ module Microkube
     end
 
     def generate_key(filename, public: false)
-      key = OpenSSL::PKey::RSA.generate(2048)
-      File.open(filename, 'w') { |file| file.puts(key) }
-      File.open("#{filename}.pub", 'w') { |file| file.puts(key.public_key) } if public
+      key = SSHKey.generate(type: 'RSA', bits: 2048)
+      File.open(filename, 'w') { |file| file.puts(key.private_key) }
+      File.open("#{filename}.pub", 'w') { |file| file.puts(key.ssh_public_key) } if public
     end
 
     def config
