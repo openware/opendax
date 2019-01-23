@@ -10,6 +10,7 @@ images:
   frontend: rubykube/mikroapp:0.1.5
   tower: rubykube/tower:0.1.1
   postmaster: quay.io/openware/postmaster:0.0.1
+load_dump: true
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
 storage:

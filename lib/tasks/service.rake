@@ -98,8 +98,15 @@ namespace :service do
 
     def start
       puts '----- Running hooks -----'
-      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate db:seed"'
-      sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate db:seed"'
+      if @config['load_dump']
+        sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate"'
+        sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate"'
+        sh 'docker-compose exec db /bin/sh -c "mysql -u root -pchangeme peatio_production < /docker-entrypoint-initdb.d/peatio_production.sql"'
+        sh 'docker-compose exec db /bin/sh -c "mysql -u root -pchangeme barong_production < /docker-entrypoint-initdb.d/barong_production.sql"'
+      else
+        sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate db:seed"'
+        sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate db:seed"'
+      end
     end
 
     def stop
