@@ -1,9 +1,0 @@
-version: '3.6'
-
-services:
-  mailcatcher:
-    image: schickling/mailcatcher
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: mail.app.local'
-      traefik.port: 1080
