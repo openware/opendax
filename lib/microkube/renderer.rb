@@ -12,11 +12,13 @@ module Microkube
     JWT_KEY = 'config/secrets/barong.key'.freeze
     SSH_KEY = 'config/secrets/kite.key'.freeze
 
-    def render
+    def render(overwrite = false)
       render_keys
 
       Dir.glob("#{TEMPLATE_PATH}/**/*.erb").each do |file|
-        render_file(file, template_name(file))
+        output_file = template_name(file)
+        next if !overwrite && File.exist?(output_file)
+        render_file(file, output_file)
       end
     end
 
