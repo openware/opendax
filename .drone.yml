@@ -2,6 +2,14 @@ kind: pipeline
 name: default
 
 steps:
+- name: Run rspec
+  image: ruby:2.6.0
+  commands:
+    - bundle
+    - rspec
+  when:
+    event:
+      - pull_request
 - name: Bump and tag
   image: ruby:2.6.0
   environment:
