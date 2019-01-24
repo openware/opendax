@@ -90,7 +90,7 @@ describe Microkube::Renderer do
       expect(renderer).to receive(:render_file).exactly(number_of_files).times
       expect(renderer).to receive(:template_name).exactly(number_of_files).times
 
-      renderer.render
+      renderer.render(true)
     end
   end
 end
