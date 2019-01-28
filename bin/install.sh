@@ -54,8 +54,8 @@ install_microkube() {
   rake render:config
   rake service:all
   rake service:daemons
-  rake service:cryptonodes
   rake geth:import
+  rake service:cryptonodes
 
   ./bin/install_webhook
 EOS
