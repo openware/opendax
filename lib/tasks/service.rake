@@ -166,18 +166,18 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc '[Optional] Run utils (mailcatcher)'
+  desc '[Optional] Run utils (mailcatcher, postmaster)'
   task :utils, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
       puts '----- Starting utils -----'
-      sh 'docker-compose up -d mailcatcher'
+      sh 'docker-compose up -d mailcatcher postmaster'
     end
 
     def stop
       puts '----- Stopping Utils -----'
-      sh 'docker-compose rm -fs mailcatcher'
+      sh 'docker-compose rm -fs mailcatcher postmaster'
     end
 
     @switch.call(args, method(:start), method(:stop))
@@ -197,6 +197,7 @@ namespace :service do
       Rake::Task["service:app"].invoke('start')
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
+      Rake::Task["service:utils"].invoke('start')
     end
 
     def stop
@@ -206,6 +207,7 @@ namespace :service do
       Rake::Task["service:app"].invoke('stop')
       Rake::Task["service:frontend"].invoke('stop')
       Rake::Task["service:tower"].invoke('stop')
+      Rake::Task["service:utils"].invoke('start')
     end
 
     @switch.call(args, method(:start), method(:stop))
