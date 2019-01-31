@@ -183,7 +183,7 @@ namespace :service do
     def start
       Rake::Task["service:proxy"].invoke('start')
       Rake::Task["service:backend"].invoke('start')
-      puts 'Wait 5 second'
+      puts 'Wait 5 second for backend'
       sleep(5)
       Rake::Task["service:setup"].invoke('start')
       Rake::Task["service:app"].invoke('start')

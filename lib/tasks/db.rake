@@ -12,8 +12,8 @@ namespace :db do
 
   desc 'Load database dump'
   task :load => :create do
-    sh %Q{docker-compose run --rm db /bin/sh -c "#{mysql_cli} peatio_production < /docker-entrypoint-initdb.d/peatio_production.sql"}
-    sh %Q{docker-compose run --rm db /bin/sh -c "#{mysql_cli} barong_production < /docker-entrypoint-initdb.d/barong_production.sql"}
+    sh %Q{cat data/mysql/peatio_production.sql | docker-compose run --rm db #{mysql_cli} peatio_production}
+    sh %Q{cat data/mysql/barong_production.sql | docker-compose run --rm db #{mysql_cli} barong_production}
     sh 'docker-compose run --rm peatio bundle exec rake db:migrate'
     sh 'docker-compose run --rm barong bundle exec rake db:migrate'
   end

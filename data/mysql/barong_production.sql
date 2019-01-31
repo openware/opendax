@@ -1,6 +1,7 @@
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
 -- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
--- Host: localhost    Database: barong_production
+-- Host: db    Database: barong_production
 -- ------------------------------------------------------
 -- Server version	5.7.24
 
@@ -99,7 +100,7 @@ CREATE TABLE `ar_internal_metadata` (
 
 LOCK TABLES `ar_internal_metadata` WRITE;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
-INSERT INTO `ar_internal_metadata` VALUES ('environment','development','2019-01-22 14:57:40','2019-01-22 14:57:40');
+INSERT INTO `ar_internal_metadata` VALUES ('environment','production','2019-01-22 14:57:40','2019-01-31 17:57:54');
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,10 +316,6 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'ID7CAF88CD33','admin@barong.io','$2a$10$Sonzos5G.VrXRW2vAzwPWu.7o47BiOMxd/FXohb7Y7mBj7FMwwOX2','admin',3,0,'active',NULL,'2019-01-22 14:57:41','2019-01-23 11:52:09'),(2,'ID535CA9B575','TestMeHelios+PhillipaRuais@gmail.com','$2a$10$Q7Hd0dYrEs5xJaV5TYOMNOa1KZ0tk3NzgfleLe3I863jcQuiQ6M1.','admin',3,1,'active',NULL,'2019-01-22 14:57:45','2019-01-23 08:46:00'),(3,'IDBA8F4E58B9','TestMeHelios+AntoinePelletier@gmail.com','$2a$10$eZnOwFoyiElkIXII6VPhDuPiJGhRVeLdgC9CC18A4QxdsZm0MQJ02','member',1,0,'pending',NULL,'2019-01-22 14:57:46','2019-01-23 08:40:39'),(4,'ID1799AE7C6F','TestMeHelios+CecileVaillancourt@gmail.com','$2a$10$I6rWbfd3M6YCIG77A.zlJOpluUIV10.mmQwMHJGJLeswkst2bc5t2','member',2,0,'active',NULL,'2019-01-22 14:57:46','2019-01-23 12:13:16'),(5,'ID8CB21CC3A3','TestMeHelios+CharmaineOuellet@gmail.com','$2a$10$3TW0TWTAtvTnLbOX/7/A/u3ZhdPZYNJet0hFPpx1LsHLG7TQ4.tL6','member',3,0,'active',NULL,'2019-01-22 14:57:46','2019-01-23 08:46:49'),(6,'IDF18F8B5E89','TestMeHelios+RamonLMcCourt@gmail.com','$2a$10$6faQ09HTyk1k55QUsx0zu.otKmmMtWUmTB.4qKU4uCY5D6b9bX3MK','member',3,0,'banned',NULL,'2019-01-22 14:57:47','2019-01-22 14:57:47'),(7,'ID79BF61C8A0','TestMeHelios+AmyJBriggs@gmail.com','$2a$10$AFtfR9pGt0ITbxLOfflkI.nhijURh363wKK6ug8mwzQ2LApiFgy8K','member',3,0,'active',NULL,'2019-01-22 14:57:47','2019-01-22 14:57:47'),(8,'ID6FC9E9F399','TestMeHelios+DavidTMoore@gmail.com','$2a$10$wMzT6zS65EK/mwhV604B/Oe7b1oOtyzBsz2mRUwp5nGNxGGwfiQ4m','member',3,0,'active',NULL,'2019-01-22 14:57:48','2019-01-22 14:57:48'),(9,'IDC9DA23294E','alinetskyi@heliostech.fr','$2a$10$2eZ9m9pPCIdIcjgDOHs.qu2C4QNmxcuA9NUr71cFeyZ.jf1wTtACq','member',3,0,'pending',NULL,'2019-01-23 08:18:09','2019-01-23 10:09:47'),(10,'IDE897F251A9','alinetskyi+test@heliostech.fr','$2a$10$RHuofUq3B290qpG7.g.pVeBpvg8ZsjtpexMgiZyV3NK2pXfYNpp/K','member',0,0,'pending',NULL,'2019-01-23 08:21:16','2019-01-23 08:21:16'),(11,'IDBCA5517FBA','alinetskyi+kek@heliostech.fr','$2a$10$AVCHCl8nltvQEo2OFC9lC.w2dKjTQnKFfLKGx6.mcU5yuGvgd1wVK','member',0,0,'pending',NULL,'2019-01-23 08:26:06','2019-01-23 08:26:06'),(12,'ID04A3A9C8AA','artem.linetskiy@gmail.com','$2a$10$O3hExABJrhxaPbCcayo3H.kOuzqQBlxvvDEkEc7TsPUZ.iI47YR.e','member',0,0,'pending',NULL,'2019-01-23 08:26:43','2019-01-23 08:26:43'),(13,'IDEB048F34E1','koliadych@gmail.com','$2a$10$OyK9fUMw7WbAians4eKkzeDLzDRCljA.iCc2OzhLBQEnq3F7k5XzO','member',0,0,'pending',NULL,'2019-01-23 08:28:55','2019-01-23 08:28:55'),(14,'ID7E9639E27F','admin@devkube.com','$2a$10$2TOdJDVvjM5h5QEsrPy0ye5XxFZfy9n/pwY8ofBJhegScn25LFkiu','admin',3,0,'active',NULL,'2019-01-23 09:35:48','2019-01-23 09:37:34'),(15,'ID6846714A89','rdyadenko@heliostech.fr','$2a$10$lm6kS6.4./goW4DQvcNtZusVE93VedRkVlqasKkf4Dfs4joTYYCE6','member',0,0,'pending',NULL,'2019-01-23 09:37:36','2019-01-23 09:37:36'),(16,'ID2F8E2AF176','user@devkube.com','$2a$10$AHSwZlp/3v8u2akKgXw4N.bjYkF4W59s1SLaSHk7mVOHdK5GrUrwm','member',1,0,'active',NULL,'2019-01-23 09:39:08','2019-01-23 09:39:39'),(17,'IDE08425FBA5','okoliadych+kik@heliostech.fr','$2a$10$7kDT2C0FFCZ4W5qgyh2UietG05e4Eh68JcN/B0SIyt5nComGw2NDa','member',1,0,'pending',NULL,'2019-01-23 09:40:09','2019-01-23 09:45:10'),(18,'IDB160F1B776','cgenchevsky@heliostech.fr','$2a$10$O4v2xaRDDlQuqKtcz15gRucSck5cgXuAHDTmpyfdKComusp1yFed.','member',0,0,'pending',NULL,'2019-01-23 11:05:25','2019-01-23 11:05:25');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'barong_production'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -329,4 +326,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-23 14:47:18
+-- Dump completed on 2019-01-31 17:58:52
