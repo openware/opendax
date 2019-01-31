@@ -3,12 +3,6 @@ version: '3.6'
 x-daemon: &peatio-daemon
   image: "<%= @config['images']['peatio'] %>"
   restart: always
-  depends_on:
-    - peatio
-    - db
-    - redis
-    - rabbitmq
-    - ranger
   env_file:
     - ../config/peatio.env
   volumes:
@@ -77,8 +71,6 @@ services:
 
   ranger:
     image: "<%= @config['images']['peatio'] %>"
-    depends_on:
-      - rabbitmq
     env_file:
       - ../config/ranger.env
     ports:
@@ -87,8 +79,6 @@ services:
 
   postmaster:
     image: "<%= @config['images']['postmaster'] %>"
-    depends_on:
-      - rabbitmq
     env_file:
       - ../config/postmaster.env
 

@@ -3,11 +3,6 @@ version: '3.6'
 services:
   peatio:
     image: "<%= @config['images']['peatio'] %>"
-    depends_on:
-      - proxy
-      - db
-      - redis
-      - rabbitmq
     env_file:
       - ../config/peatio.env
     expose:

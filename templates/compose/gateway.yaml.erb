@@ -3,8 +3,6 @@ version: '3.6'
 services:
   gateway:
     image: envoyproxy/envoy:v1.9.0
-    depends_on:
-      - barong
     volumes:
       - ../config/gateway:/etc/envoy/
     ports:
