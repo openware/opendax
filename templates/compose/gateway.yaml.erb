@@ -6,13 +6,14 @@ services:
     volumes:
       - ../config/gateway:/etc/envoy/
     ports:
-      - '10000:80'
-    command: /usr/local/bin/envoy --v2-config-only -l info -c /etc/envoy/envoy.json
+      - '8099:8099'
+      - '9099:9099'
+    command: /usr/local/bin/envoy --v2-config-only -l info -c /etc/envoy/envoy.yaml
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
-      traefik.default.port: 80
+      traefik.default.port: 8099
       traefik.default.protocol: http
       traefik.wss.frontend.rule: "Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
       traefik.wss.protocol: ws
-      traefik.wss.port: 80
+      traefik.wss.port: 8099
