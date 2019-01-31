@@ -82,6 +82,8 @@ describe Microkube::Renderer do
     end
   end
 
+  let(:renderer) { Microkube::Renderer.new }
+
   describe '.render' do
     it 'should call exact amount of helper functions' do
       number_of_files = Dir.glob('./templates/**/*.erb').length
@@ -90,7 +92,8 @@ describe Microkube::Renderer do
       expect(renderer).to receive(:render_file).exactly(number_of_files).times
       expect(renderer).to receive(:template_name).exactly(number_of_files).times
 
-      renderer.render(true)
+      renderer.render
+      renderer.render_keys
     end
   end
 end

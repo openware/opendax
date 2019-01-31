@@ -177,13 +177,10 @@ namespace :service do
   end
 
   desc 'Run the micro app with dependencies (does not run Optional)'
-  task :all, [:command] do |task, args|
+  task :all, [:command] => 'render:config' do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
-      renderer = Microkube::Renderer.new
-      renderer.render
-
       Rake::Task["service:proxy"].invoke('start')
       Rake::Task["service:backend"].invoke('start')
       puts 'Wait 5 second'
