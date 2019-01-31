@@ -7,7 +7,7 @@ services:
       - ../config/frontend/env.js:/home/node/public/env.js
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/;Host:www.<%= @config['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
       traefik.port: 3000
 
   tower:
@@ -16,6 +16,6 @@ services:
       - ../config/frontend/tower.js:/home/app/env.js
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/tower;Host:www.<%= @config['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/tower;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
       traefik.port: 8080
 

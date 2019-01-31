@@ -1,6 +1,7 @@
 app:
   name: "Microkube"
   domain: "app.local"
+  subdomain: "www"
 ssl:
   enabled: true
   email: "support@example.com"

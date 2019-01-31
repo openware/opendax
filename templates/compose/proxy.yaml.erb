@@ -13,7 +13,7 @@ services:
     networks:
       default:
         aliases:
-          - www.<%= @config['app']['domain'] %>
+          - <%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>
           - peatio.<%= @config['app']['domain'] %>
           - ws.ranger.<%= @config['app']['domain'] %>
           - eth.<%= @config['app']['domain'] %>

@@ -12,9 +12,9 @@ services:
     command: /usr/local/bin/envoy --v2-config-only -l info -c /etc/envoy/envoy.json
     labels:
       traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:www.<%= @config['app']['domain'] %>"
+      traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
       traefik.default.port: 80
       traefik.default.protocol: http
-      traefik.wss.frontend.rule: "Host:www.<%= @config['app']['domain'] %>"
+      traefik.wss.frontend.rule: "Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
       traefik.wss.protocol: ws
       traefik.wss.port: 80
