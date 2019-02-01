@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 COMPOSE_VERSION="1.23.2"
 COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
@@ -59,13 +59,13 @@ install_microkube() {
   cp $HOME/app.yml config/
 
   bundle install
-  rake render:config
-  rake service:all
-  rake service:daemons
-  rake geth:import
-  rake service:cryptonodes
-
+  rake render:config && \
+  rake service:all && \
+  rake service:daemons && \
+  rake geth:import && \
+  rake service:cryptonodes && \
   ./bin/install_webhook
+
 EOS
 }
 
