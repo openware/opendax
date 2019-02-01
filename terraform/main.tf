@@ -40,6 +40,17 @@ resource "google_compute_instance" "microkube" {
   }
 
   provisioner "file" {
+    source      = "${var.credentials}"
+    destination = "/home/${var.ssh_user}/gcloud-sa.json"
+
+    connection {
+      type        = "ssh"
+      user        = "${var.ssh_user}"
+      private_key = "${file("${var.ssh_private_key}")}"
+    }
+  }
+
+  provisioner "file" {
     source      = "../config/app.yml"
     destination = "/home/${var.ssh_user}/app.yml"
 

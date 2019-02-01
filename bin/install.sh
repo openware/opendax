@@ -30,6 +30,14 @@ create_user() {
 EOS
 }
 
+
+activate_gcloud() {
+  sudo -u app bash <<EOS
+  gcloud auth activate-service-account --key-file $HOME/gcloud-sa.json --quiet
+  gcloud auth configure-docker --quiet
+EOS
+}
+
 install_ruby() {
   sudo -u app bash <<EOS
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
@@ -64,5 +72,6 @@ EOS
 install_core
 install_docker
 create_user
+activate_gcloud
 install_ruby
 install_microkube
