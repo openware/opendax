@@ -4,7 +4,7 @@ services:
   frontend:
     image: "<%= @config['images']['frontend'] %>"
     volumes:
-      - ../config/frontend/env.js:/home/node/public/env.js
+      - ../config/frontend/env.js:/usr/share/nginx/html/config/env.js
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
