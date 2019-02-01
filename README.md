@@ -74,7 +74,6 @@ The components included in the stack are:
 - `backend` - [Vault](https://www.vaultproject.io), [MySQL](https://www.mysql.com), [Redis](https://redis.io) and [RabbitMQ](https://www.rabbitmq.com) grouped together
 - `cryptonodes` - cryptocurrency nodes such as [Geth](https://github.com/ethereum/go-ethereum) **[Optional]**
 - `daemons` - Peatio daemons and Ranger **[Optional]**
-- `utils` - utilities such as [Mailcatcher](https://mailcatcher.me/) **[Optional]**
 - `setup` - setup hooks for Peatio and Barong to run before the application starts(DB migration etc.)
 - `app` - [Peatio](https://github.com/rubykube/peatio), [Barong](https://github.com/rubykube/barong) and the [Ambassador](https://www.getambassador.io) API gateway
 - `frontend` - the frontend application located at `vendor/frontend`
