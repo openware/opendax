@@ -54,7 +54,12 @@ install_microkube() {
   rvm use --default 2.5.3
   gem install bundler
 
-  git clone https://github.com/rubykube/microkube.git
+  cp $HOME/git.key .
+	echo 'ssh -i /home/app/git.key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no \$*' > github-ssh
+	chmod +x ./github-ssh
+	chmod 0600 /home/app/git.key
+
+  GIT_SSH='./github-ssh' git clone git@github.com:openware/microkube
   cd microkube
   cp $HOME/app.yml config/
 

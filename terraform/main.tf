@@ -39,6 +39,18 @@ resource "google_compute_instance" "microkube" {
     sshKeys = "${var.ssh_user}:${file("${var.ssh_public_key}")}"
   }
 
+  # Git RSA key used to clone private repos(e.g. openware/microkube)
+  provisioner "file" {
+    source      = "${var.git_key}"
+    destination = "/home/${var.ssh_user}/git.key"
+
+    connection {
+      type        = "ssh"
+      user        = "${var.ssh_user}"
+      private_key = "${file("${var.ssh_private_key}")}"
+    }
+  }
+
   provisioner "file" {
     source      = "${var.credentials}"
     destination = "/home/${var.ssh_user}/gcloud-sa.json"
