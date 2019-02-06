@@ -99,13 +99,14 @@ For example, `rake service:frontend[stop]` would stop the frontend application c
 
 All the components with external endpoints are accessible by their respective subdomains based on the domain provided in the configuration:
 
-- `www.base.domain` - frontend application and Peatio and Barong APIs mounted on `/api`
+- `subdomain.base.domain` - frontend application and Peatio and Barong APIs mounted on `/api`
 - `peatio.base.domain` - Peatio UI and API
 - `barong.base.domain` - Barong API
 - `tower.base.domain` - the Tower admin panel application
 - `monitor.base.domain` - Traefik's dashboard useful for monitoring which components are enabled
 - `ws.ranger.base.domain` - Ranger's WebSocket endpoint **[Optional]**
 - `eth.base.domain` - Geth JSON RPC API **[Optional]**
+- `subdomain.base.domain` - Components docs (login: ILoveOpenware password: aiThai8inobei3raigei)
 
 ## Using Vendor
 
