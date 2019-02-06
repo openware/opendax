@@ -11,6 +11,7 @@ images:
   frontend: gcr.io/openware-production/baseapp:0.1.56
   tower: rubykube/tower:0.1.8
   postmaster: quay.io/openware/postmaster:0.0.3
+  components-docs: gcr.io/openware-production/components-docs:latest
 vendor:
   frontend: https://github.com/rubykube/mikroapp.git
 storage:
