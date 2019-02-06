@@ -68,6 +68,9 @@ static_resources:
                 - x-forwarded-host
                 - x-forwarded-for
                 - from
+                - x-auth-apikey
+                - x-auth-nonce
+                - x-auth-signature
                 path_prefix: "/api/v2/auth"
                 server_uri:
                   cluster: barong
