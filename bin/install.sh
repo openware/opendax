@@ -65,10 +65,13 @@ install_microkube() {
 
   bundle install
   rake render:config && \
+  rake geth:import && \
+  rake wallet:create['deposit','http://0.0.0.0:8545','changeme'] && \
+  rake wallet:create['cold','http://0.0.0.0:8545','changeme'] && \
+  rake wallet:create['warm','http://0.0.0.0:8545','changeme'] && \
+  rake render:config && \
   rake service:all && \
   rake service:daemons && \
-  rake geth:import && \
-  rake service:cryptonodes && \
   ./bin/install_webhook
 
 EOS

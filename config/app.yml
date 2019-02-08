@@ -37,3 +37,19 @@ recaptcha:
   siteKey: "changeme"
   secretKey: "changeme"
 sendgrid_api_key: changeme
+wallets:
+  - kind: deposit
+    address: "changeme"
+    nsig: 1
+    max_balance: 0.0
+    secret: changeme
+  - kind: hot
+    address: "changeme"
+    nsig: 1
+    max_balance: 100.0
+    secret: changeme
+  - kind: warm
+    address: "changeme"
+    nsig: 1
+    max_balance: 1000.0
+    secret: changeme
