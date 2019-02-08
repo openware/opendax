@@ -66,8 +66,8 @@ install_microkube() {
   bundle install
   rake render:config && \
   rake geth:import && \
-  rake wallet:create['deposit','http://0.0.0.0:8545','changeme'] && \
-  rake wallet:create['cold','http://0.0.0.0:8545','changeme'] && \
+  until rake wallet:create['deposit','http://0.0.0.0:8545','changeme']; do sleep 15; done && \
+  rake wallet:create['hot','http://0.0.0.0:8545','changeme'] && \
   rake wallet:create['warm','http://0.0.0.0:8545','changeme'] && \
   rake render:config && \
   rake service:all && \
