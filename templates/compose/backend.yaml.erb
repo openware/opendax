@@ -5,6 +5,7 @@ services:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
+      - ../config/mysql:/etc/mysql/conf.d
     ports:
       - "3306:3306"
     environment:
@@ -29,6 +30,8 @@ services:
   vault:
     image: vault:0.10.2
     restart: always
+    volumes:
+      - vault_data:/vault
     environment:
       SKIP_SETCAP: 1
       VAULT_TOKEN: changeme
@@ -39,3 +42,4 @@ volumes:
   db_data:
   rabbitmq_data:
   redis_data:
+  vault_data:
