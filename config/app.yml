@@ -13,7 +13,7 @@ images:
   postmaster: quay.io/openware/postmaster:0.0.3
   components-docs: gcr.io/openware-production/components-docs:latest
 vendor:
-  frontend: https://github.com/rubykube/mikroapp.git
+  frontend: git@github.com:openware/baseapp.git
 storage:
   provider: "Google"
   bucketName: "microkube-barong-docs-bucket"
