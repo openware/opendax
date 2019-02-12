@@ -14,6 +14,22 @@
   position:               1
   options:                {}
 
+- id:                     fth
+  name:                   Fiat Ethereum
+  symbol:                 'F'
+  type:                   fiat
+  precision:              2
+  base_factor:            1
+  enabled:                true
+  min_deposit_amount:     0
+  min_collection_amount:  0
+  withdraw_limit_24h:     100
+  withdraw_limit_72h:     200
+  deposit_fee:            0
+  withdraw_fee:           0
+  position:               2
+  options:                {}
+
 - id:                     eth
   name:                   Ethereum
   blockchain_key:         eth-rinkeby
@@ -30,7 +46,7 @@
   withdraw_limit_72h:     0.5
   deposit_fee:            0
   withdraw_fee:           0
-  position:               2
+  position:               3
   options:
     # ETH tx fees configurations.
     #
@@ -56,35 +72,6 @@
   withdraw_limit_72h:     600
   deposit_fee:            0
   withdraw_fee:           0
-  position:               3
-  options:
-    # ERC20 tx fees configurations.
-    #
-    # Maximum amount of gas you're willing to spend on a particular transaction.
-    gas_limit: 90_000
-    # Internal price that is paid for running a contract on the Ethereum network.
-    gas_price: 1_000_000_000
-    #
-    # ERC20 configuration.
-    erc20_contract_address: '0x87099add3bcc0821b5b151307c147215f839a110' # Always wrap this value in quotes!
-
-- id:                     kyn
-  name:                   Kayen
-  blockchain_key:         eth-rinkeby
-  symbol:                 'K'
-  type:                   coin
-  precision:              8
-  base_factor:            1_000_000 # IMPORTANT: Don't forget to update this variable according
-  enabled:                true      #            to your ERC20-based currency requirements
-  # Deposits with less amount are skipped during blockchain synchronization.
-  # We advise to set value 10 times bigger than the network fee to prevent losses.
-  # NOTE: Network fee is paid in ETH but min_deposit_amount is in TRST.
-  min_deposit_amount:     0.00021
-  min_collection_amount:  0.00021
-  withdraw_limit_24h:     300      #            (usually can be found on the official website).
-  withdraw_limit_72h:     600
-  deposit_fee:            0
-  withdraw_fee:           0
   position:               4
   options:
     # ERC20 tx fees configurations.
@@ -95,4 +82,4 @@
     gas_price: 1_000_000_000
     #
     # ERC20 configuration.
-    erc20_contract_address: '0x4ec07a41b94e035336cca74877319d06964ab76d' # Always wrap this value in quotes!
+    erc20_contract_address: '0x87099add3bcc0821b5b151307c147215f839a110' # Always wrap this value in quotes!
