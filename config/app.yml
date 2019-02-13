@@ -10,7 +10,7 @@ images:
   barong: rubykube/barong:2.0.39-alpha
   frontend: gcr.io/openware-production/baseapp:2.1.32
   tower: rubykube/tower:0.1.8
-  postmaster: quay.io/openware/postmaster:0.0.3
+  postmaster: quay.io/openware/postmaster:0.0.6
   components-docs: gcr.io/openware-production/components-docs:latest
 vendor:
   frontend: git@github.com:openware/baseapp.git
@@ -36,7 +36,13 @@ recaptcha:
   type: "none"
   siteKey: "changeme"
   secretKey: "changeme"
-sendgrid_api_key: changeme
+smtp:
+  host: smtp.sendgrid.net
+  port: 2525
+  user: apikey
+  password: changeme
+  sender_email: noreply@postmaster.com
+  sender_name: Postmaster
 wallets:
   - kind: deposit
     address: "changeme"
