@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  arke:
+    image: "<%= @config['images']['arke'] %>"
+    volumes:
+      - ../config/arke/values.yaml:/home/app/config/values.yaml
+    command: start
+

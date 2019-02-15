@@ -12,6 +12,7 @@ images:
   tower: rubykube/tower:0.1.8
   postmaster: quay.io/openware/postmaster:0.0.6
   components-docs: gcr.io/openware-production/components-docs:latest
+  arke: rubykube/arke:0.1.5
 vendor:
   frontend: git@github.com:openware/baseapp.git
 storage:
@@ -59,3 +60,18 @@ wallets:
     nsig: 1
     max_balance: 1000.0
     secret: changeme
+arke:
+  strategy:
+    type: 'copy'
+    pair: 'ETHUSD'
+    target:
+      driver: rubykube
+      host: 'http://www.app.local'
+      name: John
+      key: changeme
+      secret: changeme
+    sources:
+      - driver: bitfinex
+        name: Joe
+        key: changeme
+        secret: changeme

@@ -56,6 +56,24 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
+  desc '[Optional] Run arke'
+  task :arke, [:command] do |task, args|
+    args.with_defaults(:command => 'start')
+
+    def start
+      puts '----- Starting arke -----'
+      sh 'docker-compose up -d arke'
+    end
+
+    def stop
+      puts '----- Stopping arke -----'
+      sh 'docker-compose rm -fs arke'
+    end
+
+
+    @switch.call(args, method(:start), method(:stop))
+  end
+
   desc '[Optional] Run peatio daemons (ranger, peatio daemons)'
   task :daemons, [:command] do |task, args|
     @daemons = %w[ranger withdraw_audit blockchain global_state deposit_collection deposit_collection_fees deposit_coin_address slave_book pusher_market pusher_member matching order_processor trade_executor withdraw_coin k]
