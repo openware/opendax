@@ -7,7 +7,6 @@ COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSIO
 install_core() {
   sudo bash <<EOS
 apt-get update
-apt-get upgrade -y -q
 apt-get install -y -q git tmux dirmngr dbus htop curl libmariadbclient-dev-compat build-essential
 EOS
 }
