@@ -194,6 +194,22 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
+  desc '[Optional] Run superset'
+  task :superset, [:command] do |task, args|
+    args.with_defaults(:command => 'start')
+
+    def start
+      puts '----- Starting Superset -----'
+      sh 'docker-compose up -d superset'
+    end
+
+    def stop
+      puts '----- Stopping Superset -----'
+      sh 'docker-compose rm -fs superset'
+    end
+
+    @switch.call(args, method(:start), method(:stop))
+  end
   desc 'Run the micro app with dependencies (does not run Optional)'
   task :all, [:command] => 'render:config' do |task, args|
     args.with_defaults(:command => 'start')
@@ -208,6 +224,7 @@ namespace :service do
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
       Rake::Task["service:utils"].invoke('start')
+      Rake::Task["service:superset"].invoke('start')
       Rake::Task["service:daemons"].invoke('start')
     end
 
@@ -219,6 +236,7 @@ namespace :service do
       Rake::Task["service:frontend"].invoke('stop')
       Rake::Task["service:tower"].invoke('stop')
       Rake::Task["service:utils"].invoke('stop')
+      Rake::Task["service:superset"].invoke('stop')
       Rake::Task["service:daemons"].invoke('stop')
     end
 
