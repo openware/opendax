@@ -13,5 +13,6 @@ namespace :payload do
       request.options.timeout = 300
     end
     pp response.body
+    fail unless response.status == 200
   end
 end
