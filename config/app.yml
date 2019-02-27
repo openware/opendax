@@ -6,11 +6,11 @@ ssl:
   enabled: true
   email: "support@example.com"
 images:
-  peatio: rubykube/peatio:2.0.23-alpha
-  barong: rubykube/barong:2.0.39-alpha
-  frontend: gcr.io/openware-production/baseapp:2.1.32
-  tower: rubykube/tower:0.1.8
-  postmaster: quay.io/openware/postmaster:0.0.6
+  peatio: rubykube/peatio:2.0.33
+  barong: rubykube/barong:2.0.51
+  frontend: gcr.io/openware-production/baseapp:2.1.104
+  tower: rubykube/tower:0.1.11
+  postmaster: quay.io/openware/postmaster:0.0.7
   components-docs: gcr.io/openware-production/components-docs:latest
   arke: rubykube/arke:0.1.5
 vendor:
