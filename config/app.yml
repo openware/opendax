@@ -8,9 +8,9 @@ ssl:
 images:
   peatio: rubykube/peatio:2.0.33
   barong: rubykube/barong:2.0.51
-  frontend: gcr.io/openware-production/baseapp:2.1.104
+  frontend: gcr.io/openware-production/baseapp:2.1.111
   tower: rubykube/tower:0.1.11
-  postmaster: quay.io/openware/postmaster:0.0.7
+  postmaster: quay.io/openware/postmaster:0.0.12
   components-docs: gcr.io/openware-production/components-docs:latest
   arke: rubykube/arke:0.1.5
 vendor:
