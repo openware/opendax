@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: Run rspec
-  image: ruby:2.6.0
+  image: ruby:2.6.1
   commands:
     - bundle
     - rspec
@@ -11,7 +11,7 @@ steps:
     event:
       - pull_request
 - name: Bump and tag
-  image: ruby:2.6.0
+  image: ruby:2.6.1
   environment:
     BOT_USERNAME: kite-bot
     BOT_NAME: Kite Bot
