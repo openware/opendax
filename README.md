@@ -93,6 +93,69 @@ Any component from the stack can be easily stopped or restarted using `rake serv
 
 For example, `rake service:frontend[stop]` would stop the frontend application container and `rake service:proxy[restart]` would completely restart the reverse proxy container.
 
+# Managing component deployments
+
+Each component has a config file (ex. `config/frontend/tower.js`) and a compose file (ex. `compose/frontend.yaml`).
+
+All config files are mounted into respective component container, except from `config/app.yml` - this file contains all the neccessary configuration of microkube deployment
+
+Compose files contain component images, environment configuration etc.
+
+These files get rendered from their templates that are located under `templates` directory.
+
+## How to update component image?
+
+Modify `config/app.yml` with correct image and run `rake:service[all]`
+This will rerender all the files from `templates` directory and restart all the running services.
+
+Alternitavely you can update the following files:
+  * `config/app.yml`
+  * `templates/compose/*component*.yml`
+  * `compose/*component*.yml`
+And run `rake service:component[start]`
+
+## How to update component config?
+
+Modify `config/*component*/*config*` and run `rake service:component[start]`, if you want the changes to be persistent, you also need to update `templates/config/*components*/*config*`
+
+## How to use webhook ?
+
+Webhook is microkube's built in feature to update component's image tags or repositories remotely.
+In order to use webhook you need `WEBHOOK_JWT_SECRET` and microkube repository.
+
+### How to obtain webhook secret ?
+
+  * Ssh to VM that microkube is deployed to
+  * Make sure webhook is running `sudo systemctl status webhook`
+  * Run `cat /etc/systemd/system/webhook.service`
+    This will produce output like this:
+    ```
+    [Unit]
+    Description=Microkube Webhook service
+
+    [Service]
+    User=app
+    Environment="WEBHOOK_JWT_SECRET=*your secret here*"
+    ExecStart=/bin/bash -c "/home/app/.rbenv/shims/bundle exec rackup config.ru"
+    Type=simple
+    Restart=always
+    WorkingDirectory=/home/app/microkube
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+  * Copy the secret and store it somewhere safe
+
+### How to update components image using webhook ?
+
+  * Go to microkube root directory
+  * Export webhook secret `export WEBHOOK_JWT_SECRET=*your secret*`
+  * Run rake task `rake payload:send[service,image,url]`, where
+    service - docker-compose service(component) to update
+    image - image containing repository (ex. rubykube/peatio:2.1.6)
+    url - url of microkube deployment (ex. http://www.microkube.com)
+
+
 ### Accessing the deployment
 
     Note: Make sure your VM of choice has its firewall rules configured to let in
