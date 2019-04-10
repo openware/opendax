@@ -31,6 +31,10 @@ module Microkube
       File.write(out_file, result)
     end
 
+    def ssl_helper(arg)
+      @config['ssl']['enabled'] ? arg << 's' : arg
+    end
+
     def template_name(file)
       path = Pathname.new(file)
       out_path = path.relative_path_from(TEMPLATE_PATH).sub('.erb', '')
