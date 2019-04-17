@@ -3,7 +3,7 @@ app:
   domain: "app.local"
   subdomain: "www"
 ssl:
-  enabled: true
+  enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
 images:
   peatio: rubykube/peatio:2.0.34
