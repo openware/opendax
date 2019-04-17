@@ -48,9 +48,11 @@ module Microkube
     end
 
     def generate_key(filename, public: false)
-      key = SSHKey.generate(type: 'RSA', bits: 2048)
-      File.open(filename, 'w') { |file| file.puts(key.private_key) }
-      File.open("#{filename}.pub", 'w') { |file| file.puts(key.ssh_public_key) } if public
+      unless File.file?(filename)
+        key = SSHKey.generate(type: 'RSA', bits: 2048)
+        File.open(filename, 'w') { |file| file.puts(key.private_key) }
+        File.open("#{filename}.pub", 'w') { |file| file.puts(key.ssh_public_key) } if public
+      end
     end
 
     def config
