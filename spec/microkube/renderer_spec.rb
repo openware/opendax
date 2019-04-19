@@ -44,9 +44,9 @@ describe Microkube::Renderer do
     end
 
     it 'should generate a public RSA key in addition when the flag is passed' do
-      renderer.generate_key('config/secrets/kite.key', public: true)
-      expect(File).to exist('config/secrets/kite.key')
-      expect(File).to exist('config/secrets/kite.key.pub')
+      renderer.generate_key('config/secrets/app.key', public: true)
+      expect(File).to exist('config/secrets/app.key')
+      expect(File).to exist('config/secrets/app.key.pub')
     end
   end
 
@@ -54,8 +54,8 @@ describe Microkube::Renderer do
     it 'should create files with private and public RSA keys' do
       renderer.render_keys
       expect(File).to exist('config/secrets/barong.key')
-      expect(File).to exist('config/secrets/kite.key')
-      expect(File).to exist('config/secrets/kite.key.pub')
+      expect(File).to exist('config/secrets/app.key')
+      expect(File).to exist('config/secrets/app.key.pub')
     end
   end
 

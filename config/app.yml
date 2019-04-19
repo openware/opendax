@@ -22,7 +22,6 @@ storage:
   secretKey: "**********"
 terraform:
   credentials: "~/safe/microkube.json"
-  git_key: "~/.ssh/id_rsa"
   project: "example-microkube"
   region: "europe-west4"
   zone: "europe-west4-a"

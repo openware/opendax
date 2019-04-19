@@ -10,7 +10,7 @@ module Microkube
     TEMPLATE_PATH = Pathname.new('./templates')
 
     JWT_KEY = 'config/secrets/barong.key'.freeze
-    SSH_KEY = 'config/secrets/kite.key'.freeze
+    SSH_KEY = 'config/secrets/app.key'.freeze
 
     def render
       Dir.glob("#{TEMPLATE_PATH}/**/*.erb").each do |file|

@@ -33,16 +33,24 @@ resource "google_compute_instance" "microkube" {
     }
   }
 
+  service_account {
+    scopes = ["storage-ro"]
+  }
+
   tags = ["allow-webhook"]
 
   metadata {
     sshKeys = "${var.ssh_user}:${file("${var.ssh_public_key}")}"
   }
 
-  # Git RSA key used to clone private repos(e.g. openware/microkube)
-  provisioner "file" {
-    source      = "${var.git_key}"
-    destination = "/home/${var.ssh_user}/git.key"
+  provisioner "local-exec" {
+    command = "mkdir -p /tmp/upload && rsync -rv --exclude=terraform ../ /tmp/upload/"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /home/${var.ssh_user}/microkube"
+    ]
 
     connection {
       type        = "ssh"
@@ -52,19 +60,8 @@ resource "google_compute_instance" "microkube" {
   }
 
   provisioner "file" {
-    source      = "${var.credentials}"
-    destination = "/home/${var.ssh_user}/gcloud-sa.json"
-
-    connection {
-      type        = "ssh"
-      user        = "${var.ssh_user}"
-      private_key = "${file("${var.ssh_private_key}")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "../config/app.yml"
-    destination = "/home/${var.ssh_user}/app.yml"
+    source      = "/tmp/upload/"
+    destination = "/home/${var.ssh_user}/microkube"
 
     connection {
       type        = "ssh"
@@ -82,6 +79,17 @@ resource "google_compute_instance" "microkube" {
       private_key = "${file("${var.ssh_private_key}")}"
     }
   }
+
+  provisioner "remote-exec" {
+    script = "../bin/start.sh"
+
+    connection {
+      type        = "ssh"
+      user        = "${var.ssh_user}"
+      private_key = "${file("${var.ssh_private_key}")}"
+    }
+  }
+
 }
 
 resource "google_compute_firewall" "microkube" {

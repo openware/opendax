@@ -2,10 +2,6 @@ variable "credentials" {
   type = "string"
 }
 
-variable "git_key" {
-  type = "string"
-}
-
 variable "ssh_user" {
   type = "string"
   description = "Name of the SSH user to use"
