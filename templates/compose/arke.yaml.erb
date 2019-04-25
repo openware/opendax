@@ -4,6 +4,6 @@ services:
   arke:
     image: "<%= @config['images']['arke'] %>"
     volumes:
-      - ../config/arke/values.yaml:/home/app/config/values.yaml
+      - ../config/arke/strategy.yaml:/home/app/config/values.yaml
     command: start
 

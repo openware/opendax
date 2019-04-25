@@ -12,7 +12,7 @@ images:
   tower: rubykube/tower:0.1.16
   postmaster: quay.io/openware/postmaster:0.0.15
   components-docs: gcr.io/openware-production/components-docs:latest
-  arke: rubykube/arke:0.1.5
+  arke: rubykube/arke:0.1.9
 vendor:
   frontend: git@github.com:openware/baseapp.git
 storage:
@@ -62,16 +62,30 @@ wallets:
     secret: changeme
 arke:
   strategy:
-    type: 'copy'
-    pair: 'ETHUSD'
+    volume_ratio: 0.1
     target:
       driver: rubykube
-      host: 'http://www.app.local'
-      name: John
-      key: changeme
-      secret: changeme
+      market: 'FTHUSD'
+      host: "http://www.app.local"
+      key: ""
+      secret: ""
+      rate_limit: 1
     sources:
+      - driver: bitfaker
+        market: 'tETHUSD'
+        host: "api.bitfinex.com"
+        key: ""
+        secret: ""
+        rate_limit: 0.2
       - driver: bitfinex
-        name: Joe
-        key: changeme
-        secret: changeme
+        market: 'tETHUSD'
+        host: "api.bitfinex.com"
+        key: ""
+        secret: ""
+        rate_limit: 0.2
+      - driver: binance
+        market: 'ETHUSDT'
+        host: "api.binance.com"
+        key: ""
+        secret: ""
+        rate_limit: 0.2
