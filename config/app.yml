@@ -61,6 +61,7 @@ wallets:
     secret: changeme
 arke:
   strategy:
+    type: copy
     volume_ratio: 0.1
     target:
       driver: rubykube
