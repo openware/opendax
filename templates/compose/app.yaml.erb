@@ -24,3 +24,13 @@ services:
       - ../config/secrets:/secrets:ro
       - ../config/barong/seeds.yml:/home/app/config/seeds.yml
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
+      - ../config/barong/management_api.yml:/home/app/config/management_api.yml
+
+  applogic:
+    image: "<%= @config['images']['applogic'] %>"
+    env_file:
+      - ../config/applogic.env
+    expose:
+      - "8081"
+    volumes:
+      - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml

@@ -12,7 +12,7 @@ class Webhook < Sinatra::Base
 
   def initialize
     super
-    @services = %w[barong peatio frontend tower components-docs]
+    @services = %w[barong peatio frontend tower components-docs applogic]
     secret = ENV['WEBHOOK_JWT_SECRET']
     raise 'WEBHOOK_JWT_SECRET is not set' if secret.to_s.empty?
     @decoder = Microkube::Payload.new(secret: secret)

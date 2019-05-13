@@ -2,12 +2,10 @@ keychain:
   applogic:
     algorithm: RS256
     value: <%= @applogic_public_key %>
-
+    
 scopes:
-  read_operations:
+  read_users:
     mandatory_signers:
       - applogic
     permitted_signers:
       - applogic
-
-jwt: {}

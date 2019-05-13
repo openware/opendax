@@ -11,6 +11,7 @@ images:
   frontend: gcr.io/openware-production/baseapp:2.1.161
   tower: rubykube/tower:0.1.16
   postmaster: quay.io/openware/postmaster:0.0.15
+  applogic: rubykube/applogic:latest
   components-docs: gcr.io/openware-production/components-docs:latest
   arke: rubykube/arke:0.1.9
 vendor:

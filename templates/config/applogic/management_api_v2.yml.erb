@@ -1,0 +1,25 @@
+barong:
+  keychain:
+    applogic:
+      algorithm: RS256
+      value: <%= @applogic_private_key %>
+
+  jwt: {}
+
+  actions:
+    read_users:
+      required_signatures: ['applogic']
+      requires_barong_totp: false
+
+peatio:
+  keychain:
+    applogic:
+      algorithm: RS256
+      value: <%= @applogic_private_key %>
+
+  jwt: {}
+
+  actions:
+    read_operations:
+      required_signatures: ['applogic']
+      requires_barong_totp: false

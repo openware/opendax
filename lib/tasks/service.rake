@@ -110,7 +110,7 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc 'Run setup hooks for peatio and barong'
+  desc 'Run setup hooks for peatio, barong and applogic'
   task :setup, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
@@ -118,6 +118,7 @@ namespace :service do
       puts '----- Running hooks -----'
       sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate db:seed"'
       sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate db:seed"'
+      sh 'docker-compose run --rm applogic bash -c "bundle exec rake db:create db:migrate"'
     end
 
     def stop
@@ -132,12 +133,12 @@ namespace :service do
 
     def start
       puts '----- Starting app -----'
-      sh 'docker-compose up -d peatio barong gateway'
+      sh 'docker-compose up -d peatio barong applogic gateway'
     end
 
     def stop
       puts '----- Stopping app -----'
-      sh 'docker-compose rm -fs peatio barong gateway'
+      sh 'docker-compose rm -fs peatio barong applogic gateway'
     end
 
     @switch.call(args, method(:start), method(:stop))

@@ -9,7 +9,8 @@ module Microkube
   class Renderer
     TEMPLATE_PATH = Pathname.new('./templates')
 
-    JWT_KEY = 'config/secrets/barong.key'.freeze
+    BARONG_KEY = 'config/secrets/barong.key'.freeze
+    APPLOGIC_KEY = 'config/secrets/applogic.key'.freeze
     SSH_KEY = 'config/secrets/app.key'.freeze
 
     def render
@@ -23,9 +24,12 @@ module Microkube
       puts "Rendering #{out_file}"
 
       @config ||= config
-      @barong_key ||= OpenSSL::PKey::RSA.new(File.read(JWT_KEY), '')
-      @jwt_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
-      @jwt_public_key  ||= Base64.urlsafe_encode64(@barong_key.public_key.to_pem)
+      @barong_key ||= OpenSSL::PKey::RSA.new(File.read(BARONG_KEY), '')
+      @applogic_key ||= OpenSSL::PKey::RSA.new(File.read(APPLOGIC_KEY), '')
+      @barong_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
+      @barong_public_key  ||= Base64.urlsafe_encode64(@barong_key.public_key.to_pem)
+      @applogic_private_key ||= Base64.urlsafe_encode64(@applogic_key.to_pem)
+      @applogic_public_key ||= Base64.urlsafe_encode64(@applogic_key.public_key.to_pem)
 
       result = ERB.new(File.read(file), 0, '-').result(binding)
       File.write(out_file, result)
@@ -43,7 +47,8 @@ module Microkube
     end
 
     def render_keys
-      generate_key(JWT_KEY)
+      generate_key(BARONG_KEY)
+      generate_key(APPLOGIC_KEY)
       generate_key(SSH_KEY, public: true)
     end
 
