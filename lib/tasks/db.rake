@@ -8,7 +8,6 @@ namespace :db do
   task :create do
     sh 'docker-compose run --rm peatio bundle exec rake db:create'
     sh 'docker-compose run --rm barong bundle exec rake db:create'
-    sh %q(docker-compose run --rm db /bin/sh -c "mysql -u root -h db -P 3306 -pchangeme -e 'CREATE DATABASE superset'")
   end
 
   desc 'Load database dump'

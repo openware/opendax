@@ -200,6 +200,25 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
+      conf = @config['superset']
+      init_params = [
+        '--app', 'superset',
+        '--firstname', 'Admin',
+        '--lastname', 'Superset',
+        '--username', conf['username'],
+        '--email', conf['email'],
+        '--password', conf['password']
+      ].join(' ')
+
+      puts '----- Initializing Superset -----'
+      sh [
+        'docker-compose run --rm superset',
+        'sh -c "',
+        "fabmanager create-admin #{init_params}",
+        '&& superset db upgrade',
+        '&& superset init"'
+      ].join(' ')
+
       puts '----- Starting Superset -----'
       sh 'docker-compose up -d superset'
     end

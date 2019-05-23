@@ -60,6 +60,10 @@ wallets:
     nsig: 1
     max_balance: 1000.0
     secret: changeme
+superset:
+  email: superset-admin@openware.com
+  username: admin
+  password: changeme
 arke:
   strategy:
     type: copy
