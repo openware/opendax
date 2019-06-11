@@ -57,25 +57,33 @@ static_resources:
           http_filters:
           - name: envoy.ext_authz
             config:
+              with_request_body:
+                max_request_bytes: 8192
+                allow_partial_message: true
               http_service:
-                allowed_authorization_headers:
-                - location
-                - set-cookie
-                - authorization
-                - proxy-authenticate
-                - www-authenticate
-                allowed_request_headers:
-                - user-agent
-                - cookie
-                - x-forwarded-proto
-                - authorization
-                - proxy-authorization
-                - x-forwarded-host
-                - x-forwarded-for
-                - from
-                - x-auth-apikey
-                - x-auth-nonce
-                - x-auth-signature
+                authorization_request:
+                  allowed_headers:
+                    patterns:
+                    - exact: cookie
+                    - exact: x-auth-apikey
+                    - exact: x-auth-nonce
+                    - exact: x-auth-signature
+                    - exact: user-agent
+                    - exact: x-forwarded-host
+                    - exact: x-forwarded-for
+                    - exact: from
+                    - exact: x-forwarded-proto
+                    - exact: proxy-authorization
+                authorization_response:
+                  allowed_upstream_headers:
+                    patterns:
+                    - exact: authorization
+                  allowed_client_headers:
+                    patterns:
+                    - exact: set-cookie
+                    - exact: proxy-authenticate
+                    - exact: www-authenticate
+                    - exact: location
                 path_prefix: "/api/v2/auth"
                 server_uri:
                   cluster: barong

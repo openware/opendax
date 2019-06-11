@@ -2,13 +2,13 @@ version: '3.6'
 
 services:
   gateway:
-    image: envoyproxy/envoy:v1.9.0
+    image: envoyproxy/envoy:v1.10.0
     volumes:
       - ../config/gateway:/etc/envoy/
     ports:
       - '8099:8099'
       - '9099:9099'
-    command: /usr/local/bin/envoy --v2-config-only -l info -c /etc/envoy/envoy.yaml
+    command: /usr/local/bin/envoy -l info -c /etc/envoy/envoy.yaml
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/api/, /admin, /assets/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
