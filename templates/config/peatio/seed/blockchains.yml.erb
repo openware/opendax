@@ -1,9 +1,10 @@
 - key:               eth-rinkeby
   name:              Ethereum Rinkeby
-  client:            ethereum               # API client name.
+  client:            geth                   # API client name.
   server:            http://geth:8545       # Public Ethereum node endpoint. IMPORTANT: full syncmode.
   height:            2500000                # Initial block number from which sync will be started.
   min_confirmations: 6                      # Minimal confirmations needed for withdraw and deposit confirmation.
+  step:              6
   explorer:
     address:         https://rinkeby.etherscan.io/address/#{address}
     transaction:     https://rinkeby.etherscan.io/tx/#{txid}
@@ -11,10 +12,11 @@
 
 - key:               eth-mainet
   name:              Ethereum Mainet
-  client:            ethereum               # API client name.
+  client:            geth                   # API client name.
   server:            http://geth:8545       # Public Ethereum node endpoint. IMPORTANT: full syncmode.
   height:            5000000                # Initial block number from which sync will be started.
   min_confirmations: 6                      # Minimal confirmations needed for withdraw and deposit confirmation.
+  step:              6
   explorer:
     address:         https://etherscan.io/address/#{address}
     transaction:     https://etherscan.io/tx/#{txid}

@@ -1,3 +1,7 @@
 window.env = {
-  authUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/barong'
+    applogicUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/applogic',
+    authUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/barong',
+    msAlertDisplayTime: '5000',
+    tablePageLimit: 50,
+    minutesUntilAutoLogout: '5',
 };

@@ -58,7 +58,7 @@ static_resources:
           - name: envoy.ext_authz
             config:
               with_request_body:
-                max_request_bytes: 8192
+                max_request_bytes: 90000000
                 allow_partial_message: true
               http_service:
                 authorization_request:
@@ -91,6 +91,7 @@ static_resources:
                   uri: http://barong:8001
           - name: envoy.router
             config: {}
+    perConnectionBufferLimitBytes: 10000000
   clusters:
   - name: barong
     connect_timeout: 0.25s
