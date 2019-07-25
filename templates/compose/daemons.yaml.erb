@@ -90,4 +90,12 @@ services:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
       - ../config/applogic/schedule.yml:/home/app/config/schedule.yml
     command: bash -c "sidekiq"
+  
+  listener:
+    image: "<%= @config['images']['applogic'] %>"
+    env_file:
+      - ../config/applogic.env
+    volumes:
+      - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
+    command: bash -c "bundle exec rake event_api_listener"
 
