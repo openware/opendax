@@ -112,19 +112,12 @@ namespace :service do
 
   desc 'Run setup hooks for peatio, barong and applogic'
   task :setup, [:command] do |task, args|
-    args.with_defaults(:command => 'start')
-
-    def start
-      puts '----- Running hooks -----'
-      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate db:seed"'
-      sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate db:seed"'
-      sh 'docker-compose run --rm applogic bash -c "bundle exec rake db:create db:migrate"'
-    end
-
-    def stop
-    end
-
-    @switch.call(args, method(:start), method(:stop))
+    puts '----- Running hooks -----'
+    sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate"'
+    sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:seed"'
+    sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate"'
+    sh 'docker-compose run --rm barong bash -c "./bin/link_config && bundle exec rake db:seed"'
+    sh 'docker-compose run --rm applogic bash -c "bundle exec rake db:create db:migrate"'
   end
 
   desc 'Run mikro app (barong, peatio)'

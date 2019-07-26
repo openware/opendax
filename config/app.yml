@@ -6,11 +6,11 @@ ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
 images:
-  peatio: rubykube/peatio:2.2.22
-  barong: rubykube/barong:2.2.14
-  frontend: gcr.io/openware-production/baseapp:2.1.213
-  tower: gcr.io/openware-production/tower:2.2.1
-  postmaster: quay.io/openware/postmaster:0.0.17
+  peatio: rubykube/peatio:2.2.25
+  barong: rubykube/barong:2.2.22
+  frontend: gcr.io/openware-production/baseapp:2.2.18
+  tower: gcr.io/openware-production/tower:2.2.8
+  postmaster: quay.io/openware/postmaster:2.2.2
   applogic: rubykube/applogic:latest
   components-docs: gcr.io/openware-production/components-docs:latest
   arke: rubykube/arke:0.1.9
