@@ -64,6 +64,8 @@ superset:
   email: superset-admin@openware.com
   username: admin
   password: changeme
+tenko:
+  url: "https://www.openware.com/api/v2/tenko"
 arke:
   strategy:
     type: copy
