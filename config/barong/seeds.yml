@@ -137,6 +137,7 @@ permissions:
  - { role: trader, verb: all, path: api/v2/peatio/account, action: accept }
  - { role: trader, verb: all, path: api/v2/peatio/market, action: accept }
  - { role: trader, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: trader, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: trader, verb: get, path: api/v2/ranger, action: accept }
 
@@ -145,6 +146,7 @@ permissions:
  - { role: member, verb: all, path: api/v2/peatio/account, action: accept }
  - { role: member, verb: all, path: api/v2/peatio/market, action: accept }
  - { role: member, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: member, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: member, verb: get, path: api/v2/ranger, action: accept }
 
@@ -153,5 +155,6 @@ permissions:
  - { role: broker, verb: all, path: api/v2/peatio/account, action: accept }
  - { role: broker, verb: all, path: api/v2/peatio/market, action: accept }
  - { role: broker, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: broker, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: broker, verb: get, path: api/v2/ranger, action: accept }
