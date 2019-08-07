@@ -66,6 +66,7 @@ superset:
   password: changeme
 tenko:
   url: "https://www.openware.com/api/v2/tenko"
+  license_key: ""
 arke:
   strategy:
     type: copy
