@@ -16,6 +16,16 @@ static_resources:
             - name: backend
               domains:
               - "*"
+              cors:
+                allow_origin:
+                - "<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
+                allow_methods: "PUT, GET, POST"
+                allow_headers: "content-type, x-grpc-web"
+                filter_enabled:
+                  default_value:
+                    numerator: 100
+                    denominator: HUNDRED
+                  runtime_key: cors.www.enabled
               routes:
               - match:
                   prefix: "/api/v2/barong"
@@ -55,6 +65,8 @@ static_resources:
                   upgrade_configs:
                     upgrade_type: "websocket"
           http_filters:
+          - name: envoy.cors
+            typed_config: {}
           - name: envoy.ext_authz
             config:
               with_request_body:
