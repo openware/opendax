@@ -237,7 +237,6 @@ namespace :service do
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
       Rake::Task["service:utils"].invoke('start')
-      Rake::Task["service:superset"].invoke('start')
       Rake::Task["service:daemons"].invoke('start')
     end
 
@@ -249,7 +248,6 @@ namespace :service do
       Rake::Task["service:frontend"].invoke('stop')
       Rake::Task["service:tower"].invoke('stop')
       Rake::Task["service:utils"].invoke('stop')
-      Rake::Task["service:superset"].invoke('stop')
       Rake::Task["service:daemons"].invoke('stop')
     end
 
