@@ -23,7 +23,7 @@ DigitalOcean, Vultr, GCP, AWS or any dedicated servers Ubuntu, Debian, Centos wo
 
 #### Create Unix user
 SSH using root user, then create new user for the application
-```
+```bash
 useradd -g users -s `which bash` -m app
 ```
 
@@ -38,17 +38,17 @@ Docker compose follow steps: [docker compose](https://docs.docker.com/compose/in
 #### Install ruby in user app
 
 ##### Change user using 
-```
+```bash
 su - app
 ```
 
 ##### Clone OpenDAX
-```
+```bash
 git clone https://github.com/openware/opendax.git
 ```
 
 ##### Install RVM
-```
+```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 cd opendax
@@ -57,7 +57,7 @@ rvm install .
 
 ### Bundle install depedencies
 
-```
+```bash
 bundle install
 rake -T # To see if ruby and lib works
 ```
@@ -68,7 +68,7 @@ Using `rake -T` you can see all available commands, and can create new ones in `
 
 Edit the file `config/app.yml`
 Replace the license key in this block:
-```
+```yaml
 license:
   url: "https://www.openware.com/api/v2/tenko"
   license_key: "PASTE-KEY-HERE"
@@ -88,7 +88,7 @@ Insert in file `/etc/hosts`
 
 #### Bring up everything
 
-```
+```bash
 rake service:all
 ```
 
@@ -176,73 +176,20 @@ And run `rake service:component[start]`
 
 ## How to update component config?
 
-Modify `config/*component*/*config*` and run `rake service:component[start]`, if you want the changes to be persistent, you also need to update `templates/config/*components*/*config*`
-
-## How to use webhook ?
-
-Webhook is microkube's built in feature to update component's image tags or repositories remotely.
-In order to use webhook you need `WEBHOOK_JWT_SECRET` and microkube repository.
-
-### How to obtain webhook secret ?
-
-  * Ssh to VM that microkube is deployed to
-  * Make sure webhook is running `sudo systemctl status webhook`
-  * Run `cat /etc/systemd/system/webhook.service`
-    This will produce output like this:
-    ```
-    [Unit]
-    Description=Microkube Webhook service
-
-    [Service]
-    User=app
-    Environment="WEBHOOK_JWT_SECRET=*your secret here*"
-    ExecStart=/bin/bash -c "/home/app/.rbenv/shims/bundle exec rackup config.ru"
-    Type=simple
-    Restart=always
-    WorkingDirectory=/home/app/microkube
-
-    [Install]
-    WantedBy=multi-user.target
-    ```
-  * Copy the secret and store it somewhere safe
-
-### How to update components image using webhook ?
-
-  * Go to microkube root directory
-  * Export webhook secret `export WEBHOOK_JWT_SECRET=*your secret*`
-  * Run rake task `rake payload:send[service,image,url]`, where
-    service - docker-compose service(component) to update
-    image - image containing repository (ex. rubykube/peatio:2.1.6)
-    url - url of microkube deployment (ex. http://www.microkube.com)
-
-
-### Accessing the deployment
-
-    Note: Make sure your VM of choice has its firewall rules configured to let in
-    HTTP and/or HTTPS traffic and your DNS entries are pointing at its external IP.
-
-All the components with external endpoints are accessible by their respective subdomains based on the domain provided in the configuration:
-
-- `subdomain.base.domain` - frontend application and Peatio and Barong APIs mounted on `/api`
-- `peatio.base.domain` - Peatio UI and API
-- `barong.base.domain` - Barong API
-- `tower.base.domain` - the Tower admin panel application
-- `monitor.base.domain` - Traefik's dashboard useful for monitoring which components are enabled
-- `ws.ranger.base.domain` - Ranger's WebSocket endpoint **[Optional]**
-- `eth.base.domain` - Geth JSON RPC API **[Optional]**
-- `subdomain.base.domain` - Components docs (login: ILoveOpenware password: aiThai8inobei3raigei)
-
-## Using Vendor
-
-Fill in the list of vendor to clone in app.yaml
+Modify `config/*component*/*config*` and run `rake service:component[start]`, 
+if you want the changes to be persistent, you also need to update `templates/config/*components*/*config*`
 
 #### Render compose file
 ```
-rm compose/vendor.yaml
-rake render:config
-```
+# Delete all generated files
+git clean -fdx
 
-Review the generated file
+# Re-generate config from config/app.yml values
+rake render:config
+
+# Restart the container you need to reload config
+docker-compose up frontend -Vd
+```
 
 #### Clone the vendors and start
 ```
@@ -266,5 +213,5 @@ To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 ## Installer tool
 
 ```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/rubykube/microkube/master/bin/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
 ```
