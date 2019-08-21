@@ -5,6 +5,9 @@ app:
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
+license:
+  url: "https://www.openware.com/api/v2/tenko"
+  key: "PASTE-KEY-HERE"
 images:
   peatio: rubykube/peatio:2.2.25
   barong: rubykube/barong:2.2.22
@@ -64,9 +67,6 @@ superset:
   email: superset-admin@openware.com
   username: admin
   password: changeme
-tenko:
-  url: "https://www.openware.com/api/v2/tenko"
-  license_key: ""
 arke:
   strategy:
     type: copy

@@ -1,37 +1,97 @@
-# MicroKube
+# OpenDAX
 
-> Minimal stack for VM deployment.
+OpenDAX is a multi-service container system for building your crypto-currency exchange
+You can access get a free access to frontend UI by signin up on [openware.com](https://www.openware.com/)
 
 ## Getting started
 
-### Install ruby with rvm
+### Get your License key
 
+Register on [openware.com](https://www.openware.com/) to get your license key for a domain name you control.
+Save the domain and license key string.
+
+### VM requirements
+
+Minimum:
+ * 8GB to 12GB of RAM
+ * 4 to 6 cores vCPU
+ * 300GB SSD disk
+
+DigitalOcean, Vultr, GCP, AWS or any dedicated servers Ubuntu, Debian, Centos would work
+
+### Preparing the VM
+
+#### Create Unix user
+SSH using root user, then create new user for the application
+```
+useradd -g users -s `which bash` -m app
+```
+
+#### Install Docker and docker compose
+
+We highly recommend using docker and compose from docker.com install guide, do not use the system provided package
+which would be deprecated.
+
+Docker follow instruction here: [docker](https://docs.docker.com/install/)
+Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
+
+#### Install ruby in user app
+
+##### Change user using 
+```
+su - app
+```
+
+##### Clone OpenDAX
+```
+git clone https://github.com/openware/opendax.git
+```
+
+##### Install RVM
 ```
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
+cd opendax
 rvm install .
 ```
 
 ### Bundle install depedencies
 
 ```
-bundle
-rake -T
+bundle install
+rake -T # To see if ruby and lib works
+```
+
+Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
+
+### Paste you domain and license key
+
+Edit the file `config/app.yml`
+Replace the license key in this block:
+```
+license:
+  url: "https://www.openware.com/api/v2/tenko"
+  license_key: "PASTE-KEY-HERE"
 ```
 
 ### Run everything
+
+#### Configure your Domain
+If using a VM you can point your domain name to the VM ip address before this stage.
+Recommended if you enabled SSL, for local development edit the `/etc/hosts`
+
+
+Insert in file `/etc/hosts`
+```
+0.0.0.0 www.app.local
+```
+
+#### Bring up everything
 
 ```
 rake service:all
 ```
 
-Insert in file `/etc/hosts`
-```
-0.0.0.0 www.app.local
-0.0.0.0 peatio.app.local
-0.0.0.0 tower.app.local
-0.0.0.0 monitor.app.local
-```
 
 You can login on `www.app.local` with the following default users from seeds.yaml
 ```
