@@ -1,5 +1,5 @@
 app:
-  name: "Microkube"
+  name: "OpenDAX"
   domain: "app.local"
   subdomain: "www"
 ssl:
@@ -9,14 +9,11 @@ license:
   url: "https://www.openware.com/api/v2/tenko"
   key: "PASTE-KEY-HERE"
 images:
-  peatio: rubykube/peatio:2.2.25
-  barong: rubykube/barong:2.2.22
-  frontend: quay.io/openware/baseapp-lite:2.2.23
+  peatio: rubykube/peatio:2.2.29
+  barong: rubykube/barong:2.2.25
+  frontend: quay.io/openware/baseapp-lite:2.2.23  # Check on quay.io/openware for latest tags
   tower: quay.io/openware/tower:2.2.8
   postmaster: quay.io/openware/postmaster:2.2.2
-  applogic: rubykube/applogic:latest
-  components-docs: gcr.io/openware-production/components-docs:latest
-  arke: rubykube/arke:0.1.9
 vendor:
   frontend: git@github.com:openware/baseapp.git
 storage:
@@ -24,14 +21,6 @@ storage:
   bucketName: "microkube-barong-docs-bucket"
   accessKey: "**********"
   secretKey: "**********"
-terraform:
-  credentials: "~/safe/microkube.json"
-  project: "example-microkube"
-  region: "europe-west4"
-  zone: "europe-west4-a"
-  instance_name: "microkube-cloud"
-  machine_type: "n1-standard-4"
-  image: "debian-cloud/debian-9"
 twilio:
   phone_number: "+15005550000"
   account_sid: "changeme"
@@ -63,37 +52,12 @@ wallets:
     nsig: 1
     max_balance: 1000.0
     secret: changeme
-superset:
-  email: superset-admin@openware.com
-  username: admin
-  password: changeme
-arke:
-  strategy:
-    type: copy
-    volume_ratio: 0.1
-    target:
-      driver: rubykube
-      market: 'FTHUSD'
-      host: "http://www.app.local"
-      key: ""
-      secret: ""
-      rate_limit: 1
-    sources:
-      - driver: bitfaker
-        market: 'tETHUSD'
-        host: "api.bitfinex.com"
-        key: ""
-        secret: ""
-        rate_limit: 0.2
-      - driver: bitfinex
-        market: 'tETHUSD'
-        host: "api.bitfinex.com"
-        key: ""
-        secret: ""
-        rate_limit: 0.2
-      - driver: binance
-        market: 'ETHUSDT'
-        host: "api.binance.com"
-        key: ""
-        secret: ""
-        rate_limit: 0.2
+terraform:
+  credentials: "~/safe/microkube.json"
+  project: "example-microkube"
+  region: "europe-west4"
+  zone: "europe-west4-a"
+  instance_name: "microkube-cloud"
+  machine_type: "n1-standard-4"
+  image: "debian-cloud/debian-9"
+
