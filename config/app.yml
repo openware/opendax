@@ -12,7 +12,7 @@ images:
   peatio: rubykube/peatio:2.2.25
   barong: rubykube/barong:2.2.22
   frontend: quay.io/openware/baseapp-lite:2.2.23
-  tower: gcr.io/openware-production/tower:2.2.8
+  tower: quay.io/openware/tower:2.2.8
   postmaster: quay.io/openware/postmaster:2.2.2
   applogic: rubykube/applogic:latest
   components-docs: gcr.io/openware-production/components-docs:latest
