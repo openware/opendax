@@ -6,8 +6,8 @@
   kind:             <%= wallet['kind'] %>
   max_balance:      <%= wallet['max_balance'] %>
   status:           active
-  gateway:          geth
+  gateway:          parity
   settings:
-    uri:            http://geth:8545
+    uri:            http://parity:8545
     secret:         '<%= wallet['secret'] %>'
 <% end %>

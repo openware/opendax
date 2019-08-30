@@ -37,7 +37,7 @@ Docker compose follow steps: [docker compose](https://docs.docker.com/compose/in
 
 #### Install ruby in user app
 
-##### Change user using 
+##### Change user using
 ```bash
 su - app
 ```
@@ -133,7 +133,7 @@ The components included in the stack are:
 
 - `proxy` - [Traefik](https://traefik.io/), a robust cloud native edge router/reverse proxy written in Go
 - `backend` - [Vault](https://www.vaultproject.io), [MySQL](https://www.mysql.com), [Redis](https://redis.io) and [RabbitMQ](https://www.rabbitmq.com) grouped together
-- `cryptonodes` - cryptocurrency nodes such as [Geth](https://github.com/ethereum/go-ethereum) **[Optional]**
+- `cryptonodes` - cryptocurrency nodes such as [parity](https://github.com/paritytech/parity-ethereum) **[Optional]**
 - `daemons` - Peatio daemons and Ranger **[Optional]**
 - `setup` - setup hooks for Peatio and Barong to run before the application starts(DB migration etc.)
 - `app` - [Peatio](https://github.com/rubykube/peatio), [Barong](https://github.com/rubykube/barong) and the [Ambassador](https://www.getambassador.io) API gateway
@@ -176,7 +176,7 @@ And run `rake service:component[start]`
 
 ## How to update component config?
 
-Modify `config/*component*/*config*` and run `rake service:component[start]`, 
+Modify `config/*component*/*config*` and run `rake service:component[start]`,
 if you want the changes to be persistent, you also need to update `templates/config/*components*/*config*`
 
 #### Render compose file
