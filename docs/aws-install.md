@@ -70,7 +70,7 @@ When the configuration is ready, run
 ```bash
 bundle install
 rake render:config
-rake geth:import && \
+rake parity:import && \
   until rake wallet:create['deposit','http://0.0.0.0:8545','changeme']; do sleep 15; done && \
   rake wallet:create['hot','http://0.0.0.0:8545','changeme'] && \
   rake wallet:create['warm','http://0.0.0.0:8545','changeme'] && \

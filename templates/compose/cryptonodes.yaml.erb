@@ -1,21 +1,19 @@
 version: '3.6'
 
 services:
-  geth:
-    image: ethereum/client-go:stable
+  parity:
+    image: parity/parity:beta
     restart: always
     command: |
-      --syncmode=full
-      --rinkeby
-      --rpc
-      --rpcaddr=0.0.0.0
-      --rpcport=8545
-      --port=30303
-      --rpcapi="db,personal,eth,net,web3"
-      --rpccorsdomain="*"
-      --rpcvhosts="*"
+      --chain=rinkeby
+      --no-periodic-snapshot
+      --jsonrpc-interface=0.0.0.0
+      --jsonrpc-cors=all
+      --jsonrpc-hosts=all
+      --jsonrpc-apis=all
+      --db-compaction=ssd
     volumes:
-      - ../data/geth:/root/.ethereum/
+      - ../data/parity:/home/parity/.local/share/io.parity.ethereum
     expose:
       - "8545"
       - "30303"

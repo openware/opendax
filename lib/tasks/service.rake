@@ -99,12 +99,12 @@ namespace :service do
 
     def start
       puts '----- Starting cryptonodes -----'
-      sh 'docker-compose up -d geth'
+      sh 'docker-compose up -d parity'
     end
 
     def stop
       puts '----- Stopping cryptonodes -----'
-      sh 'docker-compose rm -fs geth'
+      sh 'docker-compose rm -fs parity'
     end
 
     @switch.call(args, method(:start), method(:stop))
