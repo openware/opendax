@@ -2,8 +2,8 @@ version: '3.6'
 
 services:
   arke:
-    image: "<%= @config['images']['arke'] %>"
+    image: "<%= @utils['images']['arke'] %>"
     volumes:
       - ../config/arke:/home/app/config
-    command: start
+    command: ./bin/arke start
 

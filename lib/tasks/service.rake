@@ -192,7 +192,7 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      conf = @config['superset']
+      conf = @utils['superset']
       init_params = [
         '--app', 'superset',
         '--firstname', 'Admin',
