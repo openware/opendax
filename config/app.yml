@@ -10,7 +10,7 @@ license:
   key: "PASTE-KEY-HERE"
 images:
   peatio: rubykube/peatio:2.3.22
-  barong: rubykube/barong:postmaster
+  barong: rubykube/barong:2.3.19
   frontend: quay.io/openware/baseapp-lite:2.2.32  # Check on quay.io/openware for latest tags
   tower: quay.io/openware/tower:2.2.8
   postmaster: quay.io/openware/postmaster:2.2.5
