@@ -1,0 +1,67 @@
+languages:
+- code: EN
+  name: English
+- code: RU
+  name: Russian
+
+exchanges:
+  barong: barong.events.system
+  peatio: peatio.events.model
+
+keychain:
+  barong:
+    algorithm: RS256
+    value: "<%= @barong_public_key %>"
+
+  peatio:
+    algorithm: RS256
+    value: "<%= @barong_public_key %>"
+
+events:
+- name: Email Confirmation
+  key: user.email.confirmation.token
+  exchange: barong
+  templates:
+    EN:
+      subject: Registration Confirmation
+      template_path: templates/en/email_confirmation.tpl
+    RU:
+      subject: Подтверждение Регистрации
+      template_path: templates/ru/email_confirmation.tpl
+
+- name: Password Reset
+  key: user.password.reset.token
+  exchange: barong
+  templates:
+    EN:
+      subject: Password Reset
+      template_path: templates/en/password_reset.tpl
+    RU:
+      subject: Сброс Пароля
+      template_path: templates/ru/password_reset.tpl
+
+- name: Deposit Accepted
+  key: deposit.updated
+  exchange: peatio
+  expression: changes.state == "submitted" && record.state == "accepted"
+  templates:
+    EN:
+      subject: Deposit Accepted
+      template_path: templates/en/deposit_accepted.tpl
+
+- name: Withdrawal Succeed
+  key: withdraw.updated
+  exchange: peatio
+  expression: changes.state in ["errored", "confirming"] && record.state == "succeed"
+  templates:
+    EN:
+      subject: Withdrawal Succeed
+      template_path: templates/en/withdraw_succeed.tpl
+
+- name: New Beneficiary
+  key: beneficiary.created
+  exchange: peatio
+  templates:
+    EN:
+      subject: New Beneficiary
+      template_path: templates/en/new_beneficiary.tpl
