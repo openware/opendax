@@ -24,6 +24,7 @@ module Microkube
       puts "Rendering #{out_file}"
 
       @config ||= config
+      @utils  ||= utils
       @barong_key ||= OpenSSL::PKey::RSA.new(File.read(BARONG_KEY), '')
       @applogic_key ||= OpenSSL::PKey::RSA.new(File.read(APPLOGIC_KEY), '')
       @barong_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
@@ -62,6 +63,10 @@ module Microkube
 
     def config
       YAML.load_file('./config/app.yml')
+    end
+
+    def utils
+      YAML.load_file('./config/utils.yml')
     end
   end
 end

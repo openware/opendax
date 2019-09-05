@@ -27,7 +27,7 @@ services:
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
   applogic:
-    image: "<%= @config['images']['applogic'] %>"
+    image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
     expose:

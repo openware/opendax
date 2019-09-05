@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   superset:
-    image: amancevice/superset:0.28.1
+    image: "<%= @utils['images']['superset'] %>"
     restart: always
     volumes:
       - superset_db:/var/lib/superset
