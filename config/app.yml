@@ -11,8 +11,8 @@ license:
 images:
   peatio: rubykube/peatio:2.2.29
   barong: rubykube/barong:2.2.25
-  frontend: quay.io/openware/baseapp-lite:2.2.23  # Check on quay.io/openware for latest tags
-  tower: quay.io/openware/tower:2.2.8
+  frontend: quay.io/openware/baseapp-lite:2.2.30  # Check on quay.io/openware for latest tags
+  tower: quay.io/openware/tower-lite:2.2.8
   postmaster: quay.io/openware/postmaster:2.2.2
 vendor:
   frontend: git@github.com:openware/baseapp.git
