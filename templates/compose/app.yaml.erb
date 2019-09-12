@@ -23,6 +23,7 @@ services:
     volumes:
       - ../config/secrets:/secrets:ro
       - ../config/barong/seeds.yml:/home/app/config/seeds.yml
+      - ../config/barong/barong.yml:/home/app/config/barong.yml
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
