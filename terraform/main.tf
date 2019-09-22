@@ -39,7 +39,7 @@ resource "google_compute_instance" "microkube" {
 
   tags = ["allow-webhook"]
 
-  metadata {
+  metadata = {
     sshKeys = "${var.ssh_user}:${file("${var.ssh_public_key}")}"
   }
 
@@ -53,6 +53,7 @@ resource "google_compute_instance" "microkube" {
     ]
 
     connection {
+      host        = "${google_compute_instance.microkube.network_interface.0.access_config.0.nat_ip}"
       type        = "ssh"
       user        = "${var.ssh_user}"
       private_key = "${file("${var.ssh_private_key}")}"
@@ -64,6 +65,7 @@ resource "google_compute_instance" "microkube" {
     destination = "/home/${var.ssh_user}/microkube"
 
     connection {
+      host        = "${google_compute_instance.microkube.network_interface.0.access_config.0.nat_ip}"
       type        = "ssh"
       user        = "${var.ssh_user}"
       private_key = "${file("${var.ssh_private_key}")}"
@@ -74,6 +76,7 @@ resource "google_compute_instance" "microkube" {
     script = "../bin/install.sh"
 
     connection {
+      host        = "${google_compute_instance.microkube.network_interface.0.access_config.0.nat_ip}"
       type        = "ssh"
       user        = "${var.ssh_user}"
       private_key = "${file("${var.ssh_private_key}")}"
@@ -84,6 +87,7 @@ resource "google_compute_instance" "microkube" {
     script = "../bin/start.sh"
 
     connection {
+      host        = "${google_compute_instance.microkube.network_interface.0.access_config.0.nat_ip}"
       type        = "ssh"
       user        = "${var.ssh_user}"
       private_key = "${file("${var.ssh_private_key}")}"
