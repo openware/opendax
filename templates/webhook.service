@@ -1,5 +1,5 @@
 [Unit]
-Description=MicroKube Webhook service
+Description=OpenDax Webhook service
 
 [Service]
 User=app
@@ -7,7 +7,7 @@ Environment="WEBHOOK_JWT_SECRET=GENERATED_HMAC_SECRET"
 ExecStart=/bin/bash -c "source ~/.rvm/scripts/rvm; bundle exec rackup config.ru"
 Type=simple
 Restart=always
-WorkingDirectory=MICROKUBE_DIRECTORY
+WorkingDirectory=OPENDAX_DIRECTORY
 
 [Install]
 WantedBy=multi-user.target

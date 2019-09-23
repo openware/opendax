@@ -3,7 +3,7 @@
 COMPOSE_VERSION="1.23.2"
 COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
 
-# Microkube bootstrap script
+# Opendax bootstrap script
 install_core() {
   sudo bash <<EOS
 apt-get update

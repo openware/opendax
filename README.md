@@ -104,7 +104,7 @@ Email: john@barong.io, password: Am8icnzEI3d!
 
 ### Initial configuration
 
-All the MicroKube deployment files have their confguration stored in `config/app.yml`.
+All the OpenDax deployment files have their confguration stored in `config/app.yml`.
 
 Feel free to fill it out with correct values:
 
@@ -120,11 +120,11 @@ Feel free to fill it out with correct values:
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
     Note: be sure to append all the subdomains based on app.domain to your
-    /etc/hosts file if you're running MicroKube locally
+    /etc/hosts file if you're running OpenDax locally
 
 ### Bringing up the stack
 
-The MicroKube stack can be brought up using two ways:
+The OpenDax stack can be brought up using two ways:
 
 1. Bootstrap all the components at once using `rake service:all[start]`
 2. Start every component one by one using `rake service:*component*[start]`
@@ -157,7 +157,7 @@ For example, `rake service:frontend[stop]` would stop the frontend application c
 
 Each component has a config file (ex. `config/frontend/tower.js`) and a compose file (ex. `compose/frontend.yaml`).
 
-All config files are mounted into respective component container, except from `config/app.yml` - this file contains all the neccessary configuration of microkube deployment
+All config files are mounted into respective component container, except from `config/app.yml` - this file contains all the neccessary configuration of opendax deployment
 
 Compose files contain component images, environment configuration etc.
 
@@ -200,7 +200,7 @@ docker-compose -f compose/vendor.yaml up -d
 
 ## Terraform Infrastructure as Code Provisioning
 
-You can easily bring up Microkube from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
+You can easily bring up Opendax from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
 
 To do this, just follow these simple steps:
   - Fill `app.yml` with correct values

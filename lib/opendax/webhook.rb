@@ -15,7 +15,7 @@ class Webhook < Sinatra::Base
     @services = %w[barong peatio frontend tower components-docs applogic]
     secret = ENV['WEBHOOK_JWT_SECRET']
     raise 'WEBHOOK_JWT_SECRET is not set' if secret.to_s.empty?
-    @decoder = Microkube::Payload.new(secret: secret)
+    @decoder = Opendax::Payload.new(secret: secret)
   end
 
   def update_config(service, image)
@@ -54,7 +54,7 @@ class Webhook < Sinatra::Base
     if $?.success?
       update_config(service, image)
 
-      renderer = Microkube::Renderer.new
+      renderer = Opendax::Renderer.new
       renderer.render
 
       system "docker-compose up -Vd #{service}"
