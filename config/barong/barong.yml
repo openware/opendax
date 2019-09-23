@@ -9,3 +9,10 @@ state_triggers:
   locked:
     - suspicious
     - lock
+document_types:
+  - Passport
+  - Identity card
+  - Driver license
+  - Utility Bill
+  - Residental
+  - Institutional
