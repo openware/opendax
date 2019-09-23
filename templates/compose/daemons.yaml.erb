@@ -81,6 +81,8 @@ services:
     image: "<%= @config['images']['postmaster'] %>"
     env_file:
       - ../config/postmaster.env
+    volumes:
+      -  ../config/postmaster.yml:/app/config/postmaster.yml
 
   sidekiq:
     image: "<%= @config['images']['applogic'] %>"

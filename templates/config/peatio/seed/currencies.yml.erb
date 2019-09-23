@@ -3,7 +3,7 @@
   symbol:                 '$'
   type:                   fiat
   precision:              2
-  base_factor:            1
+  subunits:               1
   enabled:                true
   min_deposit_amount:     0.01
   min_collection_amount:  0.01
@@ -37,7 +37,7 @@
   symbol:                 'Ξ'
   type:                   coin
   precision:              8
-  base_factor:            1_000_000_000_000_000_000
+  subunits:               18
   enabled:                true
   # Deposits with less amount are skipped during blockchain synchronization.
   # We advise to set value 10 times bigger than the network fee to prevent losses.
@@ -62,7 +62,7 @@
   symbol:                 'Ξ'
   type:                   coin
   precision:              8
-  base_factor:            1_000_000 # IMPORTANT: Don't forget to update this variable according
+  subunits:               6 # IMPORTANT: Don't forget to update this variable according
   enabled:                true      #            to your ERC20-based currency requirements
   # Deposits with less amount are skipped during blockchain synchronization.
   # We advise to set value 10 times bigger than the network fee to prevent losses.

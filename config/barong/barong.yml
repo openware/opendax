@@ -1,0 +1,11 @@
+activation_requirements:
+  email: 'verified'
+state_triggers:
+  banned:
+    - ban
+    - fraud
+  deleted:
+    - delete
+  locked:
+    - suspicious
+    - lock

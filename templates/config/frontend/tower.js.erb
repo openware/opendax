@@ -1,7 +1,12 @@
 window.env = {
     applogicUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/applogic',
     authUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/barong',
+    peatioUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/peatio',
     msAlertDisplayTime: '5000',
     tablePageLimit: 50,
     minutesUntilAutoLogout: '5',
+    captcha: {
+        captchaType: '<%= @config['recaptcha']['type'] %>',
+        siteKey: '<%= @config['recaptcha']['siteKey'] %>',
+    },
 };
