@@ -57,13 +57,13 @@ gem install bundler
 
 ## Step 3: Prepare the deployment
 
-Clone the microkube repo to `/home/app`
+Clone the opendax repo to `/home/app`
 
 ```bash
-git clone git@git.openware.com:microkube
+git clone git@git.openware.com:opendax
 ```
 
-`cd` into the `microkube` directory and prepare `config/app.yml` according to the [README](../README.md).
+`cd` into the `opendax` directory and prepare `config/app.yml` according to the [README](../README.md).
 
 When the configuration is ready, run
 

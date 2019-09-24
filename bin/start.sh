@@ -3,7 +3,7 @@
 COMPOSE_VERSION="1.23.2"
 COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
 
-install_microkube() {
+install_opendax() {
   sudo -u app bash <<EOS
   cd /home/app
   source /home/app/.rvm/scripts/rvm
@@ -12,7 +12,7 @@ install_microkube() {
   gem install bundler
 
 
-  cd microkube
+  cd opendax
 
   bundle install
   rake render:config
@@ -28,4 +28,4 @@ install_microkube() {
 EOS
 }
 
-install_microkube
+install_opendax
