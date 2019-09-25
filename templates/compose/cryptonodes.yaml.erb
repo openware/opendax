@@ -2,11 +2,16 @@ version: '3.6'
 
 services:
   parity:
-    image: parity/parity:beta
+    image: parity/parity:v2.5.8-stable
     restart: always
     command: |
-      --chain=rinkeby
-      --no-periodic-snapshot
+      --chain=kovan
+      --mode=active
+      --interface=all
+      --warp=true
+      --snapshot-peers=10
+      --min-peers=5
+      --max-peers=10
       --jsonrpc-interface=0.0.0.0
       --jsonrpc-cors=all
       --jsonrpc-hosts=all
@@ -14,9 +19,6 @@ services:
       --db-compaction=ssd
     volumes:
       - ../data/parity:/home/parity/.local/share/io.parity.ethereum
-    expose:
-      - "8545"
-      - "30303"
     ports:
       - "8545:8545"
     labels:
