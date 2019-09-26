@@ -1,0 +1,30 @@
+<%- if @config['terraform']['provider'] == 'gcp' -%>
+provider "google" {
+  credentials = "${file("${var.credentials}")}"
+  project = "${var.project}"
+  region = "${var.region}"
+}
+
+module "opendax" {
+  source = "./gcp"
+
+  credentials = "<%= @config['terraform']['credentials'] %>"
+  project = "<%= @config['terraform']['project'] %>"
+  region = "<%= @config['terraform']['region'] %>"
+  zone = "<%= @config['terraform']['zone'] %>"
+  ssh_user = "app"
+  ssh_public_key = "../config/secrets/app.key.pub"
+  ssh_private_key = "../config/secrets/app.key"
+  instance_name = "<%= @config['terraform']['instance_name'] %>"
+  db_instance_name = "<%= @config['terraform']['db_name'] %>"
+  core_machine_type = "<%= @config['terraform']['core_machine_type'] %>"
+  cryptonode_machine_type = "<%= @config['terraform']['cryptonode_machine_type'] %>"
+  core_image = "<%= @config['terraform']['core_image'] %>"
+  bitcoind_image = "<%= @config['terraform']['bitcoind_image'] %>"
+  parity_image = "<%= @config['terraform']['parity_image'] %>"
+  bitcoind_rpcport = "<%= @config['bitcoind']['rpcport'] %>"
+  bitcoind_port = "<%= @config['bitcoind']['port'] %>"
+  parity_rpcport = "<%= @config['parity']['rpcport'] %>"
+  parity_port = "<%= @config['parity']['port'] %>"
+}
+<%- end -%>

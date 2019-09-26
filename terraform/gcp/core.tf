@@ -1,25 +1,17 @@
-provider "google" {
-  credentials = "${file("${var.credentials}")}"
-  project = "${var.project}"
-  region = "${var.region}"
-}
-
-provider "random" {}
-
 resource "random_id" "opendax" {
   byte_length = 2
 }
 
 resource "google_compute_instance" "opendax" {
   name         = "${var.instance_name}-${random_id.opendax.hex}"
-  machine_type = "${var.machine_type}"
+  machine_type = "${var.core_machine_type}"
   zone         = "${var.zone}"
 
   allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
-      image = "${var.image}"
+      image = "${var.core_image}"
       type = "pd-ssd"
       size = 120
     }
