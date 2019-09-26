@@ -4,8 +4,8 @@ require 'pathname'
 require 'yaml'
 require 'base64'
 
-module Microkube
-  # Renderer is class for rendering Microkube templates.
+module Opendax
+  # Renderer is class for rendering Opendax templates.
   class Renderer
     TEMPLATE_PATH = Pathname.new('./templates')
 

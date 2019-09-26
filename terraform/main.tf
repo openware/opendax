@@ -6,12 +6,12 @@ provider "google" {
 
 provider "random" {}
 
-resource "random_id" "microkube" {
+resource "random_id" "opendax" {
   byte_length = 2
 }
 
-resource "google_compute_instance" "microkube" {
-  name         = "${var.instance_name}-${random_id.microkube.hex}"
+resource "google_compute_instance" "opendax" {
+  name         = "${var.instance_name}-${random_id.opendax.hex}"
   machine_type = "${var.machine_type}"
   zone         = "${var.zone}"
 
@@ -26,10 +26,10 @@ resource "google_compute_instance" "microkube" {
   }
 
   network_interface {
-    network = "${google_compute_network.microkube.name}"
+    network = "${google_compute_network.opendax.name}"
 
     access_config {
-      nat_ip = "${google_compute_address.microkube.address}"
+      nat_ip = "${google_compute_address.opendax.address}"
     }
   }
 
@@ -49,7 +49,7 @@ resource "google_compute_instance" "microkube" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p /home/${var.ssh_user}/microkube"
+      "mkdir -p /home/${var.ssh_user}/opendax"
     ]
 
     connection {
@@ -61,7 +61,7 @@ resource "google_compute_instance" "microkube" {
 
   provisioner "file" {
     source      = "/tmp/upload/"
-    destination = "/home/${var.ssh_user}/microkube"
+    destination = "/home/${var.ssh_user}/opendax"
 
     connection {
       type        = "ssh"
@@ -92,9 +92,9 @@ resource "google_compute_instance" "microkube" {
 
 }
 
-resource "google_compute_firewall" "microkube" {
-  name    = "microkube-firewall-${random_id.microkube.hex}"
-  network = "${google_compute_network.microkube.name}"
+resource "google_compute_firewall" "opendax" {
+  name    = "opendax-firewall-${random_id.opendax.hex}"
+  network = "${google_compute_network.opendax.name}"
 
   allow {
     protocol = "tcp"
@@ -106,10 +106,10 @@ resource "google_compute_firewall" "microkube" {
   target_tags = ["allow-webhook"]
 }
 
-resource "google_compute_address" "microkube" {
-  name = "microkube-ip-${random_id.microkube.hex}"
+resource "google_compute_address" "opendax" {
+  name = "opendax-ip-${random_id.opendax.hex}"
 }
 
-resource "google_compute_network" "microkube" {
-  name = "microkube-network-${random_id.microkube.hex}"
+resource "google_compute_network" "opendax" {
+  name = "opendax-network-${random_id.opendax.hex}"
 }

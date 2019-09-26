@@ -1,4 +1,4 @@
-# Install MicroKube in Ubuntu 18.04
+# Install OpenDax in Ubuntu 18.04
 
 ## Step 1: Install Docker
 
@@ -72,18 +72,18 @@ curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compo
 chmod +x /usr/local/bin/docker-compose
 ```
 
-## Step 3: Clone MicroKube
+## Step 3: Clone OpenDax
 
 Login to your app user:
 ```
 su - app
 ```
 
-Clone microkube repository
+Clone opendax repository
 ```
 cd $HOME
-git clone https://github.com/rubykube/microkube.git
-cd microkube
+git clone https://github.com/rubykube/opendax.git
+cd opendax
 ```
 
 ## Step 4: Clone your frontend

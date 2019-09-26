@@ -1,12 +1,12 @@
-require 'microkube/renderer'
+require 'opendax/renderer'
 
-describe Microkube::Renderer do
-  let(:renderer) { Microkube::Renderer.new }
+describe Opendax::Renderer do
+  let(:renderer) { Opendax::Renderer.new }
   let(:fake_erb_result) { { 'data' => 'this is fake data'} }
   let(:config) do
     {
       'app' => {
-        'name' => 'Microkube',
+        'name' => 'Opendax',
         'domain' => 'app.test'
       },
       'ssl' => {
@@ -82,7 +82,7 @@ describe Microkube::Renderer do
     end
   end
 
-  let(:renderer) { Microkube::Renderer.new }
+  let(:renderer) { Opendax::Renderer.new }
 
   describe '.render' do
     it 'should call exact amount of helper functions' do
