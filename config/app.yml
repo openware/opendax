@@ -62,6 +62,7 @@ terraform:
   instance_name: "opendax-pro"
   db_name: "opendax-db"
   core_machine_type: "n1-standard-8"
+  db_machine_type: "db-n1-standard-2"
   cryptonode_machine_type: "n1-standard-2"
   cryptonode_disk_size: "400"
   core_image: "debian-cloud/debian-9"

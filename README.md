@@ -5,6 +5,19 @@ You can access get a free access to frontend UI by signin up on [openware.com](h
 
 ## Getting started
 
+### Cloud Settings
+
+The preferred cloud configurations are as follows:
+
+GCP:
+  - Core machine type - n1-highmem-8
+  - Cryptonode machine type - n1-standard-4
+  - Database machine type - db-n1-standard-2
+
+DigitalOcean:
+  - Core machine type - s-6vcpu-16gb
+  - Database machine type - db-s-2vcpu-4gb
+
 ### Get your License key
 
 Register on [openware.com](https://www.openware.com/) to get your license key for a domain name you control.

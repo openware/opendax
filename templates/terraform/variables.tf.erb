@@ -1,6 +1,5 @@
-<%- if @config['terraform']['provider'].casecmp? 'gcp' -%>
-# Core variables
 variable "credentials" {
+  default = "changeme"
   type = "string"
 }
 
@@ -15,4 +14,3 @@ variable "region" {
 variable "zone" {
   type = "string"
 }
-<%- end -%>

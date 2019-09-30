@@ -1,24 +1,55 @@
 <%- if @config['terraform']['provider'].casecmp? 'gcp' -%>
-output opendax_ip {
+output opendax_address {
   value = "${module.opendax.opendax_ip}"
 }
 
-output parity_ip {
+output parity_address {
   value = "${module.opendax.parity_ip}"
 }
 
-output bitcoind_ip {
+output bitcoind_address {
   value = "${module.opendax.bitcoind_ip}"
 }
 
-output db_ip {
+output db_address {
   description = "The IPv4 address of the master database instnace"
   value       = "${module.opendax.db_ip}"
 }
 
-output db_root_password {
+output db_user {
+  description = "The auto generated Cloud SQL user name"
+  value       = "root"
+}
+
+output db_password {
   description = "The auto generated Cloud SQL root user password"
   value       = "${module.opendax.generated_root_user_password}"
+  sensitive   = true
+}
+<%- elsif @config['terraform']['provider'].casecmp? 'do' -%>
+output opendax_address {
+  value = "${module.opendax.opendax_ip}"
+}
+
+output parity_address {
+  value = "${module.opendax.parity_ip}"
+}
+
+output bitcoind_address {
+  value = "${module.opendax.bitcoind_ip}"
+}
+
+output db_address {
+  value = "${module.opendax.db_address}"
+}
+
+output db_user {
+  description = "The auto generated Cloud SQL user name"
+  value       = "${module.opendax.db_user}"
+}
+
+output db_password {
+  value       = "${module.opendax.db_password}"
   sensitive   = true
 }
 <%- end -%>
