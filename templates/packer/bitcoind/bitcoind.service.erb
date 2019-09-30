@@ -1,0 +1,10 @@
+[Unit]
+Description=The Bitcoin Blockchain Command Line Interface
+After=network.target
+
+[Service]
+User=bitcoin
+Group=bitcoin
+ExecStart=/usr/local/sbin/bitcoind
+[Install]
+WantedBy=default.target

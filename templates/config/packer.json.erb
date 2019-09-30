@@ -1,0 +1,8 @@
+<% if @config['terraform']['provider'].casecmp? 'gcp' -%>
+<% path = "#{File.expand_path(@config['terraform']['credentials'])}" -%>
+{
+  "account_file": "<%= path %>",
+  "project_id":   "<%= @config['terraform']['project'] %>",
+  "zone":         "<%= @config['terraform']['zone'] %>"
+}
+<% end -%>

@@ -1,0 +1,38 @@
+{
+  "variables": {
+<% if @config['terraform']['provider'].casecmp? 'gcp' -%>
+    "account_file": "",
+    "project_id":   "",
+    "zone":         ""
+<% end -%>
+  },
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "packer/parity",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
+      "script": "packer/install-parity.sh"
+    }
+  ],
+  "builders": [
+    {
+<% if @config['terraform']['provider'].casecmp? 'gcp' -%>
+      "type":         "googlecompute",
+      "machine_type": "n1-highcpu-16",
+      "ssh_username": "parity",
+      "account_file": "{{user `account_file`}}",
+      "project_id":   "{{user `project_id`}}",
+      "source_image": "centos-7-v20180129",
+      "zone":         "{{user `zone`}}",
+      "image_name":   "parity-{{timestamp}}",
+      "instance_name":"parity-{{uuid}}",
+      "disk_size": <%= @config['terraform']['cryptonode_disk_size'] %>,
+      "disk_type": "pd-ssd"
+<% end -%>
+    }
+  ]
+}

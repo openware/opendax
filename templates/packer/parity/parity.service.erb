@@ -1,0 +1,14 @@
+[Unit]
+Description=Parity Ethereum Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/parity --config /home/parity/.ethereum/parity.toml
+User=parity
+Group=parity
+Restart=on-failure
+
+KillSignal=SIGHUP
+
+[Install]
+WantedBy=default.target

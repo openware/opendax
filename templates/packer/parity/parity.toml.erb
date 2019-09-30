@@ -1,0 +1,13 @@
+[parity]
+mode_timeout = 300
+no_download = false
+chain = "<%= @config['parity']['network'] %>"
+auto_update = "critical"
+
+[rpc]
+apis = ["web3", "eth", "net", "parity","parity_accounts","personal", "traces", "rpc", "secretstore", "parity_pubsub"]
+hosts = ["all"]
+interface = "0.0.0.0"
+
+[snapshots]
+disable_periodic = false

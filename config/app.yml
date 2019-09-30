@@ -68,8 +68,12 @@ terraform:
   bitcoind_image: "debian-cloud/debian-9"
   parity_image: "debian-cloud/debian-9"
 bitcoind:
+  rpcuser: admin
+  rpcpassword: changeme
+  network: mainnet
   rpcport: 18332
   port: 18333
 parity:
+  network: mainnet
   rpcport: 8545
   port: 30303
