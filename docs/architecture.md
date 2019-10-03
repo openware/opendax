@@ -20,6 +20,8 @@
 
 ### Parity
 
+### Bitcoind
+
 ### Ranger
 
 ### Postmaster
