@@ -2,7 +2,8 @@ app:
   name: "OpenDAX"
   domain: "app.local"
   subdomain: "www"
-render_protect: false 
+  smsContent: "Your verification code for OpenDAX: {{code}}"
+render_protect: false
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
@@ -27,9 +28,12 @@ database:
   password: changeme
 storage:
   provider: "Google"
-  bucketName: "opendax-barong-docs-bucket"
-  accessKey: "**********"
-  secretKey: "**********"
+  bucketName: "opendax-pro-bucket"
+  region: fra1
+  endpoint: https://fra1.digitaloceanspaces.com
+  accessKey: "changeme"
+  secretKey: "changeme"
+  signatureVersion: "2"
 twilio:
   phone_number: "+15005550000"
   account_sid: "changeme"
