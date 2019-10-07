@@ -1,21 +1,21 @@
-- key:               eth-kovan
-  name:              Ethereum Kovan
-  client:            parity                   # API client name.
-  server:            http://parity:8545       # Public Ethereum node endpoint. IMPORTANT: full syncmode.
-  height:            4000000                # Initial block number from which sync will be started.
-  min_confirmations: 6                      # Minimal confirmations needed for withdraw and deposit confirmation.
+- key:               btc-mainnet
+  name:              Bitcoin Mainnet
+  client:            bitcoin
+  server:            http://<%= @config['bitcoind']['rpcuser'] %>:<%= @config['bitcoind']['rpcpassword'] %>@<%= @config['bitcoind']['address'] %>:<%= @config['bitcoind']['rpcport'] %>
+  height:            597000
+  min_confirmations: 6
   explorer:
-    address:         https://kovan.etherscan.io/address/#{address}
-    transaction:     https://kovan.etherscan.io/tx/#{txid}
+    address:         https://blockchain.info/address/#{address}
+    transaction:     https://blockchain.info/tx/#{txid}
   status:            active
 
-- key:               eth-mainet
-  name:              Ethereum Mainet
-  client:            parity                   # API client name.
-  server:            http://parity:8545       # Public Ethereum node endpoint. IMPORTANT: full syncmode.
-  height:            7500000                # Initial block number from which sync will be started.
-  min_confirmations: 6                      # Minimal confirmations needed for withdraw and deposit confirmation.
+- key:               eth-mainnet
+  name:              Ethereum Mainnet
+  client:            parity
+  server:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
+  height:            8670000
+  min_confirmations: 6
   explorer:
     address:         https://etherscan.io/address/#{address}
     transaction:     https://etherscan.io/tx/#{txid}
-  status:            disabled
+  status:            active

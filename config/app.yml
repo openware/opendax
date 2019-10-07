@@ -46,18 +46,29 @@ smtp:
   sender_email: noreply@postmaster.com
   sender_name: Postmaster
 wallets:
-  - kind: deposit
-    address: "changeme"
-    max_balance: 0.0
-    secret: changeme
-  - kind: hot
-    address: "changeme"
-    max_balance: 100.0
-    secret: changeme
-  - kind: warm
-    address: "changeme"
-    max_balance: 1000.0
-    secret: changeme
+  eth:
+    - kind: deposit
+      address: "changeme"
+      max_balance: 0.0
+      secret: changeme
+    - kind: hot
+      address: "changeme"
+      max_balance: 100.0
+      secret: changeme
+    - kind: warm
+      address: "changeme"
+      max_balance: 1000.0
+      secret: changeme
+  btc:
+    - kind: deposit
+      address: "changeme"
+      max_balance: 0.0
+    - kind: hot
+      address: "changeme"
+      max_balance: 100.0
+    - kind: warm
+      address: "changeme"
+      max_balance: 1000.0
 terraform:
   provider: "gcp"
   credentials: "~/safe/opendax.json"
@@ -77,9 +88,11 @@ bitcoind:
   rpcuser: admin
   rpcpassword: changeme
   network: mainnet
-  rpcport: 18332
-  port: 18333
+  address: 127.0.0.1
+  rpcport: 8332
+  port: 8333
 parity:
   network: mainnet
+  address: 127.0.0.1
   rpcport: 8545
   port: 30303

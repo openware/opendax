@@ -1,6 +1,6 @@
-<% @config['wallets'].each do |wallet| -%>
+<% @config['wallets']['eth'].each do |wallet| -%>
 - name:             Ethereum <%= wallet['kind'].capitalize %> Wallet
-  blockchain_key:   eth-kovan
+  blockchain_key:   eth-mainnet
   currency_id:      eth
   address:          '<%= wallet['address'] %>'
   kind:             <%= wallet['kind'] %>
@@ -8,6 +8,19 @@
   status:           active
   gateway:          parity
   settings:
-    uri:            http://parity:8545
+    uri:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
     secret:         '<%= wallet['secret'] %>'
+<% end %>
+
+<% @config['wallets']['btc'].each do |wallet| -%>
+- name:             Bitcoin <%= wallet['kind'].capitalize %> Wallet
+  blockchain_key:   btc-mainnet
+  currency_id:      btc
+  address:          '<%= wallet['address'] %>'
+  kind:             <%= wallet['kind'] %>
+  max_balance:      <%= wallet['max_balance'] %>
+  status:           active
+  gateway:          bitcoind
+  settings:
+    uri:            http://<%= @config['bitcoind']['rpcuser'] %>:<%= @config['bitcoind']['rpcpassword'] %>@<%= @config['bitcoind']['address'] %>:<%= @config['bitcoind']['rpcport'] %>
 <% end %>
