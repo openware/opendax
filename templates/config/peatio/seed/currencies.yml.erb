@@ -4,7 +4,7 @@
   type:                   fiat
   precision:              2
   subunits:               1
-  enabled:                true
+  visible:                true
   min_deposit_amount:     0.01
   min_collection_amount:  0.01
   withdraw_limit_24h:     100
@@ -19,7 +19,7 @@
   symbol:                 '₪'
   type:                   fiat
   precision:              2
-  enabled:                true
+  visible:                true
   # Deposits with less amount are skipped during blockchain synchronization.
   # We advise to set value 10 times bigger than the network fee to prevent losses.
   min_deposit_amount:     0.01
@@ -38,7 +38,7 @@
   type:                   coin
   precision:              8
   subunits:               18
-  enabled:                true
+  visible:                true
   # Deposits with less amount are skipped during blockchain synchronization.
   # We advise to set value 10 times bigger than the network fee to prevent losses.
   min_deposit_amount:     0.00021
@@ -63,7 +63,7 @@
   type:                   coin
   precision:              8
   subunits:               6 # IMPORTANT: Don't forget to update this variable according
-  enabled:                true      #            to your ERC20-based currency requirements
+  visible:                true      #            to your ERC20-based currency requirements
   # Deposits with less amount are skipped during blockchain synchronization.
   # We advise to set value 10 times bigger than the network fee to prevent losses.
   # NOTE: Network fee is paid in ETH but min_deposit_amount is in TRST.

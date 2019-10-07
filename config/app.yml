@@ -7,9 +7,9 @@ ssl:
   email: "support@example.com"
 license:
   url: "https://www.openware.com/api/v2/tenko"
-  key: "PASTE-KEY-HERE"
+  key: "J6LK5-FFBRF-JT1VL-LSHC6-8LATN"
 images:
-  peatio: rubykube/peatio:2.3.31
+  peatio: rubykube/peatio:2.3.38
   barong: rubykube/barong:2.3.24
   frontend: quay.io/openware/baseapp-lite:2.2.34  # Check on quay.io/openware for latest tags
   tower: quay.io/openware/tower-lite:2.2.8
