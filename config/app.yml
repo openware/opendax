@@ -16,6 +16,8 @@ images:
   postmaster: quay.io/openware/postmaster:2.3.4
 vendor:
   frontend: git@github.com:openware/baseapp.git
+vault:
+  token: changeme
 storage:
   provider: "Google"
   bucketName: "opendax-barong-docs-bucket"

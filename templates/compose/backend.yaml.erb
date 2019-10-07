@@ -31,10 +31,12 @@ services:
     restart: always
     volumes:
       - vault_data:/vault
+    command:
+      - server
+    cap_add:
+      - IPC_LOCK
     environment:
-      SKIP_SETCAP: 1
-      VAULT_TOKEN: changeme
-      VAULT_DEV_ROOT_TOKEN_ID: changeme
+      VAULT_LOCAL_CONFIG: '{"storage": {"file": { "path": "/vault/data" }}, "listener": {"tcp":{"address": "0.0.0.0:8200","tls_disable":"1"}}}'
       VAULT_ADDR: http://vault:8200
 
 volumes:
