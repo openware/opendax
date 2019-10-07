@@ -26,6 +26,8 @@ database:
   port: 3306
   user: root
   password: changeme
+vault:
+  token: changeme
 storage:
   provider: "Google"
   bucketName: "opendax-pro-bucket"

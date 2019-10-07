@@ -10,13 +10,17 @@ You can access get a free access to frontend UI by signin up on [openware.com](h
 The preferred cloud configurations are as follows:
 
 GCP:
-  - Core machine type - n1-highmem-8
-  - Cryptonode machine type - n1-standard-4
-  - Database machine type - db-n1-standard-2
+  - Core machine image - `debian-cloud/debian-9`
+  - Core machine type - `n1-highmem-8`
+  - Cryptonode machine type - `n1-standard-4`
+  - Database machine type - `db-n1-standard-2`
 
 DigitalOcean:
-  - Core machine type - s-6vcpu-16gb
-  - Database machine type - db-s-2vcpu-4gb
+  - Storage endpoint - `https://*region*.digitaloceanspaces.com`
+  - Storage signature version - `2`
+  - Core machine image - `centos-7-x64`
+  - Core machine type - `s-6vcpu-16gb`
+  - Database machine type - `db-s-2vcpu-4gb`
 
 ### Get your License key
 
@@ -131,7 +135,7 @@ Feel free to fill it out with correct values:
 | `vendor`          | Frontend application Git repo URL                |
 | `render_protect`  | Enable read-only mode for rendered files         |
 
-    Note: You can protect all the rendered files from being edited so that you wouldn't lose your changes upon re-rendering templates in the future by setting `render_protect` to `true` 
+    Note: You can protect all the rendered files from being edited so that you wouldn't lose your changes upon re-rendering templates in the future by setting `render_protect` to `true`
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
     Note: be sure to append all the subdomains based on app.domain to your
