@@ -1,0 +1,93 @@
+#!/bin/bash
+
+set -xe
+
+CARGO_PKG_VERSION="2.4.9"
+USER_NAME="parity"
+USER_HOME="/home/${USER_NAME}"
+BLOCKCHAIN_BUCKET="cryptonodes-blockchain"
+
+cat <<EOT >> /etc/environment
+export LANG=en_US.utf-8
+export LC_ALL=en_US.utf-8
+EOT
+
+# Bash functions, which will be executed in the end of this script.
+# Gives ability to refactor this script faster.
+
+# Update system and install dependencies
+function prepare_system {
+  yum upgrade -y
+  yum install -y epel-release
+  yum install -y git curl wget pwgen vim htop python-devel \
+                 libudev-devel gcc gcc-c++ python-setuptools\
+                 redhat-rpm-config $@
+}
+
+# Cmake installation.
+function install_cmake {
+  wget https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz
+  tar -zxvf cmake-3.6.2.tar.gz
+  cd cmake-3.6.2
+  ./bootstrap --prefix=/usr/local
+  make install
+  cd -
+  rm -rf cmake-3.6.2.tar.gz
+  export PATH=/usr/local/bin:$PATH:$HOME/bin
+}
+
+# Cargo installation.
+function install_cargo {
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
+  source $HOME/.cargo/env
+}
+
+# Parity CLI installation.
+#
+# Docs:https://github.com/paritytech/parity-ethereum
+function install_parity {
+  git clone https://github.com/paritytech/parity
+  cd parity
+  git submodule init
+  git submodule update
+  cargo build --release
+  cp target/release/parity /usr/local/sbin/
+}
+
+# Creates needed directory and copy file
+# from mounted /tmp/ directory to other paths.
+#
+# Files:
+#  - parity/parity.service
+#  - parity/parity.config
+function copy_resources {
+  mkdir -p ${USER_HOME}/.ethereum
+
+  # Add configuration file for parity service.
+  cp /tmp/parity/parity.toml ${USER_HOME}/.ethereum
+
+  # Add systemctl service configuration to run parity in background.
+  cp /tmp/parity/parity.service /usr/lib/systemd/system/parity.service
+  chmod +x /usr/lib/systemd/system/parity.service
+
+  cd -
+}
+
+# Create a user and a group and change the file ownership
+function init_user {
+  chown -R ${USER_NAME}:${USER_NAME} ${USER_HOME}
+}
+
+prepare_system
+
+install_cmake
+
+install_cargo
+
+install_parity
+
+copy_resources
+
+init_user
+
+systemctl enable parity

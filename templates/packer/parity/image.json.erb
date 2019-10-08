@@ -15,7 +15,7 @@
     {
       "type": "shell",
       "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
-      "script": "packer/install-parity.sh"
+      "script": "packer/parity/install-parity.sh"
     }
   ],
   "builders": [
