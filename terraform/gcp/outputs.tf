@@ -10,7 +10,7 @@ output bitcoind_ip {
   value = "${google_compute_address.bitcoind.address}"
 }
 
-output db_ip {
+output db_address {
   description = "The IPv4 address of the master database instnace"
   value       = "${google_sql_database_instance.master.ip_address.0.ip_address}"
 }

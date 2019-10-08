@@ -54,6 +54,10 @@ variable database_version {
   default     = "MYSQL_5_6"
 }
 
+variable db_machine_type {
+  type = "string"
+}
+
 variable tier {
   description = "The machine tier (First Generation) or type (Second Generation). See this page for supported tiers and pricing: https://cloud.google.com/sql/pricing"
   default     = "db-f1-micro"
