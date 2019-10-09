@@ -12,7 +12,7 @@ services:
       - |
         cd /home/node
         yarn
-        yarn start
+        REACT_APP_BUILD_VERSION=Enterprise yarn start
     labels:
       traefik.enable: true
       traefik.frontend.rule: "PathPrefix:/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
