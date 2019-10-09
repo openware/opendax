@@ -198,6 +198,17 @@ rake vendor:clone
 docker-compose -f compose/vendor.yaml up -d
 ```
 
+#### Baseapp development with vendor
+
+If you would like to develop baseapp with opendax, you have to replace
+```
+yarn start
+```
+with
+```
+REACT_APP_BUILD_VERSION=Enterprise yarn start
+```
+
 ## Terraform Infrastructure as Code Provisioning
 
 You can easily bring up Opendax from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
