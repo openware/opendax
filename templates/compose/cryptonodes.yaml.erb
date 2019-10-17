@@ -23,4 +23,12 @@ services:
     image: quay.io/openware/bitcoind:0.17.1
     restart: always
     volumes:
+      - ../data/bitcoin:/bitcoin
       - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
+
+  litecoind:
+    image: quay.io/openware/litecoind:0.16.3
+    restart: always
+    volumes:
+      - ../data/litecoin:/litecoin
+      - ../config/litecoin.conf:/litecoin/litecoin.conf

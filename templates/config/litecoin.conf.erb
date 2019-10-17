@@ -1,0 +1,20 @@
+<%- litecoind = @config['litecoind'] -%>
+txindex=1
+dnsseed=0
+upnp=0
+printtoconsole=1
+
+server=1
+
+onlynet=ipv4
+
+<%- unless litecoind['network'] == 'mainnet' -%>
+<%= "#{litecoind['network']}=1" %>
+[test]
+<%- end -%>
+rpcuser=<%= litecoind['rpcuser'] %>
+rpcpassword=<%= litecoind['rpcpassword'] %>
+port=<%= litecoind['port'] %>
+rpcport=<%= litecoind['rpcport'] %>
+rpcbind=0.0.0.0
+rpcallowip=0.0.0.0/0

@@ -97,6 +97,13 @@ bitcoind:
   address: 127.0.0.1
   rpcport: 8332
   port: 8333
+litecoind:
+  rpcuser: admin
+  rpcpassword: changeme
+  network: mainnet
+  address: 127.0.0.1
+  rpcport: 9332
+  port: 9333
 parity:
   network: mainnet
   address: 127.0.0.1
