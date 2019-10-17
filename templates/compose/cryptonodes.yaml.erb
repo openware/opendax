@@ -5,13 +5,12 @@ services:
     image: parity/parity:v2.5.9-stable
     restart: always
     command: |
-      --chain=kovan
+      --chain=mainnet
       --mode=active
       --interface=all
-      --warp=true
       --snapshot-peers=10
-      --min-peers=5
-      --max-peers=10
+      --min-peers=25
+      --max-peers=50
       --jsonrpc-interface=0.0.0.0
       --jsonrpc-cors=all
       --jsonrpc-hosts=all
@@ -19,7 +18,9 @@ services:
       --db-compaction=ssd
     volumes:
       - ../data/parity:/home/parity/.local/share/io.parity.ethereum
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: eth.<%= @config['app']['domain'] %>'
-      traefik.port: 8545
+
+  bitcoind:
+    image: quay.io/openware/bitcoind:0.17.1
+    restart: always
+    volumes:
+      - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
