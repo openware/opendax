@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   peatio:
-    image: "<%= @config['images']['peatio'] %>"
+    image: "rubykube/peatio:2.3.31"
     env_file:
       - ../config/peatio.env
     expose:
@@ -15,7 +15,7 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   arke:
-    image: "<%= @config['images']['arke'] %>"
+    image: "arke:trade-api"
     env_file:
       - ../config/arke.env
     ports:
@@ -23,7 +23,7 @@ services:
     command: bash -c "bundle exec puma --config config/puma.rb"
 
   barong:
-    image: "<%= @config['images']['barong'] %>"
+    image: "rubykube/barong:2.3.24"
     env_file:
       - ../config/barong.env
     ports:
@@ -36,7 +36,7 @@ services:
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
   applogic:
-    image: "<%= @utils['images']['applogic'] %>"
+    image: "rubykube/applogic:latest"
     env_file:
       - ../config/applogic.env
     expose:

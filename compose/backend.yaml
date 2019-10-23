@@ -11,23 +11,24 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: changeme
 
-
-  influxdb:
-    image: influxdb:1.7.8
-    container_name: influxdb
-    ports:
-      - "8083:8083"
-      - "8086:8086"
-    volumes:
-      - influx_data:/var/lib/influxdb
-    environment:
-       INFLUXDB_ADMIN_ENABLED: "true"
-
   redis:
     image: redis:4.0.10
     restart: always
     volumes:
       - redis_data:/data
+
+
+  influxdb:
+    image: influxdb:1.7.8
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    volumes:
+      - influx_data:/var/lib/influxdb
+      - ../config/influxdb/build_candles.sql:/build_candles.sql
+      - ../config/influxdb/influxdb.sql:/influxdb.sql
+    environment:
+       INFLUXDB_ADMIN_ENABLED: "true"
 
   rabbitmq:
     image: rabbitmq:3.7.6-management
@@ -38,7 +39,7 @@ services:
       - "5672:5672"
     labels:
       traefik.enable: true
-      traefik.frontend.rule: 'Host: rabbitmq.<%= @config['app']['domain'] %>'
+      traefik.frontend.rule: 'Host: rabbitmq.app.local'
       traefik.port: 15672
 
   vault:
@@ -57,3 +58,4 @@ volumes:
   rabbitmq_data:
   redis_data:
   vault_data:
+  influx_data:

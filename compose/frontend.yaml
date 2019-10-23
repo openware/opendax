@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  frontend:
+    image: "quay.io/openware/baseapp-lite:2.3.12"
+    volumes:
+      - ../config/frontend/env.js:/usr/share/nginx/html/config/env.js
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/;Host:www.app.local"
+      traefik.port: 3000
+
+  tower:
+    image: "quay.io/openware/tower-lite:2.2.8"
+    volumes:
+      - ../config/frontend/tower.js:/home/app/env.js
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/tower;Host:www.app.local"
+      traefik.port: 8080
+

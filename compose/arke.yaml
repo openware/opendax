@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+
+  arke-recorder:
+    image: "arke:trade-api"
+    env_file:
+      - ../config/arke.env
+    volumes:
+      - ../config/arke/strategies.yml:/home/app/config/strategies.yml
+      - ../config/arke/recorder.yml:/home/app/config/recorder.yml
+    command: ./bin/arke recorder start
+

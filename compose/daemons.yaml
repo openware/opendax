@@ -1,0 +1,103 @@
+version: '3.6'
+
+x-daemon: &peatio-daemon
+  image: "rubykube/peatio:2.3.31"
+  restart: always
+  env_file:
+    - ../config/peatio.env
+  volumes:
+    - ../config/peatio:/opt/peatio/config:ro
+
+services:
+  withdraw_audit:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb withdraw_audit"
+
+  blockchain:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb blockchain"
+
+  global_state:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb global_state"
+
+  k:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb k"
+
+  slave_book:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb slave_book"
+
+  deposit_collection:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection"
+
+  deposit_collection_fees:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection_fees"
+
+  deposit_coin_address:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
+
+  market_ticker:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb market_ticker"
+
+  matching:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+
+  order_processor:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
+
+  trade_executor:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
+
+  withdraw_coin:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb withdraw_coin"
+
+  pusher_market:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb pusher_market"
+
+  pusher_member:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb pusher_member"
+
+  ranger:
+    image: "rubykube/peatio:2.3.31"
+    env_file:
+      - ../config/ranger.env
+    ports:
+      - "8080:8080"
+    command: bash -c "bundle exec peatio service start ranger"
+
+  postmaster:
+    image: "quay.io/openware/postmaster:2.3.4"
+    env_file:
+      - ../config/postmaster.env
+    volumes:
+      -  ../config/postmaster.yml:/app/config/postmaster.yml
+
+  sidekiq:
+    image: ""
+    env_file:
+      - ../config/applogic.env
+    volumes:
+      - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
+      - ../config/applogic/schedule.yml:/home/app/config/schedule.yml
+    command: bash -c "sidekiq"
+  
+  listener:
+    image: ""
+    env_file:
+      - ../config/applogic.env
+    volumes:
+      - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
+    command: bash -c "bundle exec rake event_api_listener"
+

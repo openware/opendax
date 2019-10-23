@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+  components-docs:
+    image: ""
+    expose:
+      - "80"
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'PathPrefix: /components, /src;Host: www.app.local'
+      traefik.port: 80
+      traefik.frontend.auth.basic: 'ILoveOpenware:$$apr1$$F47ty7.m$$PmAZpvByLBNgxNld4m1B81'

@@ -1,0 +1,102 @@
+---
+log_level: INFO
+accounts:
+- id: 1
+  driver: bitfaker
+  debug: false
+  host: http://www.app.local
+  ws: ws://www.app.local
+  key: ''
+  secret: ''
+  delay: 1
+- id: 2
+  driver: bitfaker
+  host: api.binance.com
+  key: 
+  secret: 
+  delay: 1
+strategies:
+- id: 1
+  type: copy
+  debug: true
+  enabled: true
+  period: 10
+  params:
+    spread_bids: 0.003
+    spread_asks: 0.003
+    limit_asks_base: 0.05
+    limit_bids_base: 0.05
+    levels_size: 0.25
+    levels_count: 10
+    side: both
+    enable_orderback: false
+  target:
+    account_id: 1
+    market:
+      id: BTCUSD
+      base: btc
+      quote: usd
+      base_precision: 2
+      quote_precision: 2
+      min_ask_amount: 1.5
+      min_bid_amount: 1.5
+  sources:
+  - account_id: 2
+    market:
+      id: BTCUSD
+      base: BTC
+      quote: USD
+      base_precision: 8
+      quote_precision: 8
+      min_order_back_amount: 1.5
+- id: 2
+  type: microtrades
+  debug: true
+  period: 5
+  period_random_delay: 10
+  params:
+    linked_strategy_id: 1
+    min_amount: 0.05
+    max_amount: 10
+    min_price: 100
+    max_price: 1000
+  target:
+    account_id: 1
+    market:
+      id: BTCUSD
+      base: btc
+      quote: usd
+      base_precision: 2
+      quote_precision: 2
+      min_ask_amount: 1.5
+      min_bid_amount: 1.5
+  strategy:
+    type: copy
+    volume_ratio: 0.1
+    target:
+      driver: rubykube
+      market: FTHUSD
+      host: http://www.app.local
+      key: ''
+      secret: ''
+      rate_limit: 1
+    sources:
+    - driver: bitfaker
+      market: tETHUSD
+      host: api.bitfinex.com
+      key: ''
+      secret: ''
+      rate_limit: 0.2
+    - driver: bitfinex
+      market: tETHUSD
+      host: api.bitfinex.com
+      key: ''
+      secret: ''
+      rate_limit: 0.2
+    - driver: binance
+      market: ETHUSDT
+      host: api.binance.com
+      key: ''
+      secret: ''
+      rate_limit: 0.2
+

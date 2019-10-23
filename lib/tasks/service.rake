@@ -223,7 +223,7 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
   desc 'Run the micro app with dependencies (does not run Optional)'
-  task :all, [:command] => 'render:config' do |task, args|
+  task :all do |task, args|
     args.with_defaults(:command => 'start')
 
     def start

@@ -7,13 +7,15 @@ ssl:
   email: "support@example.com"
 license:
   url: "https://www.openware.com/api/v2/tenko"
-  key: "PASTE-KEY-HERE"
+  key: "OQHII-PTULQ-OQ58D-E6DCR-Z0SZ3"
 images:
   peatio: rubykube/peatio:2.3.31
   barong: rubykube/barong:2.3.24
   frontend: quay.io/openware/baseapp-lite:2.3.12  # Check on quay.io/openware for latest tags
   tower: quay.io/openware/tower-lite:2.2.8
   postmaster: quay.io/openware/postmaster:2.3.4
+  # Need to build local image from PR https://github.com/openware/arke/pull/89
+  arke: gcr.io/openware-production/arke:2.3.1
 vendor:
   frontend: git@github.com:openware/baseapp.git
 storage:

@@ -1,0 +1,15 @@
+version: '3.6'
+
+services:
+  superset:
+    image: "amancevice/superset:0.28.1"
+    restart: always
+    volumes:
+      - superset_db:/var/lib/superset
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "Host:superset.app.local"
+      traefik.port: 8088
+
+volumes:
+  superset_db:

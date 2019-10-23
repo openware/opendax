@@ -1,0 +1,27 @@
+version: '3.6'
+
+services:
+  parity:
+    image: parity/parity:v2.5.8-stable
+    restart: always
+    command: |
+      --chain=kovan
+      --mode=active
+      --interface=all
+      --warp=true
+      --snapshot-peers=10
+      --min-peers=5
+      --max-peers=10
+      --jsonrpc-interface=0.0.0.0
+      --jsonrpc-cors=all
+      --jsonrpc-hosts=all
+      --jsonrpc-apis=all
+      --db-compaction=ssd
+    volumes:
+      - ../data/parity:/home/parity/.local/share/io.parity.ethereum
+    ports:
+      - "8545:8545"
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: 'Host: eth.app.local'
+      traefik.port: 8545

@@ -27,11 +27,11 @@ static_resources:
                 route:
                   cluster: applogic
                   prefix_rewrite: "/api/v2/"
-              - match:
-                  regex: "/api/v2/peatio/public/markets/[a-z]*/trades"
-                route:
-                  cluster: arke
-                  prefix_rewrite: "/api/v2/public/markets/[a-z]*/trades" 
+              # - match:
+              #     regex: "/api/v2/peatio/public/markets/:market/trades"
+              #   route:
+              #     cluster: arke
+              #     prefix_rewrite: "/api/v2/public/markets/:market/trades"            
               - match:
                   prefix: "/api/v2/peatio"
                 route:
@@ -114,6 +114,14 @@ static_resources:
     - socket_address:
         address: applogic
         port_value: 8081
+  - name: arke
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: arke
+        port_value: 8081
   - name: peatio
     connect_timeout: 0.25s
     type: strict_dns
@@ -131,7 +139,7 @@ static_resources:
         address: ranger
         port_value: 8080
 admin:
-  access_log_path: "/dev/null"
+  access_log_path: "/dev/log.log"
   address:
     socket_address:
       address: 0.0.0.0

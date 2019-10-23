@@ -1,0 +1,67 @@
+languages:
+- code: EN
+  name: English
+- code: RU
+  name: Russian
+
+exchanges:
+  barong: barong.events.system
+  peatio: peatio.events.model
+
+keychain:
+  barong:
+    algorithm: RS256
+    value: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUEzdFc3ZTVGcVZZNlQ5WTkxQXdaWQo2RWJ3R2x6c2FjWXNLNjV5eDVaZWRrNGVFSXlITnM3bzFuYkhKaHB1OHdJQ3VFL09lTy9ucGFLSEpCU3h5WWkwCjdmOWdYazc3SS9sMXlWeG80dlEvcVBDZjhyM1ZUSk5rTlZkTGQ0V1p0Rjh4N0ZFRldBRDNsb0ZNU3ZtaXFOcVYKWlBsNEJEQm5BOFBFaTdYN0c3TlRQU1hKVzI1SitqSGtnbzJrRlRMSjhWTnFSbW1aVDRucm5qdk5pdmk0R2QrTwpldldzQTA2NzRDN0EyL3A4VHlqSm5RNmNVVjM5a004eit4WHhRUjA1ZEExU0ZvUUV3SDZCNWFiK2VabEtibGdxClN3a2hYTUJZendCSGJzTjBqa3dqUkpLZUhqOXdFUEZ3Yi9tM3hwMzB0WE9PUkVITC9kOXlKWFFyRTBIWGZkWlUKVFFJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=="
+
+  peatio:
+    algorithm: RS256
+    value: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUEzdFc3ZTVGcVZZNlQ5WTkxQXdaWQo2RWJ3R2x6c2FjWXNLNjV5eDVaZWRrNGVFSXlITnM3bzFuYkhKaHB1OHdJQ3VFL09lTy9ucGFLSEpCU3h5WWkwCjdmOWdYazc3SS9sMXlWeG80dlEvcVBDZjhyM1ZUSk5rTlZkTGQ0V1p0Rjh4N0ZFRldBRDNsb0ZNU3ZtaXFOcVYKWlBsNEJEQm5BOFBFaTdYN0c3TlRQU1hKVzI1SitqSGtnbzJrRlRMSjhWTnFSbW1aVDRucm5qdk5pdmk0R2QrTwpldldzQTA2NzRDN0EyL3A4VHlqSm5RNmNVVjM5a004eit4WHhRUjA1ZEExU0ZvUUV3SDZCNWFiK2VabEtibGdxClN3a2hYTUJZendCSGJzTjBqa3dqUkpLZUhqOXdFUEZ3Yi9tM3hwMzB0WE9PUkVITC9kOXlKWFFyRTBIWGZkWlUKVFFJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg=="
+
+events:
+- name: Email Confirmation
+  key: user.email.confirmation.token
+  exchange: barong
+  templates:
+    EN:
+      subject: Registration Confirmation
+      template_path: templates/en/email_confirmation.tpl
+    RU:
+      subject: Подтверждение Регистрации
+      template_path: templates/ru/email_confirmation.tpl
+
+- name: Password Reset
+  key: user.password.reset.token
+  exchange: barong
+  templates:
+    EN:
+      subject: Password Reset
+      template_path: templates/en/password_reset.tpl
+    RU:
+      subject: Сброс Пароля
+      template_path: templates/ru/password_reset.tpl
+
+- name: Deposit Accepted
+  key: deposit.updated
+  exchange: peatio
+  expression: changes.state == "submitted" && record.state == "accepted"
+  templates:
+    EN:
+      subject: Deposit Accepted
+      template_path: templates/en/deposit_accepted.tpl
+
+- name: Withdrawal Succeed
+  key: withdraw.updated
+  exchange: peatio
+  expression: changes.state in ["errored", "confirming"] && record.state == "succeed"
+  templates:
+    EN:
+      subject: Withdrawal Succeed
+      template_path: templates/en/withdraw_succeed.tpl
+
+- name: New Beneficiary
+  key: beneficiary.created
+  exchange: peatio
+  templates:
+    EN:
+      subject: New Beneficiary
+      template_path: templates/en/new_beneficiary.tpl

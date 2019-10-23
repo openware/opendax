@@ -1,0 +1,10 @@
+log_level: DEBUG
+
+period: 30
+
+storage:
+  driver: influx
+  output: ./data/
+
+exchanges:
+  - driver: binance
