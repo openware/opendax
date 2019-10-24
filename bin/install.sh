@@ -11,6 +11,20 @@ apt-get install -y -q git tmux gnupg2 dirmngr dbus htop curl libmariadbclient-de
 EOS
 }
 
+log_rotation() {
+  sudo bash <<EOS
+mkdir -p /etc/docker
+echo '
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "10"
+  }
+}' > /etc/docker/daemon.json
+EOS
+}
+
 # Docker installation
 install_docker() {
   curl -fsSL https://get.docker.com/ | bash
@@ -36,6 +50,7 @@ EOS
 }
 
 install_core
+log_rotation
 install_docker
 activate_gcloud
 install_ruby
