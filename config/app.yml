@@ -7,7 +7,7 @@ ssl:
   email: "support@example.com"
 license:
   url: "https://www.openware.com/api/v2/tenko"
-  key: "J6LK5-FFBRF-JT1VL-LSHC6-8LATN"
+  key: "PASTE-KEY-HERE"
 images:
   peatio: rubykube/peatio:2.3.38
   barong: rubykube/barong:2.3.24
