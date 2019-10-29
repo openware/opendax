@@ -83,6 +83,7 @@ services:
       - ../config/postmaster.env
     volumes:
       -  ../config/postmaster.yml:/app/config/postmaster.yml
+      - ../config/postmaster/templates:/app/templates
 
   sidekiq:
     image: "<%= @config['images']['applogic'] %>"
@@ -100,4 +101,3 @@ services:
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
     command: bash -c "bundle exec rake event_api_listener"
-
