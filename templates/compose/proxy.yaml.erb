@@ -10,16 +10,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ../config/traefik.toml:/etc/traefik/traefik.toml:ro
       - ../config/acme.json:/acme.json
-    networks:
-      default:
-        aliases:
-          - <%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>
-          - peatio.<%= @config['app']['domain'] %>
-          - ws.ranger.<%= @config['app']['domain'] %>
-          - superset.<%= @config['app']['domain'] %>
-          - eth.<%= @config['app']['domain'] %>
-          - tower.<%= @config['app']['domain'] %>
-          - monitor.<%= @config['app']['domain'] %>
     labels:
       traefik.enable: true
       traefik.frontend.rule: 'Host: monitor.<%= @config['app']['domain'] %>'

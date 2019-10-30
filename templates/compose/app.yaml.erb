@@ -18,8 +18,6 @@ services:
     image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
-    ports:
-      - "8001:8001"
     volumes:
       - ../config/secrets:/secrets:ro
       - ../config/barong/seeds.yml:/home/app/config/seeds.yml
