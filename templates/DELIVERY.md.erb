@@ -1,0 +1,25 @@
+##  <%= @config['app']['name'] %> OpenDAX Pro Delivery note xx.xx.19
+
+### Overview
+
+**URL**: https://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>
+
+**Status**: Ready to QA
+
+**Currencies**: USD, BTC, LTC, ETH
+
+**Markets**: BTCUSD, LTCUSD, ETHUSD
+
+**Known issues**: None
+
+**Versions**:
+
+<% @config['images'].each do |component, image| %>
+  <%= "**#{component.capitalize}**: #{image}" %>
+<% end %>
+
+**Credentials**:
+
+email: qa@openware.com
+
+passwd: thatsAPasswdHere42
