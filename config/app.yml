@@ -109,3 +109,7 @@ parity:
   address: 127.0.0.1
   rpcport: 8545
   port: 30303
+ardor:
+  rpcpassword: changeme
+  network: mainnet
+  address: 0.0.0.0

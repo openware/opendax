@@ -32,3 +32,10 @@ services:
     volumes:
       - ../data/litecoin:/litecoin
       - ../config/litecoin.conf:/litecoin/litecoin.conf
+
+  ardor:
+    image: quay.io/openware/ardor:2.2.3
+    restart: always
+    volumes:
+      - ../data/ardor:/ardor/db/
+      - ../config/ardor.conf:/ardor/conf/nxt.properties
