@@ -4,9 +4,15 @@ window.env = {
     peatioUrl: '<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>/api/v2/peatio',
     msAlertDisplayTime: '5000',
     tablePageLimit: 50,
-    minutesUntilAutoLogout: '5',
+    minutesUntilAutoLogout: '35',
     captcha: {
         captchaType: '<%= @config['recaptcha']['type'] %>',
         siteKey: '<%= @config['recaptcha']['siteKey'] %>',
     },
+    labelSwitcher: [
+        { name: 'email', label: [{ email: 'verified' }] },
+        { name: 'phone', label: [{ phone: 'verified' }] },
+        { name: 'residence', label: [{ document: 'verified' }] },
+    ],
+    plugins: [],
 };

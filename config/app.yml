@@ -9,10 +9,10 @@ license:
   url: "https://www.openware.com/api/v2/tenko"
   key: "PASTE-KEY-HERE"
 images:
-  peatio: rubykube/peatio:2.3.31
-  barong: rubykube/barong:2.3.24
-  frontend: quay.io/openware/baseapp-lite:2.2.34  # Check on quay.io/openware for latest tags
-  tower: quay.io/openware/tower-lite:2.2.8
+  peatio: rubykube/peatio:2.3.43
+  barong: rubykube/barong:2.3.36
+  frontend: quay.io/openware/baseapp-lite:2.3.20 # Check on quay.io/openware for latest tags
+  tower: quay.io/openware/tower-lite:2.3.130
   postmaster: quay.io/openware/postmaster:2.3.4
 vendor:
   frontend: git@github.com:openware/baseapp.git
