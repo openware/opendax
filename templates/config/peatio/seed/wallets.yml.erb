@@ -1,6 +1,6 @@
 <% @config['wallets'].each do |wallet| -%>
 - name:             Ethereum <%= wallet['kind'].capitalize %> Wallet
-  blockchain_key:   eth-rinkeby
+  blockchain_key:   eth-kovan
   currency_id:      eth
   address:          '<%= wallet['address'] %>'
   kind:             <%= wallet['kind'] %>
