@@ -6,8 +6,6 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ../config/mysql:/etc/mysql/conf.d
-    ports:
-      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: changeme
 
@@ -22,8 +20,6 @@ services:
     restart: always
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
-    ports:
-      - "5672:5672"
     labels:
       traefik.enable: true
       traefik.frontend.rule: 'Host: rabbitmq.<%= @config['app']['domain'] %>'

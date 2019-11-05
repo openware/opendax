@@ -73,8 +73,6 @@ services:
     image: "<%= @config['images']['peatio'] %>"
     env_file:
       - ../config/ranger.env
-    ports:
-      - "8080:8080"
     command: bash -c "bundle exec peatio service start ranger"
 
   postmaster:
@@ -93,7 +91,7 @@ services:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
       - ../config/applogic/schedule.yml:/home/app/config/schedule.yml
     command: bash -c "sidekiq"
-  
+
   listener:
     image: "<%= @config['images']['applogic'] %>"
     env_file:
