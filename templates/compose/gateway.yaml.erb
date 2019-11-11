@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
   gateway:
+    restart: always
     image: envoyproxy/envoy:v1.10.0
     volumes:
       - ../config/gateway:/etc/envoy/

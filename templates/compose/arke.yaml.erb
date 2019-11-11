@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
   arke:
+    restart: always
     image: "<%= @utils['images']['arke'] %>"
     volumes:
       - ../config/arke:/home/app/config

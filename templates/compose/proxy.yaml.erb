@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
   proxy:
+    restart: always
     image: traefik:1.7.6
     ports:
       - "80:80"

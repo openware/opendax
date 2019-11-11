@@ -70,12 +70,14 @@ services:
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb pusher_member"
 
   ranger:
+    restart: always
     image: "<%= @config['images']['peatio'] %>"
     env_file:
       - ../config/ranger.env
     command: bash -c "bundle exec peatio service start ranger"
 
   postmaster:
+    restart: always
     image: "<%= @config['images']['postmaster'] %>"
     env_file:
       - ../config/postmaster.env
@@ -84,6 +86,7 @@ services:
       - ../config/postmaster/templates:/app/templates
 
   sidekiq:
+    restart: always
     image: "<%= @config['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
@@ -93,6 +96,7 @@ services:
     command: bash -c "sidekiq"
 
   listener:
+    restart: always
     image: "<%= @config['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
