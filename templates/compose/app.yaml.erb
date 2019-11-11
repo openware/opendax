@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
   peatio:
+    restart: always
     image: "<%= @config['images']['peatio'] %>"
     env_file:
       - ../config/peatio.env
@@ -15,6 +16,7 @@ services:
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
   barong:
+    restart: always
     image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
@@ -26,6 +28,7 @@ services:
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
   applogic:
+    restart: always
     image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env

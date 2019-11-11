@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
   db:
+    restart: always
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
