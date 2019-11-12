@@ -116,7 +116,9 @@ Feel free to fill it out with correct values:
 | `ssl.email`       | Email address to use for SSL generation requests |
 | `images`          | Application images tags                          |
 | `vendor`          | Frontend application Git repo URL                |
+| `render_protect`  | Enable read-only mode for rendered files         |
 
+    Note: You can protect all the rendered files from being edited so that you wouldn't lose your changes upon re-rendering templates in the future by setting `render_protect` to `true` 
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
     Note: be sure to append all the subdomains based on app.domain to your
