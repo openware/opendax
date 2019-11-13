@@ -5,23 +5,6 @@ You can access get a free access to frontend UI by signin up on [openware.com](h
 
 ## Getting started
 
-### Cloud Settings
-
-The preferred cloud configurations are as follows:
-
-GCP:
-  - Core machine image - `debian-cloud/debian-9`
-  - Core machine type - `n1-highmem-8`
-  - Cryptonode machine type - `n1-standard-4`
-  - Database machine type - `db-n1-standard-2`
-
-DigitalOcean:
-  - Storage endpoint - `https://*region*.digitaloceanspaces.com`
-  - Storage signature version - `2`
-  - Core machine image - `centos-7-x64`
-  - Core machine type - `s-6vcpu-16gb`
-  - Database machine type - `db-s-2vcpu-4gb`
-
 ### Get your License key
 
 Register on [openware.com](https://www.openware.com/) to get your license key for a domain name you control.
@@ -166,18 +149,26 @@ Go ahead and try your deployment on www.your.domain!
 
 ### Vault setup
 
-To do the initial Vault setup, go throught the following steps:
+You can run Vault in two modes: development and production. You can set it in the `mode` field of `vault` section in the `app.yml`.
+ - Development mode
+  You lose your API keys and 2FA authenticators after container restart.
+ - Production mode
+  You do not lose data after restarting the container, but you will have to unseal Vault with unseal keys.
+
+To do the production mode Vault setup, go through the following steps:
   - `docker-compose exec vault sh`
   - `vault operator init`
   - Save the output to a file in a secure place
   - Unlock Vault with three different unlock keys - `vault operator unseal *unseal_key*`
   - `vault login *root_token*`
   - `vault secrets enable totp`
-  - `vault secrets disable totp`
+  - `vault secrets disable secret`
   - `vault secrets enable -path=secret -version=1 kv`
 
 Add the Vault root token to `config/app.yml`, render the configs and start the `app` services.
 Afterwards, Vault should be fully configured and ready to work with Peatio and Barong.
+
+For development mode Vault setup you don't have to perform any actions.
 
 ### Stopping and restarting components
 
