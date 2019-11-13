@@ -1,10 +1,19 @@
 version: '3.6'
 
 services:
-  arke:
+  arke-maker:
     restart: always
     image: "<%= @utils['images']['arke'] %>"
+    env_file:
+      - ../config/arke.env
     volumes:
-      - ../config/arke:/home/app/config
+      - ../config/arke/strategies.yml:/home/app/config/strategies.yml
     command: ./bin/arke start
 
+  arke-etl:
+    image: "<%= @utils['images']['arke'] %>"
+    env_file:
+      - ../config/arke.env
+    volumes:
+      - ../config/arke/etl.yml:/home/app/config/etl.yml
+    command: ./bin/arke etl start

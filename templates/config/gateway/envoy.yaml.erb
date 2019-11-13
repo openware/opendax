@@ -38,6 +38,11 @@ static_resources:
                   cluster: applogic
                   prefix_rewrite: "/api/v2/"
               - match:
+                  prefix: "/api/v2/arke"
+                route:
+                  cluster: arke
+                  prefix_rewrite: "/api/v2/"
+              - match:
                   prefix: "/api/v2/peatio"
                 route:
                   cluster: peatio
@@ -120,6 +125,14 @@ static_resources:
     hosts:
     - socket_address:
         address: applogic
+        port_value: 8081
+  - name: arke
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: arke
         port_value: 8081
   - name: peatio
     connect_timeout: 0.25s

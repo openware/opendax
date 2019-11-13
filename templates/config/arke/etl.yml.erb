@@ -1,0 +1,73 @@
+log_level: INFO
+
+shared_params:
+  markets: [BTCUSDT, ETHUSDT, LTCUSDT, ETHBTC, LTCBTC, BATETH, LINKETH, OMGETH, LTCETH]
+
+jobs:
+
+  - extract: Tickers
+    process:
+      - load:
+          AMQP:
+            exchange: arke.events.ranger
+
+  - extract: Kline
+    process:
+      - load:
+          AMQP:
+            exchange: arke.events.ranger
+
+  # Store non sampled binance trades and forward to arke AMQP
+  - extract:
+      Bitfinex:
+        listen:
+          - public_trades
+    process:
+      - load:
+          Influx:
+            measurment: trades
+      - load:
+          AMQP:
+            exchange: arke.events.ranger
+
+  # Store sampled binance trades and forward to arke AMQP
+  - extract:
+      Binance:
+        listen:
+          - public_trades
+    transform:
+     - Sample:
+         ratio: 0.2  
+    process:
+      - load:
+          Influx:
+            measurment: trades
+      - load:
+          AMQP:
+            exchange: arke.events.ranger
+
+  # Listen peatio trades, store in Influx and forward to arke AMQP
+  - extract:
+      PeatioAMQP:
+        exchange: peatio.events.ranger
+        events:
+          - {type: public, event: trades}
+    process:
+      - load:
+          Influx:
+            measurment: trades
+
+
+  # Forward peatio events except tickers and klines
+  - extract:
+      AMQP:
+        exchange: peatio.events.ranger
+        events:
+          - {type: public, event: update}
+          - {type: public, event: trades}
+          - {type: private}
+    process:
+      - load: Print
+      - load:
+          AMQP:
+            exchange: arke.events.ranger
