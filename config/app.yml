@@ -2,6 +2,7 @@ app:
   name: "OpenDAX"
   domain: "app.local"
   subdomain: "www"
+render_protect: false 
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
