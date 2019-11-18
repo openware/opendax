@@ -149,6 +149,30 @@ For example, to start the `backend` services, you'll simply need to run `rake se
 
 Go ahead and try your deployment on www.your.domain!
 
+### Vault setup
+
+You can run Vault in two modes: `development` and `production`. You can set it in the `vault.mode` field of `app.yml`.
+The main differences are:
+ - Development mode
+   Everything is stored in-memory, thus all API keys and 2FA tokens are lost on every container restart.
+ - Production mode
+   Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
+
+To setup Vault in production mode, go through the following steps:
+  - `docker-compose exec vault sh`
+  - `vault operator init`
+  - Save the output to a file in a secure place
+  - Unlock Vault with three different unlock keys - `vault operator unseal *unseal_key*`
+  - `vault login *root_token*`
+  - `vault secrets enable totp`
+  - `vault secrets disable secret`
+  - `vault secrets enable -path=secret -version=1 kv`
+
+Add the Vault root token to `config/app.yml`, render the configs and start the `app` services.
+Afterwards, Vault should be fully configured and ready to work with Peatio and Barong.
+
+For development mode Vault setup you don't have to perform any actions.
+
 ### Stopping and restarting components
 
 Any component from the stack can be easily stopped or restarted using `rake service:*component*[stop]` and `rake service:*component*[restart]`.
