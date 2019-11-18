@@ -149,13 +149,14 @@ Go ahead and try your deployment on www.your.domain!
 
 ### Vault setup
 
-You can run Vault in two modes: development and production. You can set it in the `mode` field of `vault` section in the `app.yml`.
+You can run Vault in two modes: `development` and `production`. You can set it in the `vault.mode` field of `app.yml`.
+The main differences are:
  - Development mode
-  You lose your API keys and 2FA authenticators after container restart.
+   Everything is stored in-memory, thus all API keys and 2FA tokens are lost on every container restart.
  - Production mode
-  You do not lose data after restarting the container, but you will have to unseal Vault with unseal keys.
+   Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
 
-To do the production mode Vault setup, go through the following steps:
+To setup Vault in production mode, go through the following steps:
   - `docker-compose exec vault sh`
   - `vault operator init`
   - Save the output to a file in a secure place
