@@ -27,6 +27,14 @@ services:
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
+  arke:
+    image: "<%= @utils['images']['arke'] %>"
+    env_file:
+      - ../config/arke.env
+    expose:
+      - "8081"
+    command: bash -c "bundle exec puma --config config/puma.rb"
+
   applogic:
     restart: always
     image: "<%= @utils['images']['applogic'] %>"
