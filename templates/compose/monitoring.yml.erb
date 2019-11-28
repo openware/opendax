@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  node_exporter:
+    image: prom/node-exporter:master
+    ports:
+      - 9100:9100
+
+  cadvisor:
+    image: google/cadvisor:canary
+    ports:
+      - 8080:8080
+    volumes:
+      - /var/run:/var/run:rw
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /:/rootfs:ro
+      - /sys:/sys:ro

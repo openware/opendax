@@ -188,6 +188,25 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
+  desc '[Optional] Run monitoring (postmaster)'
+  task :monitor, [:command] do |task, args|
+    args.with_defaults(:command => 'start')
+
+    def start
+      puts '----- Starting monitoring -----'
+      sh 'docker-compose up -d node_exporter'
+      sh 'docker-compose up -d cadvisor'
+    end
+
+    def stop
+      puts '----- Stopping monitoring -----'
+      sh 'docker-compose rm -fs node_exporter'
+      sh 'docker-compose rm -fs cadvisor'
+    end
+
+    @switch.call(args, method(:start), method(:stop))
+  end
+
   desc '[Optional] Run superset'
   task :superset, [:command] do |task, args|
     args.with_defaults(:command => 'start')
@@ -223,6 +242,7 @@ namespace :service do
 
     @switch.call(args, method(:start), method(:stop))
   end
+  
   desc 'Run the micro app with dependencies (does not run Optional)'
   task :all, [:command] => 'render:config' do |task, args|
     args.with_defaults(:command => 'start')
