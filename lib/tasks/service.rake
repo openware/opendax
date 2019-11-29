@@ -188,8 +188,8 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc '[Optional] Run monitoring (postmaster)'
-  task :monitor, [:command] do |task, args|
+  desc '[Optional] Run monitoring'
+  task :monitoring, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
