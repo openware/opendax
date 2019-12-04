@@ -1,13 +1,13 @@
 # OpenDAX
 
 OpenDAX is an open-source cloud-native multi-service platform for building your Blockchain/FinTech digital assets, cryptocurrency and security tokens exchange.
-You can get FREE license access to a starter React-powered frontend UI for OpenDAX at [openware.com](https://www.openware.com/)
+You can get free license access to a starter React-powered frontend UI for OpenDAX at [openware.com](https://www.openware.com/)
 
 ## Getting started with OpenDAX
 
-### 1. Get your License key
+### 1. Get your License Key
 
-Register a free user account at [openware.com](https://www.openware.com/) to get your license key for a domain name you control.
+Register a free user account at [openware.com](https://www.openware.com/) to get your OpenDAX license key for a domain name you control.
 Save the domain and license key string.
 
 ### 2. Get a VM
@@ -17,7 +17,7 @@ Minimum VM requirements for OpenDAX:
  * 4 cores vCPU (6 cores recommended)
  * 300GB disk space (SSD recommended)
 
-A VM from any cloud provider like DigitalOcean, Vultr, Google Cloud, AWS as well as any dedicated server with Ubuntu, Debian or Centos would work
+A VM from any cloud provider like DigitalOcean, Vultr, GCP, AWS as well as any dedicated server with Ubuntu, Debian or Centos would work
 
 ### 3. Prepare the VM
 
@@ -29,8 +29,7 @@ useradd -g users -s `which bash` -m app
 
 #### 3.2 Install Docker and docker compose
 
-We highly recommend using docker and compose from docker.com install guide, do not use the system provided package
-which would most likely be deprecated.
+We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
 Docker follow instruction here: [docker](https://docs.docker.com/install/)
 Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
@@ -55,7 +54,7 @@ cd opendax
 rvm install .
 ```
 
-### 4. Bundle install depedencies
+### 4. Bundle install dependencies
 
 ```bash
 bundle install
@@ -76,7 +75,7 @@ license:
 
 ### 6. Run everything
 
-#### 6.1 Configure your Domain
+#### 6.1 Configure your domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
 
@@ -126,18 +125,18 @@ Once you're done with the configuration, render the files using `rake render:con
 
 ### Bringing up the stack
 
-The OpenDax stack can be brought up using two ways:
+The OpenDAX stack can be brought up using two ways:
 
 1. Bootstrap all the components at once using `rake service:all[start]`
-2. Start every component one by one using `rake service:*component*[start]`
+2. Start every component one-by-one using `rake service:*component*[start]`
 
 The components included in the stack are:
 
-- `proxy` - [Traefik](https://traefik.io/), a robust cloud native edge router/reverse proxy written in Go
+- `proxy` - [Traefik](https://traefik.io/), a robust cloud-native edge router/reverse proxy written in Go
 - `backend` - [Vault](https://www.vaultproject.io), [MySQL](https://www.mysql.com), [Redis](https://redis.io) and [RabbitMQ](https://www.rabbitmq.com) grouped together
 - `cryptonodes` - cryptocurrency nodes such as [parity](https://github.com/paritytech/parity-ethereum) **[Optional]**
-- `daemons` - Peatio daemons and Ranger **[Optional]**
-- `setup` - setup hooks for Peatio and Barong to run before the application starts(DB migration etc.)
+- `daemons` - Peatio and Ranger daemons **[Optional]**
+- `setup` - setup hooks for Peatio and Barong to run before the application starts (DB migration etc.)
 - `app` - [Peatio](https://github.com/rubykube/peatio), [Barong](https://github.com/rubykube/barong) and the [Ambassador](https://www.getambassador.io) API gateway
 - `frontend` - the frontend application located at `vendor/frontend`
 - `tower` - the Tower admin panel application located at `vendor/tower`
@@ -154,7 +153,7 @@ Go ahead and try your own OpenDAX exchange deployment!
 You can run Vault in two modes: `development` and `production`. You can set it in the `vault.mode` field of `app.yml`.
 The main differences are:
  - Development mode
-   Everything is stored in-memory, thus all API keys and 2FA tokens are lost on every container restart.
+   Everything is stored in memory, thus all API keys and 2FA tokens are lost on every container restart.
  - Production mode
    Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
 
@@ -187,7 +186,7 @@ All config files are mounted into respective component container, except from `c
 
 Compose files contain component images, environment configuration etc.
 
-These files get rendered from their templates that are located under `templates` directory.
+These files get rendered from their respective templates that are located under `templates` directory.
 
 ## How to update component image?
 
@@ -226,13 +225,12 @@ docker-compose -f compose/vendor.yaml up -d
 
 ## Terraform Infrastructure as Code Provisioning
 
-You can easily bring up Opendax from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
+You can easily deploy OpenDAX from scratch on Google Cloud Platform using [Terraform](https://www.terraform.io)!
 
 To do this, just follow these simple steps:
   - Fill `app.yml` with correct values
   - Run `rake terraform:apply`
   - Access your VM from the GCP Cloud Console
-  - Have fun using it!
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 
@@ -242,5 +240,5 @@ To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
 ```
 
-Happy trading with OpenDAX!
+## Happy trading with OpenDAX!
 If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or at [openware.com](https://www.openware.com/)
