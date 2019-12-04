@@ -1,53 +1,53 @@
 # OpenDAX
 
-OpenDAX is a multi-service container system for building your crypto-currency exchange
-You can access get a free access to frontend UI by signin up on [openware.com](https://www.openware.com/)
+OpenDAX is an open-source cloud-native multi-service platform for building your Blockchain/FinTech digital assets, cryptocurrency and security tokens exchange.
+You can get FREE license access to a starter React-powered frontend UI for OpenDAX at [openware.com](https://www.openware.com/)
 
-## Getting started
+## Getting started with OpenDAX
 
-### Get your License key
+### 1. Get your License key
 
-Register on [openware.com](https://www.openware.com/) to get your license key for a domain name you control.
+Register a free user account at [openware.com](https://www.openware.com/) to get your license key for a domain name you control.
 Save the domain and license key string.
 
-### VM requirements
+### 2. Get a VM
 
-Minimum:
- * 8GB to 12GB of RAM
- * 4 to 6 cores vCPU
- * 300GB SSD disk
+Minimum VM requirements for OpenDAX:
+ * 8GB of RAM (12GB recommended)
+ * 4 cores vCPU (6 cores recommended)
+ * 300GB disk space (SSD recommended)
 
-DigitalOcean, Vultr, GCP, AWS or any dedicated servers Ubuntu, Debian, Centos would work
+A VM from any cloud provider like DigitalOcean, Vultr, Google Cloud, AWS as well as any dedicated server with Ubuntu, Debian or Centos would work
 
-### Preparing the VM
+### 3. Prepare the VM
 
-#### Create Unix user
+#### 3.1 Create Unix user
 SSH using root user, then create new user for the application
 ```bash
 useradd -g users -s `which bash` -m app
 ```
 
-#### Install Docker and docker compose
+#### 3.2 Install Docker and docker compose
 
 We highly recommend using docker and compose from docker.com install guide, do not use the system provided package
-which would be deprecated.
+which would most likely be deprecated.
 
 Docker follow instruction here: [docker](https://docs.docker.com/install/)
 Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
 
-#### Install ruby in user app
+#### 3.3 Install ruby in user app
 
-##### Change user using
+##### 3.3.1 Change user using
 ```bash
 su - app
 ```
 
-##### Clone OpenDAX
+##### 3.3.2 Clone OpenDAX
 ```bash
 git clone https://github.com/openware/opendax.git
 ```
 
-##### Install RVM
+##### 3.3.3 Install RVM
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
@@ -55,7 +55,7 @@ cd opendax
 rvm install .
 ```
 
-### Bundle install depedencies
+### 4. Bundle install depedencies
 
 ```bash
 bundle install
@@ -64,7 +64,7 @@ rake -T # To see if ruby and lib works
 
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
-### Paste you domain and license key
+### 5. Paste you domain and the free license key you got at [openware.com](https://www.openware.com/)
 
 Edit the file `config/app.yml`
 Replace the license key in this block:
@@ -74,9 +74,9 @@ license:
   license_key: "PASTE-KEY-HERE"
 ```
 
-### Run everything
+### 6. Run everything
 
-#### Configure your Domain
+#### 6.1 Configure your Domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
 
@@ -86,7 +86,7 @@ Insert in file `/etc/hosts`
 0.0.0.0 www.app.local
 ```
 
-#### Bring up everything
+#### 6.2 Bring everything up
 
 ```bash
 rake service:all
@@ -104,7 +104,7 @@ Email: john@barong.io, password: Am8icnzEI3d!
 
 ### Initial configuration
 
-All the OpenDax deployment files have their confguration stored in `config/app.yml`.
+All the OpenDAX deployment files have their confguration stored in `config/app.yml`.
 
 Feel free to fill it out with correct values:
 
@@ -147,7 +147,7 @@ For example, to start the `backend` services, you'll simply need to run `rake se
     Note: all the components marked as [Optional] need to be installed using
     rake service:*component*[start] explicitly
 
-Go ahead and try your deployment on www.your.domain!
+Go ahead and try your own OpenDAX exchange deployment!
 
 ### Vault setup
 
@@ -241,3 +241,6 @@ To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
 ```
+
+Happy trading with OpenDAX!
+If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or at [openware.com](https://www.openware.com/)
