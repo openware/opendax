@@ -86,7 +86,7 @@ describe Opendax::Renderer do
 
   describe '.render' do
     it 'should call exact amount of helper functions' do
-      number_of_files = Dir.glob('./templates/**/*.erb').length
+      number_of_files = Dir.glob('./templates/**/*.erb', File::FNM_DOTMATCH).length
       expect(renderer).to receive(:render_file).exactly(number_of_files).times
 
       renderer.render

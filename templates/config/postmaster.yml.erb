@@ -4,23 +4,29 @@ languages:
 - code: RU
   name: Russian
 
-exchanges:
-  barong: barong.events.system
-  peatio: peatio.events.model
-
 keychain:
   barong:
     algorithm: RS256
     value: "<%= @barong_public_key %>"
-
   peatio:
     algorithm: RS256
     value: "<%= @barong_public_key %>"
 
+exchanges:
+  barong_system:
+    name: barong.events.system
+    signer: barong
+  barong_model:
+    name: barong.events.model
+    signer: barong
+  peatio:
+    name: peatio.events.model
+    signer: peatio
+
 events:
 - name: Email Confirmation
   key: user.email.confirmation.token
-  exchange: barong
+  exchange: barong_system
   templates:
     EN:
       subject: Registration Confirmation
@@ -31,7 +37,7 @@ events:
 
 - name: Password Reset
   key: user.password.reset.token
-  exchange: barong
+  exchange: barong_system
   templates:
     EN:
       subject: Password Reset
@@ -39,6 +45,28 @@ events:
     RU:
       subject: Сброс Пароля
       template_path: templates/ru/password_reset.tpl
+
+- name: Label Created
+  key: label.created
+  exchange: barong_model
+  expression: |
+    record.key in ["phone", "profile", "document"] &&
+    record.value in ["verified", "rejected"]
+  templates:
+    EN:
+      subject: Account Details Updated
+      template_path: templates/en/label_created.tpl
+
+- name: Label Updated
+  key: label.updated
+  exchange: barong_model
+  expression: |
+    record.key in ["phone", "profile", "document"] &&
+    record.value in ["verified", "rejected"]
+  templates:
+    EN:
+      subject: Account Details Updated
+      template_path: templates/en/label_created.tpl
 
 - name: Deposit Accepted
   key: deposit.updated
@@ -48,6 +76,14 @@ events:
     EN:
       subject: Deposit Accepted
       template_path: templates/en/deposit_accepted.tpl
+
+- name: Session Create
+  key: session.create
+  exchange: barong_system
+  templates:
+    EN:
+      subject: New Login
+      template_path: templates/en/session_create.tpl
 
 - name: Withdrawal Succeed
   key: withdraw.updated
