@@ -25,7 +25,7 @@ module Opendax
       @applogic_private_key ||= Base64.urlsafe_encode64(@applogic_key.to_pem)
       @applogic_public_key ||= Base64.urlsafe_encode64(@applogic_key.public_key.to_pem)
 
-      Dir.glob("#{TEMPLATE_PATH}/**/*.erb").each do |file|
+      Dir.glob("#{TEMPLATE_PATH}/**/*.erb", File::FNM_DOTMATCH).each do |file|
         output_file = template_name(file)
         FileUtils.chmod 0o644, output_file if File.exist?(output_file)
         render_file(file, output_file)
