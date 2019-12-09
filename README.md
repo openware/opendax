@@ -1,6 +1,6 @@
 # OpenDAX
 
-OpenDAX is an open-source cloud-native multi-service platform for building your Blockchain/FinTech digital assets, cryptocurrency and security tokens exchange.
+OpenDAX is an open-source cloud-native multi-service platform for building a Blockchain/FinTech exchange of digital assets, cryptocurrency and security tokens.
 You can get free license access to a starter React-powered frontend UI for OpenDAX at [openware.com](https://www.openware.com/)
 
 ## Getting started with OpenDAX
