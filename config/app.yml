@@ -2,7 +2,7 @@ app:
   name: "OpenDAX"
   domain: "app.local"
   subdomain: "www"
-render_protect: false 
+render_protect: false
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
@@ -12,7 +12,7 @@ license:
 images:
   peatio: rubykube/peatio:2.3.43
   barong: rubykube/barong:2.3.36
-  frontend: quay.io/openware/baseapp-lite:2.3.20 # Check on quay.io/openware for latest tags
+  frontend: quay.io/openware/baseapp:2.3.20 # Check on quay.io/openware for latest tags
   tower: quay.io/openware/tower-lite:2.3.130
   postmaster: quay.io/openware/postmaster:2.3.5
 vendor:
