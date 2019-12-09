@@ -6,9 +6,6 @@ render_protect: false
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
-license:
-  url: "https://www.openware.com/api/v2/tenko"
-  key: "PASTE-KEY-HERE"
 images:
   peatio: rubykube/peatio:2.3.43
   barong: rubykube/barong:2.3.36

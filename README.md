@@ -1,16 +1,10 @@
 # OpenDAX
 
 OpenDAX is an open-source cloud-native multi-service platform for building a Blockchain/FinTech exchange of digital assets, cryptocurrency and security tokens.
-You can get free license access to a starter React-powered frontend UI for OpenDAX at [openware.com](https://www.openware.com/)
 
 ## Getting started with OpenDAX
 
-### 1. Get your License Key
-
-Register a free user account at [openware.com](https://www.openware.com/) to get your OpenDAX license key for a domain name you control.
-Save the domain and license key string.
-
-### 2. Get a VM
+### 1. Get a VM
 
 Minimum VM requirements for OpenDAX:
  * 8GB of RAM (12GB recommended)
@@ -19,22 +13,22 @@ Minimum VM requirements for OpenDAX:
 
 A VM from any cloud provider like DigitalOcean, Vultr, GCP, AWS as well as any dedicated server with Ubuntu, Debian or Centos would work
 
-### 3. Prepare the VM
+### 2. Prepare the VM
 
-#### 3.1 Create Unix user
+#### 2.1 Create Unix user
 SSH using root user, then create new user for the application
 ```bash
 useradd -g users -s `which bash` -m app
 ```
 
-#### 3.2 Install Docker and docker compose
+#### 2.2 Install Docker and docker compose
 
 We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
 Docker follow instruction here: [docker](https://docs.docker.com/install/)
 Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
 
-#### 3.3 Install ruby in user app
+#### 2.3 Install ruby in user app
 
 ##### 3.3.1 Change user using
 ```bash
@@ -54,7 +48,7 @@ cd opendax
 rvm install .
 ```
 
-### 4. Bundle install dependencies
+### 3. Bundle install dependencies
 
 ```bash
 bundle install
@@ -63,19 +57,10 @@ rake -T # To see if ruby and lib works
 
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
-### 5. Paste you domain and the free license key you got at [openware.com](https://www.openware.com/)
 
-Edit the file `config/app.yml`
-Replace the license key in this block:
-```yaml
-license:
-  url: "https://www.openware.com/api/v2/tenko"
-  license_key: "PASTE-KEY-HERE"
-```
+### 4. Run everything
 
-### 6. Run everything
-
-#### 6.1 Configure your domain
+#### 4.1 Configure your domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
 
@@ -85,7 +70,7 @@ Insert in file `/etc/hosts`
 0.0.0.0 www.app.local
 ```
 
-#### 6.2 Bring everything up
+#### 4.2 Bring everything up
 
 ```bash
 rake service:all
