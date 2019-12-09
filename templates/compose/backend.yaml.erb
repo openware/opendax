@@ -38,7 +38,7 @@ services:
       traefik.port: 15672
 
   vault:
-    image: vault:0.10.2
+    image: vault:1.3.0
     restart: always
     volumes:
       - vault_data:/vault
