@@ -271,8 +271,8 @@ namespace :service do
       Rake::Task["service:app"].invoke('start')
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
-      Rake::Task["service:influxdb"].invoke('start')
-      Rake::Task["service:arke_proxy"].invoke('start')
+      Rake::Task["service:influxdb"].invoke('start') if @config['arke_proxy']['enabled']
+      Rake::Task["service:arke_proxy"].invoke('start') if @config['arke_proxy']['enabled']
       Rake::Task["service:utils"].invoke('start')
       Rake::Task["service:daemons"].invoke('start')
     end
