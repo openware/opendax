@@ -30,17 +30,17 @@ Docker compose follow steps: [docker compose](https://docs.docker.com/compose/in
 
 #### 2.3 Install ruby in user app
 
-##### 3.3.1 Change user using
+##### 2.3.1 Change user using
 ```bash
 su - app
 ```
 
-##### 3.3.2 Clone OpenDAX
+##### 2.3.2 Clone OpenDAX
 ```bash
 git clone https://github.com/openware/opendax.git
 ```
 
-##### 3.3.3 Install RVM
+##### 2.3.3 Install RVM
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
