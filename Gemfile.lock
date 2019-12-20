@@ -9,7 +9,7 @@ GEM
     multipart-post (2.0.0)
     mustermann (1.0.3)
     puma (3.12.2)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-protection (2.0.4)
       rack
     rake (12.3.1)
