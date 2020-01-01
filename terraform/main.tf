@@ -1,10 +1,11 @@
 provider "google" {
-  credentials = "${file("${var.credentials}")}"
-  project = "${var.project}"
-  region = "${var.region}"
+  credentials = file(var.credentials)
+  project     = var.project
+  region      = var.region
 }
 
-provider "random" {}
+provider "random" {
+}
 
 resource "random_id" "opendax" {
   byte_length = 2
@@ -12,24 +13,24 @@ resource "random_id" "opendax" {
 
 resource "google_compute_instance" "opendax" {
   name         = "${var.instance_name}-${random_id.opendax.hex}"
-  machine_type = "${var.machine_type}"
-  zone         = "${var.zone}"
+  machine_type = var.machine_type
+  zone         = var.zone
 
   allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
-      image = "${var.image}"
-      type = "pd-ssd"
-      size = 120
+      image = var.image
+      type  = "pd-ssd"
+      size  = 120
     }
   }
 
   network_interface {
-    network = "${google_compute_network.opendax.name}"
+    network = google_compute_network.opendax.name
 
     access_config {
-      nat_ip = "${google_compute_address.opendax.address}"
+      nat_ip = google_compute_address.opendax.address
     }
   }
 
@@ -39,8 +40,8 @@ resource "google_compute_instance" "opendax" {
 
   tags = ["allow-webhook"]
 
-  metadata {
-    sshKeys = "${var.ssh_user}:${file("${var.ssh_public_key}")}"
+  metadata = {
+    sshKeys = "${var.ssh_user}:${file(var.ssh_public_key)}"
   }
 
   provisioner "local-exec" {
@@ -49,13 +50,14 @@ resource "google_compute_instance" "opendax" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p /home/${var.ssh_user}/opendax"
+      "mkdir -p /home/${var.ssh_user}/opendax",
     ]
 
     connection {
+      host        = self.network_interface[0].access_config[0].nat_ip
       type        = "ssh"
-      user        = "${var.ssh_user}"
-      private_key = "${file("${var.ssh_private_key}")}"
+      user        = var.ssh_user
+      private_key = file(var.ssh_private_key)
     }
   }
 
@@ -64,9 +66,10 @@ resource "google_compute_instance" "opendax" {
     destination = "/home/${var.ssh_user}/opendax"
 
     connection {
+      host        = self.network_interface[0].access_config[0].nat_ip
       type        = "ssh"
-      user        = "${var.ssh_user}"
-      private_key = "${file("${var.ssh_private_key}")}"
+      user        = var.ssh_user
+      private_key = file(var.ssh_private_key)
     }
   }
 
@@ -74,9 +77,10 @@ resource "google_compute_instance" "opendax" {
     script = "../bin/install.sh"
 
     connection {
+      host        = self.network_interface[0].access_config[0].nat_ip
       type        = "ssh"
-      user        = "${var.ssh_user}"
-      private_key = "${file("${var.ssh_private_key}")}"
+      user        = var.ssh_user
+      private_key = file(var.ssh_private_key)
     }
   }
 
@@ -84,17 +88,17 @@ resource "google_compute_instance" "opendax" {
     script = "../bin/start.sh"
 
     connection {
+      host        = self.network_interface[0].access_config[0].nat_ip
       type        = "ssh"
-      user        = "${var.ssh_user}"
-      private_key = "${file("${var.ssh_private_key}")}"
+      user        = var.ssh_user
+      private_key = file(var.ssh_private_key)
     }
   }
-
 }
 
 resource "google_compute_firewall" "opendax" {
   name    = "opendax-firewall-${random_id.opendax.hex}"
-  network = "${google_compute_network.opendax.name}"
+  network = google_compute_network.opendax.name
 
   allow {
     protocol = "tcp"
@@ -113,3 +117,4 @@ resource "google_compute_address" "opendax" {
 resource "google_compute_network" "opendax" {
   name = "opendax-network-${random_id.opendax.hex}"
 }
+
