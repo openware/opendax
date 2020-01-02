@@ -175,7 +175,7 @@ These files get rendered from their respective templates that are located under 
 
 ## How to update component image?
 
-Modify `config/app.yml` with correct image and run `rake service:all
+Modify `config/app.yml` with correct image and run `rake service:all`
 This will rerender all the files from `templates` directory and restart all the running services.
 
 Alternitavely you can update the following files:
