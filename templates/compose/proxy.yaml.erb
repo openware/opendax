@@ -13,7 +13,3 @@ services:
       - ../config/acme.json:/acme.json
     networks:
       - default
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: monitor.<%= @config['app']['domain'] %>'
-      traefik.port: 8080
