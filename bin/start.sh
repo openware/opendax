@@ -4,9 +4,9 @@ COMPOSE_VERSION="1.23.2"
 COMPOSE_URL="https://github.com/docker/compose/releases/download/$COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)"
 
 install_opendax() {
-  sudo -u app bash <<EOS
-  cd /home/app
-  source /home/app/.rvm/scripts/rvm
+  sudo -u deploy bash <<EOS
+  cd /home/deploy
+  source /home/deploy/.rvm/scripts/rvm
   rvm install --quiet-curl 2.6.1
   rvm use --default 2.6.1
   gem install bundler

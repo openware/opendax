@@ -21,7 +21,3 @@ services:
       - ../data/parity:/home/parity/.local/share/io.parity.ethereum
     ports:
       - "127.0.0.1:8545:8545"
-    labels:
-      traefik.enable: true
-      traefik.frontend.rule: 'Host: eth.<%= @config['app']['domain'] %>'
-      traefik.port: 8545
