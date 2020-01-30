@@ -39,13 +39,7 @@ namespace :service do
 
     def start
       puts '----- Starting dependencies -----'
-      puts "----- Vault mode: #{@config['vault']['mode']} -----"
       sh 'docker-compose up -d vault db redis rabbitmq'
-      sh 'docker-compose run --rm vault secrets enable totp \
-              && docker-compose run --rm vault secrets disable secret \
-              && docker-compose run --rm vault secrets enable transit \
-              && docker-compose run --rm vault secrets enable -path=secret -version=1 kv \
-              || echo Vault already enabled' if @config['vault']['mode'] == 'development'
       sleep 7 # time for db to start, we can get connection refused without sleeping
     end
 

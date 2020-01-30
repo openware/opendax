@@ -38,20 +38,12 @@ services:
     restart: always
     volumes:
       - vault_data:/vault
-    <%- if @config['vault']['mode'] == "production" -%>
     command:
       - server
     cap_add:
       - IPC_LOCK
-    <%- end -%>
     environment:
-    <%- if @config['vault']['mode'] == "production" -%>
       VAULT_LOCAL_CONFIG: '{"storage": {"file": { "path": "/vault/data" }}, "listener": {"tcp":{"address": "0.0.0.0:8200","tls_disable":"1"}}}'
-    <%- elsif @config['vault']['mode'] == "development" -%>
-      SKIP_SETCAP: 1
-      VAULT_TOKEN: <%= @config['vault']['token'] %>
-      VAULT_DEV_ROOT_TOKEN_ID: <%= @config['vault']['token'] %>
-    <%- end -%>
       VAULT_ADDR: http://vault:8200
 
 volumes:
