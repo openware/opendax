@@ -70,12 +70,34 @@ Insert in file `/etc/hosts`
 0.0.0.0 www.app.local
 ```
 
-#### 4.2 Bring everything up
+#### 4.2 Render all config files
+
+Simply run `rake render:config`
+
+#### 4.3 Set up Vault
+
+    Note: Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
+
+To set up Vault, go through the following steps:
+  - `docker-compose up -d vault`
+  - `docker-compose exec vault sh`
+  - `vault operator init`
+  - Save the output to a file in a secure place
+  - Unlock Vault with three different unlock keys - `vault operator unseal *unseal_key*`
+  - `vault login *root_token*`
+  - `vault secrets enable totp`
+  - `vault secrets enable transit`
+  - `vault secrets disable secret`
+  - `vault secrets enable -path=secret -version=1 kv`
+
+Add the Vault root token to `config/app.yml`, render the configs and start the `app` services.
+Afterwards, Vault should be fully configured and ready to work with Peatio and Barong.
+
+#### 4.4 Bring everything up
 
 ```bash
 rake service:all
 ```
-
 
 You can login on `www.app.local` with the following default users from seeds.yaml
 ```
@@ -132,30 +154,6 @@ For example, to start the `backend` services, you'll simply need to run `rake se
     rake service:*component*[start] explicitly
 
 Go ahead and try your own OpenDAX exchange deployment!
-
-### Vault setup
-
-You can run Vault in two modes: `development` and `production`. You can set it in the `vault.mode` field of `app.yml`.
-The main differences are:
- - Development mode
-   Everything is stored in memory, thus all API keys and 2FA tokens are lost on every container restart.
- - Production mode
-   Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
-
-To setup Vault in production mode, go through the following steps:
-  - `docker-compose exec vault sh`
-  - `vault operator init`
-  - Save the output to a file in a secure place
-  - Unlock Vault with three different unlock keys - `vault operator unseal *unseal_key*`
-  - `vault login *root_token*`
-  - `vault secrets enable totp`
-  - `vault secrets disable secret`
-  - `vault secrets enable -path=secret -version=1 kv`
-
-Add the Vault root token to `config/app.yml`, render the configs and start the `app` services.
-Afterwards, Vault should be fully configured and ready to work with Peatio and Barong.
-
-For development mode Vault setup you don't have to perform any actions.
 
 ### Stopping and restarting components
 

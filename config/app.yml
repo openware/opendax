@@ -17,7 +17,6 @@ arke_proxy:
 vendor:
   frontend: git@github.com:openware/baseapp.git
 vault:
-  mode: development
   token: changeme
 storage:
   provider: "Google"
