@@ -8,7 +8,7 @@ services:
       - ../config/arke.env
     volumes:
       - ../config/arke/strategies.yml:/home/app/config/strategies.yml
-    command: ./bin/arke start
+    command: bundle exec ./bin/arke start
 
   arke-etl:
     image: "<%= @utils['images']['arke'] %>"

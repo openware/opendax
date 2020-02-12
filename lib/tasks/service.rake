@@ -108,7 +108,13 @@ namespace :service do
 
   desc '[Optional] Run peatio daemons (ranger, peatio daemons)'
   task :daemons, [:command] do |task, args|
-    @daemons = %w[ranger withdraw_audit blockchain global_state deposit_collection deposit_collection_fees deposit_coin_address slave_book matching order_processor trade_executor withdraw_coin influx_writer k market_ticker]
+    @daemons = %w[ranger withdraw_audit blockchain global_state deposit_collection deposit_collection_fees deposit_coin_address slave_book withdraw_coin influx_writer k market_ticker]
+
+    if @config['finex']['enabled']
+      @daemons |= %w[finex-engine finex-api]
+    else
+      @daemons |= %w[matching order_processor trade_executor]
+    end
 
     args.with_defaults(:command => 'start')
 

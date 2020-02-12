@@ -1,0 +1,184 @@
+# List of Barong administrators.
+#
+# Other parameters that you can set here can be found in Account,
+# Profile and Phone models (e.g. app/models/account.rb...); all the
+# model properties are listed at the very bottom of this models files.
+#
+# Note: email is the only required field here.
+users:
+  - email: admin@barong.io
+    password: 0lDHd9ufs9t@
+    role: admin
+    state: active
+    level: 3
+  - email: john@barong.io
+    password: Am8icnzEI3d!
+    role: member
+    state: active
+    level: 3
+
+levels:
+  - key: email
+    value: verified
+    description: "User clicked on the confirmation link"
+  - key: phone
+    value: verified
+    description: "User entered a valid code from sms"
+  - key: document
+    value: verified
+    description: "User personal documents have been verified"
+
+permissions:
+# SUPER ADMIN has an access to the whole system without any limits
+# so we can just grant him access to /api/v2/*
+ - { role: superadmin, verb: all, path: api/v2, action: accept }
+<%- if @config['finex']['enabled'] -%>
+ - { role: superadmin, verb: post, path: api/v2/peatio/market/orders, action: drop }
+<%- end -%>
+ # superadmin has a full access to the peatio admin api
+ - { role: superadmin, verb: all, path: admin, action: accept }
+ - { role: superadmin, verb: get, path: assets, action: accept }
+ # we are watching after you 0_0
+ - { role: superadmin, verb: all, path: admin, action: audit }
+ - { role: superadmin, verb: all, path: api/v2/, action: audit }
+
+# ADMIN
+# admin has nearly full access to barong and peatio api, except managing permissions
+ - { role: admin, verb: all, path: api/v2, action: accept }
+<%- if @config['finex']['enabled'] -%>
+ - { role: admin, verb: post, path: api/v2/peatio/market/orders, action: drop }
+<%- end -%>
+ # admin has a full access to the peatio admin api
+ - { role: admin, verb: all, path: admin, action: accept }
+ - { role: admin, verb: get, path: assets, action: accept }
+ # admin doesnt have access to manage platform roles and permissions
+ - { role: admin, verb: all, path: api/v2/barong/admin/permissions, action: drop }
+ # we are watching after you 0_0
+ - { role: admin, verb: all, path: admin, action: audit }
+ - { role: admin, verb: all, path: api/v2, action: audit }
+
+# ACCOUNTANT
+ # accountant has a read access to the peatio admin api
+ - { role: accountant, verb: get, path: api/v2/barong/admin/metrics, action: accept }
+ - { role: accountant, verb: get, path: admin/deposits, action: accept }
+ - { role: accountant, verb: get, path: admin/withdraws, action: accept }
+ - { role: accountant, verb: get, path: admin/members, action: accept }
+ - { role: accountant, verb: get, path: admin/operations, action: accept }
+ - { role: accountant, verb: get, path: admin/balance_sheet, action: accept }
+ - { role: accountant, verb: get, path: admin/income_statement, action: accept }
+ - { role: accountant, verb: get, path: assets, action: accept }
+ # accountant has a read access to barong admin
+ - { role: accountant, verb: get, path: api/v2/barong/admin, action: accept }
+ # has an ability to ban user
+ - { role: accountant, verb: put, path: api/v2/barong/admin/users, action: accept }
+ - { role: accountant, verb: put, path: api/v2/barong/admin/users/labels, action: drop }
+ # ranger access
+ - { role: accountant, verb: get, path: api/v2/ranger, action: accept }
+ # accountant doesnt have access to manage platform roles and permissions
+ - { role: accountant, verb: all, path: api/v2/barong/admin/permissions, action: drop }
+ # we are watching after you 0_0
+ - { role: accountant, verb: all, path: admin, action: audit }
+ - { role: accountant, verb: all, path: api/v2, action: audit }
+
+# COMPLIANCE
+ # has an access to CRUD of user-related resources
+ - { role: compliance, verb: get, path: api/v2/barong/admin/metrics, action: accept }
+ - { role: compliance, verb: post, path: api/v2/barong/admin/users, action: accept }
+ - { role: compliance, verb: put, path: api/v2/barong/admin/users, action: accept }
+ - { role: compliance, verb: get, path: api/v2/barong/admin/users, action: accept }
+ - { role: compliance, verb: delete, path: api/v2/barong/admin/users, action: accept }
+ - { role: compliance, verb: get, path: api/v2/barong/admin/activities, action: accept }
+ # has read-only access to peatio admin api
+ - { role: compliance, verb: get, path: admin/deposits, action: accept }
+ - { role: compliance, verb: get, path: admin/withdraws, action: accept }
+ - { role: compliance, verb: get, path: admin/members, action: accept }
+ - { role: compliance, verb: get, path: admin/operations, action: accept }
+ - { role: compliance, verb: get, path: admin/balance_sheet, action: accept }
+ - { role: compliance, verb: get, path: admin/income_statement, action: accept }
+ - { role: compliance, verb: get, path: assets, action: accept }
+ # ranger access
+ - { role: compliance, verb: get, path: api/v2/ranger, action: accept }
+ # compliance doesnt have access to manage platform roles and permissions
+ - { role: compliance, verb: all, path: api/v2/barong/admin/permissions, action: drop }
+ # we are watching after you 0_0
+ - { role: compliance, verb: all, path: admin, action: audit }
+ - { role: compliance, verb: all, path: api/v2, action: audit }
+
+# TECHNICAL
+ # has an access to CRUD of peatio admin functionality on market, blockchain, wallets, currencies
+ - { role: technical, verb: get, path: assets, action: accept }
+ - { role: technical, verb: get, path: admin, action: accept }
+ - { role: technical, verb: all, path: admin/wallets, action: accept }
+ - { role: technical, verb: all, path: admin/markets, action: accept }
+ - { role: technical, verb: all, path: admin/blockchains, action: accept }
+ - { role: technical, verb: all, path: admin/currencies, action: accept }
+
+ # ranger access
+ - { role: technical, verb: get, path: api/v2/ranger, action: accept }
+ # technical doesnt have access to manage platform roles and permissions
+ - { role: technical, verb: all, path: api/v2/barong/admin/permissions, action: drop }
+ # we are watching after you 0_0
+ - { role: technical, verb: all, path: admin, action: audit }
+ - { role: technical, verb: all, path: api/v2, action: audit }
+
+# SUPPORT
+ # has read only access to several statistic and user-related endpoints
+ - { role: support, verb: get, path: admin/deposits, action: accept }
+ - { role: support, verb: get, path: admin/withdraws, action: accept }
+ - { role: support, verb: get, path: admin/members, action: accept }
+ - { role: support, verb: get, path: admin/operations, action: accept }
+ - { role: support, verb: get, path: api/v2/barong/admin/users, action: accept }
+ - { role: support, verb: get, path: admin/balance_sheet, action: accept }
+ - { role: support, verb: get, path: admin/income_statement, action: accept }
+ - { role: support, verb: get, path: assets, action: accept }
+ - { role: support, verb: get, path: admin, action: accept }
+ # support doesnt have access to manage platform roles and permissions
+ - { role: support, verb: all, path: api/v2/barong/admin/permissions, action: drop }
+ # we are watching after you 0_0
+ - { role: support, verb: all, path: admin, action: audit }
+ - { role: support, verb: all, path: api/v2, action: audit }
+
+# TRADER
+ # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+ - { role: trader, verb: all, path: api/v2/peatio/account, action: accept }
+<%- if @config['finex']['enabled'] -%>
+ - { role: trader, verb: get, path: api/v2/peatio/market, action: accept }
+ - { role: trader, verb: all, path: api/v2/finex/market, action: accept }
+ - { role: trader, verb: post, path: api/v2/peatio/market/orders, action: drop }
+<%- else -%>
+ - { role: trader, verb: all, path: api/v2/peatio/market, action: accept }
+<%- end -%>
+ - { role: trader, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: trader, verb: all, path: api/v2/resource, action: accept }
+ # ranger access
+ - { role: trader, verb: get, path: api/v2/ranger, action: accept }
+
+ # MEMBER
+ # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+ - { role: member, verb: all, path: api/v2/peatio/account, action: accept }
+<%- if @config['finex']['enabled'] -%>
+ - { role: member, verb: get, path: api/v2/peatio/market, action: accept }
+ - { role: member, verb: all, path: api/v2/finex/market, action: accept }
+ - { role: member, verb: post, path: api/v2/peatio/market/orders, action: drop }
+<%- else -%>
+ - { role: member, verb: all, path: api/v2/peatio/market, action: accept }
+<%- end -%>
+ - { role: member, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: member, verb: all, path: api/v2/resource, action: accept }
+ # ranger access
+ - { role: member, verb: get, path: api/v2/ranger, action: accept }
+
+ # BROKER
+ # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+ - { role: broker, verb: all, path: api/v2/peatio/account, action: accept }
+<%- if @config['finex']['enabled'] -%>
+ - { role: broker, verb: get, path: api/v2/peatio/market, action: accept }
+ - { role: broker, verb: all, path: api/v2/finex/market, action: accept }
+ - { role: broker, verb: post, path: api/v2/peatio/market/orders, action: drop }
+<%- else -%>
+ - { role: broker, verb: all, path: api/v2/peatio/market, action: accept }
+<%- end -%>
+ - { role: broker, verb: all, path: api/v2/barong/resource, action: accept }
+ - { role: broker, verb: all, path: api/v2/resource, action: accept }
+ # ranger access
+ - { role: broker, verb: get, path: api/v2/ranger, action: accept }

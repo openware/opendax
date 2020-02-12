@@ -5,6 +5,7 @@ require 'sshkey'
 require 'pathname'
 require 'yaml'
 require 'base64'
+require 'fileutils'
 
 module Opendax
   # Renderer is class for rendering Opendax templates.
@@ -36,6 +37,8 @@ module Opendax
     def render_file(file, out_file)
       puts "Rendering #{out_file}"
       result = ERB.new(File.read(file), trim_mode: '-').result(binding)
+      dir = File.dirname(out_file)
+      FileUtils.mkdir(dir) unless Dir.exist?(dir)
       File.write(out_file, result)
     end
 
@@ -57,13 +60,11 @@ module Opendax
     end
 
     def generate_key(filename, public: false)
-      unless File.file?(filename)
-        key = SSHKey.generate(type: 'RSA', bits: 2048)
-        File.open(filename, 'w') { |file| file.puts(key.private_key) }
-        if public
-          File.open("#{filename}.pub", 'w') { |file| file.puts(key.ssh_public_key) }
-        end
-      end
+      return if File.file?(filename)
+
+      key = SSHKey.generate(type: 'RSA', bits: 2048)
+      File.write(filename, key.private_key)
+      File.write("#{filename}.pub", key.ssh_public_key) if public
     end
 
     def config
