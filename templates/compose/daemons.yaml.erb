@@ -45,18 +45,6 @@ services:
     << : *peatio-daemon
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb market_ticker"
 
-  matching:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
-
-  order_processor:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
-
-  trade_executor:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
-
   withdraw_coin:
     << : *peatio-daemon
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb withdraw_coin"
@@ -71,6 +59,20 @@ services:
     env_file:
       - ../config/ranger.env
     command: bash -c "bundle exec peatio service start ranger"
+
+<% unless @config['finex']['enabled'] %>
+  matching:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+
+  order_processor:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
+
+  trade_executor:
+    << : *peatio-daemon
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
+<% end %>
 
   postmaster:
     restart: always

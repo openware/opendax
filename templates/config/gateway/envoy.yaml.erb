@@ -48,6 +48,11 @@ static_resources:
                   cluster: peatio
                   prefix_rewrite: "/api/v2/"
               - match:
+                  prefix: "/api/v2/finex"
+                route:
+                  cluster: finex
+                  prefix_rewrite: "/api/v2/"
+              - match:
                   prefix: "/admin"
                 route:
                   cluster: peatio
@@ -143,6 +148,14 @@ static_resources:
     - socket_address:
         address: peatio
         port_value: 8000
+  - name: finex
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: finex-api
+        port_value: 8080
   - name: ranger
     connect_timeout: 0.25s
     type: strict_dns

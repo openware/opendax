@@ -3,6 +3,7 @@ config/frontend/*.js
 config/gateway/mapping.yaml
 config/peatio/management_api_v1.yml
 config/barong/management_api.yml
+config/finex/*
 config/toolbox.yaml
 config/traefik.toml
 config/*.env

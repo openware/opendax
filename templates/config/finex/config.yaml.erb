@@ -1,0 +1,58 @@
+database:
+  driver: mysql
+  name: peatio_production
+  username: root
+  password: changeme
+  host: db
+  port: 3306
+messaging:
+  driver: amqp
+  username: guest
+  password: guest
+  host: rabbitmq
+  port: 5672
+  exchanges:
+    - name:    finex.orderapi
+      type:    direct
+      durable: false
+    - name:    peatio.events.ranger
+      type:    topic
+      durable: false
+    - name:    peatio.trade
+      type:    headers
+      durable: false
+    - name:    peatio.events
+      type:    direct
+      durable: false
+  queues:
+    - name:    finex.gateway
+    - name:    finex.events.processor
+gateway:
+  rate:
+    maker:
+      - limit: 500
+        period: 10s
+    bench:
+      - limit: 9000
+        period: 1s
+    default:
+      - limit: 50
+        period: 10s
+      - limit: 10000
+        period: 24h
+api:
+  bulk_limit: 100
+  rate:
+    maker:
+      limit: 500
+      period: 10s
+    default:
+      limit: 500
+      period: 10s
+  actions:
+    trade:
+      min_level: 2
+      roles: [member, broker, trader, maker]
+    bulk_api:
+      min_level: 3
+      roles: [maker]
