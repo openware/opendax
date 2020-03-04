@@ -59,7 +59,8 @@ namespace :service do
     def start
       puts '----- Starting influxdb -----'
       sh 'docker-compose up -d influxdb'
-      sh 'docker-compose exec influxdb bash -c "cat influxdb.sql | influx"'
+      sh 'docker-compose exec influxdb bash -c "cat arke.sql | influx"' if @config['arke_proxy']['enabled']
+      sh 'docker-compose exec influxdb bash -c "cat peatio.sql | influx"'
     end
 
     def stop
@@ -262,13 +263,13 @@ namespace :service do
     def start
       Rake::Task["service:proxy"].invoke('start')
       Rake::Task["service:backend"].invoke('start')
+      Rake::Task["service:influxdb"].invoke('start')
       puts 'Wait 5 second for backend'
       sleep(5)
       Rake::Task["service:setup"].invoke('start')
       Rake::Task["service:app"].invoke('start')
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
-      Rake::Task["service:influxdb"].invoke('start') if @config['arke_proxy']['enabled']
       Rake::Task["service:arke_proxy"].invoke('start') if @config['arke_proxy']['enabled']
       Rake::Task["service:utils"].invoke('start')
       Rake::Task["service:daemons"].invoke('start')
@@ -277,11 +278,11 @@ namespace :service do
     def stop
       Rake::Task["service:proxy"].invoke('stop')
       Rake::Task["service:backend"].invoke('stop')
+      Rake::Task["service:influxdb"].invoke('stop')
       Rake::Task["service:setup"].invoke('stop')
       Rake::Task["service:app"].invoke('stop')
       Rake::Task["service:frontend"].invoke('stop')
       Rake::Task["service:tower"].invoke('stop')
-      Rake::Task["service:influxdb"].invoke('stop')
       Rake::Task["service:arke_proxy"].invoke('stop')
       Rake::Task["service:utils"].invoke('stop')
       Rake::Task["service:daemons"].invoke('stop')
