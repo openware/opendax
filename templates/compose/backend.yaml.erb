@@ -11,12 +11,13 @@ services:
       MYSQL_ROOT_PASSWORD: changeme
 
   influxdb:
-    image: influxdb:1.7.8
+    image: influxdb:1.7.10
     restart: always
     volumes:
       - influx_data:/var/lib/influxdb
       - ../config/influxdb/build_candles.sql:/build_candles.sql
-      - ../config/influxdb/influxdb.sql:/influxdb.sql
+      - ../config/influxdb/arke.sql:/arke.sql
+      - ../config/influxdb/peatio.sql:/peatio.sql
       - ../config/arke/historical_data:/data/historical_data
     environment:
        INFLUXDB_ADMIN_ENABLED: "true"
