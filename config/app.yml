@@ -28,7 +28,7 @@ twilio:
   phone_number: "+15005550000"
   account_sid: "changeme"
   auth_token: "changeme"
-recaptcha:
+captcha:
   type: "none"
   siteKey: "changeme"
   secretKey: "changeme"
