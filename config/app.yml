@@ -3,12 +3,13 @@ app:
   domain: "app.local"
   subdomain: "www"
 render_protect: false
+csrfEnabled: false
 ssl:
   enabled: false    # Make sure to enable during deployment
   email: "support@example.com"
 images:
   peatio: quay.io/openware/peatio:2.3.47
-  barong: quay.io/openware/barong:2.4.0-a547f87
+  barong: quay.io/openware/barong:2.4.0-66599b5
   frontend: quay.io/openware/baseapp:2.3.26 # Check on quay.io/openware/baseapp for latest tags
   tower: quay.io/openware/tower:2.3.137
   postmaster: quay.io/openware/postmaster:2.3.5
