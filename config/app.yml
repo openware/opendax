@@ -30,8 +30,11 @@ database:
 storage:
   provider: "Google"
   bucketName: "opendax-barong-docs-bucket"
-  accessKey: "**********"
-  secretKey: "**********"
+  region: fra1
+  endpoint: https://fra1.digitaloceanspaces.com
+  accessKey: "changeme"
+  secretKey: "changeme"
+  signatureVersion: "2"
 twilio:
   phone_number: "+15005550000"
   account_sid: "changeme"
