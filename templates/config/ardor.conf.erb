@@ -1,0 +1,12 @@
+<%- ardor = @config['ardor'] -%>
+
+<%- if ardor['network'] == 'mainnet' -%>
+  nxt.isTestnet=false
+<%- else -%>
+  nxt.isTestnet=true
+<%- end -%>
+nxt.allowedBotHosts=*
+nxt.apiServerHost=<%= ardor['address'] %>
+nxt.dbDir=./db/nxt_NXTNET_db/nxt
+nxt.testDbDir=./db/nxt_NXTNET_db/nxt
+nxt.adminPassword=<%= ardor['rpcpassword'] %>
