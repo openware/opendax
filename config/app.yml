@@ -22,6 +22,11 @@ vendor:
   frontend: git@github.com:openware/baseapp.git
 vault:
   token: changeme
+database:
+  host: db
+  port: 3306
+  user: root
+  password: changeme
 storage:
   provider: "Google"
   bucketName: "opendax-barong-docs-bucket"
