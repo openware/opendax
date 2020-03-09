@@ -3,10 +3,11 @@ name: default
 
 steps:
 - name: Run rspec
-  image: ruby:2.6.1
+  image: ruby:2.6.5
   commands:
+    - gem install bundler
     - bundle
-    - rspec
+    - bundle exec rspec
   when:
     event:
       - pull_request
