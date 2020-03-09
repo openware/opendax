@@ -1,9 +1,9 @@
 <%- ardor = @config['ardor'] -%>
 
 <%- if ardor['network'] == 'mainnet' -%>
-  nxt.isTestnet=false
+nxt.isTestnet=false
 <%- else -%>
-  nxt.isTestnet=true
+nxt.isTestnet=true
 <%- end -%>
 nxt.allowedBotHosts=*
 nxt.apiServerHost=<%= ardor['address'] %>

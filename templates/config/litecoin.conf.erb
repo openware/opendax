@@ -9,8 +9,8 @@ server=1
 onlynet=ipv4
 
 <%- unless litecoind['network'] == 'mainnet' -%>
-  <%= "#{litecoind['network']}=1" %>
-  [test]
+<%= "#{litecoind['network']}=1" %>
+[test]
 <%- end -%>
 rpcuser=<%= litecoind['rpcuser'] %>
 rpcpassword=<%= litecoind['rpcpassword'] %>
