@@ -76,12 +76,12 @@ services:
 
   postmaster:
     restart: always
-    image: "<%= @config['images']['postmaster'] %>"
+    image: "<%= @config['images']['barong'] %>"
     env_file:
-      - ../config/postmaster.env
+      - ../config/barong.env
     volumes:
-      -  ../config/postmaster.yml:/app/config/postmaster.yml
-      - ../config/postmaster/templates:/app/templates
+      -  ../config/postmaster.yml:/home/app/config/mailer.yml
+    command: bash -c "bin/mailer run"
 
   sidekiq:
     restart: always
