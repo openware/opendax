@@ -21,3 +21,17 @@ services:
       - ../data/parity:/home/parity/.local/share/io.parity.ethereum
     ports:
       - "127.0.0.1:8545:8545"
+
+  bitcoind:
+    image: quay.io/openware/bitcoind:0.17.1
+    restart: always
+    volumes:
+      - ../data/bitcoin:/bitcoin
+      - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
+
+  litecoind:
+    image: quay.io/openware/litecoind:0.16.3
+    restart: always
+    volumes:
+      - ../data/litecoin:/litecoin
+      - ../config/litecoin.conf:/litecoin/litecoin.conf

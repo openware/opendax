@@ -147,6 +147,7 @@ The components included in the stack are:
 - `app` - [Peatio](https://github.com/rubykube/peatio), [Barong](https://github.com/rubykube/barong) and the [Ambassador](https://www.getambassador.io) API gateway
 - `frontend` - the frontend application located at `vendor/frontend`
 - `tower` - the Tower admin panel application located at `vendor/tower`
+- `monitoring` - [cAdvisor](https://github.com/google/cadvisor) and [Node Exporter](https://github.com/prometheus/node_exporter) monitoring tools **[Optional]**
 
 For example, to start the `backend` services, you'll simply need to run `rake service:backend[start]`
 

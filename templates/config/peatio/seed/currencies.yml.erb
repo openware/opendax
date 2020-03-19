@@ -38,7 +38,7 @@
 
 - id:                     eth
   name:                   Ethereum
-  blockchain_key:         eth-kovan
+  blockchain_key:         eth-<%= @config['parity']['network'] %>
   symbol:                 'Ξ'
   type:                   coin
   precision:              8
@@ -65,7 +65,7 @@
 
 - id:                     trst
   name:                   WeTrust
-  blockchain_key:         eth-kovan
+  blockchain_key:         eth-<%= @config['parity']['network'] %>
   symbol:                 'Ξ'
   type:                   coin
   precision:              8
@@ -95,3 +95,25 @@
     #
     # ERC20 configuration.
     erc20_contract_address: '0x87099add3bcc0821b5b151307c147215f839a110' # Always wrap this value in quotes!
+<% if @config['bitcoind']['enabled'] %>
+- id:                     btc
+  name:                   Bitcoin
+  blockchain_key:         btc-<%= @config['bitcoind']['network'] %>
+  symbol:                 '฿'
+  type:                   coin
+  precision:              8
+  base_factor:            100_000_000
+  visible:                true
+  deposit_enabled:        true
+  withdrawal_enabled:     true
+  # Deposits with less amount are skipped during blockchain synchronization.
+  # We advise to set value 10 times bigger than the network fee to prevent losses.
+  min_deposit_amount:     0.0000356
+  min_collection_amount:  0.0000356
+  withdraw_limit_24h:     0.1
+  withdraw_limit_72h:     0.2
+  deposit_fee:            0
+  withdraw_fee:           0
+  position:               2
+  options:                {}
+<% end %>

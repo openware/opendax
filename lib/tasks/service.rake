@@ -138,11 +138,17 @@ namespace :service do
     def start
       puts '----- Starting cryptonodes -----'
       sh 'docker-compose up -d parity'
+      if @config['bitcoind']['enabled']
+        sh 'docker-compose up -d bitcoind'
+      end
     end
 
     def stop
       puts '----- Stopping cryptonodes -----'
       sh 'docker-compose rm -fs parity'
+      if @config['bitcoind']['enabled']
+        sh 'docker-compose rm -fs bitcoind'
+      end
     end
 
     @switch.call(args, method(:start), method(:stop))
@@ -222,6 +228,25 @@ namespace :service do
     def stop
       puts '----- Stopping Utils -----'
       sh 'docker-compose rm -fs postmaster'
+    end
+
+    @switch.call(args, method(:start), method(:stop))
+  end
+
+  desc '[Optional] Run monitoring'
+  task :monitoring, [:command] do |task, args|
+    args.with_defaults(:command => 'start')
+
+    def start
+      puts '----- Starting monitoring -----'
+      sh 'docker-compose up -d node_exporter'
+      sh 'docker-compose up -d cadvisor'
+    end
+
+    def stop
+      puts '----- Stopping monitoring -----'
+      sh 'docker-compose rm -fs node_exporter'
+      sh 'docker-compose rm -fs cadvisor'
     end
 
     @switch.call(args, method(:start), method(:stop))

@@ -22,11 +22,19 @@ vendor:
   frontend: git@github.com:openware/baseapp.git
 vault:
   token: changeme
+database:
+  host: db
+  port: 3306
+  user: root
+  password: changeme
 storage:
   provider: "Google"
   bucketName: "opendax-barong-docs-bucket"
-  accessKey: "**********"
-  secretKey: "**********"
+  region: fra1
+  endpoint: https://fra1.digitaloceanspaces.com
+  accessKey: "changeme"
+  secretKey: "changeme"
+  signatureVersion: "2"
 twilio:
   phone_number: "+15005550000"
   account_sid: "changeme"
@@ -43,18 +51,49 @@ smtp:
   sender_email: noreply@postmaster.com
   sender_name: Postmaster
 wallets:
-  - kind: deposit
-    address: "changeme"
-    max_balance: 0.0
-    secret: changeme
-  - kind: hot
-    address: "changeme"
-    max_balance: 100.0
-    secret: changeme
-  - kind: warm
-    address: "changeme"
-    max_balance: 1000.0
-    secret: changeme
+  eth:
+    - kind: deposit
+      address: "changeme"
+      max_balance: 0.0
+      secret: changeme
+    - kind: hot
+      address: "changeme"
+      max_balance: 100.0
+      secret: changeme
+    - kind: warm
+      address: "changeme"
+      max_balance: 1000.0
+      secret: changeme
+  btc:
+    - kind: deposit
+      address: "changeme"
+      max_balance: 0.0
+    - kind: hot
+      address: "changeme"
+      max_balance: 100.0
+    - kind: warm
+      address: "changeme"
+      max_balance: 1000.0
+parity:
+  network: testnet
+  address: parity
+  rpcport: 8545
+  port: 30303
+bitcoind:
+  enabled: false
+  rpcuser: admin
+  rpcpassword: changeme
+  address: bitcoind
+  network: testnet
+  rpcport: 18332
+  port: 18333
+litecoind:
+  rpcuser: admin
+  rpcpassword: changeme
+  address: litecoind
+  network: testnet
+  rpcport: 19332
+  port: 19335
 terraform:
   credentials: "~/safe/opendax.json"
   project: "example-opendax"
