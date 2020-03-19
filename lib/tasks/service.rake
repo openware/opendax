@@ -138,11 +138,17 @@ namespace :service do
     def start
       puts '----- Starting cryptonodes -----'
       sh 'docker-compose up -d parity'
+      if @config['bitcoind']['enabled']
+        sh 'docker-compose up -d bitcoind'
+      end
     end
 
     def stop
       puts '----- Stopping cryptonodes -----'
       sh 'docker-compose rm -fs parity'
+      if @config['bitcoind']['enabled']
+        sh 'docker-compose rm -fs bitcoind'
+      end
     end
 
     @switch.call(args, method(:start), method(:stop))
