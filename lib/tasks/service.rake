@@ -15,24 +15,6 @@ namespace :service do
     end
   end
 
-  desc 'Run Traefik (reverse-proxy)'
-  task :proxy, [:command] do |task, args|
-    args.with_defaults(:command => 'start')
-
-    def start
-      puts '----- Starting the proxy -----'
-      File.new('config/acme.json', File::CREAT, 0600) unless File.exist? 'config/acme.json'
-      sh 'docker-compose up -d proxy'
-    end
-
-    def stop
-      puts '----- Stopping the proxy -----'
-      sh 'docker-compose rm -fs proxy'
-    end
-
-    @switch.call(args, method(:start), method(:stop))
-  end
-
   desc 'Run backend (vault db redis rabbitmq)'
   task :backend, [:command] do |task, args|
     args.with_defaults(:command => 'start')
@@ -159,7 +141,7 @@ namespace :service do
   end
 
   desc 'Run mikro app (barong, peatio)'
-  task :app, [:command] => [:proxy, :backend, :setup] do |task, args|
+  task :app, [:command] => [:backend, :setup] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
@@ -285,7 +267,6 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      Rake::Task["service:proxy"].invoke('start')
       Rake::Task["service:backend"].invoke('start')
       puts 'Wait 5 second for backend'
       sleep(5)
@@ -300,7 +281,6 @@ namespace :service do
     end
 
     def stop
-      Rake::Task["service:proxy"].invoke('stop')
       Rake::Task["service:backend"].invoke('stop')
       Rake::Task["service:setup"].invoke('stop')
       Rake::Task["service:app"].invoke('stop')
