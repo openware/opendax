@@ -59,7 +59,6 @@ namespace :service do
     def start
       puts '----- Starting influxdb -----'
       sh 'docker-compose up -d influxdb'
-      sh 'docker-compose exec influxdb bash -c "cat arke.sql | influx"' if @config['arke_proxy']['enabled']
       sh 'docker-compose exec influxdb bash -c "cat peatio.sql | influx"'
     end
 
@@ -83,24 +82,6 @@ namespace :service do
     def stop
       puts '----- Stopping arke -----'
       sh 'docker-compose rm -fs arke-maker'
-    end
-
-    @switch.call(args, method(:start), method(:stop))
-  end
-
-  desc '[Optional] Run arke proxy'
-  task :arke_proxy, [:command] do |task, args|
-    @containers = %w[arke arke-etl]
-    args.with_defaults(:command => 'start')
-
-    def start
-      puts '----- Starting arke-proxy -----'
-      sh "docker-compose up -d #{@containers.join(' ')}"
-    end
-
-    def stop
-      puts '----- Stopping arke-proxy -----'
-      sh "docker-compose rm -fs #{@containers.join(' ')}"
     end
 
     @switch.call(args, method(:start), method(:stop))
@@ -301,7 +282,6 @@ namespace :service do
       Rake::Task["service:app"].invoke('start')
       Rake::Task["service:frontend"].invoke('start')
       Rake::Task["service:tower"].invoke('start')
-      Rake::Task["service:arke_proxy"].invoke('start') if @config['arke_proxy']['enabled']
       Rake::Task["service:utils"].invoke('start')
       Rake::Task["service:daemons"].invoke('start')
     end
@@ -314,7 +294,6 @@ namespace :service do
       Rake::Task["service:app"].invoke('stop')
       Rake::Task["service:frontend"].invoke('stop')
       Rake::Task["service:tower"].invoke('stop')
-      Rake::Task["service:arke_proxy"].invoke('stop')
       Rake::Task["service:utils"].invoke('stop')
       Rake::Task["service:daemons"].invoke('stop')
     end
