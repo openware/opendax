@@ -16,8 +16,6 @@ images:
 finex:
   enabled: false
   image: quay.io/openware/finex:2.4.0-98718c7
-arke_proxy:
-  enabled: false
 vendor:
   frontend: git@github.com:openware/baseapp.git
 vault:
