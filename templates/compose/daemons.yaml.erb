@@ -17,17 +17,13 @@ services:
     << : *peatio-daemon
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb blockchain"
 
-  global_state:
+  cron_job:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb global_state"
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb cron_job"
 
-  k:
+  upstream:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb k"
-
-  slave_book:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb slave_book"
+    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb upstream"
 
   deposit_collection:
     << : *peatio-daemon
