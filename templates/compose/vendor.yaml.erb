@@ -15,6 +15,7 @@ services:
         yarn
         yarn start
     labels:
-      traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
-      traefik.port: 3000
+      - "traefik.http.routers.frontend.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
+      - "traefik.http.services.frontend.loqadbalancer.server.port=3000"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.enable=true"
