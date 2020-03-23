@@ -8,6 +8,18 @@
   min_amount:        0.00001
   position:          2
   state:             enabled
+  data:              {}
+  # The data field for store some special data market
+  # Can be used in upstream worker
+  # Example for upstream:
+  # data: {
+  #   "upstream"=> {
+  #                 "driver"=>"opendax",
+  #                 "target"=>"btcusdt",
+  #                 "rest"=>"https://url",
+  #                 "websocket"=>"wss://url"
+  #                }
+  # }
 
 - id:                fthusd
   base_unit:         fth
