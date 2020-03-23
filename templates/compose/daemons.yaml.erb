@@ -81,6 +81,7 @@ services:
       - ../config/barong.env
     volumes:
       -  ../config/secrets:/secrets:ro
+      -  ../config/postmaster/templates:/home/app/app/views/postmaster
       -  ../config/postmaster.yml:/home/app/config/mailer.yml
     command: bash -c "bin/mailer run"
 

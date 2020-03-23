@@ -1,0 +1,75 @@
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+  <tr>
+    <td>&nbsp;</td>
+    <td class="container">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <%= image_tag attachments['logo.png'].url, alt: 'Campany Logo', class: 'logo-img' %>
+          </td>
+        </tr>
+      </table>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td class="container">
+      <div class="content">
+        <table role="presentation" class="main">
+          <!-- START MAIN CONTENT AREA -->
+          <tr>
+            <td class="wrapper">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <br />
+                    <p>Hello!</p>
+                    <p>
+                      <% if @record.value == "verified" %>
+                        Congratulations, your account details was successfully upgraded.
+                      <% end %>
+                      <% if @record.value == "rejected" %>
+                        Unfortunately, your account details was rejected.
+                      <% end %>
+                        Your current account level is <b><%= @record.user.level %></b>
+                        Your account state is <b><%= @record.user.state %></b>
+                    </p>
+                    <p>
+                      <% if @record.key == "profile" %>
+                        Recently your user profile was <%= @record.value %>.
+                      <% end %>
+                      <% if @record.key == "id_document" %>
+                        Recently your main document was <%= @record.value %>.
+                      <% end %>
+                      <% if @record.key == "second_document" %>
+                        Recently your second document was <% @record.value %>.
+                      <% end %>
+                      <% if @record.key == "institutional" %>
+                        Recently your institutional document was <%= @record.value %>.
+                      <% end %>
+                    </p>
+                    <br /><br /><br />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <!-- END MAIN CONTENT AREA -->
+        </table>
+      </div>
+      <!-- START FOOTER -->
+      <div class="footer">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="content-block">
+              <span>Company Inc, 3 Abbey Road, San Francisco CA 94102, USA</span>
+              <br><a href="http://opendax.io">opendax.io</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- END FOOTER -->
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>

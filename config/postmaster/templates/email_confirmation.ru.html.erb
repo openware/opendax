@@ -1,0 +1,72 @@
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+  <tr>
+    <td>&nbsp;</td>
+    <td class="container">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <%= image_tag attachments['logo.png'].url, alt: 'Campany Logo', class: 'logo-img' %>
+          </td>
+        </tr>
+      </table>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td class="container">
+      <div class="content">
+        <table role="presentation" class="main">
+          <!-- START MAIN CONTENT AREA -->
+          <tr>
+            <td class="wrapper">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <br />
+                    <p style="margin-top: 18px"><b>Здравствуйте!</b></p>
+                    <p>
+                      Используйте эту уникальную ссылку для подтверждения вашей почты <%= @user.email %>
+                    </p>
+                    <br /><br /><br />
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                      <tbody>
+                        <tr>
+                          <td align="left">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <a href="<%= @record.domain %>/accounts/confirmation?confirmation_token=<%= @record.token %>&lang=en">Подтвердить</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br /><br />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <!-- END MAIN CONTENT AREA -->
+        </table>
+      </div>
+      <!-- START FOOTER -->
+      <div class="footer">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="content-block">
+              <span>Company Inc, 3 Abbey Road, San Francisco CA 94102, USA</span>
+              <br><a href="http://opendax.io">opendax.io</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- END FOOTER -->
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
