@@ -8,26 +8,11 @@
   min_amount:        0.00001
   position:          2
   state:             enabled
-  data:              {}
   # The data field for store some special data market
   # Can be used in upstream worker
-  # Example for upstream:
-  # data: {
-  #   "upstream"=> {
-  #                 "driver"=>"opendax",
-  #                 "target"=>"btcusdt",
-  #                 "rest"=>"https://url",
-  #                 "websocket"=>"wss://url"
-  #                }
-  # }
-
-- id:                fthusd
-  base_unit:         fth
-  quote_unit:        usd
-  amount_precision:  2
-  price_precision:   2
-  min_price:         0.01
-  max_price:         1000.0
-  min_amount:        0.01
-  position:          1
-  state:             enabled
+  data: { "upstream": {
+                        "driver": "opendax",
+                        "target": "ethusd",
+                        "rest": "https:///www.opendax.io/api/v2/peatio/",
+                        "websocket": "wss://www.opendax.io/api/v2/ranger/public/"
+                      } }
