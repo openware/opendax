@@ -11,6 +11,8 @@ services:
       - "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.enable=true"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
 
   tower:
     restart: always
@@ -22,4 +24,5 @@ services:
       - "traefik.http.routers.tower.entrypoints=web"
       - "traefik.enable=true"
       - "traefik.http.services.tower.loadbalancer.server.port=8080"
-
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
