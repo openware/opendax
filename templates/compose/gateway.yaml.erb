@@ -8,11 +8,11 @@ services:
       - ../config/gateway:/etc/envoy/
     command: /usr/local/bin/envoy -l info -c /etc/envoy/envoy.yaml
     labels:
-      - "traefik.http.routers.gateway.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.gateway.entrypoints=web"
+      - "traefik.http.routers.gateway-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/api`,`/admin`,`/assets/`)"
+      - "traefik.http.routers.gateway-<%= @name %>.entrypoints=web"
       - "traefik.enable=true"
       - "traefik.http.services.gateway.loadbalancer.server.port=8099"
-      <%- if @config['ssl']['enabled'] %>
-      - "traefik.http.routers.gateway.tls=true"
-      - "traefik.http.routers.gateway.tls.certresolver=myresolver"
-      <% end -%>
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.gateway-<%= @name %>.tls=true"
+      - "traefik.http.routers.gateway-<%= @name %>.tls.certresolver=myresolver"
+      <%- end -%>

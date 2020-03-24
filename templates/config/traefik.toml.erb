@@ -1,8 +1,0 @@
-<% if @config['ssl']['enabled'] -%>
-[certificatesResolvers.myresolver.acme]
-email = "support@<%= @config['app']['domain'] %>"
-storage = "acme.json"
-[certificatesResolvers.myresolver.acme.httpChallenge]
-# used during the challenge
-entryPoint = "web"
-<% end -%>
