@@ -33,6 +33,7 @@ storage:
   secretKey: "changeme"
   signatureVersion: "2"
 twilio:
+  enabled: false
   phone_number: "+15005550000"
   account_sid: "changeme"
   auth_token: "changeme"
