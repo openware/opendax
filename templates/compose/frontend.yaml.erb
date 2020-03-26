@@ -7,9 +7,16 @@ services:
     volumes:
       - ../config/frontend/env.js:/usr/share/nginx/html/config/env.js
     labels:
-      traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
-      traefik.port: 3000
+      - "traefik.http.routers.frontend-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
+      - "traefik.enable=true"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.frontend-<%= @name %>.entrypoints=websecure"
+      - "traefik.http.routers.frontend-<%= @name %>.tls=true"
+      - "traefik.http.routers.frontend-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.frontend-<%= @name %>.entrypoints=web"
+      <%- end -%>
 
   tower:
     restart: always
@@ -17,7 +24,13 @@ services:
     volumes:
       - ../config/frontend/tower.js:/home/app/env.js
     labels:
-      traefik.enable: true
-      traefik.frontend.rule: "PathPrefix:/tower;Host:<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
-      traefik.port: 8080
-
+      - "traefik.http.routers.tower-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/tower`)"
+      - "traefik.enable=true"
+      - "traefik.http.services.tower.loadbalancer.server.port=8080"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.tower-<%= @name %>.entrypoints=websecure"
+      - "traefik.http.routers.tower-<%= @name %>.tls=true"
+      - "traefik.http.routers.tower-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.tower-<%= @name %>.entrypoints=web"
+      <%- end -%>

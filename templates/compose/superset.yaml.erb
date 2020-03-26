@@ -7,9 +7,14 @@ services:
     volumes:
       - superset_db:/var/lib/superset
     labels:
-      traefik.enable: true
-      traefik.frontend.rule: "Host:superset.<%= @config['app']['domain'] %>"
-      traefik.port: 8088
+      - "traefik.http.routers.superset-<%= @name %>.rule=Host(`superset.<%= @config['app']['domain'] %>`)"
+      - "traefik.http.services.superset.loadbalancer.server.port=8088"
+      - "traefik.enable=true"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.superset-<%= @name %>.entrypoints=websecure"
+      <%- else -%>
+      - "traefik.http.routers.superset-<%= @name %>.entrypoints=web"
+      <%- end -%>
 
 volumes:
   superset_db:

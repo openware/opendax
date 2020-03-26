@@ -3,13 +3,25 @@ version: '3.6'
 services:
   proxy:
     restart: always
-    image: traefik:1.7.6
+    image: traefik:2.1.8
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ../config/traefik.toml:/etc/traefik/traefik.toml:ro
+      <%- if @config['ssl']['enabled'] -%>
       - ../config/acme.json:/acme.json
-    networks:
-      - default
+      <%- end -%>
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      <%- if @config['ssl']['enabled'] -%>
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=<%= @config['ssl']['email'] %>"
+      - "--certificatesresolvers.myresolver.acme.storage=/acme.json"
+      <%- end -%>
