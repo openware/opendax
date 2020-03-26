@@ -112,21 +112,41 @@ Email: john@barong.io, password: Am8icnzEI3d!
 
 All the OpenDAX deployment files have their confguration stored in `config/app.yml`.
 
-Feel free to fill it out with correct values:
+#### app.yml
 
-| Parameter         | Description                                      |
-| ----------------- | ------------------------------------------------ |
-| `app.name`        | Global application name                          |
-| `app.domain`      | Base domain name to be used                      |
-| `ssl.enabled`     | Enable SSL certificate generation                |
-| `ssl.email`       | Email address to use for SSL generation requests |
-| `images`          | Application images tags                          |
-| `vendor`          | Frontend application Git repo URL                |
-| `render_protect`  | Enable read-only mode for rendered files         |
+The following table lists the configurable parameters of the config/app.yml configuration file and its default values.
 
-    Twilio SMS service is disabled by default, feel free to enable it in the `twilio` section of the config
+Parameter | Description | Default
+--- | --- | ---
+`app.name` | global application name | `"OpenDax"`
+`app.domain` | base domain name to be used | `app.local`
+`subdomain` | subdomain of your application | `www`
+`render_protect` | enable read-only mode for rendered files | `false`
+`csrfEnabled` | enable csrf token on barong | `false`
+`ssl.enabled` | enable SSL certificate generation | `false`
+`ssl.email` | email address to use for SSL generation requests | `"support@example.com"`
+`images` | application images tags
+`vendor.frontend` | vendor is a tool to develop front with opendax, put there a link to you front repo | `git@github.com:openware/baseapp.git`
+`vault.token` | root token to unseal the vault | `changeme `
+`database.host` | database host name | `db`
+`database.port` | database port | `3306 `
+`database.user` | database user name | `root`
+`database.password` | database root password | `changeme`
+`storage.provider` | cloud service name | `"Google"`
+`storage.bucketname` | storage bucket name | `"opendax-barong-docs-bucket"`
+`storage.region` | storage region | `"fra1"`
+`storage.secretkey`, `storage.accesskey` | bucket access keys | `"changeme"`
+`terraform.credentials` | local path to service account in json format | `"~/safe/opendax.json"`
+`terraform.project` | project name | `"example-opendax"`
 
-    Note: You can protect all the rendered files from being edited so that you wouldn't lose your changes upon re-rendering templates in the future by setting `render_protect` to `true`
+### utils.yml
+
+The following table lists the configurable parameters of the config/utils.yml configuration file and its default values.
+
+Parameter | Description | Default
+--- | --- | ---
+images | links to [applogic](https://www.openware.com/sdk/docs.html#applogic), [arke](https://www.openware.com/sdk/docs.html#arke), [finex](https://www.openware.com/sdk/docs.html#openfinex), superset docker images
+superset | tool for business anaysis       |
 
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
