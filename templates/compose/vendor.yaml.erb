@@ -16,6 +16,12 @@ services:
         yarn start
     labels:
       - "traefik.http.routers.frontend-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
-      - "traefik.http.routers.frontend-<%= @name %>.entrypoints=web"
+      - "traefik.http.services.frontend-<%= @name %>.loadbalancer.server.port=3000"
       - "traefik.enable=true"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.frontend-<%= @name %>.entrypoints=websecure"
+      - "traefik.http.routers.frontend-<%= @name %>.tls=true"
+      - "traefik.http.routers.frontend-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.frontend-<%= @name %>.entrypoints=web"
+      <%- end -%>
