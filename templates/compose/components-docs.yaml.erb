@@ -8,7 +8,7 @@ services:
     labels:
       - "traefik.http.routers.components-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/components`, `/src`)"
       - "traefik.enable=true"
-      - "traefik.http.services.components.loadbalancer.server.port=80"
+      - "traefik.http.services.components-<%= @name %>.loadbalancer.server.port=80"
       - "traefik.http.routers.components-<%= @name %>.middlewares=auth"
       - "traefik.http.middlewares.auth.basicauth.users=ILoveOpenware:$$apr1$$F47ty7.m$$PmAZpvByLBNgxNld4m1B81"
       <%- if @config['ssl']['enabled'] -%>

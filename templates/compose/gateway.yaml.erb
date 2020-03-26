@@ -9,10 +9,12 @@ services:
     command: /usr/local/bin/envoy -l info -c /etc/envoy/envoy.yaml
     labels:
       - "traefik.http.routers.gateway-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/api`,`/admin`,`/assets/`)"
-      - "traefik.http.routers.gateway-<%= @name %>.entrypoints=web"
       - "traefik.enable=true"
-      - "traefik.http.services.gateway.loadbalancer.server.port=8099"
+      - "traefik.http.services.gateway-<%= @name %>.loadbalancer.server.port=8099"
       <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.gateway-<%= @name %>.entrypoints=websecure"
       - "traefik.http.routers.gateway-<%= @name %>.tls=true"
       - "traefik.http.routers.gateway-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.gateway-<%= @name %>.entrypoints=web"
       <%- end -%>

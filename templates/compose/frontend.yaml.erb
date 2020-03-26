@@ -9,7 +9,7 @@ services:
     labels:
       - "traefik.http.routers.frontend-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
       - "traefik.enable=true"
-      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      - "traefik.http.services.frontend-<%= @name %>.loadbalancer.server.port=3000"
       <%- if @config['ssl']['enabled'] -%>
       - "traefik.http.routers.frontend-<%= @name %>.entrypoints=websecure"
       - "traefik.http.routers.frontend-<%= @name %>.tls=true"
@@ -26,7 +26,7 @@ services:
     labels:
       - "traefik.http.routers.tower-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/tower`)"
       - "traefik.enable=true"
-      - "traefik.http.services.tower.loadbalancer.server.port=8080"
+      - "traefik.http.services.tower-<%= @name %>.loadbalancer.server.port=8080"
       <%- if @config['ssl']['enabled'] -%>
       - "traefik.http.routers.tower-<%= @name %>.entrypoints=websecure"
       - "traefik.http.routers.tower-<%= @name %>.tls=true"
