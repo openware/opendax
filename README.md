@@ -112,21 +112,52 @@ Email: john@barong.io, password: Am8icnzEI3d!
 
 All the OpenDAX deployment files have their confguration stored in `config/app.yml`.
 
-Feel free to fill it out with correct values:
+#### app.yml
 
-| Parameter         | Description                                      |
-| ----------------- | ------------------------------------------------ |
-| `app.name`        | Global application name                          |
-| `app.domain`      | Base domain name to be used                      |
-| `ssl.enabled`     | Enable SSL certificate generation                |
-| `ssl.email`       | Email address to use for SSL generation requests |
-| `images`          | Application images tags                          |
-| `vendor`          | Frontend application Git repo URL                |
-| `render_protect`  | Enable read-only mode for rendered files         |
+The following table lists the configurable parameters of the config/app.yml configuration file and its default values.
 
-    Twilio SMS service is disabled by default, feel free to enable it in the `twilio` section of the config
+Parameter | Description | Default
+--- | --- | ---
+`app.name` | global application name | `"OpenDax"`
+`app.domain` | base domain name | `app.local`
+`subdomain` | subdomain | `www`
+`render_protect` | enable read-only mode for rendered files | `false`
+`csrfEnabled` | enable CSRF protection on Barong | `false`
+`ssl.enabled` | enable SSL certificate generation | `false`
+`ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
+`images` | Docker image tags per component
+`vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
+`vault.token` | Vault authentication token | `changeme `
+`database.host` | database host name | `db`
+`database.port` | database port | `3306 `
+`database.user` | database username | `root`
+`database.password` | database root password | `changeme`
+`storage.provider` | object storage provider | `"Google"`
+`storage.bucketname` | storage bucket name | `"opendax-barong-docs-bucket"`
+`storage.endpoint` | S3-compatible storage API endpoint | `"https://fra1.digitaloceanspaces.com"`
+`storage.region` | storage region | `"fra1"`
+`storage.signatureVersion` | S3-compatible storage API signature version(2 or 4) | `"fra1"`
+`storage.secretkey`, `storage.accesskey` | storage access keys | `"changeme"`
+`twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
+`gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
+`smtp` | SMTP configs used for sending platform emails 
+`captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
+`wallets` | configs for wallets seeded during the initial deployment of Peatio 
+`parity` | Parity cryptonode configuration
+`bitcoind` | Bitcoind cryptonode configuration
+`litecoind` | Litecoind cryptonode configuration
+`terraform.credentials` | local path to a GCP service account JSON key | `"~/safe/opendax.json"`
+`terraform.project` | GCP project name | `"example-opendax"`
 
-    Note: You can protect all the rendered files from being edited so that you wouldn't lose your changes upon re-rendering templates in the future by setting `render_protect` to `true`
+### utils.yml
+
+The following table lists configurable parameters of the `config/utils.yml` file:
+
+Parameter | Description | Default
+--- | --- | ---
+images | Docker image tags per component |
+superset | Superset BI tool configs |
+arke | Arke liquidity bot configs |
 
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
