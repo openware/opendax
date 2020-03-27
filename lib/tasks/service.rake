@@ -147,7 +147,7 @@ namespace :service do
   end
 
   desc 'Run mikro app (barong, peatio)'
-  task :app, [:command] => [:proxy, :backend, :setup] do |task, args|
+  task :app, [:command] => [:backend, :setup] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
