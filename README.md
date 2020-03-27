@@ -126,7 +126,7 @@ Parameter | Description | Default
 `ssl.enabled` | enable SSL certificate generation | `false`
 `ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
 `images` | Docker image tags per component
-`vendor.frontend` | Optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
+`vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
 `vault.token` | Vault authentication token | `changeme `
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `
@@ -141,8 +141,8 @@ Parameter | Description | Default
 `twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
 `gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
 `smtp` | SMTP configs used for sending platform emails 
-`captcha` | Captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
-`wallets` | Configs for wallets seeded during the initial deployment of Peatio 
+`captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
+`wallets` | configs for wallets seeded during the initial deployment of Peatio 
 `parity` | Parity cryptonode configuration
 `bitcoind` | Bitcoind cryptonode configuration
 `litecoind` | Litecoind cryptonode configuration
