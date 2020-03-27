@@ -119,34 +119,45 @@ The following table lists the configurable parameters of the config/app.yml conf
 Parameter | Description | Default
 --- | --- | ---
 `app.name` | global application name | `"OpenDax"`
-`app.domain` | base domain name to be used | `app.local`
-`subdomain` | subdomain of your application | `www`
+`app.domain` | base domain name | `app.local`
+`subdomain` | subdomain | `www`
 `render_protect` | enable read-only mode for rendered files | `false`
-`csrfEnabled` | enable csrf token on barong | `false`
+`csrfEnabled` | enable CSRF protection on Barong | `false`
 `ssl.enabled` | enable SSL certificate generation | `false`
-`ssl.email` | email address to use for SSL generation requests | `"support@example.com"`
-`images` | application images tags
-`vendor.frontend` | vendor is a tool to develop front with opendax, put there a link to you front repo | `git@github.com:openware/baseapp.git`
-`vault.token` | root token to unseal the vault | `changeme `
+`ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
+`images` | Docker image tags per component
+`vendor.frontend` | Optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
+`vault.token` | Vault authentication token | `changeme `
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `
-`database.user` | database user name | `root`
+`database.user` | database username | `root`
 `database.password` | database root password | `changeme`
-`storage.provider` | cloud service name | `"Google"`
+`storage.provider` | object storage provider | `"Google"`
 `storage.bucketname` | storage bucket name | `"opendax-barong-docs-bucket"`
+`storage.endpoint` | S3-compatible storage API endpoint | `"https://fra1.digitaloceanspaces.com"`
 `storage.region` | storage region | `"fra1"`
-`storage.secretkey`, `storage.accesskey` | bucket access keys | `"changeme"`
-`terraform.credentials` | local path to service account in json format | `"~/safe/opendax.json"`
-`terraform.project` | project name | `"example-opendax"`
+`storage.signatureVersion` | S3-compatible storage API signature version(2 or 4) | `"fra1"`
+`storage.secretkey`, `storage.accesskey` | storage access keys | `"changeme"`
+`twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
+`gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
+`smtp` | SMTP configs used for sending platform emails 
+`captcha` | Captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
+`wallets` | Configs for wallets seeded during the initial deployment of Peatio 
+`parity` | Parity cryptonode configuration
+`bitcoind` | Bitcoind cryptonode configuration
+`litecoind` | Litecoind cryptonode configuration
+`terraform.credentials` | local path to a GCP service account JSON key | `"~/safe/opendax.json"`
+`terraform.project` | GCP project name | `"example-opendax"`
 
 ### utils.yml
 
-The following table lists the configurable parameters of the config/utils.yml configuration file and its default values.
+The following table lists configurable parameters of the `config/utils.yml` file:
 
 Parameter | Description | Default
 --- | --- | ---
-images | links to [applogic](https://www.openware.com/sdk/docs.html#applogic), [arke](https://www.openware.com/sdk/docs.html#arke), [finex](https://www.openware.com/sdk/docs.html#openfinex), superset docker images
-superset | tool for business anaysis       |
+images | Docker image tags per component |
+superset | Superset BI tool configs |
+arke | Arke liquidity bot configs |
 
 Once you're done with the configuration, render the files using `rake render:config`. You can easily apply your changes at any time by running this command.
 
