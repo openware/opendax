@@ -25,10 +25,10 @@ useradd -g users -s `which bash` -m app
 
 We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
-Docker follow instruction here: [docker](https://docs.docker.com/install/)  
-Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
+Follow Docker installation instructions here: [docker](https://docs.docker.com/install/)
+Follow Docker Compose installation steps here: [docker compose](https://docs.docker.com/compose/install/)
 
-Add our new created user to the docker group so that the user can access docker
+Add the newly created user to the Docker group so that the user can access Docker API:
 ```bash
 usermod -aG docker app
 ```
@@ -65,13 +65,11 @@ rake -T # To see if ruby and lib works
 
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
-
 ### 4. Run everything
 
 #### 4.1 Configure your domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
-
 
 Insert in file `/etc/hosts`
 ```
@@ -83,7 +81,6 @@ Insert in file `/etc/hosts`
 ```bash
 rake service:all
 ```
-
 
 You can login on `www.app.local` with the following default users from seeds.yaml
 ```
