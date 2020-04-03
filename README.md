@@ -28,12 +28,16 @@ We highly recommend using docker and compose from docker.com install guide inste
 Docker follow instruction here: [docker](https://docs.docker.com/install/)
 Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
 
+Add our new created user to the docker group so that the user can access docker
+```bash
+usermod -aG docker app
+```
+
 #### 2.3 Install ruby in user app
 
 ##### 2.3.1 Change user using and add user to docker group
 ```bash
 su - app
-sudo usermod -aG docker $USER
 ```
 
 ##### 2.3.2 Clone OpenDAX
@@ -45,7 +49,8 @@ git clone https://github.com/openware/opendax.git
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
-source /home/$USER/.rvm/scripts/rvm
+echo 'source ~/.rvm/scripts/rvm' >> ~/.bashrc
+source ~/.bashrc
 cd opendax
 rvm install .
 ```
