@@ -25,7 +25,7 @@ useradd -g users -s `which bash` -m app
 
 We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
-Docker follow instruction here: [docker](https://docs.docker.com/install/)
+Docker follow instruction here: [docker](https://docs.docker.com/install/)  
 Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
 
 Add our new created user to the docker group so that the user can access docker
