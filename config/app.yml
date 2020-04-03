@@ -1,16 +1,17 @@
+---
 app:
-  name: "OpenDAX"
-  domain: "app.local"
-  subdomain: "www"
+  name: OpenDAX
+  domain: app.local
+  subdomain: www
 render_protect: false
 csrfEnabled: false
 ssl:
-  enabled: false    # Make sure to enable during deployment
-  email: "support@example.com"
+  enabled: false
+  email: support@example.com
 images:
   peatio: quay.io/openware/peatio:2.4.0-66aceba
   barong: quay.io/openware/barong:2.4.0-7bce38f
-  frontend: quay.io/openware/baseapp:2.4.0-0b881ab # Check on quay.io/openware/baseapp for latest tags
+  frontend: quay.io/openware/baseapp:2.4.0-0b881ab
   tower: quay.io/openware/tower-lite:2.4.0-d904cac
 finex:
   enabled: false
@@ -25,23 +26,23 @@ database:
   user: root
   password: changeme
 storage:
-  provider: "Google"
-  bucketName: "opendax-barong-docs-bucket"
+  provider: Google
+  bucketName: opendax-barong-docs-bucket
   region: fra1
   endpoint: https://fra1.digitaloceanspaces.com
-  accessKey: "changeme"
-  secretKey: "changeme"
-  signatureVersion: "2"
+  accessKey: changeme
+  secretKey: changeme
+  signatureVersion: '2'
 twilio:
   enabled: false
   phone_number: "+15005550000"
-  account_sid: "changeme"
-  auth_token: "changeme"
-gaTrackerKey: ""
+  account_sid: changeme
+  auth_token: changeme
+gaTrackerKey: ''
 captcha:
-  type: "none"
-  siteKey: "changeme"
-  secretKey: "changeme"
+  type: none
+  siteKey: changeme
+  secretKey: changeme
 smtp:
   host: smtp.sendgrid.net
   port: 2525
@@ -51,28 +52,28 @@ smtp:
   sender_name: Postmaster
 wallets:
   eth:
-    - kind: deposit
-      address: "changeme"
-      max_balance: 0.0
-      secret: changeme
-    - kind: hot
-      address: "changeme"
-      max_balance: 100.0
-      secret: changeme
-    - kind: warm
-      address: "changeme"
-      max_balance: 1000.0
-      secret: changeme
+  - kind: deposit
+    address: changeme
+    max_balance: 0.0
+    secret: changeme
+  - kind: hot
+    address: changeme
+    max_balance: 100.0
+    secret: changeme
+  - kind: warm
+    address: changeme
+    max_balance: 1000.0
+    secret: changeme
   btc:
-    - kind: deposit
-      address: "changeme"
-      max_balance: 0.0
-    - kind: hot
-      address: "changeme"
-      max_balance: 100.0
-    - kind: warm
-      address: "changeme"
-      max_balance: 1000.0
+  - kind: deposit
+    address: changeme
+    max_balance: 0.0
+  - kind: hot
+    address: changeme
+    max_balance: 100.0
+  - kind: warm
+    address: changeme
+    max_balance: 1000.0
 parity:
   network: testnet
   address: parity
@@ -95,9 +96,9 @@ litecoind:
   port: 19335
 terraform:
   credentials: "~/safe/opendax.json"
-  project: "example-opendax"
-  region: "europe-west4"
-  zone: "europe-west4-a"
-  instance_name: "opendax-cloud"
-  machine_type: "n1-standard-4"
-  image: "debian-cloud/debian-9"
+  project: example-opendax
+  region: europe-west4
+  zone: europe-west4-a
+  instance_name: opendax-cloud
+  machine_type: n1-standard-4
+  image: debian-cloud/debian-9
