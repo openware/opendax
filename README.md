@@ -21,7 +21,7 @@ SSH using root user, then create new user for the application
 useradd -g users -s `which bash` -m app
 ```
 
-#### 2.2 Install Docker and docker compose
+#### 2.2 Install Docker and Docker Compose
 
 We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
@@ -35,7 +35,7 @@ usermod -aG docker app
 
 #### 2.3 Install ruby in user app
 
-##### 2.3.1 Change user using and add user to docker group
+##### 2.3.1 Change user using su
 ```bash
 su - app
 ```
