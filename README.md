@@ -21,16 +21,21 @@ SSH using root user, then create new user for the application
 useradd -g users -s `which bash` -m app
 ```
 
-#### 2.2 Install Docker and docker compose
+#### 2.2 Install Docker and Docker Compose
 
 We highly recommend using docker and compose from docker.com install guide instead of the system provided package, which would most likely be deprecated.
 
-Docker follow instruction here: [docker](https://docs.docker.com/install/)
-Docker compose follow steps: [docker compose](https://docs.docker.com/compose/install/)
+Follow Docker installation instructions here: [docker](https://docs.docker.com/install/)
+Follow Docker Compose installation steps here: [docker compose](https://docs.docker.com/compose/install/)
+
+Add the newly created user to the Docker group so that the user can access Docker API:
+```bash
+usermod -aG docker app
+```
 
 #### 2.3 Install ruby in user app
 
-##### 2.3.1 Change user using
+##### 2.3.1 Change user using su
 ```bash
 su - app
 ```
@@ -44,6 +49,8 @@ git clone https://github.com/openware/opendax.git
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
+echo 'source ~/.rvm/scripts/rvm' >> ~/.bashrc
+source ~/.bashrc
 cd opendax
 rvm install .
 ```
@@ -51,19 +58,18 @@ rvm install .
 ### 3. Bundle install dependencies
 
 ```bash
+gem install bundler
 bundle install
 rake -T # To see if ruby and lib works
 ```
 
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
-
 ### 4. Run everything
 
 #### 4.1 Configure your domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
-
 
 Insert in file `/etc/hosts`
 ```
@@ -75,7 +81,6 @@ Insert in file `/etc/hosts`
 ```bash
 rake service:all
 ```
-
 
 You can login on `www.app.local` with the following default users from seeds.yaml
 ```
