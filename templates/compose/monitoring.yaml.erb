@@ -2,16 +2,27 @@ version: '3.6'
 
 services:
   node_exporter:
-    image: prom/node-exporter:master
+    image: prom/node-exporter:v0.18.1
+    container_name: node_exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
     ports:
       - 9100:9100
 
   cadvisor:
     image: gcr.io/google-containers/cadvisor:v0.34.0
-    ports:
-      - 8080:8080
+    container_name: cadvisor
     volumes:
       - /var/run:/var/run:rw
       - /var/lib/docker/:/var/lib/docker:ro
       - /:/rootfs:ro
       - /sys:/sys:ro
+    ports:
+      - 8080:8080
