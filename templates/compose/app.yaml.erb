@@ -7,6 +7,7 @@ services:
     environment:
       - VAULT_TOKEN=${PEATIO_RAILS_VAULT_TOKEN}
     env_file:
+      - ../config/kaigara.env
       - ../config/peatio.env
     expose:
       - "8000"
@@ -16,12 +17,13 @@ services:
       - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
       - ../config/peatio/abilities.yml:/opt/peatio/config/abilities.yml
     labels: {}
-    command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
+    command: bash -c "bin/link_config && kaigara bundle exec puma --config config/puma.rb"
 
   barong:
     restart: always
     image: "<%= @config['images']['barong'] %>"
     env_file:
+      - ../config/kaigara.env
       - ../config/barong.env
     volumes:
       - ../config/secrets:/secrets:ro
@@ -30,19 +32,20 @@ services:
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
       - ../config/barong/abilities.yml:/home/app/config/abilities.yml
+    command: bash -c "kaigara bundle exec puma --config config/puma.rb"
 
 <% if @config['finex']['enabled'] %>
   finex-api:
     restart: always
     image: "<%= @config['finex']['image'] %>"
-    command: "./orderapi"
+    command: "kaigara ./orderapi"
     volumes:
       - ../config/finex:/app/config:ro
 
   finex-engine:
     restart: always
     image: "<%= @config['finex']['image'] %>"
-    command: "./finex"
+    command: "kaigara ./finex"
     volumes:
       - ../config/finex:/app/config:ro
 <% end %>
@@ -52,7 +55,27 @@ services:
     image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
+      - ../config/kaigara.env
     expose:
       - "8081"
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
+
+  sonic:
+    restart: always
+    image: "<%= @config['images']['sonic'] %>"
+    env_file:
+      - ../config/sonic.env
+      - ../config/kaigara.env
+    entrypoint: /bin/sh -c "kaigara ./bin/sonic serve"
+    labels:
+      - "traefik.http.routers.sonic-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
+      - "traefik.enable=true"
+      - "traefik.http.services.sonic-<%= @name %>.loadbalancer.server.port=6969"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.sonic-<%= @name %>.entrypoints=websecure"
+      - "traefik.http.routers.sonic-<%= @name %>.tls=true"
+      - "traefik.http.routers.sonic-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.sonic-<%= @name %>.entrypoints=web"
+      <%- end -%>

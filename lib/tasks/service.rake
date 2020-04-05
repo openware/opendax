@@ -140,10 +140,10 @@ namespace :service do
     if args.command != 'stop'
       Rake::Task["render:config"].execute
       puts '----- Running hooks -----'
-      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:create db:migrate"'
-      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && bundle exec rake db:seed"'
-      sh 'docker-compose run --rm barong bash -c "./bin/init_config && bundle exec rake db:create db:migrate"'
-      sh 'docker-compose run --rm barong bash -c "./bin/link_config && bundle exec rake db:seed"'
+      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:create db:migrate"'
+      sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:seed"'
+      sh 'docker-compose run --rm barong bash -c "./bin/init_config && kaigara bundle exec rake db:create db:migrate"'
+      sh 'docker-compose run --rm barong bash -c "./bin/link_config && kaigara bundle exec rake db:seed"'
     end
   end
 

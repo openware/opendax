@@ -28,6 +28,11 @@ static_resources:
                   runtime_key: cors.www.enabled
               routes:
               - match:
+                  prefix: "/api/v2/sonic"
+                route:
+                  cluster: sonic
+                  prefix_rewrite: "/api/v2"
+              - match:
                   prefix: "/api/v2/barong"
                 route:
                   cluster: barong
@@ -116,6 +121,14 @@ static_resources:
             config: {}
     perConnectionBufferLimitBytes: 10000000
   clusters:
+  - name: sonic
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: sonic
+        port_value: 6969
   - name: barong
     connect_timeout: 0.25s
     type: strict_dns
@@ -123,7 +136,7 @@ static_resources:
     hosts:
     - socket_address:
         address: barong
-        port_value: 8001
+        port_value: 8081
   - name: applogic
     connect_timeout: 0.25s
     type: strict_dns
