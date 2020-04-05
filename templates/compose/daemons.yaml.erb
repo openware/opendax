@@ -11,7 +11,7 @@ x-daemon: &peatio-daemon
 services:
   blockchain:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb blockchain"
+    command: bash -c "bin/link_config && kaigara -name blockchain -exec bundle exec ruby lib/daemons/daemons.rb blockchain"
 
   cron_job:
     << : *peatio-daemon
@@ -35,7 +35,7 @@ services:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
+    command: bash -c "bin/link_config && kaigara -name deposit_coin_address -exec bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
 
   withdraw_coin:
     << : *peatio-daemon
@@ -59,6 +59,7 @@ services:
     environment:
     - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+    command: bash -c "bin/link_config && kaigara -name matching -exec bundle exec ruby lib/daemons/amqp_daemon.rb matching"
 
   order_processor:
     << : *peatio-daemon
