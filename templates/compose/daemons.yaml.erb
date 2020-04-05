@@ -15,7 +15,7 @@ services:
 
   blockchain:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb blockchain"
+    command: bash -c "bin/link_config && kaigara -name blockchain -exec bundle exec ruby lib/daemons/daemons.rb blockchain"
 
   cron_job:
     << : *peatio-daemon
@@ -27,15 +27,15 @@ services:
 
   deposit_collection:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection"
+    command: bash -c "bin/link_config && kaigara -name deposit_collection -exec bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection"
 
   deposit_collection_fees:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection_fees"
+    command: bash -c "bin/link_config && kaigara -name deposit_collection_fees -exec bundle exec ruby lib/daemons/amqp_daemon.rb deposit_collection_fees"
 
   deposit_coin_address:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
+    command: bash -c "bin/link_config && kaigara -name deposit_coin_address -exec bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
 
   market_ticker:
     << : *peatio-daemon
@@ -59,7 +59,7 @@ services:
 <% unless @config['finex']['enabled'] %>
   matching:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+    command: bash -c "bin/link_config && kaigara -name matching -exec bundle exec ruby lib/daemons/amqp_daemon.rb matching"
 
   order_processor:
     << : *peatio-daemon

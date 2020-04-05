@@ -9,7 +9,7 @@ ssl:
   enabled: false
   email: support@example.com
 images:
-  peatio: quay.io/openware/peatio:2.4.0-66aceba
+  peatio: quay.io/openware/peatio:2.4.0-840df8f
   barong: quay.io/openware/barong:2.4.0-7bce38f
   frontend: quay.io/openware/baseapp:2.4.0-0b881ab
   tower: quay.io/openware/tower-lite:2.4.0-d904cac
