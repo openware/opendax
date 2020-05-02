@@ -70,15 +70,15 @@ services:
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
 <% end %>
 
-  postmaster:
+  mailer:
     restart: always
     image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
     volumes:
       -  ../config/secrets:/secrets:ro
-      -  ../config/postmaster/templates:/home/app/app/views/postmaster
-      -  ../config/postmaster.yml:/home/app/config/mailer.yml
+      -  ../config/mailer/templates:/home/app/app/views/postmaster
+      -  ../config/mailer.yml:/home/app/config/mailer.yml
     command: bash -c "bin/mailer run"
 
   sidekiq:

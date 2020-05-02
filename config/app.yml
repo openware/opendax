@@ -48,7 +48,7 @@ smtp:
   port: 2525
   user: apikey
   password: changeme
-  sender_email: noreply@postmaster.com
+  sender_email: noreply@barong.io
   sender_name: Postmaster
 wallets:
   eth:

@@ -198,18 +198,18 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc '[Optional] Run utils (postmaster)'
+  desc '[Optional] Run utils (mailer)'
   task :utils, [:command] do |task, args|
     args.with_defaults(:command => 'start')
 
     def start
       puts '----- Starting utils -----'
-      sh 'docker-compose up -d postmaster'
+      sh 'docker-compose up -d mailer'
     end
 
     def stop
       puts '----- Stopping Utils -----'
-      sh 'docker-compose rm -fs postmaster'
+      sh 'docker-compose rm -fs mailer'
     end
 
     @switch.call(args, method(:start), method(:stop))
