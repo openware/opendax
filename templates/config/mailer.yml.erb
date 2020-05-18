@@ -82,7 +82,7 @@ events:
 - name: Withdrawal Succeed
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state in ["errored", "confirming"] && record.state == "succeed"
+  expression: changes.state in ["succeed", "rejected", "canceled", "failed", "accepted"] && record.state in ["succeed", "rejected", "canceled", "failed"]
   templates:
     en:
       subject: Withdrawal Succeed
