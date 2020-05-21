@@ -1,4 +1,5 @@
 - id:                ethusd
+  engine_id:         2
   base_unit:         eth
   quote_unit:        usd
   amount_precision:  5
@@ -8,11 +9,4 @@
   min_amount:        0.00001
   position:          2
   state:             enabled
-  # The data field for store some special data market
-  # Can be used in upstream worker
-  data: { "upstream": {
-                        "driver": "opendax",
-                        "target": "ethusd",
-                        "rest": "https:///www.opendax.io/api/v2/peatio/",
-                        "websocket": "wss://www.opendax.io/api/v2/ranger/public/"
-                      } }
+  data:              {}
