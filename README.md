@@ -70,30 +70,7 @@ Insert in file `/etc/hosts`
 0.0.0.0 www.app.local
 ```
 
-#### 4.2 Render all config files
-
-Simply run `rake render:config`
-
-#### 4.3 Set up Vault
-
-    Note: Everything is persisted on the local filesystem, thus API keys and 2FA tokens are preserved between restarts. However, Vault needs to be unsealed after every stop/restart.
-
-To set up Vault, go through the following steps:
-  - `docker-compose up -d vault`
-  - `docker-compose exec vault sh`
-  - `vault operator init`
-  - Save the output to a file in a secure place
-  - Unlock Vault with three different unlock keys - `vault operator unseal *unseal_key*`
-  - `vault login *root_token*`
-  - `vault secrets enable totp`
-  - `vault secrets enable transit`
-  - `vault secrets disable secret`
-  - `vault secrets enable -path=secret -version=1 kv`
-
-Add the Vault root token to `config/app.yml`, render the configs and start the `app` services.
-Afterwards, Vault should be fully configured and ready to work with Peatio and Barong.
-
-#### 4.4 Bring everything up
+#### 4.2 Bring everything up
 
 ```bash
 rake service:all
@@ -252,11 +229,6 @@ To do this, just follow these simple steps:
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 
-## Installer tool
-
-```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
-```
 
 ## Happy trading with OpenDAX!
 If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or at [openware.com](https://www.openware.com/)
