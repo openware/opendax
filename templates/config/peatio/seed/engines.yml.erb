@@ -8,9 +8,10 @@
   secret:    ""
   # The data field for store some special data engine
   # Can be used in upstream worker
-  data: {
-            "rest"=>"https://www.opendax.io/api/v2/finex",
-            "websocket"=>"wss://www.opendax.io/api/v2/ranger",
-            "trade_proxy"=>true,
-        }
+  data: |
+    {
+          "rest"=>"https://www.opendax.io/api/v2/finex",
+          "websocket"=>"wss://www.opendax.io/api/v2/ranger",
+          "trade_proxy"=>true,
+    }
   state:    online
