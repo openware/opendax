@@ -29,12 +29,12 @@ levels:
     description: "User personal documents have been verified"
 
 restrictions: {}
-# - { category: whitelist, scope: country, value: UA, state: disabled }
+# - { category: allowlist, scope: country, value: UA, state: disabled }
 # - { category: maintenance, scope: all, value: all, state: disabled }
-# - { category: blacklist, scope: ip, value: 164.116.47.255, state: disabled, code: 433 }
-# - { category: blacklist, scope: ip_subnet, value: 164.116.47.0/24, state: disabled, code: 434 }
-# - { category: blacklist, scope: country, value: USA, state: disabled, code: 435 }
-# - { category: blacklist, scope: continent, value: SA, state: disabled, code: 436 }
+# - { category: denylist, scope: ip, value: 164.116.47.255, state: disabled, code: 433 }
+# - { category: denylist, scope: ip_subnet, value: 164.116.47.0/24, state: disabled, code: 434 }
+# - { category: denylist, scope: country, value: USA, state: disabled, code: 435 }
+# - { category: denylist, scope: continent, value: SA, state: disabled, code: 436 }
 
 permissions:
 # SUPER ADMIN has an access to the whole system without any limits

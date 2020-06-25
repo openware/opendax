@@ -1,6 +1,6 @@
 #
-# pass for whitelisted (public) routes
-# block for blacklisted routes
+# pass for allowlisted (public) routes
+# block for denylisted routes
 #
 rules:
   pass:
