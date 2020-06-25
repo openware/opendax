@@ -11,8 +11,8 @@ ssl:
 images:
   peatio: quay.io/openware/peatio:2.5.12
   barong: quay.io/openware/barong:2.5.4
-  frontend: quay.io/openware/baseapp:2.4.0-64f97d9
-  tower: quay.io/openware/tower:2.5.0-36d724e
+  frontend: quay.io/openware/baseapp:2.5.0
+  tower: quay.io/openware/tower:2.5.0
 finex:
   enabled: false
   image: quay.io/openware/finex:2.5.4
