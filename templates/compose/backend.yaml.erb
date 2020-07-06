@@ -8,7 +8,7 @@ services:
       - db_data:/var/lib/mysql
       - ../config/mysql:/etc/mysql/conf.d
     environment:
-      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_ROOT_PASSWORD: <%= @config['database']['password'] %>
 
   influxdb:
     image: influxdb:1.7.10
