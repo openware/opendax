@@ -17,6 +17,7 @@ services:
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
       --db-compaction=ssd
+      --no-persistent-txqueue
     volumes:
       - ../data/parity:/home/parity/.local/share/io.parity.ethereum
     ports:
