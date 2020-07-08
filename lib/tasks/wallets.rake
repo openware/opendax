@@ -13,7 +13,7 @@ namespace :wallet do
     address = JSON.parse(response.body)['result']
     puts "----- Generating a new #{args.kind} wallet -----", "Address: " + address
 
-    @config['wallets'].find { |w| w['kind'] == args.kind }.update('address' => address, 'secret' => args.secret)
+    @config['wallets']['eth'].find { |w| w['kind'] == args.kind }.update('address' => address, 'secret' => args.secret)
 
     File.open(CONFIG_PATH, 'w') {|f| f.write @config.to_yaml }
   end
