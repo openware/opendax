@@ -50,6 +50,7 @@ smtp:
   password: changeme
   sender_email: noreply@barong.io
   sender_name: Postmaster
+  sender_logo: https://storage.googleapis.com/public_peatio/logo.png
 wallets:
   eth:
   - kind: deposit
