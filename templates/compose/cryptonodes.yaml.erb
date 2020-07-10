@@ -24,8 +24,10 @@ services:
       - "127.0.0.1:8545:8545"
 
   bitcoind:
-    image: quay.io/openware/bitcoind:0.17.1
+    image: quay.io/openware/bitcoind:0.19.1
     restart: always
+    user: root
+    command: bitcoind
     volumes:
       - ../data/bitcoin:/bitcoin
       - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
