@@ -12,7 +12,7 @@ images:
   peatio: quay.io/openware/peatio:2.4.19
   barong: quay.io/openware/barong:2.4.12
   frontend: quay.io/openware/baseapp:2.4.1 # Check on quay.io/openware/baseapp for latest tags
-  tower: quay.io/openware/tower:2.4.5
+  tower: quay.io/openware/tower:2.4.9
   rango: quay.io/openware/rango:2.4.3
 finex:
   enabled: false
