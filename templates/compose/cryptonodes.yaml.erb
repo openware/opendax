@@ -5,21 +5,13 @@ services:
     image: parity/parity:v2.7.2-stable
     restart: always
     command: |
-      --chain=kovan
       --mode=active
-      --interface=all
-      --warp=true
-      --snapshot-peers=10
-      --min-peers=5
-      --max-peers=10
-      --jsonrpc-interface=0.0.0.0
-      --jsonrpc-cors=all
-      --jsonrpc-hosts=all
-      --jsonrpc-apis=all
-      --db-compaction=ssd
-      --no-persistent-txqueue
+      --chain=<%= @config['parity']['network'] %>
+      --min-peers=<%= @config['parity']['minPeers'] %>
+      --max-peers=<%= @config['parity']['maxPeers'] %>
     volumes:
-      - ../data/parity:/home/parity/.local/share/io.parity.ethereum
+      - ../config/cryptonodes/parity/config.toml:/home/parity/.local/share/io.parity.ethereum/config.toml
+      - <%= @config['parity']['volumePath'] -%>:/home/parity/.local/share/io.parity.ethereum
     ports:
       - "127.0.0.1:8545:8545"
 
@@ -29,19 +21,19 @@ services:
     user: root
     command: bitcoind
     volumes:
-      - ../data/bitcoin:/bitcoin
+      - <%= @config['bitcoind']['volumePath'] -%>:/bitcoin
       - ../config/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf
 
   litecoind:
     image: quay.io/openware/litecoind:0.16.3
     restart: always
     volumes:
-      - ../data/litecoin:/litecoin
+      - <%= @config['litecoind']['volumePath'] -%>:/litecoin
       - ../config/litecoin.conf:/litecoin/litecoin.conf
 
   ardor:
     image: quay.io/openware/ardor:2.2.3
     restart: always
     volumes:
-      - ../data/ardor:/ardor/db/
+      - <%= @config['ardor']['volumePath'] -%>:/ardor/db/
       - ../config/ardor.conf:/ardor/conf/nxt.properties
