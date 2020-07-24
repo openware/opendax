@@ -61,14 +61,14 @@ static_resources:
                 route:
                   cluster: peatio
               - match:
-                  prefix: "/api/v2/ranger/public"
+                  prefix: "/api/v2/rango/public"
                 route:
                   cluster: rango
                   prefix_rewrite: ""
                   upgrade_configs:
                     upgrade_type: "websocket"
               - match:
-                  prefix: "/api/v2/ranger/private"
+                  prefix: "/api/v2/rango/private"
                 route:
                   cluster: rango
                   prefix_rewrite: ""
