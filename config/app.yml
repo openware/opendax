@@ -13,6 +13,7 @@ images:
   barong: quay.io/openware/barong:2.5.4
   frontend: quay.io/openware/baseapp:2.5.0
   tower: quay.io/openware/tower:2.5.0
+  rango: quay.io/openware/rango:2.5.0
 finex:
   enabled: false
   image: quay.io/openware/finex:2.5.4
