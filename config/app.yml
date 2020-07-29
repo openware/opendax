@@ -24,6 +24,7 @@ database:
   port: 3306
   user: root
   password: changeme
+  volumePath: ../data/db
 storage:
   provider: "Google"
   bucketName: "opendax-barong-docs-bucket"
@@ -73,10 +74,13 @@ wallets:
       address: "changeme"
       max_balance: 1000.0
 parity:
-  network: testnet
+  network: kovan
   address: parity
   rpcport: 8545
   port: 30303
+  minPeers: 5
+  maxPeers: 10
+  volumePath: ../data/parity
 bitcoind:
   enabled: false
   rpcuser: admin
@@ -85,6 +89,7 @@ bitcoind:
   network: testnet
   rpcport: 18332
   port: 18333
+  volumePath: ../data/bitcoin
 litecoind:
   rpcuser: admin
   rpcpassword: changeme
@@ -92,10 +97,12 @@ litecoind:
   network: testnet
   rpcport: 19332
   port: 19335
+  volumePath: ../data/litecoin
 ardor:
   rpcpassword: changeme
   network: testnet
   address: ardor
+  volumePath: ../data/ardor
 terraform:
   credentials: "~/safe/opendax.json"
   project: "example-opendax"

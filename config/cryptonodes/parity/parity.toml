@@ -1,0 +1,34 @@
+[parity]
+mode = "active"
+mode_timeout = 300
+mode_alarm = 3600
+auto_update = "critical"
+release_track = "stable"
+public_node = false
+no_download = false
+no_consensus = false
+
+[network]
+port = 30303
+discovery = true
+warp = true
+allow_ips = "all"
+# Parity will maintain additional 128 peers for snapshot sync.
+snapshot_peers = 128
+# Parity will allow up to 512 pending connections.
+max_pending_peers = 512
+
+[footprint]
+tracing = "off"
+db_compaction = "ssd"
+cache_size = 4096
+
+[ui]
+disable = true
+
+[rpc]
+disable = false
+port = 8545
+interface = "0.0.0.0"
+hosts = ["*"]
+apis = ["web3", "eth", "net","parity","parity_accounts","personal", "traces", "rpc", "secretstore", "parity_pubsub"]
