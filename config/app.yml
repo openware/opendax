@@ -57,6 +57,10 @@ smtp:
   sender_email: noreply@barong.io
   sender_name: Postmaster
   sender_logo: https://storage.googleapis.com/public_peatio/logo.png
+kyc:
+  authorization_token: changeme
+  sandbox_mode: true
+  api_endpoint: https://api.kycaid.com/
 wallets:
   eth:
   - kind: deposit
