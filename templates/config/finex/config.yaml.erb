@@ -15,6 +15,9 @@ messaging:
     - name:    finex.orderapi
       type:    direct
       durable: false
+    - name:    finex.events.websocket
+      type:    topic
+      durable: false
     - name:    peatio.events.ranger
       type:    topic
       durable: false
