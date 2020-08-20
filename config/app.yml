@@ -19,6 +19,11 @@ finex:
   image: quay.io/openware/finex:2.5.33
 vendor:
   frontend: git@github.com:openware/baseapp.git
+kyc:
+  type: kycaid 
+  authorization_token: changeme
+  sandbox_mode: true
+  api_endpoint: https://api.kycaid.com/
 vault:
   token: changeme
 database:
