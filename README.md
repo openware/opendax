@@ -106,6 +106,46 @@ Email: admin@barong.io, password: 0lDHd9ufs9t@
 Email: john@barong.io, password: Am8icnzEI3d!
 ```
 
+
+### [optional] KYCAID
+
+In order to  accelerate customer interaction, reduce risks and simplify business processes you can use KYC Verification Service from KYCaid.
+KYC goal is to prevent fraud and to decline users that don’t fulfill certain standards of credibility. 
+To learn more about KYCaid and pricing you can visit their website - [kycaid.com](https://www.kycaid.com/)
+
+#### How to integrate KYCaid to the platform?
+
+KYCAID already integrated with our stack, to use it you need to create account on [kycaid.com](https://www.kycaid.com/), and set up authorization creds there.
+
+After that all you have to do is to change several lines in `config/app.yml`:
+
+```bash
+kyc:
+  provider: kycaid
+  authorization_token: changeme             # your Production API token from 'Settings' section of kycaid.com
+  sandbox_mode: true                        # 'true' for test environment - documents will be verified/rejected automatically, without payment for verification
+  api_endpoint: https://api.kycaid.com/
+```
+
+Also, check if in the `config/barong/authz_rules.yml` file you have permitted path `- api/v2/barong/public` in the `pass` module. This allows platform to receive `callback`, as it is in the public module.
+
+##### Additional settings for KYCAID
+
+- Be sure to check `BARONG_REQUIRED_DOCS_EXPIRE` ENV value inside `config/barong.env` to be `false` if you want to include `address` verification in your KYC process. You can set it to `true` if only document check needed.
+- Check if in the `config/barong/barong.yml` file you have correct list of `document_types`. Be sure, that you have at least this values inside:
+  - Passport
+  - Identity card
+  - Driver license
+  - Address
+
+#### How to make start KYCAID on platform?
+
+Once you're done with the configuration:
+- render the files using `rake render:config`
+- restart Barong service `docker-compose up -Vd barong`
+- start Sidekiq daemon `docker-compose up -d barong_sidekiq`
+
+Ready! You can try KYC verification steps on your deployment.
 ## Usage
 
 ### Initial configuration
@@ -127,6 +167,10 @@ Parameter | Description | Default
 `ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
 `images` | Docker image tags per component
 `vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
+`kyc.provider` |  KYC provider | `kycaid`
+`kyc.authorization_token` |  optional API token for KYCAID use | `changeme`
+`kyc.sendbox` |  enable KYCAID test mode  | `true`
+`kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
 `vault.token` | Vault authentication token | `changeme `
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `

@@ -20,7 +20,7 @@ finex:
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:
-  type: kycaid 
+  provider: kycaid
   authorization_token: changeme
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
