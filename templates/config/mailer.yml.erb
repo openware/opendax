@@ -22,10 +22,10 @@ events:
   key: user.email.confirmation.token
   exchange: barong_system
   templates:
-    en:
+    EN:
       subject: Registration Confirmation
       template_path: email_confirmation.en.html.erb
-    ru:
+    RU:
       subject: Подтверждение Регистрации
       template_path: email_confirmation.ru.html.erb
 
@@ -33,10 +33,10 @@ events:
   key: user.password.reset.token
   exchange: barong_system
   templates:
-    en:
+    EN:
       subject: Password Reset
       template_path: password_reset.en.html.erb
-    ru:
+    RU:
       subject: Сброс Пароля
       template_path: password_reset.ru.html.erb
 
@@ -47,7 +47,7 @@ events:
     record.key in ["phone", "profile", "document"] &&
     record.value in ["verified", "rejected"]
   templates:
-    en:
+    EN:
       subject: Account Details Updated
       template_path: label_created.en.html.erb
 
@@ -58,7 +58,7 @@ events:
     record.key in ["phone", "profile", "document"] &&
     record.value in ["verified", "rejected"]
   templates:
-    en:
+    EN:
       subject: Account Details Updated
       template_path: label_created.en.html.erb
 
@@ -67,7 +67,7 @@ events:
   exchange: peatio
   expression: changes.state == "submitted" && record.state == "accepted"
   templates:
-    en:
+    EN:
       subject: Deposit Accepted
       template_path: deposit_accepted.en.html.erb
 
@@ -75,7 +75,7 @@ events:
   key: session.create
   exchange: barong_system
   templates:
-    en:
+    EN:
       subject: New Login
       template_path: session_create.en.html.erb
 
@@ -84,7 +84,7 @@ events:
   exchange: peatio
   expression: changes.state in ["succeed", "rejected", "canceled", "failed", "accepted"] && record.state in ["succeed", "rejected", "canceled", "failed"]
   templates:
-    en:
+    EN:
       subject: Withdrawal Succeed
       template_path: withdraw_succeed.en.html.erb
 
@@ -92,6 +92,6 @@ events:
   key: beneficiary.created
   exchange: peatio
   templates:
-    en:
+    EN:
       subject: New Beneficiary
       template_path: new_beneficiary.en.html.erb
