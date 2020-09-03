@@ -160,7 +160,7 @@ Parameter | Description | Default
 `vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
 `kyc.provider` |  KYC provider, can be `kycaid` or `local` | `kycaid`
 `kyc.authorization_token` |  optional API token for KYCAID use | `changeme`
-`kyc.sendbox` |  enable KYCAID test mode  | `true`
+`kyc.sandbox` |  enable KYCAID test mode  | `true`
 `kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
 `vault.token` | Vault authentication token | `changeme `
 `database.host` | database host name | `db`
