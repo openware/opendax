@@ -106,7 +106,6 @@ Email: admin@barong.io, password: 0lDHd9ufs9t@
 Email: john@barong.io, password: Am8icnzEI3d!
 ```
 
-
 ### [Optional] KYCAID
 
 In order to  accelerate customer interaction, reduce risks and simplify business processes you can use KYC Verification Service from KYCaid.
@@ -135,7 +134,8 @@ kyc:
   - Identity card
   - Driver license
   - Address
-
+* Frontend KYC steps can be configured in `templates/config/frontend/env.js.erb` via the `kycSteps` field
+* Tower KYC labels can be configured in `templates/config/frontend/tower.js.erb` via the `labelSwitcher` field
 
 ## Usage
 
