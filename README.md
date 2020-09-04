@@ -106,6 +106,37 @@ Email: admin@barong.io, password: 0lDHd9ufs9t@
 Email: john@barong.io, password: Am8icnzEI3d!
 ```
 
+### [Optional] KYCAID
+
+In order to  accelerate customer interaction, reduce risks and simplify business processes you can use KYC Verification Service from KYCaid.
+KYC goal is to prevent fraud and to decline users that don’t fulfill certain standards of credibility. 
+To learn more about KYCaid and pricing you can visit their website - [kycaid.com](https://www.kycaid.com/)
+
+#### How to configure KYCAID on the platform?
+
+KYCAID is already integrated into our stack, to use it you'd need to create an account on [kycaid.com](https://www.kycaid.com/), and set up authentification creds there.
+
+After that all you have to do is to change several lines in `config/app.yml`:
+
+```yaml
+kyc:
+  provider: kycaid
+  authorization_token: changeme             # your production API token from the 'Settings' section of kycaid.com
+  sandbox_mode: true                        # 'true' for test environments - documents will be verified/rejected automatically, without payment for verification
+  api_endpoint: https://api.kycaid.com/
+```
+
+##### Additional settings for KYCAID
+
+* Be sure to check `BARONG_REQUIRED_DOCS_EXPIRE` ENV value inside `config/barong.env` to be `false` if you want to include `address` verification in your KYC process. You can set it to `true` if you need the document check only.
+* Check if  you have the correct list of `document_types` in the `config/barong/barong.yml` file:
+  - Passport
+  - Identity card
+  - Driver license
+  - Address
+* Frontend KYC steps can be configured in `templates/config/frontend/env.js.erb` via the `kycSteps` field
+* Tower KYC labels can be configured in `templates/config/frontend/tower.js.erb` via the `labelSwitcher` field
+
 ## Usage
 
 ### Initial configuration
@@ -127,6 +158,10 @@ Parameter | Description | Default
 `ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
 `images` | Docker image tags per component
 `vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
+`kyc.provider` |  KYC provider, can be `kycaid` or `local` | `kycaid`
+`kyc.authorization_token` |  optional API token for KYCAID use | `changeme`
+`kyc.sandbox` |  enable KYCAID test mode  | `true`
+`kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
 `vault.token` | Vault authentication token | `changeme `
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `

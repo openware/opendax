@@ -76,7 +76,7 @@ services:
       -  ../config/mailer.yml:/home/app/config/mailer.yml
     command: bash -c "bin/mailer run"
 
-  sidekiq:
+  applogic_sidekiq:
     restart: always
     image: "<%= @config['images']['applogic'] %>"
     env_file:
@@ -84,7 +84,20 @@ services:
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
       - ../config/applogic/schedule.yml:/home/app/config/schedule.yml
-    command: bash -c "sidekiq"
+    command: bash -c "bundle exec sidekiq"
+
+  barong_sidekiq:
+    restart: always
+    image: "<%= @config['images']['barong'] %>"
+    env_file:
+      - ../config/barong.env
+    volumes:
+      - ../config/secrets:/secrets:ro
+      - ../config/barong/seeds.yml:/home/app/config/seeds.yml
+      - ../config/barong/barong.yml:/home/app/config/barong.yml
+      - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
+      - ../config/barong/management_api.yml:/home/app/config/management_api.yml
+    command: bash -c "bundle exec sidekiq"
 
   listener:
     restart: always

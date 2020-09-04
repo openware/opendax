@@ -87,9 +87,9 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc '[Optional] Run peatio daemons (rango, peatio daemons)'
+  desc '[Optional] Run daemons (rango, peatio daemons, barong sidekiq)'
   task :daemons, [:command] do |_task, args|
-    @daemons = %w[rango withdraw_audit blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer]
+    @daemons = %w[rango withdraw_audit blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer barong_sidekiq]
 
     if @config['finex']['enabled']
       @daemons |= %w[finex-engine finex-api]
@@ -100,12 +100,12 @@ namespace :service do
     args.with_defaults(:command => 'start')
 
     def start
-      puts '----- Starting peatio daemons -----'
+      puts '----- Starting daemons -----'
       sh "docker-compose up -d #{@daemons.join(' ')}"
     end
 
     def stop
-      puts '----- Stopping peatio daemons -----'
+      puts '----- Stopping daemons -----'
       sh "docker-compose rm -fs #{@daemons.join(' ')}"
     end
 
