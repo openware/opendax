@@ -1,0 +1,45 @@
+roles:
+  - superadmin
+  - admin
+  - compliance
+  - support
+
+admin_permissions:
+  superadmin:
+    manage:
+      - User
+      - Activity
+      - Ability
+      - APIKey
+      - Profile
+      - Permission
+      - Label
+      - Restriction
+      - Level
+  admin:
+    read:
+      - Level
+      - APIKey
+      - Permission
+    manage:
+      - User
+      - Activity
+      - Profile
+      - Label
+  compliance:
+    read:
+      - Level
+      - User
+      - Activity
+    manage:
+      - Label
+    update:
+      - Profile
+  support:
+    read:
+      - User
+      - Activity
+      - APIKey
+      - Profile
+      - Label
+      - Level
