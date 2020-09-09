@@ -12,6 +12,7 @@ services:
       - ../config/peatio/seed:/opt/peatio/config/seed
       - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
       - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
+      - ../config/peatio/abilities.yml:/opt/peatio/config/abilities.yml
     labels: {}
     command: bash -c "bin/link_config && bundle exec puma --config config/puma.rb"
 
@@ -26,6 +27,7 @@ services:
       - ../config/barong/barong.yml:/home/app/config/barong.yml
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
+      - ../config/barong/abilities.yml:/home/app/config/abilities.yml
 
 <% if @config['finex']['enabled'] %>
   finex-api:
