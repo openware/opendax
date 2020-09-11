@@ -7,7 +7,7 @@ rules:
     - api/v2/barong/public
     - api/v2/barong/identity
     - api/v2/peatio/public
-    - api/v2/ranger/public
+    - api/v2/rango/public
     - api/v2/applogic/public
     - api/v2/arke/public
   block:
