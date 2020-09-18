@@ -276,11 +276,29 @@ To do this, just follow these simple steps:
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 
+
 ## Installer tool
 
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
 ```
+
+
+## Using opendax deployment for local development
+
+Modify `templates/config/gateway/envoy.yaml.erb` file by next way:
+
+1. Set cors allow_origin as "*"
+2. Setup all allow_methods what you need. Example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
+3. Setup expose_headers. Example: `expose_headers:  "total, page, x-csrf-token"`
+4. Add `allow_credentials: true` to your cors configuration
+
+### Applying changes
+```
+rake render:config
+docker-compose up -Vd gateway
+```
+
 
 ## Happy trading with OpenDAX!
 If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or here: [crypto exchange software](https://www.openware.com/)
