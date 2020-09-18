@@ -117,9 +117,9 @@ Parameter | Description | Default
 `storage.secretkey`, `storage.accesskey` | storage access keys | `"changeme"`
 `twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
 `gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
-`smtp` | SMTP configs used for sending platform emails 
+`smtp` | SMTP configs used for sending platform emails
 `captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
-`wallets` | configs for wallets seeded during the initial deployment of Peatio 
+`wallets` | configs for wallets seeded during the initial deployment of Peatio
 `parity` | Parity cryptonode configuration
 `bitcoind` | Bitcoind cryptonode configuration
 `litecoind` | Litecoind cryptonode configuration
@@ -228,6 +228,22 @@ To do this, just follow these simple steps:
   - Access your VM from the GCP Cloud Console
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
+
+
+## Using opendax deployment for local development
+
+Modify `templates/config/gateway/envoy.yaml.erb` file by next way:
+
+1. Set cors allow_origin as "*"
+2. Setup all allow_methods what you need. Example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
+3. Setup expose_headers. Example: `expose_headers:  "total, page, x-csrf-token"`
+4. Add `allow_credentials: true` to your cors configuration
+
+### Applying changes
+```
+rake render:config
+docker-compose up -Vd gateway
+```
 
 
 ## Happy trading with OpenDAX!
