@@ -141,6 +141,7 @@ Parameter | Description | Default
 `twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
 `gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
 `smtp` | SMTP configs used for sending platform emails
+`remoteAccess` | Configuration env for opening cors
 `captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
 `wallets` | configs for wallets seeded during the initial deployment of Peatio
 `parity` | Parity cryptonode configuration
@@ -262,18 +263,13 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/
 
 ## Using opendax deployment for local development
 
-Modify `templates/config/gateway/envoy.yaml.erb` file by next way:
+You can easily use your development with deployed opendax
 
-1. Set cors allow_origin as "*"
-2. Setup all allow_methods what you need. Example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
-3. Setup expose_headers. Example: `expose_headers:  "total, page, x-csrf-token"`
-4. Add `allow_credentials: true` to your cors configuration
+To do this, folow these steps:
+  - In `app.yml` change `remoteAccess` value to true
+  - Run `rake render:config`
+  - Run `docker-compose up -Vd gateway` for restarting gateway with updated configuration
 
-### Applying changes
-```
-rake render:config
-docker-compose up -Vd gateway
-```
 
 ## Happy trading with OpenDAX!
 If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or at [openware.com](https://www.openware.com/)
