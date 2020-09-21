@@ -19,6 +19,7 @@ finex:
   image: quay.io/openware/finex:2.6.0-dd96848
 vendor:
   frontend: git@github.com:openware/baseapp.git
+remoteAccess: false
 vault:
   token: changeme
 database:
