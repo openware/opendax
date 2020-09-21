@@ -17,18 +17,18 @@ static_resources:
               domains:
               - "*"
               cors:
-              <%- if @config['remoteAccess'] != true -%>
-                allow_origin:
-                - "<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
-                allow_methods: "PUT, GET, POST"
-                allow_headers: "content-type, x-grpc-web"
-              <%- else -%>
+              <%- if @config['remoteAccess'] -%>
                 allow_origin:
                 - "*"
                 allow_methods: "PUT, GET, POST, DELETE, PATCH"
                 expose_headers: "total, page, x-csrf-token"
                 allow_credentials: true
+              <%- else -%>
+                allow_origin:
+                - "<%= ssl_helper('http') %>://<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>"
+                allow_methods: "PUT, GET, POST"
               <%- end -%>
+                allow_headers: "content-type, x-grpc-web"
                 filter_enabled:
                   default_value:
                     numerator: 100
