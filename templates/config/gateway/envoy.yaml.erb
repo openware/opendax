@@ -68,6 +68,13 @@ static_resources:
                   upgrade_configs:
                     upgrade_type: "websocket"
               - match:
+                  prefix: "/api/v2/open_finance"
+                route:
+                  cluster: finex
+                  prefix_rewrite: "/api/v2/ws"
+                  upgrade_configs:
+                    upgrade_type: "websocket"
+              - match:
                   prefix: "/api/v2/rango/private"
                 route:
                   cluster: rango

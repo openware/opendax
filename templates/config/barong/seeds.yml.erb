@@ -82,6 +82,7 @@ permissions:
  - { role: accountant, verb: put, path: api/v2/barong/admin/users/labels, action: drop }
  # ranger access
  - { role: accountant, verb: get, path: api/v2/ranger, action: accept }
+ - { role: accountant, verb: get, path: api/v2/open_finance, action: accept }
  # accountant doesnt have access to manage platform roles and permissions
  - { role: accountant, verb: all, path: api/v2/barong/admin/permissions, action: drop }
  # we are watching after you 0_0
@@ -106,6 +107,7 @@ permissions:
  - { role: compliance, verb: get, path: assets, action: accept }
  # ranger access
  - { role: compliance, verb: get, path: api/v2/ranger, action: accept }
+ - { role: compliance, verb: get, path: api/v2/open_finance, action: accept }
  # compliance doesnt have access to manage platform roles and permissions
  - { role: compliance, verb: all, path: api/v2/barong/admin/permissions, action: drop }
  # we are watching after you 0_0
@@ -123,6 +125,7 @@ permissions:
 
  # ranger access
  - { role: technical, verb: get, path: api/v2/ranger, action: accept }
+ - { role: technical, verb: get, path: api/v2/open_finance, action: accept }
  # technical doesnt have access to manage platform roles and permissions
  - { role: technical, verb: all, path: api/v2/barong/admin/permissions, action: drop }
  # we are watching after you 0_0
@@ -160,6 +163,7 @@ permissions:
  - { role: trader, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: trader, verb: get, path: api/v2/ranger, action: accept }
+ - { role: trader, verb: get, path: api/v2/open_finance, action: accept }
 
  # MEMBER
  # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
@@ -175,6 +179,7 @@ permissions:
  - { role: member, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: member, verb: get, path: api/v2/ranger, action: accept }
+ - { role: member, verb: get, path: api/v2/open_finance, action: accept }
 
  # BROKER
  # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
@@ -190,5 +195,6 @@ permissions:
  - { role: broker, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: broker, verb: get, path: api/v2/ranger, action: accept }
+ - { role: broker, verb: get, path: api/v2/open_finance, action: accept }
 
 restrictions: {}
