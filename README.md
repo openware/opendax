@@ -163,6 +163,7 @@ Parameter | Description | Default
 `kyc.sandbox` |  enable KYCAID test mode  | `true`
 `kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
 `vault.token` | Vault authentication token | `changeme `
+`database.adapter`| database adapter kind either `mysql` or `postgresql` |`mysql`
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `
 `database.user` | database username | `root`

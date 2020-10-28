@@ -1,7 +1,7 @@
 <% @config['wallets']['eth'].each do |wallet| -%>
 - name:             Ethereum <%= wallet['kind'].capitalize %> Wallet
   blockchain_key:   eth-<%= @config['parity']['network'] %>
-  currency_id:      eth
+  currency_ids:     eth,trst
   address:          '<%= wallet['address'] %>'
   kind:             <%= wallet['kind'] %>
   max_balance:      <%= wallet['max_balance'] %>
@@ -16,7 +16,7 @@
 <% @config['wallets']['btc'].each do |wallet| -%>
 - name:             Bitcoin <%= wallet['kind'].capitalize %> Wallet
   blockchain_key:   btc-<%= @config['bitcoind']['network'] %>
-  currency_id:      btc
+  currency_ids:     btc
   address:          '<%= wallet['address'] %>'
   kind:             <%= wallet['kind'] %>
   max_balance:      <%= wallet['max_balance'] %>

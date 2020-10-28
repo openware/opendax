@@ -3,12 +3,21 @@ version: '3.6'
 services:
   db:
     restart: always
+    <%- if @config['database']['adapter'] == 'mysql' %>
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
       - ../config/mysql:/etc/mysql/conf.d
     environment:
-      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_ROOT_PASSWORD: <%= @config['database']['password'] %>
+    <%- elsif @config['database']['adapter'] == 'postgresql' %>
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: <%= @config['database']['user'] %>
+      POSTGRES_PASSWORD: <%= @config['database']['password'] %>
+    <%- end %>
 
   influxdb:
     image: influxdb:1.7.10

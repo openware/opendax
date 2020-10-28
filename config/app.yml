@@ -9,10 +9,10 @@ ssl:
   enabled: false
   email: support@example.com
 images:
-  peatio: quay.io/openware/peatio:2.6.0-0f60e12
-  barong: quay.io/openware/barong:2.6.0-a97b181
-  frontend: quay.io/openware/baseapp:2.5.2
-  tower: quay.io/openware/tower:2.5.15
+  peatio: quay.io/openware/peatio:2.6.0-ecbdaf8
+  barong: quay.io/openware/barong:2.6.0
+  frontend: quay.io/openware/baseapp:2.6.0-c0e5a82
+  tower: quay.io/openware/tower:2.6.0-95a4b5a
   rango: quay.io/openware/rango:2.6.0-e02b329
 finex:
   enabled: false
@@ -20,7 +20,7 @@ finex:
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:
-  provider: kycaid
+  provider: local
   authorization_token: changeme
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
@@ -28,6 +28,7 @@ vault:
   token: changeme
 database:
   host: db
+  adapter: mysql
   port: 3306
   user: root
   password: changeme
@@ -57,10 +58,6 @@ smtp:
   sender_email: noreply@barong.io
   sender_name: Postmaster
   sender_logo: https://storage.googleapis.com/public_peatio/logo.png
-kyc:
-  authorization_token: changeme
-  sandbox_mode: true
-  api_endpoint: https://api.kycaid.com/
 wallets:
   eth:
   - kind: deposit
