@@ -213,7 +213,7 @@ The components included in the stack are:
 - `cryptonodes` - cryptocurrency nodes such as [parity](https://github.com/paritytech/parity-ethereum) **[Optional]**
 - `daemons` - Peatio and Ranger daemons **[Optional]**
 - `setup` - setup hooks for Peatio and Barong to run before the application starts (DB migration etc.)
-- `app` - [Peatio](https://github.com/rubykube/peatio), [Barong](https://github.com/rubykube/barong) and the [Ambassador](https://www.getambassador.io) API gateway
+- `app` - Peatio is the [crypto exchange software](https://www.openware.com/), [Barong](https://github.com/openware/barong) and the [Ambassador](https://www.getambassador.io) API gateway
 - `frontend` - the frontend application located at `vendor/frontend`
 - `tower` - the Tower admin panel application located at `vendor/tower`
 - `monitoring` - [cAdvisor](https://github.com/google/cadvisor) and [Node Exporter](https://github.com/prometheus/node_exporter) monitoring tools **[Optional]**
@@ -294,4 +294,4 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/
 ```
 
 ## Happy trading with OpenDAX!
-If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or at [openware.com](https://www.openware.com/)
+If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or here: [crypto exchange software](https://www.openware.com/)
