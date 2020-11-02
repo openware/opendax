@@ -1,3 +1,13 @@
+![Cryptocurrency Exchange Platform - OpenDAX](https://github.com/openware/meta/raw/main/images/github_opendax.png)
+
+<h3 align="center">
+<a href="https://www.openware.com/sdk">Guide</a> <span>&vert;</span>
+<a href="https://www.openware.com/sdk/api.html">API Docs</a> <span>&vert;</span>
+<a href="https://www.openware.com/">Consulting</a> <span>&vert;</span>
+<a href="https://t.me/peatio">Community</a>
+</h3>
+<h6 align="center"><a href="https://github.com/openware/opendax">OpenDAX Trading Platform</a></h6>
+
 # OpenDAX
 
 OpenDAX is an open-source cloud-native multi-service platform for building a Blockchain/FinTech exchange of digital assets, cryptocurrency and security tokens.
@@ -109,7 +119,7 @@ Email: john@barong.io, password: Am8icnzEI3d!
 ### [Optional] KYCAID
 
 In order to  accelerate customer interaction, reduce risks and simplify business processes you can use KYC Verification Service from KYCaid.
-KYC goal is to prevent fraud and to decline users that don’t fulfill certain standards of credibility. 
+KYC goal is to prevent fraud and to decline users that don’t fulfill certain standards of credibility.
 To learn more about KYCaid and pricing you can visit their website - [kycaid.com](https://www.kycaid.com/)
 
 #### How to configure KYCAID on the platform?
@@ -176,9 +186,9 @@ Parameter | Description | Default
 `storage.secretkey`, `storage.accesskey` | storage access keys | `"changeme"`
 `twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
 `gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
-`smtp` | SMTP configs used for sending platform emails 
+`smtp` | SMTP configs used for sending platform emails
 `captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
-`wallets` | configs for wallets seeded during the initial deployment of Peatio 
+`wallets` | configs for wallets seeded during the initial deployment of Peatio
 `parity` | Parity cryptonode configuration
 `bitcoind` | Bitcoind cryptonode configuration
 `litecoind` | Litecoind cryptonode configuration
