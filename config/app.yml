@@ -19,6 +19,8 @@ finex:
   image: quay.io/openware/finex:2.5.33
 vendor:
   frontend: git@github.com:openware/baseapp.git
+show_landing:
+  enabled: true
 kyc:
   provider: kycaid
   authorization_token: changeme
