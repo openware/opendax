@@ -9,14 +9,15 @@ ssl:
   enabled: false
   email: support@example.com
 images:
-  peatio: quay.io/openware/peatio:2.6.0-ecbdaf8
-  barong: quay.io/openware/barong:2.6.0
-  frontend: quay.io/openware/baseapp:2.6.0-c0e5a82
-  tower: quay.io/openware/tower:2.6.0-95a4b5a
-  rango: quay.io/openware/rango:2.6.0-e02b329
+  peatio: quay.io/openware/peatio:2.6.0-a2f27bb
+  barong: quay.io/openware/barong:2.6.1
+  frontend: quay.io/openware/baseapp:2.6.1
+  tower: quay.io/openware/tower:2.6.25
+  rango: quay.io/openware/rango:2.6.0-e87c2da
 finex:
   enabled: false
-  image: quay.io/openware/finex:2.6.0-dd96848
+  image: quay.io/openware/finex:2.6.0-7e27e98
+  license_key: changeme
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:

@@ -1,7 +1,6 @@
 images:
   applogic: rubykube/applogic:latest
-  arke: gcr.io/openware-production/arke:2.3.1
-  finex: reg.openware.work/openware/finex:0.0.1
+  arke: quay.io/openware/arke:2.6.0-bccb72c
   superset: amancevice/superset:0.28.1
 superset:
   email: superset-admin@openware.com

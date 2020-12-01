@@ -9,10 +9,6 @@ x-daemon: &peatio-daemon
     - ../config/peatio:/opt/peatio/config:ro
 
 services:
-  withdraw_audit:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb withdraw_audit"
-
   blockchain:
     << : *peatio-daemon
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb blockchain"
@@ -32,10 +28,6 @@ services:
   deposit_coin_address:
     << : *peatio-daemon
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
-
-  market_ticker:
-    << : *peatio-daemon
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb market_ticker"
 
   withdraw_coin:
     << : *peatio-daemon
@@ -78,7 +70,7 @@ services:
 
   applogic_sidekiq:
     restart: always
-    image: "<%= @config['images']['barong'] %>"
+    image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/barong.env
     volumes:
@@ -101,7 +93,7 @@ services:
 
   listener:
     restart: always
-    image: "<%= @config['images']['applogic'] %>"
+    image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
     volumes:
