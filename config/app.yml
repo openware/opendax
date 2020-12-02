@@ -16,7 +16,7 @@ images:
   rango: quay.io/openware/rango:2.6.0
 finex:
   enabled: false
-  image: quay.io/openware/finex:2.6.0-7e27e98
+  image: quay.io/openware/finex:2.6.0
   license_key: changeme
 vendor:
   frontend: git@github.com:openware/baseapp.git
