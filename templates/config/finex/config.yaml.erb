@@ -1,10 +1,19 @@
+metrics:
+  enabled: true
+license: <%= @config['finex']['license_key'] %>
 database:
   driver: mysql
   name: peatio_production
-  username: root
-  password: changeme
-  host: db
-  port: 3306
+  username: <%= @config['database']['user'] %>
+  password: <%= @config['database']['password'] %>
+  host: <%= @config['database']['host'] %>
+  port: <%= @config['database']['port'] %>
+log_level:
+  log_observer: info
+vault:
+  host: http://vault:8200
+  token: <%= @config['vault']['token'] %>
+  app_name: <%= @config['app']['name'].downcase %>
 messaging:
   driver: amqp
   username: guest
@@ -27,9 +36,13 @@ messaging:
     - name:    peatio.events
       type:    direct
       durable: false
+    - name: peatio.matching
+      type: direct
+      durable: false
   queues:
     - name:    finex.gateway
     - name:    finex.events.processor
+    - name:    finex.influx.writer
 orderbook:
   max_publish_size: 300
 gateway:

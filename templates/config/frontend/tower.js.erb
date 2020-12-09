@@ -7,6 +7,7 @@ window.env = {
     tablePageLimit: 50,
     minutesUntilAutoLogout: '35',
     finex: <%= config['finex']['enabled'] %>,
+    aml: false,
     captcha: {
         captchaType: '<%= @config['captcha']['type'] %>',
         siteKey: '<%= @config['captcha']['siteKey'] %>',
@@ -66,4 +67,5 @@ window.env = {
         'manager',
     ],
     withCredentials: false,
+    sentryEnabled: false,
 };
