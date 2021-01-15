@@ -8,6 +8,7 @@ csrfEnabled: false
 ssl:
   enabled: false
   email: support@example.com
+updateVersions: false
 images:
   peatio: quay.io/openware/peatio:2.6.4
   barong: quay.io/openware/barong:2.6.3

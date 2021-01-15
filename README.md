@@ -166,6 +166,7 @@ Parameter | Description | Default
 `csrfEnabled` | enable CSRF protection on Barong | `false`
 `ssl.enabled` | enable SSL certificate generation | `false`
 `ssl.email` | email address used for SSL certificate issuing | `"support@example.com"`
+`updateVersions` | update all image tags by fetching global ones for OpenDAX | `false`
 `images` | Docker image tags per component
 `vendor.frontend` | optional Git URL for a development frontend repo | `git@github.com:openware/baseapp.git`
 `kyc.provider` |  KYC provider, can be `kycaid` or `local` | `kycaid`
