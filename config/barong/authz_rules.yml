@@ -10,6 +10,7 @@ rules:
     - api/v2/ranger/public
     - api/v2/applogic/public
     - api/v2/arke/public
+    - api/v2/finex/public
   block:
     - api/v2/barong/management
     - api/v2/peatio/management
