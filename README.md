@@ -230,16 +230,16 @@ To do this, just follow these simple steps:
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 
 
-## Using opendax deployment for local development
+## Using an OpenDAX deployment for local frontend development
 
-Modify `templates/config/gateway/envoy.yaml.erb` file by next way:
+If you'd like to use a real API from an existing OpenDAX deployment when developing frontend components(e.g. [baseapp](https://github.com/openware/baseapp)), modify `templates/config/gateway/envoy.yaml.erb` file the following way:
 
-1. Set cors allow_origin as "*"
-2. Setup all allow_methods what you need. Example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
-3. Setup expose_headers. Example: `expose_headers:  "total, page, x-csrf-token"`
-4. Add `allow_credentials: true` to your cors configuration
+1. Set `cors.allow_origin` as "*"
+2. Configure all the needed HTTP methods in `cors.allow_methods`. For example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
+3. Configure `expose_headers` in a similar way `expose_headers:  "total, page, x-csrf-token"`
+4. Add `cors.allow_credentials: true` to your CORS configuration
 
-### Applying changes
+Afterwards, apply the config onto your deployment:
 ```
 rake render:config
 docker-compose up -Vd gateway
