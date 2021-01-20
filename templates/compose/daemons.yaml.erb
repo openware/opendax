@@ -15,22 +15,32 @@ services:
 
   cron_job:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb cron_job"
 
   deposit:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb deposit"
 
   upstream:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_UPSTREAM_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/daemons.rb upstream"
 
   deposit_coin_address:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
 
   withdraw_coin:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb withdraw_coin"
 
   influx_writer:
@@ -46,14 +56,20 @@ services:
 <% unless @config['finex']['enabled'] %>
   matching:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
 
   order_processor:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
 
   trade_executor:
     << : *peatio-daemon
+    environment:
+    - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
     command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
 <% end %>
 

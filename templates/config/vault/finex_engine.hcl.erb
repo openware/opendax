@@ -1,0 +1,23 @@
+path "transit/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = [ "read" ]
+}
+# Decrypt secrets
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = [ "create", "update" ]
+}
+# Use key for signing
+path "transit/sign/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = ["update"]
+}
+# Create transit key
+path "transit/keys/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = ["create"]
+}
+# Renew tokens
+path "auth/token/renew" {
+  capabilities = ["update"]
+}
+# Lookup tokens
+path "auth/token/lookup" {
+  capabilities = ["update"]
+}

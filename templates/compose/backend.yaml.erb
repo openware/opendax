@@ -48,6 +48,7 @@ services:
     restart: always
     volumes:
       - vault_data:/vault
+      - ../config/vault:/tmp/policies
     command:
       - server
     cap_add:

@@ -150,7 +150,13 @@ Parameter | Description | Default
 `kyc.authorization_token` |  optional API token for KYCAID use | `changeme`
 `kyc.sandbox` |  enable KYCAID test mode  | `true`
 `kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
-`vault.token` | Vault authentication token | `changeme `
+`vault.root_token` | Root Vault authentication token | `changeme `
+`vault.peatio_rails_token` | Peatio Server Vault authentication token | `changeme `
+`vault.peatio_crypto_token` | Peatio Daemons (cron_job, deposit, deposit_coin_address, withdraw_coin) Vault authentication token | `changeme `
+`vault.peatio_upstream_token` | Peatio Upstream Daemon Vault authentication token | `changeme `
+`vault.peatio_matching_token` | Peatio Daemons (matching, order_processor, trade_executor) Vault authentication token | `changeme `
+`vault.barong_token` | Barong Vault authentication token | `changeme `
+`vault.finex_engine_token` | Finex Engine Vault authentication token | `changeme `
 `database.adapter`| database adapter kind either `mysql` or `postgresql` |`mysql`
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `
@@ -264,6 +270,37 @@ source ./bin/set-env.sh
 rake vendor:clone
 docker-compose -f compose/vendor.yaml up -d
 ```
+
+## Vault management
+Opendax use [Vault Policy](https://www.vaultproject.io/docs/concepts/policies) feature to restrict components access to sensitive data. Each component has it's own Vault token which allows to access only needed data.
+
+For Vault management Opendax has 2 rake tasks:
+```
+rake vault:setup # Rake task for initial Vault configuration ( root token generation, unsealing, configuring endpoints)
+rake vault:load_policies # Rake task for generating components Vault tokens
+```
+### Troubleshooting
+#### Vault is sealed
+In case of such error:
+1. Run `rake vault:setup`
+2. Restart the component
+
+#### Vault permission denied
+Possible reason may be the vault token expiration.
+To fix the issues:
+1. Run `rake vault:load_policies`
+2. Run `rake render:config`
+3. Restart Vault dependend components:
+
+    ```
+    docker-compose up -Vd barong peatio cron_job deposit deposit_coin_address withdraw_coin upstream
+
+    # If you are using Finex
+    docker-compose up -Vd finex-engine
+
+    # If you are using Peatio Matching
+    docker-compose up -Vd matching order_processor trade_executor
+    ```
 
 ## Terraform Infrastructure as Code Provisioning
 

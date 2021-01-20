@@ -1,0 +1,24 @@
+# Manage the transit secrets engine
+path "transit/keys/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = ["create", "read", "list"]
+}
+# Encrypt Payment Addresses secrets
+path "transit/encrypt/<%= @config['app']['name'].downcase %>_payment_addresses_*" {
+  capabilities = ["create", "read", "update"]
+}
+# Decrypt Payment Addresses secrets
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_payment_addresses_*" {
+  capabilities = ["create", "read", "update"]
+}
+# Decrypt wallets secrets
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_wallets_*" {
+  capabilities = ["create", "read", "update"]
+}
+# Renew tokens
+path "auth/token/renew" {
+  capabilities = ["update"]
+}
+# Lookup tokens
+path "auth/token/lookup" {
+  capabilities = ["update"]
+}

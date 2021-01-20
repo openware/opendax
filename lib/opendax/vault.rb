@@ -2,6 +2,8 @@
 
 module Opendax
   class Vault
+    POLICIES_NAMES = ["barong", "finex_engine", "peatio_rails", "peatio_crypto", "peatio_upstream", "peatio_matching"]
+
     def vault_secrets_path
       'config/vault-secrets.yml'
     end
@@ -55,6 +57,25 @@ module Opendax
       secrets('disable', ['secret'])
       secrets('enable', ['kv'], '-path=secret -version=1')
       vault_root_token
+    end
+
+    def load_policies(deployment_name, vault_root_token)
+      puts '----- Vault login -----'
+      vault_exec("vault login #{vault_root_token}")
+
+      tokens = {}
+      POLICIES_NAMES.each do |policy|
+        name = "#{deployment_name.downcase}_#{policy}"
+
+        puts "Loading #{name} policy..."
+        vault_exec("vault policy write #{name} /tmp/policies/#{policy}.hcl")
+
+        puts "Creating the #{name} token..."
+        vault_token_create_output = YAML.safe_load(vault_exec("vault token create -policy=#{name} -renewable=true -ttl=240h -period=240h -format=yaml"))
+        tokens["#{policy}_token"] = vault_token_create_output["auth"]["client_token"]
+      end
+
+      tokens
     end
   end
 end
