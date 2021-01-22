@@ -95,3 +95,14 @@ events:
     EN:
       subject: New Beneficiary
       template_path: new_beneficiary.en.html.erb
+
+- name: Resend beneficiary
+  key: beneficiary.updated
+  exchange: peatio
+  expression:
+    and:
+       record.state: 'pending'
+  templates:
+    EN:
+      subject: Resend Beneficiary
+      template_path: new_beneficiary.en.html.erb
