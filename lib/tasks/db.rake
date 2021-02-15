@@ -6,16 +6,16 @@ namespace :db do
 
   desc 'Create database'
   task :create do
-    sh 'docker-compose run --rm peatio bundle exec rake db:create'
-    sh 'docker-compose run --rm barong bundle exec rake db:create'
+    sh 'docker-compose run --rm peatio kaigara bundle exec rake db:create'
+    sh 'docker-compose run --rm barong kaigara bundle exec rake db:create'
   end
 
   desc 'Load database dump'
   task :load => :create do
     sh %Q{cat data/mysql/peatio_production.sql | docker-compose run --rm db #{mysql_cli} peatio_production}
     sh %Q{cat data/mysql/barong_production.sql | docker-compose run --rm db #{mysql_cli} barong_production}
-    sh 'docker-compose run --rm peatio bundle exec rake db:migrate'
-    sh 'docker-compose run --rm barong bundle exec rake db:migrate'
+    sh 'docker-compose run --rm peatio kaigara bundle exec rake db:migrate'
+    sh 'docker-compose run --rm barong kaigara bundle exec rake db:migrate'
   end
 
   desc 'Drop all databases'
