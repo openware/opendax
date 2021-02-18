@@ -67,13 +67,11 @@ rake -T # To see if ruby and lib works
 
 Using `rake -T` you can see all available commands, and can create new ones in `lib/tasks`
 
-
 ### 4. Run everything
 
 #### 4.1 Configure your domain
 If using a VM you can point your domain name to the VM ip address before this stage.
 Recommended if you enabled SSL, for local development edit the `/etc/hosts`
-
 
 Insert in file `/etc/hosts`
 ```
@@ -325,13 +323,11 @@ To do this, just follow these simple steps:
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
 
-
 ## Installer tool
 
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/openware/opendax/master/bin/install)"
 ```
-
 
 ## Using an OpenDAX deployment for local frontend development
 
@@ -364,6 +360,15 @@ rake render:config
 docker-compose up -Vd gateway
 ```
 
-
 ## Happy trading with OpenDAX!
+
 If you have any comments, feedback and suggestions, we are happy to hear from you here at GitHub or here: [crypto exchange software](https://www.openware.com/)
+
+## 2.6 Migration guide
+
+To migrate from 2.5 to 2.6, do the following:
+1. Pull 2-6-stable branch
+   While rebasing, rename your `vault.token` to `vault.root_token` in `config/app.yml`
+2. Run `rake render:config`
+3. Run `dc up -Vd vault`
+4. Run `rake service:all`
