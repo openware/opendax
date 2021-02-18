@@ -151,7 +151,13 @@ Parameter | Description | Default
 `kyc.authorization_token` |  optional API token for KYCAID use | `changeme`
 `kyc.sandbox` |  enable KYCAID test mode  | `true`
 `kyc.api_endpoint` |  API endpoint for KYCAID | `https://api.kycaid.com/`
-`vault.token` | Vault authentication token | `changeme `
+`vault.root_token` | Root Vault authentication token | `changeme `
+`vault.peatio_rails_token` | Peatio Server Vault authentication token | `changeme `
+`vault.peatio_crypto_token` | Peatio Daemons (cron_job, deposit, deposit_coin_address, withdraw_coin) Vault authentication token | `changeme `
+`vault.peatio_upstream_token` | Peatio Upstream Daemon Vault authentication token | `changeme `
+`vault.peatio_matching_token` | Peatio Daemons (matching, order_processor, trade_executor) Vault authentication token | `changeme `
+`vault.barong_token` | Barong Vault authentication token | `changeme `
+`vault.finex_engine_token` | Finex Engine Vault authentication token | `changeme `
 `database.adapter`| database adapter kind either `mysql` or `postgresql` |`mysql`
 `database.host` | database host name | `db`
 `database.port` | database port | `3306 `
@@ -265,6 +271,48 @@ source ./bin/set-env.sh
 rake vendor:clone
 docker-compose -f compose/vendor.yaml up -d
 ```
+
+## Vault management
+Opendax uses [Vault Policies](https://www.vaultproject.io/docs/concepts/policies) to restrict components' access to sensitive data. Each component has its own Vault token which allows granular access only to the data required.
+
+OpenDAX has 2 rake tasks for Vault management:
+```sh
+rake vault:setup # Initial Vault configuration (root token generation, unseal, endpoints configuration)
+rake vault:load_policies # Components' Vault token generation
+```
+
+### Troubleshooting
+#### Vault is sealed
+
+In case of such error:
+1. Run `rake vault:setup`
+2. Restart the component
+
+Make sure you're not using an existing Docker volume for Vault(i.e. one left after a different Vault container deployment):
+```sh
+docker volumes ps | grep vault
+```
+
+In case there are existing volumes, remove the running Vault container via `docker rm -f *id*` and run `docker volume rm -f *volume name*`
+Afterward, run `docker-compose up -Vd vault` and re-run `rake vault:setup`.
+
+#### Vault permission denied
+Usually, this means that one of your Vault tokens has expired.
+
+To fix the issue:
+1. Run `rake vault:load_policies`
+2. Run `rake render:config`
+3. Restart Vault dependant components:
+
+    ```
+    docker-compose up -Vd barong peatio cron_job deposit deposit_coin_address withdraw_coin upstream
+
+    # If you are using Finex
+    docker-compose up -Vd finex-engine
+
+    # If you are using Peatio Matching Engine
+    docker-compose up -Vd matching order_processor trade_executor
+    ```
 
 ## Terraform Infrastructure as Code Provisioning
 

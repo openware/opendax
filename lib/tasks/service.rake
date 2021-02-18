@@ -136,7 +136,7 @@ namespace :service do
   end
 
   desc 'Run setup hooks for peatio, barong'
-  task :setup, [:command] => ['vault:setup'] do |task, args|
+  task :setup, [:command] => ['vault:setup', 'vault:load_policies'] do |task, args|
     if args.command != 'stop'
       Rake::Task["render:config"].execute
       puts '----- Running hooks -----'
