@@ -370,7 +370,9 @@ If you have any comments, feedback and suggestions, we are happy to hear from yo
 
 ## 2.6 Migration guide
 1. Pull 2-6-stable branch
+    
     While rebasing, rename your `vault.token` to `vault.root_token` in `config/app.yml`
+
 2. Run `rake render:config`
 3. Run `dc up -Vd vault`
 4. Run `rake service:all`
