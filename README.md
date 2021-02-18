@@ -296,11 +296,12 @@ In case there are existing volumes, remove the running Vault container via `dock
 Afterward, run `docker-compose up -Vd vault` and re-run `rake vault:setup`.
 
 #### Vault permission denied
-Possible reason may be the vault token expiration.
-To fix the issues:
+Usually, this means that one of your Vault tokens has expired.
+
+To fix the issue:
 1. Run `rake vault:load_policies`
 2. Run `rake render:config`
-3. Restart Vault dependend components:
+3. Restart Vault dependant components:
 
     ```
     docker-compose up -Vd barong peatio cron_job deposit deposit_coin_address withdraw_coin upstream
@@ -308,7 +309,7 @@ To fix the issues:
     # If you are using Finex
     docker-compose up -Vd finex-engine
 
-    # If you are using Peatio Matching
+    # If you are using Peatio Matching Engine
     docker-compose up -Vd matching order_processor trade_executor
     ```
 
