@@ -138,7 +138,8 @@ Parameter | Description | Default
 --- | --- | ---
 `app.name` | global application name | `"OpenDax"`
 `app.domain` | base domain name | `app.local`
-`subdomain` | subdomain | `www`
+`app.subdomain` | subdomain | `www`
+`app.show_landing` | enable/disable Landing page for Frontend application | `true`
 `render_protect` | enable read-only mode for rendered files | `false`
 `csrfEnabled` | enable CSRF protection on Barong | `false`
 `ssl.enabled` | enable SSL certificate generation | `false`

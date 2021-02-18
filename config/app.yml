@@ -3,6 +3,7 @@ app:
   name: OpenDAX
   domain: app.local
   subdomain: www
+  show_landing: true
 render_protect: false
 csrfEnabled: false
 ssl:
