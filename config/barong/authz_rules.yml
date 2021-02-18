@@ -7,6 +7,8 @@ rules:
     - api/v2/barong/public
     - api/v2/barong/identity
     - api/v2/peatio/public
+    - api/v2/peatio/coinmarketcap
+    - api/v2/peatio/coingecko
     - api/v2/ranger/public
     - api/v2/applogic/public
     - api/v2/arke/public
