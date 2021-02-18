@@ -117,9 +117,9 @@ Parameter | Description | Default
 `storage.secretkey`, `storage.accesskey` | storage access keys | `"changeme"`
 `twilio` | [Twilio](https://www.twilio.com/) SMS provider configs
 `gaTrackerKey` | [Google Analytics](https://analytics.google.com/) tracker key inserted into the frontend app
-`smtp` | SMTP configs used for sending platform emails 
+`smtp` | SMTP configs used for sending platform emails
 `captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
-`wallets` | configs for wallets seeded during the initial deployment of Peatio 
+`wallets` | configs for wallets seeded during the initial deployment of Peatio
 `parity` | Parity cryptonode configuration
 `bitcoind` | Bitcoind cryptonode configuration
 `litecoind` | Litecoind cryptonode configuration
@@ -228,6 +228,38 @@ To do this, just follow these simple steps:
   - Access your VM from the GCP Cloud Console
 
 To destroy the provisioned infrastructure, just run `rake terraform:destroy`
+
+
+## Using an OpenDAX deployment for local frontend development
+
+If you'd like to use a real API from an existing OpenDAX deployment when developing frontend components(e.g. [baseapp](https://github.com/openware/baseapp)), modify `templates/config/gateway/envoy.yaml.erb` file the following way:
+
+1. Set `allow_origin` as `"*"`
+
+2. Configure all the needed HTTP methods in `allow_methods`. For example: `allow_methods: "PUT, GET, POST, DELETE, PATCH"`
+
+3. Add `'total, page, x-csrf-token'` to `allow_headers` value
+
+4. Configure `expose_headers` in a similar way `expose_headers:  "total, page, x-csrf-token"`
+
+5. Add `allow_credentials: true` to your CORS configuration
+
+After completing these steps, you should have the following config:
+```
+cors:
+  allow_origin:
+  - "*"
+  allow_methods: "PUT, GET, POST, DELETE, PATCH"
+  allow_headers: "content-type, x-grpc-web, total, page, x-csrf-token"
+  expose_headers: "total, page, x-csrf-token"
+  allow_credentials: true
+```
+
+Afterwards, apply the config onto your deployment:
+```
+rake render:config
+docker-compose up -Vd gateway
+```
 
 
 ## Happy trading with OpenDAX!
