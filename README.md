@@ -101,7 +101,7 @@ To learn more about KYCaid and pricing you can visit their website - [kycaid.com
 
 #### How to configure KYCAID on the platform?
 
-KYCAID is already integrated into our stack, to use it you'd need to create an account on [kycaid.com](https://www.kycaid.com/), and set up authentification creds there.
+KYCAID is already integrated into our stack, to use it you'd need to create an account on [kycaid.com](https://www.kycaid.com/), and set up authentification creds there and the callback url: https://example.com/api/v2/barong/public/kyc
 
 After that all you have to do is to change several lines in `config/app.yml`:
 
