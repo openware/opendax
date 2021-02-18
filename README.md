@@ -272,18 +272,28 @@ docker-compose -f compose/vendor.yaml up -d
 ```
 
 ## Vault management
-Opendax use [Vault Policy](https://www.vaultproject.io/docs/concepts/policies) feature to restrict components access to sensitive data. Each component has it's own Vault token which allows to access only needed data.
+Opendax uses [Vault Policies](https://www.vaultproject.io/docs/concepts/policies) to restrict components' access to sensitive data. Each component has its own Vault token which allows granular access only to the data required.
 
-For Vault management Opendax has 2 rake tasks:
+OpenDAX has 2 rake tasks for Vault management:
+```sh
+rake vault:setup # Initial Vault configuration (root token generation, unseal, endpoints configuration)
+rake vault:load_policies # Components' Vault token generation
 ```
-rake vault:setup # Rake task for initial Vault configuration ( root token generation, unsealing, configuring endpoints)
-rake vault:load_policies # Rake task for generating components Vault tokens
-```
+
 ### Troubleshooting
 #### Vault is sealed
+
 In case of such error:
 1. Run `rake vault:setup`
 2. Restart the component
+
+Make sure you're not using an existing Docker volume for Vault(i.e. one left after a different Vault container deployment):
+```sh
+docker volumes ps | grep vault
+```
+
+In case there are existing volumes, remove the running Vault container via `docker rm -f *id*` and run `docker volume rm -f *volume name*`
+Afterward, run `docker-compose up -Vd vault` and re-run `rake vault:setup`.
 
 #### Vault permission denied
 Possible reason may be the vault token expiration.
