@@ -12,7 +12,7 @@ ssl:
 updateVersions: false
 images:
   peatio: quay.io/openware/peatio:2.6.20
-  barong: quay.io/openware/barong:2.7-kaigara
+  barong: quay.io/openware/barong:2.7.0-17b26a4
   frontend: quay.io/openware/baseapp:2.6.5
   tower: quay.io/openware/tower:2.6.36
   rango: quay.io/openware/rango:2.6.1
