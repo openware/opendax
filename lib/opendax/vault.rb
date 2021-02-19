@@ -55,7 +55,7 @@ module Opendax
       puts '----- Configuring the endpoints -----'
       secrets('enable', %w[totp transit])
       secrets('disable', ['secret'])
-      secrets('enable', ['kv'], '-version=2')
+      secrets('enable', ['kv'], '-version=2 -path=secret')
       vault_root_token
     end
 
