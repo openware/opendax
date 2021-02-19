@@ -5,73 +5,74 @@ x-daemon: &peatio-daemon
   restart: always
   env_file:
     - ../config/peatio.env
+    - ../config/kaigara.env
   volumes:
     - ../config/peatio:/opt/peatio/config:ro
 
 services:
   blockchain:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && kaigara -name blockchain -exec bundle exec ruby lib/daemons/daemons.rb blockchain"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/daemons.rb blockchain"
 
   cron_job:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name cron_job -exec bundle exec ruby lib/daemons/daemons.rb cron_job"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/daemons.rb cron_job"
 
   deposit:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name deposit -exec bundle exec ruby lib/daemons/daemons.rb deposit"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/daemons.rb deposit"
 
   upstream:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_UPSTREAM_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name upstream -exec bundle exec ruby lib/daemons/daemons.rb upstream"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/daemons.rb upstream"
 
   deposit_coin_address:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name deposit_coin_address -exec bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb deposit_coin_address"
 
   withdraw_coin:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_CRYPTO_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name withdraw_coin -exec bundle exec ruby lib/daemons/amqp_daemon.rb withdraw_coin"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb withdraw_coin"
 
   influx_writer:
     << : *peatio-daemon
-    command: bash -c "bin/link_config && kaigara -name influx_writer -exec bundle exec ruby lib/daemons/amqp_daemon.rb influx_writer"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb influx_writer"
 
   rango:
     restart: always
     image: "<%= @config['images']['rango'] %>"
     env_file:
       - ../config/rango.env
+      - ../config/kaigara.env
 
 <% unless @config['finex']['enabled'] %>
   matching:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
-    command: bash -c "bin/link_config && bundle exec ruby lib/daemons/amqp_daemon.rb matching"
-    command: bash -c "bin/link_config && kaigara -name matching -exec bundle exec ruby lib/daemons/amqp_daemon.rb matching"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb matching"
 
   order_processor:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name order_processor -exec bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
 
   trade_executor:
     << : *peatio-daemon
     environment:
     - VAULT_TOKEN=${PEATIO_MATCHING_VAULT_TOKEN}
-    command: bash -c "bin/link_config && kaigara -name trade_executor -exec bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
+    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
 <% end %>
 
   mailer:
@@ -79,40 +80,44 @@ services:
     image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
+      - ../config/kaigara.env
     volumes:
       -  ../config/secrets:/secrets:ro
       -  ../config/mailer/templates:/home/app/app/views/postmaster
       -  ../config/mailer.yml:/home/app/config/mailer.yml
-    command: bash -c "kaigara -name mailer -exec bin/mailer run"
+    command: bash -c "kaigara bin/mailer run"
 
   applogic_sidekiq:
     restart: always
     image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/barong.env
+      - ../config/kaigara.env
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
       - ../config/applogic/schedule.yml:/home/app/config/schedule.yml
-    command: bash -c "kaigara -name applogic_sidekiq -exec bundle exec sidekiq"
+    command: bash -c "kaigara bundle exec sidekiq"
 
   barong_sidekiq:
     restart: always
     image: "<%= @config['images']['barong'] %>"
     env_file:
       - ../config/barong.env
+      - ../config/kaigara.env
     volumes:
       - ../config/secrets:/secrets:ro
       - ../config/barong/seeds.yml:/home/app/config/seeds.yml
       - ../config/barong/barong.yml:/home/app/config/barong.yml
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
-    command: bash -c "kaigara -name barong_sidekiq -exec bundle exec sidekiq"
+    command: bash -c "kaigara bundle exec sidekiq"
 
   listener:
     restart: always
     image: "<%= @utils['images']['applogic'] %>"
     env_file:
       - ../config/applogic.env
+      - ../config/kaigara.env
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
-    command: bash -c "bundle exec rake event_api_listener"
+    command: bash -c "kaigara bundle exec rake event_api_listener"
