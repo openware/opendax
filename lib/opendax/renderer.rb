@@ -64,6 +64,8 @@ module Opendax
 
     def render_keys
       generate_key(BARONG_KEY)
+      generate_key(PEATIO_KEY)
+      generate_key(SONIC_KEY)
       generate_key(APPLOGIC_KEY)
       generate_key(SSH_KEY, public: true)
     end
