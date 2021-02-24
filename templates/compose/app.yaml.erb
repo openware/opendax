@@ -5,12 +5,10 @@ services:
     restart: always
     image: "<%= @config['images']['peatio'] %>"
     environment:
-      - VAULT_TOKEN=${PEATIO_RAILS_VAULT_TOKEN}
+      - VAULT_TOKEN=<%= @config['vault']['peatio_rails_token'] %>
     env_file:
       - ../config/kaigara.env
       - ../config/peatio.env
-    expose:
-      - "8000"
     volumes:
       - ../config/peatio/seed:/opt/peatio/config/seed
       - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
@@ -22,6 +20,8 @@ services:
   barong:
     restart: always
     image: "<%= @config['images']['barong'] %>"
+    environment:
+      - BARONG_VAULT_TOKEN=<%= @config['vault']['barong_token'] %>
     env_file:
       - ../config/kaigara.env
       - ../config/barong.env
@@ -56,14 +56,14 @@ services:
     env_file:
       - ../config/applogic.env
       - ../config/kaigara.env
-    expose:
-      - "8081"
     volumes:
       - ../config/applogic/management_api_v2.yml:/home/app/config/management_api_v2.yml
 
   sonic:
     restart: always
     image: "<%= @config['images']['sonic'] %>"
+    environment:
+      - VAULT_TOKEN=<%= @config['vault']['sonic_token'] %>
     env_file:
       - ../config/sonic.env
       - ../config/kaigara.env
