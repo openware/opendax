@@ -5,6 +5,8 @@ GEM
     diff-lcs (1.3)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     jwt (2.2.1)
     multipart-post (2.1.1)
     mustermann (1.1.1)
@@ -44,6 +46,7 @@ PLATFORMS
 DEPENDENCIES
   bump
   faraday
+  faraday_middleware
   jwt
   puma
   rack

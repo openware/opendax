@@ -13,6 +13,8 @@ module Opendax
     TEMPLATE_PATH = Pathname.new('./templates')
 
     BARONG_KEY = 'config/secrets/barong.key'
+    PEATIO_KEY = 'config/secrets/peatio.key'
+    SONIC_KEY = 'config/secrets/sonic.key'
     APPLOGIC_KEY = 'config/secrets/applogic.key'
     SSH_KEY = 'config/secrets/app.key'
 
@@ -21,9 +23,15 @@ module Opendax
       @utils  ||= utils
       @name ||= @config['app']['name'].downcase
       @barong_key ||= OpenSSL::PKey::RSA.new(File.read(BARONG_KEY), '')
+      @peatio_key ||= OpenSSL::PKey::RSA.new(File.read(PEATIO_KEY), '')
+      @sonic_key ||= OpenSSL::PKey::RSA.new(File.read(SONIC_KEY), '')
       @applogic_key ||= OpenSSL::PKey::RSA.new(File.read(APPLOGIC_KEY), '')
       @barong_private_key ||= Base64.urlsafe_encode64(@barong_key.to_pem)
       @barong_public_key  ||= Base64.urlsafe_encode64(@barong_key.public_key.to_pem)
+      @peatio_private_key ||= Base64.urlsafe_encode64(@peatio_key.to_pem)
+      @peatio_public_key  ||= Base64.urlsafe_encode64(@peatio_key.public_key.to_pem)
+      @sonic_private_key ||= Base64.urlsafe_encode64(@sonic_key.to_pem)
+      @sonic_public_key  ||= Base64.urlsafe_encode64(@sonic_key.public_key.to_pem)
       @applogic_private_key ||= Base64.urlsafe_encode64(@applogic_key.to_pem)
       @applogic_public_key ||= Base64.urlsafe_encode64(@applogic_key.public_key.to_pem)
 
