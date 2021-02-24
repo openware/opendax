@@ -1,11 +1,11 @@
 keychain:
-  applogic:
+  sonic:
     algorithm: RS256
-    value: <%= @applogic_public_key %>
-    
+    value: <%= @sonic_public_key %>
+
 scopes:
   read_users:
     mandatory_signers:
-      - applogic
+      - sonic
     permitted_signers:
-      - applogic
+      - sonic
