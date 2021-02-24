@@ -136,9 +136,8 @@ namespace :service do
   end
 
   desc 'Run setup hooks for peatio, barong'
-  task :setup, [:command] => ['vault:setup', 'vault:load_policies'] do |task, args|
+  task :setup, [:command] => ['vault:setup', 'vault:load_policies', 'render:config', 'kaisave:fetch', 'kaisave:save'] do |task, args|
     if args.command != 'stop'
-      Rake::Task["render:config"].execute
       puts '----- Running hooks -----'
       sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:create db:migrate"'
       sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:seed"'

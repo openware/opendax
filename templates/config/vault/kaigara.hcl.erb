@@ -15,7 +15,7 @@ path "secret/metadata/<%= @config['app']['name'].downcase %>/*" {
 
 # Manage the transit secrets engine
 path "transit/keys/<%= @config['app']['name'].downcase %>_kaigara_*" {
-  capabilities = ["create", "read", "list"]
+  capabilities = ["create", "read", "list", "update"]
 }
 
 # Encrypt secrets data
