@@ -10,6 +10,7 @@ services:
       - ../config/mysql:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_PASSWORD: <%= @config['database']['password'] %>
+      MYSQL_DATABASE: sonic
     <%- elsif @config['database']['adapter'] == 'postgresql' %>
     image: postgres:13
     volumes:
@@ -53,6 +54,8 @@ services:
       - ../config/vault:/tmp/policies
     command:
       - server
+    ports:
+      - "8200:8200"
     cap_add:
       - IPC_LOCK
     environment:

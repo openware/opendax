@@ -1,0 +1,39 @@
+# Manage the transit secrets engine
+path "transit/keys/<%= @config['app']['name'].downcase %>_*" {
+  capabilities = ["create", "read", "list"]
+}
+
+# View the kv v2 data
+path "secret/data/<%= @config['app']['name'].downcase %>/*" {
+  capabilities = ["read", "list"]
+}
+
+# View the kv v2 metadata
+path "secret/metadata/<%= @config['app']['name'].downcase %>/*" {
+  capabilities = ["read", "list"]
+}
+
+# Manage the transit secrets engine
+path "transit/keys/<%= @config['app']['name'].downcase %>_kaigara_*" {
+  capabilities = ["create", "read", "list"]
+}
+
+# Encrypt secrets data
+path "transit/encrypt/<%= @config['app']['name'].downcase %>_kaigara_*" {
+  capabilities = ["create", "read", "update"]
+}
+
+# Decrypt secrets data
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_kaigara_*" {
+  capabilities = ["create", "read", "update"]
+}
+
+# Renew tokens
+path "auth/token/renew" {
+  capabilities = ["update"]
+}
+
+# Lookup tokens
+path "auth/token/lookup" {
+  capabilities = ["update"]
+}
