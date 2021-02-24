@@ -2,7 +2,7 @@
 
 module Opendax
   class Vault
-    POLICIES_NAMES = ["barong", "finex_engine", "peatio_rails", "peatio_crypto", "peatio_upstream", "peatio_matching"]
+    POLICIES_NAMES = ["barong", "finex_engine", "peatio_rails", "peatio_crypto", "peatio_upstream", "peatio_matching", "kaigara", "sonic"]
 
     def vault_secrets_path
       'config/vault-secrets.yml'
