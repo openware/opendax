@@ -1,3 +1,4 @@
+---
 kind: pipeline
 name: default
 
@@ -29,3 +30,81 @@ steps:
 
 image_pull_secrets:
   - dockerconfigjson
+
+---
+kind: pipeline
+name: digitalocean-packer
+
+steps:
+- name: Build DigitalOcean Opendax image
+  image: appleboy/drone-packer
+  environment:
+    PKR_VAR_api_token:
+      from_secret: digitalocean_api_token
+  commands:
+    - packer build ./packer/do-packer.json.pkr.hcl
+
+trigger:
+  event:
+    - push
+  branch:
+    - feature/packer
+
+---
+kind: pipeline
+name: aws-packer
+
+steps:
+- name: Build AWS Opendax image
+  image: appleboy/drone-packer
+  environment:
+    PKR_VAR_access_key:
+      from_secret: aws_access_key
+    PKR_VAR_secret_key:
+      from_secret: aws_secret_key
+  commands:
+    - packer build ./packer/aws-packer.json.pkr.hcl
+
+trigger:
+  event:
+    - push
+  branch:
+    - feature/packer
+
+---
+kind: pipeline
+name: gcp-packer
+
+steps:
+- name: Create google credential
+  image: alpine:3.8
+  environment:
+    JSON_CREDENTIAL:
+      from_secret: json_credential
+  commands:
+    - echo "$JSON_CREDENTIAL" > cred.json
+
+- name: Build GKE Opendax base image
+  image: hashicorp/packer
+  failure: ignore
+  environment:
+    PKR_VAR_account_file: cred.json
+    PROJECT_ID:
+      from_secret: project_id
+  commands:
+    - packer build -var project_id=$PROJECT_ID ./packer/gcp-image-base.json.pkr.hcl
+
+- name: Build GKE Opendax image
+  image: hashicorp/packer
+  environment:
+    PKR_VAR_account_file: cred.json
+    PROJECT_ID:
+      from_secret: project_id
+  commands:
+    - packer build -var project_id=$PROJECT_ID ./packer/gcp-packer.json.pkr.hcl
+
+trigger:
+  event:
+    - push
+  branch:
+    - feature/packer
