@@ -5,6 +5,7 @@ require 'faraday_middleware'
 
 KAISAVE_VERSION = '0.1.15'
 KAISAVE_PATH = 'tmp/kaisave'
+SECRETS_PATH = 'config/secrets.yaml'
 
 namespace :kaisave do
   desc "Fetch the kaisave binary to #{KAISAVE_PATH}"
@@ -30,5 +31,14 @@ namespace :kaisave do
     FileUtils.chmod 0o755, KAISAVE_PATH
 
     puts 'Kaisave fetched successfully'
+  end
+
+  desc "Save #{SECRETS_PATH} contents to Vault"
+  task :save do
+    ENV['KAIGARA_DEPLOYMENT_ID'] = @config['app']['name'].downcase
+    ENV['KAIGARA_VAULT_ADDR'] = 'http://127.0.0.1:8200'
+    ENV['KAIGARA_VAULT_TOKEN'] = @config['vault']['sonic_token']
+
+    sh "./tmp/kaisave --filepath #{SECRETS_PATH}"
   end
 end
