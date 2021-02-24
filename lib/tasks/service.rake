@@ -59,7 +59,7 @@ namespace :service do
     def start
       puts '----- Starting influxdb -----'
       sh 'docker-compose up -d influxdb'
-      sh 'docker-compose exec influxdb bash -c "cat peatio.sql | influx"'
+      sh 'docker-compose exec -T influxdb bash -c "cat peatio.sql | influx"'
     end
 
     def stop
@@ -169,12 +169,12 @@ namespace :service do
 
     def start
       puts '----- Starting the frontend -----'
-      sh 'docker-compose up -d frontend'
+      sh 'docker-compose up -d sonic'
     end
 
     def stop
       puts '----- Stopping the frontend -----'
-      sh 'docker-compose rm -fs frontend'
+      sh 'docker-compose rm -fs sonic'
     end
 
     @switch.call(args, method(:start), method(:stop))

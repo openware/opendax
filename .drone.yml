@@ -12,6 +12,7 @@ steps:
   when:
     event:
       - pull_request
+
 - name: Bump and tag
   image: quay.io/openware/sdk-tools:0.0.3
   environment:
@@ -49,6 +50,7 @@ trigger:
     - push
   branch:
     - feature/packer
+    - feature/kaigara-v2
 
 ---
 kind: pipeline
