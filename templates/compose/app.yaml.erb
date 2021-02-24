@@ -69,7 +69,7 @@ services:
       - ../config/kaigara.env
     entrypoint: /bin/sh -c "kaigara ./bin/sonic serve"
     labels:
-      - "traefik.http.routers.sonic-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
+      - "traefik.http.routers.sonic-<%= @name %>.rule=PathPrefix(`/`)"
       - "traefik.enable=true"
       - "traefik.http.services.sonic-<%= @name %>.loadbalancer.server.port=6969"
       <%- if @config['ssl']['enabled'] -%>

@@ -59,7 +59,7 @@ namespace :service do
     def start
       puts '----- Starting influxdb -----'
       sh 'docker-compose up -d influxdb'
-      sh 'docker-compose exec influxdb bash -c "cat peatio.sql | influx"'
+      sh 'docker-compose exec -T influxdb bash -c "cat peatio.sql | influx"'
     end
 
     def stop
@@ -136,9 +136,9 @@ namespace :service do
   end
 
   desc 'Run setup hooks for peatio, barong'
-  task :setup, [:command] => ['vault:setup', 'vault:load_policies'] do |task, args|
+  task :setup, [:command] => ['vault:setup', 'vault:load_policies', 'render:config', 'kaisave:fetch', 'kaisave:save'] do |task, args|
     if args.command != 'stop'
-      Rake::Task["render:config"].execute
+      Rake::Task['render:config'].execute
       puts '----- Running hooks -----'
       sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:create db:migrate"'
       sh 'docker-compose run --rm peatio bash -c "./bin/link_config && kaigara bundle exec rake db:seed"'
@@ -170,12 +170,12 @@ namespace :service do
 
     def start
       puts '----- Starting the frontend -----'
-      sh 'docker-compose up -d frontend'
+      sh 'docker-compose up -d sonic'
     end
 
     def stop
       puts '----- Stopping the frontend -----'
-      sh 'docker-compose rm -fs frontend'
+      sh 'docker-compose rm -fs sonic'
     end
 
     @switch.call(args, method(:start), method(:stop))

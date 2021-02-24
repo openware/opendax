@@ -7,7 +7,7 @@ services:
     volumes:
       - ../config/frontend/env.js:/usr/share/nginx/html/config/env.js
     labels:
-      - "traefik.http.routers.frontend-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/`)"
+      - "traefik.http.routers.frontend-<%= @name %>.rule=PathPrefix(`/`)"
       - "traefik.enable=true"
       - "traefik.http.services.frontend-<%= @name %>.loadbalancer.server.port=3000"
       <%- if @config['ssl']['enabled'] -%>
@@ -24,7 +24,7 @@ services:
     volumes:
       - ../config/frontend/tower.js:/home/app/env.js
     labels:
-      - "traefik.http.routers.tower-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/tower`)"
+      - "traefik.http.routers.tower-<%= @name %>.rule=PathPrefix(`/tower`)"
       - "traefik.enable=true"
       - "traefik.http.services.tower-<%= @name %>.loadbalancer.server.port=8080"
       <%- if @config['ssl']['enabled'] -%>
