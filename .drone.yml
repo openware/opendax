@@ -12,6 +12,7 @@ steps:
   when:
     event:
       - pull_request
+
 - name: Bump and tag
   image: quay.io/openware/sdk-tools:0.0.3
   environment:
@@ -25,8 +26,10 @@ steps:
   commands:
     - BUNDLE_GEMFILE=/sdk/Gemfile bundle exec rake --rakefile=/sdk/Rakefile release:push
   when:
-    event: [push]
-    branch: [master]
+    event: 
+      - push
+    branch: 
+      - master
 
 image_pull_secrets:
   - dockerconfigjson
@@ -42,13 +45,13 @@ steps:
     PKR_VAR_api_token:
       from_secret: digitalocean_api_token
   commands:
-    - packer build ./packer/do-packer.json.pkr.hcl
+    - packer build -var tag=${DRONE_COMMIT_SHA:0:7} ./packer/do-packer.json.pkr.hcl
 
 trigger:
   event:
     - push
   branch:
-    - feature/packer
+    - master
 
 ---
 kind: pipeline
@@ -63,13 +66,13 @@ steps:
     PKR_VAR_secret_key:
       from_secret: aws_secret_key
   commands:
-    - packer build ./packer/aws-packer.json.pkr.hcl
+    - packer build -var tag=${DRONE_COMMIT_SHA:0:7} ./packer/aws-packer.json.pkr.hcl
 
 trigger:
   event:
     - push
   branch:
-    - feature/packer
+    - master
 
 ---
 kind: pipeline
@@ -101,10 +104,10 @@ steps:
     PROJECT_ID:
       from_secret: project_id
   commands:
-    - packer build -var project_id=$PROJECT_ID ./packer/gcp-packer.json.pkr.hcl
+    - packer build -var project_id=$PROJECT_ID -var tag=${DRONE_COMMIT_SHA:0:7} ./packer/gcp-packer.json.pkr.hcl
 
 trigger:
   event:
     - push
   branch:
-    - feature/packer
+    - master

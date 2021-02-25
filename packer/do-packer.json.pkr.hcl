@@ -15,6 +15,7 @@
 # views them; you can change their type later on. Read the variables type
 # constraints documentation
 # https://www.packer.io/docs/from-1.5/variables#type-constraints for more info.
+
 variable "api_token" {
   type    = string
   default = ""
@@ -26,8 +27,11 @@ variable "region" {
   description = "The name (or slug) of the region to launch the droplet in."
 }
 
-# "timestamp" template function replacement
-locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
+variable "tag" {
+  type        = string
+  default     = ""
+  description = "The image tag"
+}
 
 # source blocks are generated from your builders; a source can be referenced in
 # build blocks. A build block runs provisioner and post-processors on a
@@ -38,7 +42,7 @@ source "digitalocean" "opendax" {
   image         = "debian-9-x64"
   region        = "${var.region}"
   size          = "s-2vcpu-2gb"
-  snapshot_name = "opendax-${local.timestamp}"
+  snapshot_name = "opendax-${var.tag}"
   ssh_username  = "root"
 }
 
