@@ -9,9 +9,6 @@ steps:
     - gem install bundler
     - bundle
     - bundle exec rspec
-  when:
-    event:
-      - pull_request
 
 - name: Bump and tag
   image: quay.io/openware/sdk-tools:0.0.3
@@ -26,8 +23,14 @@ steps:
   commands:
     - BUNDLE_GEMFILE=/sdk/Gemfile bundle exec rake --rakefile=/sdk/Rakefile release:push
   when:
-    event: [push]
-    branch: [master]
+    event:
+      - push
+    branch:
+      - master
+
+trigger:
+  event:
+    - push
 
 image_pull_secrets:
   - dockerconfigjson
