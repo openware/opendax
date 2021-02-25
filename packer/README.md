@@ -1,6 +1,7 @@
 # Packer images
 
-HashiCorp Packer automates the creation of any type of machine image with the prepared scripts. The source image based on `Debbian 9 (stretch)`
+HashiCorp Packer automates the creation of any type of machine image with the prepared scripts.  
+The source image based on `Debian 9 (stretch)`
 
 ## Build GCP image
 1. Create a custom service account for Packer and assign it:  

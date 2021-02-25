@@ -15,25 +15,29 @@
 # views them; you can change their type later on. Read the variables type
 # constraints documentation
 # https://www.packer.io/docs/from-1.5/variables#type-constraints for more info.
+
 variable "account_file" {
   type    = string
   default = ""
 }
 
 variable "project_id" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "The project ID that will be used to launch instances and store images."
 }
 
 variable "zone" {
-  type = string
-  default = "europe-west1-b"
+  type        = string
+  default     = "europe-west1-b"
   description = "The zone in which to launch the instance used to create the image."
 }
 
-# "timestamp" template function replacement
-locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
+variable "tag" {
+  type        = string
+  default     = ""
+  description = "The image tag"
+}
 
 # source blocks are generated from your builders; a source can be referenced in
 # build blocks. A build block runs provisioner and post-processors on a
@@ -43,7 +47,7 @@ source "googlecompute" "opendax" {
   account_file  = "${var.account_file}"
   disk_size     = 10
   disk_type     = "pd-ssd"
-  image_name    = "opendax-${local.timestamp}"
+  image_name    = "opendax-${var.tag}"
   instance_name = "opendax-${uuidv4()}"
   machine_type  = "n1-standard-4"
   project_id    = "${var.project_id}"
