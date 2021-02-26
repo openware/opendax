@@ -35,6 +35,10 @@ vault:
   peatio_matching_token: changeme
   barong_token: changeme
   finex_engine_token: changeme
+auth0:
+  enabled: false
+  domain: changeme
+  client_id: changeme
 database:
   host: db
   adapter: mysql
