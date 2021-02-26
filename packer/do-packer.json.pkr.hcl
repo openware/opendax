@@ -37,7 +37,7 @@ source "digitalocean" "opendax" {
   api_token     = "${var.api_token}"
   image         = "debian-9-x64"
   region        = "${var.region}"
-  size          = "s-2vcpu-2gb"
+  size          = "s-4vcpu-16gb"
   snapshot_name = "opendax-${local.timestamp}"
   ssh_username  = "root"
 }
