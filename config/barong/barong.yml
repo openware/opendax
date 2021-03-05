@@ -20,7 +20,7 @@ document_types:
 user_storage_titles:
 # - personal  ## example
 # - company   ## example
-сaptcha_protected_endpoints: []
+captcha_protected_endpoints: []
 # - user_create
 # - session_create
 # - password_reset
