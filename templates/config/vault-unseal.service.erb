@@ -1,0 +1,12 @@
+[Unit]
+Description=This service unseals Vault in ~/deploy/opendax upon startup
+After=docker.service
+
+[Service]
+User=deploy
+ExecStart=/bin/bash -c "source ~/.rvm/scripts/rvm; bundle exec rake vault:setup"
+Type=simple
+WorkingDirectory=/home/deploy/opendax
+
+[Install]
+WantedBy=multi-user.target
