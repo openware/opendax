@@ -36,7 +36,7 @@ namespace :kaisave do
   desc "Save #{SECRETS_PATH} contents to Vault"
   task :save do
     ENV['KAIGARA_DEPLOYMENT_ID'] = @config['app']['name'].downcase
-    ENV['KAIGARA_VAULT_ADDR'] = 'http://127.0.0.1:8200'
+    ENV['KAIGARA_VAULT_ADDR'] ||= 'http://127.0.0.1:8200'
     ENV['KAIGARA_VAULT_TOKEN'] = @config['vault']['sonic_token']
 
     sh "./tmp/kaisave --filepath #{SECRETS_PATH}"

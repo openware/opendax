@@ -34,7 +34,6 @@ services:
       - ../config/barong/abilities.yml:/home/app/config/abilities.yml
     command: bash -c "kaigara bundle exec puma --config config/puma.rb"
 
-<% if @config['finex']['enabled'] %>
   finex-api:
     restart: always
     image: "<%= @config['images']['finex'] %>"
@@ -54,7 +53,6 @@ services:
     command: "kaigara ./finex"
     volumes:
       - ../config/finex:/app/config:ro
-<% end %>
 
   applogic:
     restart: always
