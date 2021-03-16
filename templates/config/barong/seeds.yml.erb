@@ -40,9 +40,7 @@ permissions:
 # SUPER ADMIN has an access to the whole system without any limits
 # so we can just grant him access to /api/v2/*
  - { role: superadmin, verb: all, path: api/v2, action: accept }
-<%- if @config['finex']['enabled'] -%>
  - { role: superadmin, verb: post, path: api/v2/peatio/market/orders, action: drop }
-<%- end -%>
  # superadmin has a full access to the peatio admin api
  - { role: superadmin, verb: all, path: admin, action: accept }
  - { role: superadmin, verb: get, path: assets, action: accept }
@@ -53,9 +51,7 @@ permissions:
 # ADMIN
 # admin has nearly full access to barong and peatio api, except managing permissions
  - { role: admin, verb: all, path: api/v2, action: accept }
-<%- if @config['finex']['enabled'] -%>
  - { role: admin, verb: post, path: api/v2/peatio/market/orders, action: drop }
-<%- end -%>
  # admin has a full access to the peatio admin api
  - { role: admin, verb: all, path: admin, action: accept }
  - { role: admin, verb: get, path: assets, action: accept }
@@ -150,13 +146,9 @@ permissions:
 # TRADER
  # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
  - { role: trader, verb: all, path: api/v2/peatio/account, action: accept }
-<%- if @config['finex']['enabled'] -%>
  - { role: trader, verb: get, path: api/v2/peatio/market, action: accept }
  - { role: trader, verb: all, path: api/v2/finex/market, action: accept }
  - { role: trader, verb: post, path: api/v2/peatio/market/orders, action: drop }
-<%- else -%>
- - { role: trader, verb: all, path: api/v2/peatio/market, action: accept }
-<%- end -%>
  - { role: trader, verb: all, path: api/v2/barong/resource, action: accept }
  - { role: trader, verb: all, path: api/v2/resource, action: accept }
  # ranger access
@@ -165,13 +157,9 @@ permissions:
  # MEMBER
  # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
  - { role: member, verb: all, path: api/v2/peatio/account, action: accept }
-<%- if @config['finex']['enabled'] -%>
  - { role: member, verb: get, path: api/v2/peatio/market, action: accept }
  - { role: member, verb: all, path: api/v2/finex/market, action: accept }
  - { role: member, verb: post, path: api/v2/peatio/market/orders, action: drop }
-<%- else -%>
- - { role: member, verb: all, path: api/v2/peatio/market, action: accept }
-<%- end -%>
  - { role: member, verb: all, path: api/v2/barong/resource, action: accept }
  - { role: member, verb: all, path: api/v2/resource, action: accept }
  # ranger access
@@ -180,13 +168,9 @@ permissions:
  # BROKER
  # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
  - { role: broker, verb: all, path: api/v2/peatio/account, action: accept }
-<%- if @config['finex']['enabled'] -%>
  - { role: broker, verb: get, path: api/v2/peatio/market, action: accept }
  - { role: broker, verb: all, path: api/v2/finex/market, action: accept }
  - { role: broker, verb: post, path: api/v2/peatio/market/orders, action: drop }
-<%- else -%>
- - { role: broker, verb: all, path: api/v2/peatio/market, action: accept }
-<%- end -%>
  - { role: broker, verb: all, path: api/v2/barong/resource, action: accept }
  - { role: broker, verb: all, path: api/v2/resource, action: accept }
  # ranger access
