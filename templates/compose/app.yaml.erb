@@ -37,14 +37,20 @@ services:
 <% if @config['finex']['enabled'] %>
   finex-api:
     restart: always
-    image: "<%= @config['finex']['image'] %>"
+    image: "<%= @config['images']['finex'] %>"
+    env_file:
+      - ../config/finex.env
+      - ../config/kaigara.env
     command: "kaigara ./orderapi"
     volumes:
       - ../config/finex:/app/config:ro
 
   finex-engine:
     restart: always
-    image: "<%= @config['finex']['image'] %>"
+    image: "<%= @config['images']['finex'] %>"
+    env_file:
+      - ../config/finex.env
+      - ../config/kaigara.env
     command: "kaigara ./finex"
     volumes:
       - ../config/finex:/app/config:ro
@@ -78,4 +84,19 @@ services:
       - "traefik.http.routers.sonic-<%= @name %>.tls.certresolver=myresolver"
       <%- else -%>
       - "traefik.http.routers.sonic-<%= @name %>.entrypoints=web"
+      <%- end -%>
+
+  tower:
+    restart: always
+    image: "<%= @config['images']['tower'] %>"
+    labels:
+      - "traefik.http.routers.tower-<%= @name %>.rule=PathPrefix(`/tower`)"
+      - "traefik.enable=true"
+      - "traefik.http.services.tower-<%= @name %>.loadbalancer.server.port=8080"
+      <%- if @config['ssl']['enabled'] -%>
+      - "traefik.http.routers.tower-<%= @name %>.entrypoints=websecure"
+      - "traefik.http.routers.tower-<%= @name %>.tls=true"
+      - "traefik.http.routers.tower-<%= @name %>.tls.certresolver=myresolver"
+      <%- else -%>
+      - "traefik.http.routers.tower-<%= @name %>.entrypoints=web"
       <%- end -%>
