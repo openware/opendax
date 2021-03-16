@@ -54,6 +54,7 @@ services:
     env_file:
       - ../config/rango.env
       - ../config/kaigara.env
+    command: kaigara ./rango
 
   mailer:
     restart: always
