@@ -1,30 +1,8 @@
 metrics:
   enabled: true
-license: <%= @config['finex']['license_key'] %>
-influx:
-  host: influxdb
-  port: 8086
-  scheme: http
-  database: peatio_production
-database:
-  driver: mysql
-  name: peatio_production
-  username: <%= @config['database']['user'] %>
-  password: <%= @config['database']['password'] %>
-  host: <%= @config['database']['host'] %>
-  port: <%= @config['database']['port'] %>
 log_level:
   log_observer: info
-vault:
-  host: http://vault:8200
-  token: <%= @config['vault']['finex_engine_token'] %>
-  app_name: <%= @config['app']['name'].downcase %>
 messaging:
-  driver: amqp
-  username: guest
-  password: guest
-  host: rabbitmq
-  port: 5672
   exchanges:
     - name:    finex.orderapi
       type:    direct

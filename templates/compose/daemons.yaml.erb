@@ -55,26 +55,6 @@ services:
       - ../config/rango.env
       - ../config/kaigara.env
 
-<% unless @config['finex']['enabled'] %>
-  matching:
-    << : *peatio-daemon
-    environment:
-      - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
-    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb matching"
-
-  order_processor:
-    << : *peatio-daemon
-    environment:
-      - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
-    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb order_processor"
-
-  trade_executor:
-    << : *peatio-daemon
-    environment:
-      - VAULT_TOKEN=<%= @config['vault']['peatio_matching_token'] %>
-    command: bash -c "bin/link_config && kaigara bundle exec ruby lib/daemons/amqp_daemon.rb trade_executor"
-<% end %>
-
   mailer:
     restart: always
     image: "<%= @config['images']['barong'] %>"

@@ -87,15 +87,9 @@ namespace :service do
     @switch.call(args, method(:start), method(:stop))
   end
 
-  desc '[Optional] Run daemons (rango, peatio daemons, barong sidekiq)'
+  desc 'Run daemons (rango, peatio daemons, barong sidekiq)'
   task :daemons, [:command] do |_task, args|
-    @daemons = %w[rango blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer barong_sidekiq]
-
-    if @config['finex']['enabled']
-      @daemons |= %w[finex-engine finex-api]
-    else
-      @daemons |= %w[matching order_processor trade_executor]
-    end
+    @daemons = %w[rango blockchain cron_job upstream deposit deposit_coin_address withdraw_coin influx_writer barong_sidekiq finex-engine finex-api]
 
     args.with_defaults(:command => 'start')
 
