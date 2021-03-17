@@ -18,6 +18,16 @@ path "transit/encrypt/<%= @config['app']['name'].downcase %>_kaigara_*" {
   capabilities = ["create", "read", "update"]
 }
 
+# Decrypt Finex secrets data
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_kaigara_finex" {
+  capabilities = ["create", "read", "update"]
+}
+
+# Decrypt Sonic secrets data
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_kaigara_sonic" {
+  capabilities = ["create", "read", "update"]
+}
+
 # Renew tokens
 path "auth/token/renew" {
   capabilities = ["update"]
