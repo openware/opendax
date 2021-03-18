@@ -1,9 +1,9 @@
 #!/bin/bash -x
 
 function enable_vault_unseal() {
-  cp /home/deploy/opendax/config/vault-unseal.service /etc/systemd/system/vault-unseal.service
-  systemctl daemon-reload
-  systemctl enable vault-unseal
+  sudo cp /home/deploy/opendax/config/vault-unseal.service /etc/systemd/system/vault-unseal.service
+  sudo systemctl daemon-reload
+  sudo systemctl enable vault-unseal
 }
 
 sudo -u deploy bash <<EOS

@@ -16,7 +16,7 @@ images:
   sonic: quay.io/openware/baseapp:3.0.0-1ef7a427
   tower: quay.io/openware/tower:3.0.0-ccde1dd
   rango: quay.io/openware/rango:2.6.0-1ecb85b
-  finex: quay.io/openware/openfinex:2.7.0-3acdefe
+  finex: quay.io/openware/openfinex:3.0.0-d66ed57
 vendor:
   frontend: git@github.com:openware/baseapp.git
 kyc:
