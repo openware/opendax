@@ -75,6 +75,7 @@ trigger:
     - push
   branch:
     - feature/packer
+    - feature/kaigara-v2
 
 ---
 kind: pipeline

@@ -43,9 +43,6 @@ events:
 - name: Label Created
   key: label.created
   exchange: barong_model
-  expression: |
-    record.key in ["phone", "profile", "document"] &&
-    record.value in ["verified", "rejected"]
   templates:
     EN:
       subject: Account Details Updated
@@ -54,9 +51,6 @@ events:
 - name: Label Updated
   key: label.updated
   exchange: barong_model
-  expression: |
-    record.key in ["phone", "profile", "document"] &&
-    record.value in ["verified", "rejected"]
   templates:
     EN:
       subject: Account Details Updated
@@ -65,7 +59,6 @@ events:
 - name: Deposit Accepted
   key: deposit.updated
   exchange: peatio
-  expression: changes.state == "submitted" && record.state == "accepted"
   templates:
     EN:
       subject: Deposit Accepted
@@ -82,7 +75,6 @@ events:
 - name: Withdrawal Succeed
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state in ["succeed", "rejected", "canceled", "failed", "accepted"] && record.state in ["succeed", "rejected", "canceled", "failed"]
   templates:
     EN:
       subject: Withdrawal Succeed
@@ -99,9 +91,6 @@ events:
 - name: Resend beneficiary
   key: beneficiary.updated
   exchange: peatio
-  expression:
-    and:
-       record.state: 'pending'
   templates:
     EN:
       subject: Resend Beneficiary
