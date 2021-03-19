@@ -4,6 +4,7 @@ app:
   domain: app.local
   subdomain: www
   show_landing: true
+  opendax_addr: https://www.opendax.cloud
 render_protect: false
 csrfEnabled: false
 ssl:
