@@ -9,6 +9,17 @@
     transaction:     https://etherscan.io/tx/#{txid}
   status:            active
 
+- key:               opendax-cloud
+  name:              Opendax Cloud Blockchain
+  client:            parity
+  server:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
+  height:            8670000
+  min_confirmations: 6
+  explorer:
+    address:         https://etherscan.io/address/#{address}
+    transaction:     https://etherscan.io/tx/#{txid}
+  status:            disabled
+
 <% if @config['bitcoind']['enabled'] %>
 - key:               btc-<%= @config['bitcoind']['network'] %>
   name:              Bitcoin <%= @config['bitcoind']['network'].capitalize %>
