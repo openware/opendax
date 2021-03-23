@@ -1,46 +1,71 @@
 roles:
   - superadmin
   - admin
+  - technical
+  - accountant
   - compliance
   - support
 
 admin_permissions:
   superadmin:
     manage:
-      - User
-      - Activity
       - Ability
-      - APIKey
-      - Profile
-      - Permission
-      - Label
-      - Restriction
+      - User
       - Level
+      - Label
+      - Profile
+      - Activity
+      - APIKey
+      - Permission
+      - Restriction
+      - Document
   admin:
     read:
-      - Activity
-      - Level
-      - APIKey
+      - Activity    
       - Permission
     manage:
+      - Ability
       - User
-      - Activity
-      - Profile
-      - Label
-  compliance:
-    read:
       - Level
+      - Label
+      - Profile
+      - APIKey
+      - Restriction
+      - Document
+  technical:
+    read:
+      - Ability
       - User
+      - Level
+      - Label
+      - Profile
       - Activity
     manage:
+      - APIKey
+      - Restriction
+  accountant:
+    read:
+      - Ability
+      - User
+      - Level
       - Label
-    update:
+      - Profile
+      - Activity
+  compliance:
+    read:
+      - Ability
+      - Document
+    manage:
+      - User
+      - Level
+      - Label
       - Profile
   support:
     read:
-      - User
-      - Activity
-      - APIKey
-      - Profile
+      - Ability
       - Label
       - Level
+      - Profile
+      - Activity
+    manage:
+      - User
