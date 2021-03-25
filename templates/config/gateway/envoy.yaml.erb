@@ -121,7 +121,7 @@ static_resources:
                   uri: http://barong:8001
           - name: envoy.router
             config: {}
-    perConnectionBufferLimitBytes: 10000000
+    perConnectionBufferLimitBytes: 20000000
   clusters:
   - name: sonic
     connect_timeout: 0.25s
