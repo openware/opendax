@@ -175,3 +175,40 @@ permissions:
  - { role: broker, verb: all, path: api/v2/resource, action: accept }
  # ranger access
  - { role: broker, verb: get, path: api/v2/ranger, action: accept }
+
+ # MAKER
+ - { role: maker, verb: all, path: api/v2/peatio/account, action: accept }
+ - { role: maker, verb: all, path: api/v2/peatio/market, action: accept }
+ - { role: maker, verb: all, path: api/v2/finex/market, action: accept }
+ - { role: maker, verb: all, path: api/v2/barong/resource, action: accept }
+ # ranger access
+ - { role: maker, verb: get, path: api/v2/ranger, action: accept }
+ # Finex upstream access
+ - { role: maker, verb: get, path: api/v2/open_finance, action: accept }
+ # applogic access
+ - { role: maker, verb: all, path: api/v2/applogic, action: accept }
+
+ # Service Account  Maker
+ # has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+ - { role: sa_maker, verb: all, path: api/v2/peatio/account, action: accept }
+ - { role: sa_maker, verb: all, path: api/v2/peatio/market, action: accept }
+ - { role: sa_maker, verb: all, path: api/v2/finex/market, action: accept }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource, action: accept }
+ # Service Account can not interact with Password, 2FA, KYC, API keys, Beneficiary, Deposit and Withdraw
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/otp, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/phones, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/profiles, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/documents, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/addresses, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/applogic/private/tenants, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/api_keys, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/barong/resource/users/password, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/peatio/account/deposit_address, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/peatio/account/withdraws, action: drop }
+ - { role: sa_maker, verb: all, path: api/v2/peatio/account/beneficiaries, action: drop }
+ # Finex upstream access
+ - { role: sa_maker, verb: get, path: api/v2/open_finance, action: accept }
+ # ranger access
+ - { role: sa_maker, verb: get, path: api/v2/ranger, action: accept }
+ # applogic access
+ - { role: sa_maker, verb: all, path: api/v2/applogic, action: accept }
