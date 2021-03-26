@@ -11,7 +11,7 @@ services:
       - ../config/peatio.env
     volumes:
       - ../config/peatio/seed:/opt/peatio/config/seed
-      - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api_v1.yml
+      - ../config/peatio/management_api_v1.yml:/opt/peatio/config/management_api.yml
       - ../config/peatio/plugins.yml:/opt/peatio/config/plugins.yml
       - ../config/peatio/abilities.yml:/opt/peatio/config/abilities.yml
     labels: {}
