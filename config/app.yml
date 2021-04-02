@@ -54,6 +54,7 @@ twilio:
   phone_number: "+15005550000"
   account_sid: changeme
   auth_token: changeme
+  sms_content_template: 'Your changme verification code is: {{code}}'  
 gaTrackerKey: ''
 captcha:
   type: none
