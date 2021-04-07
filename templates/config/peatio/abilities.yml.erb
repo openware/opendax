@@ -1,15 +1,15 @@
 roles:
   - superadmin
   - admin
-  - manager
+  - technical
   - accountant
   - compliance
   - support
-  - technical
   - member
   - broker
   - trader
   - maker
+  - sa_maker
 
 admin_permissions:
   superadmin:
@@ -19,33 +19,57 @@ admin_permissions:
       - Operations::Expense
       - Operations::Liability
       - Operations::Revenue
+      - Member
+      - Account
+      - Beneficiary
+      - PaymentAddress
       - Deposit
       - Withdraw
-      - Account
-      - PaymentAddress
-      - Member
+      - WithdrawLimit
+      - Blockchain
+      - Currency
       - Engine
       - Market
-      - Currency
-      - Blockchain
       - TradingFee
       - Wallet
       - Adjustment
-      - Beneficiary
+      - InternalTransfer
+      - WhitelistedSmartContract
     read:
       - Trade
       - Order
+    create:
+      - Deposits::Fiat
     update:
       - Order
   admin:
+    manage:
+      - Operations::Account
+      - Operations::Asset
+      - Operations::Expense
+      - Operations::Liability
+      - Operations::Revenue
+      - Beneficiary
+      - Deposit
+      - Withdraw
+      - WithdrawLimit
+      - Engine
+      - Market
+      - TradingFee
+      - Wallet
+      - Adjustment 
+      - InternalTransfer
+      - WhitelistedSmartContract
     read:
       - Trade
+      - Order
       - Account
       - PaymentAddress
       - Member
-      - Order
       - Currency
       - Blockchain
+    create:
+      - Deposits::Fiat
     update:
       - Order
       - Member
@@ -58,20 +82,27 @@ admin_permissions:
         - name
         - explorer_address
         - explorer_transaction
-    manage:
-      - Beneficiary
+  technical:
+    read:
       - Operations::Account
       - Operations::Asset
       - Operations::Expense
       - Operations::Liability
-      - Operations::Revenue
+      - Trade
+      - Order
+      - Member
+      - InternalTransfer
+    manage:
+      - WithdrawLimit
+      - Blockchain
+      - Currency
       - Engine
       - Market
-      - Wallet
       - TradingFee
-      - Adjustment
-      - Deposit
-      - Withdraw
+      - Wallet
+      - WhitelistedSmartContract
+    update:
+      - Order
   accountant:
     read:
       - Operations::Account
@@ -80,14 +111,22 @@ admin_permissions:
       - Operations::Liability
       - Operations::Revenue
       - Member
-      - Deposit
-      - Withdraw
       - Account
-      - PaymentAddress
       - Beneficiary
-    update:
+      - PaymentAddress
       - Deposit
       - Withdraw
+      - WithdrawLimit
+      - Blockchain
+      - Currency
+      - Engine
+      - Market
+      - TradingFee
+      - Wallet
+      - Trade
+      - Order
+      - Adjustment
+      - InternalTransfer
     create:
       - Deposits::Fiat
       - Adjustment
@@ -97,77 +136,50 @@ admin_permissions:
       - Operations::Asset
       - Operations::Expense
       - Operations::Liability
-      - Operations::Revenue
       - Member
-      - Deposit
-      - Withdraw
       - Account
-      - PaymentAddress
       - Beneficiary
-    update:
+      - PaymentAddress
       - Deposit
       - Withdraw
-  manager:
-    read:
-      - Operations::Account
-      - Operations::Asset
-      - Operations::Expense
-      - Operations::Liability
-      - Operations::Revenue
-      - Deposit
-      - Withdraw
-      - Account
-      - PaymentAddress
-      - Beneficiary
-      - Member
-      - Trade
-      - Order
-    manage:
       - Currency
-      - Blockchain
-  support:
-    read:
-      - Deposit
-      - Withdraw
-      - Account
-      - Member
-  technical:
-    read:
-      - Operations::Account
-      - Operations::Asset
-      - Operations::Expense
-      - Operations::Liability
-      - Operations::Revenue
-      - Deposit
-      - Withdraw
-      - Account
-      - PaymentAddress
-      - Beneficiary
-      - Member
-    manage:
       - Engine
       - Market
+      - Trade
+      - Order
+  support:
+    read:
+      - Operations::Account
+      - Operations::Asset
+      - Operations::Expense
+      - Operations::Liability
+      - Member
+      - Account
+      - Beneficiary
+      - PaymentAddress
+      - Deposit
+      - Withdraw
       - Currency
-      - Blockchain
-      - TradingFee
-      - Wallet
+      - Engine
+      - Market
+      - Trade
+      - Order
+      - InternalTransfer
 
 user_permissions:
-  member:
-    manage: all
   superadmin:
     manage: all
   admin:
+    manage: all
+  technical:
     manage: all
   accountant:
     manage: all
   compliance:
     manage: all
-  manager:
-    manage: all
   support:
     manage: all
-  technical:
+  member:
     manage: all
   broker:
     manage: all
@@ -175,3 +187,13 @@ user_permissions:
     manage: all
   maker:
     manage: all
+  sa_maker:
+    read:
+      - Operations::Account
+      - Order
+      - Trade
+      - StatsMemberPnl
+    create:
+      - Order
+    update:
+      - Order
