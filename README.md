@@ -288,7 +288,7 @@ In case of such error:
 
 Make sure you're not using an existing Docker volume for Vault(i.e. one left after a different Vault container deployment):
 ```sh
-docker volumes ps | grep vault
+docker volume ls | grep vault
 ```
 
 In case there are existing volumes, remove the running Vault container via `docker rm -f *id*` and run `docker volume rm -f *volume name*`
