@@ -5,12 +5,16 @@
 # model properties are listed at the very bottom of this models files.
 #
 # Note: email is the only required field here.
+<%- unless @config['wizard_enabled'] %>
+users:
+- email: admin@barong.io
+  password: 0lDHd9ufs9t@
+  role: superadmin
+  state: active
+  level: 3
+<%- else %>
 users: []
-# - email: admin@barong.io
-#   password: 0lDHd9ufs9t@
-#   role: admin
-#   state: active
-#   level: 3
+<%- end %>
 # - email: john@barong.io
 #   password: Am8icnzEI3d!
 #   role: member
