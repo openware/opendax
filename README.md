@@ -124,7 +124,30 @@ kyc:
 
 ## Usage
 
-### Initial configuration
+### Installation Wizard
+
+Unless the installation wizard was disabled(`app.wizard_enabled` in `config/app.yml`), it will be displayed upon the first startup.
+There, you can set the initial superadmin email and password, configure the exchange name and URL, and configure upstream markets from OpenDAX Cloud
+
+### Tower configuration
+
+After the initial configuration, you can manage all the configuration variables at `*exchange_url*/tower/settings/configurations`.
+
+`public` and `private` scope configurations can be both viewed and updated while `secret` ones can only be updated to avoid credentials leakage.
+
+As soon as any component's (barong, peatio, etc.) configuration is changed, it will restart and reload its config within 20 seconds.
+
+### Terminal-based configuration
+
+You can also alter platform configurations directly from the terminal.
+To do this:
+1. Open `config/secrets.yaml` or create a file with the same structure
+2. Add or edit new configuration data for component(s) you'd like to update
+3. Run `./tmp/kaisave --filepath *filepath*` to load all configurations from a given file
+
+**Note: existing configurations would be overwritten by this process so make sure to only load relevant changes without resetting existing data with defaults for other components**
+
+### Configuration files
 
 All the OpenDAX deployment files have their confguration stored in `config/app.yml`.
 
@@ -137,6 +160,7 @@ Parameter | Description | Default
 `app.name` | global application name | `"OpenDax"`
 `app.domain` | base domain name | `app.local`
 `app.subdomain` | subdomain | `www`
+`app.wizard_enabled` | enable installation wizard | `true`
 `app.show_landing` | enable/disable landing page display for the frontend application | `true`
 `render_protect` | enable read-only mode for rendered files | `false`
 `csrfEnabled` | enable CSRF protection on Barong | `false`
