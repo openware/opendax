@@ -49,15 +49,12 @@ admin_permissions:
       - Operations::Expense
       - Operations::Liability
       - Operations::Revenue
-      - Member
-      - Account
       - Beneficiary
-      - PaymentAddress
       - Deposit
       - Withdraw
       - WithdrawLimit
-      - Blockchain
       - Currency
+      - Blockchain
       - Engine
       - Market
       - TradingFee
@@ -68,10 +65,16 @@ admin_permissions:
     read:
       - Trade
       - Order
+      - Account
+      - PaymentAddress
+      - Member
+      - Currency
+      - Blockchain
     create:
       - Deposits::Fiat
     update:
       - Order
+      - Member
   technical:
     read:
       - Operations::Account
@@ -90,6 +93,7 @@ admin_permissions:
       - Market
       - TradingFee
       - Wallet
+      - WhitelistedSmartContract
     update:
       - Order
   accountant:
