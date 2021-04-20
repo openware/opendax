@@ -43,3 +43,22 @@ HashiCorp Packer automates the creation of any type of machine image with the pr
     ```bash
     $ packer build ./packer/aws-packer.json.pkr.hcl
     ```
+
+## Build Azure image
+1. Create Azure App Registration.
+2. Create Azure Resource Group with name 'Opendax'
+    In case, you can choose diffent name. Then you will need to set `PKR_VAR_resource_group_name` with your name.
+    ```bash
+    $ export PKR_VAR_resource_group_name=*resource_group_name*
+    ```
+3. Create Key vault
+4. Set `PKR_VAR_subscription_id` & `PKR_VAR_tenant_id` with your Azure credentials. [Here](https://www.inkoop.io/blog/how-to-get-azure-api-credentials/) you can find more information how to get them.
+   ```bash
+   $ export PKR_VAR_subscription_id = YOUR_AZURE_SUBSCRIPTION_ID
+   $ export PKR_VAR_tenant_id = YOUR_AZURE_APP_REGISTRATION_TENANT_ID
+   ```
+
+5. Build Azure Opendax image
+    ```bash
+    $ packer build ./packer/azure-packer.json.pkr.hcl
+    ```
