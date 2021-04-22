@@ -17,7 +17,7 @@ images:
   barong: quay.io/openware/barong:3.0.5
   sonic: quay.io/openware/baseapp:3.0.7
   tower: quay.io/openware/tower:3.0.6
-  rango: quay.io/openware/rango:2.7.0-2c38d65
+  rango: quay.io/openware/rango:3.0.1
   finex: quay.io/openware/openfinex:3.0.0-74d3b52
 vendor:
   frontend: git@github.com:openware/baseapp.git
@@ -27,15 +27,15 @@ kyc:
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
 vault:
-  root_token: s.OpW0UoXyQIOQoQLHCQezfLe6
-  peatio_rails_token: s.PUAa51M6tKaFF52QISnFAf0P
-  peatio_crypto_token: s.OeAISG7HJfjIrC1fbVlkC3hW
-  peatio_upstream_token: s.PmGxYY7kMY2SFPS7p37514bM
-  peatio_matching_token: s.q5mAWv8i8EuDI1dsY1RzVMwc
-  barong_token: s.ltdDvAQxGqVKYC7IPGkMZSQg
-  finex_engine_token: s.rEOUdl2jOu333JqWH5E5A3Oy
-  kaigara_token: s.zV7NuqMzbeQApBT3fZjMXKkp
-  sonic_token: s.LiINVGoRb2XzEGUN7r7ppXiw
+  root_token: changeme
+  peatio_rails_token: changeme
+  peatio_crypto_token: changeme
+  peatio_upstream_token: changeme
+  peatio_matching_token: changeme
+  barong_token: changeme
+  finex_engine_token: changeme
+  kaigara_token: changeme
+  sonic_token: changeme
 database:
   host: db
   adapter: mysql
@@ -93,7 +93,7 @@ wallets:
     address: changeme
     max_balance: 1000.0
 parity:
-  network: testnet
+  network: kovan  # Could be mainnet, kovan, rinkeby
   address: parity
   rpcport: 8545
   port: 30303
@@ -112,6 +112,18 @@ litecoind:
   network: testnet
   rpcport: 19332
   port: 19335
+electrumd_btc:
+  user: opendax
+  password: changeme
+  wallet_passphrase: "luc1d1tyc0m3b@ck"
+  testnet: true
+  segwit: false
+electrumd_ltc:
+  user: opendax
+  password: changeme
+  wallet_passphrase: "th3l3ss1kn0wth3b3tt3r"
+  testnet: true
+  segwit: false
 terraform:
   credentials: "~/safe/opendax.json"
   project: example-opendax
