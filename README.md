@@ -196,9 +196,11 @@ Parameter | Description | Default
 `smtp` | SMTP configs used for sending platform emails
 `captcha` | captcha configuration([Recaptcha](https://www.google.com/recaptcha) or [Geetest](https://www.geetest.com))
 `wallets` | configs for wallets seeded during the initial deployment of Peatio
-`parity` | Parity cryptonode configuration
+`parity` | Parity cryptonode configuration([learn more](https://openethereum.github.io))
 `bitcoind` | Bitcoind cryptonode configuration
 `litecoind` | Litecoind cryptonode configuration
+`electrumd-btc` | Bitcoin electrumd server configuration([learn more](https://github.com/openware/images/tree/master/electrum))
+`electrumd-ltc` | Litecoin electrumd server configuration([learn more](https://github.com/openware/images/tree/master/electrum-ltc))
 `terraform.credentials` | local path to a GCP service account JSON key | `"~/safe/opendax.json"`
 `terraform.project` | GCP project name | `"example-opendax"`
 
