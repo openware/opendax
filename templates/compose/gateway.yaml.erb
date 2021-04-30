@@ -8,7 +8,7 @@ services:
       - ../config/gateway:/etc/envoy/
     command: /usr/local/bin/envoy -l info -c /etc/envoy/envoy.yaml
     labels:
-      - "traefik.http.routers.gateway-<%= @name %>.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.gateway-<%= @name %>.rule=Host(`<%= @config['app']['subdomain'] %>.<%= @config['app']['domain'] %>`) && PathPrefix(`/api`)"
       - "traefik.enable=true"
       - "traefik.http.services.gateway-<%= @name %>.loadbalancer.server.port=8099"
       <%- if @config['ssl']['enabled'] -%>
