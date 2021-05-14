@@ -50,6 +50,8 @@ storage:
   accessKey: changeme
   secretKey: changeme
   signatureVersion: '2'
+  uploadMinSize: 1
+  uploadMaxSize: 20
 twilio:
   enabled: false
   phone_number: "+15005550000"
