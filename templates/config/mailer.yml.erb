@@ -65,7 +65,10 @@ events:
 - name: Deposit Accepted
   key: deposit.updated
   exchange: peatio
-  expression: changes.state == "submitted" && record.state == "accepted"
+  expression:
+    and:
+      changes.state: 'submitted'
+      record.state: 'accepted'
   templates:
     EN:
       subject: Deposit Accepted
@@ -74,7 +77,10 @@ events:
 - name: Deposit Rejected
   key: deposit.updated
   exchange: peatio
-  expression: changes.state == "rejected" && record.state == "rejected"
+  expression:
+    and:
+      changes.state: 'submitted'
+      record.state: 'rejected'
   templates:
     EN:
       subject: Deposit Rejected
@@ -91,7 +97,22 @@ events:
 - name: Withdrawal Succeed
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state in ["succeed", "accepted"] && record.state == "succeed"
+  expression:
+    and:
+      changes.state: 'succeed'
+      record.state: 'succeed'
+  templates:
+    EN:
+      subject: Withdrawal Succeed
+      template_path: withdraw_succeed.en.html.erb
+
+- name: Withdrawal Succeed
+  key: withdraw.updated
+  exchange: peatio
+  expression:
+    and:
+      changes.state: 'accepted'
+      record.state: 'succeed'
   templates:
     EN:
       subject: Withdrawal Succeed
@@ -100,7 +121,10 @@ events:
 - name: Withdrawal Rejected
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state == "rejected" && record.state == "rejected"
+  expression:
+    and:
+      changes.state: 'rejected'
+      record.state: 'rejected'
   templates:
     EN:
       subject: Withdrawal Rejected
@@ -109,7 +133,10 @@ events:
 - name: Withdrawal Canceled
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state == "canceled" && record.state == "canceled"
+  expression:
+    and:
+      changes.state: 'canceled'
+      record.state: 'canceled'
   templates:
     EN:
       subject: Withdrawal Canceled
@@ -118,7 +145,10 @@ events:
 - name: Withdrawal Failed
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state == "failed" && record.state == "failed"
+  expression:
+    and:
+      changes.state: 'failed'
+      record.state: 'failed'
   templates:
     EN:
       subject: Withdrawal Failed
