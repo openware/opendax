@@ -424,3 +424,27 @@ permissions:
 - { role: sa_maker, verb: all, path: api/v2/applogic, action: accept }    
 # get abilities
 - { role: maker, verb: get, path: api/v2/finex/abilities, action: accept }
+
+# REPORTER
+- { role: reporter, verb: all, path: api/v2/peatio/account, action: accept }
+- { role: reporter, verb: all, path: api/v2/peatio/market, action: accept }
+- { role: reporter, verb: all, path: api/v2/finex/market, action: accept }
+- { role: reporter, verb: all, path: api/v2/barong/resource, action: accept }
+- { role: reporter, verb: get, path: api/v2/barong/admin/users, action: accept }
+# reporter has a read access to Peatio financial information
+- { role: reporter, verb: get, path: api/v2/peatio/admin/deposits, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/withdraws, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/revenues, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/liabilities, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/assets, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/expenses, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/wallets, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/blockchains, action: accept }
+- { role: reporter, verb: get, path: api/v2/peatio/admin/currencies, action: accept }
+# ranger access
+- { role: reporter, verb: get, path: api/v2/ranger, action: accept }
+# Finex upstream access
+- { role: reporter, verb: get, path: api/v2/open_finance, action: accept }
+# applogic access
+- { role: reporter, verb: all, path: api/v2/applogic, action: accept }
+- { role: reporter, verb: get, path: v2/applogic/admin/marketplace/subscriptions/items, action: accept }
