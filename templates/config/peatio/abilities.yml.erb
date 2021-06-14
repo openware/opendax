@@ -10,6 +10,7 @@ roles:
   - trader
   - maker
   - sa_maker
+  - reporter
 
 admin_permissions:
   superadmin:
@@ -158,6 +159,18 @@ admin_permissions:
       - Trade
       - Order
       - InternalTransfer
+  reporter:
+    read:
+      - Operations::Revenue
+      - Operations::Account
+      - Operations::Asset
+      - Operations::Expense
+      - Operations::Liability
+      - Deposit
+      - Withdraw
+      - Currency
+      - Wallet
+      - Blockchain
 
 user_permissions:
   superadmin:
@@ -179,6 +192,8 @@ user_permissions:
   trader:
     manage: all
   maker:
+    manage: all
+  reporter:
     manage: all
   sa_maker:
     read:
