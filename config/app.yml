@@ -5,18 +5,18 @@ app:
   subdomain: www
   show_landing: true
   opendax_addr: https://www.opendax.cloud
-  wizard_enabled: false
+  wizard_enabled: true
 render_protect: false
-csrfEnabled: false
+csrfEnabled: true
 ssl:
   enabled: false
   email: support@example.com
 updateVersions: false
 images:
-  peatio: quay.io/openware/peatio:3.0.2
+  peatio: quay.io/openware/peatio:3.0.13
   barong: quay.io/openware/barong:3.0.5
-  sonic: quay.io/openware/baseapp:3.0.7
-  tower: quay.io/openware/tower:3.0.20
+  sonic: quay.io/openware/baseapp:d61d0626
+  tower: quay.io/openware/tower:3.0.44
   rango: quay.io/openware/rango:3.0.1
   finex: quay.io/openware/openfinex:3.0.0-74d3b52
 vendor:
@@ -27,15 +27,15 @@ kyc:
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
 vault:
-  root_token: changeme
-  peatio_rails_token: changeme
-  peatio_crypto_token: changeme
-  peatio_upstream_token: changeme
-  peatio_matching_token: changeme
-  barong_token: changeme
-  finex_engine_token: changeme
-  kaigara_token: changeme
-  sonic_token: changeme
+  root_token: s.ebOpxSfzIv9iLD2PT9Rl5iQ2
+  peatio_rails_token: s.BK2DthB29Rs0x1p75ICDwcoW
+  peatio_crypto_token: s.LXSlwG2vdNopqoZvcqXlU9u1
+  peatio_upstream_token: s.wKKNgdD89QwUnrZbnZ4Wsryw
+  peatio_matching_token: s.mA1QGlPvBPQNLCvTQF5PFETr
+  barong_token: s.W6lCchKW8CIGadgrYoUO3Lsg
+  finex_engine_token: s.N5yUIklbHe0K3cZO7OJgZuPf
+  kaigara_token: s.NClJWXGxEJtUnuqfRVVNzVvV
+  sonic_token: s.mtCB4E4YJXkkZCyeGcp6uglU
 database:
   host: db
   adapter: mysql
@@ -95,7 +95,7 @@ wallets:
     address: changeme
     max_balance: 1000.0
 parity:
-  network: kovan  # Could be mainnet, kovan, rinkeby
+  network: kovan
   address: parity
   rpcport: 8545
   port: 30303
@@ -117,13 +117,13 @@ litecoind:
 electrumd_btc:
   user: opendax
   password: changeme
-  wallet_passphrase: "luc1d1tyc0m3b@ck"
+  wallet_passphrase: luc1d1tyc0m3b@ck
   testnet: true
   segwit: false
 electrumd_ltc:
   user: opendax
   password: changeme
-  wallet_passphrase: "th3l3ss1kn0wth3b3tt3r"
+  wallet_passphrase: th3l3ss1kn0wth3b3tt3r
   testnet: true
   segwit: false
 terraform:
