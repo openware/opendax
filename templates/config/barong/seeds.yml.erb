@@ -5,7 +5,7 @@
 # model properties are listed at the very bottom of this models files.
 #
 # Note: email is the only required field here.
-<%- unless @config['wizard_enabled'] %>
+<%- unless @config['app']['wizard_enabled'] %>
 users:
 - email: admin@barong.io
   password: 0lDHd9ufs9t@
