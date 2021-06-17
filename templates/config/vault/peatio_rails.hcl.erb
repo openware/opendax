@@ -6,6 +6,14 @@ path "transit/keys/<%= @config['app']['name'].downcase %>_*" {
 path "transit/encrypt/<%= @config['app']['name'].downcase %>_engines_*" {
   capabilities = ["create", "read", "update"]
 }
+# Encrypt blockchains data
+path "transit/encrypt/<%= @config['app']['name'].downcase %>_blockchains_*" {
+  capabilities = ["create", "read", "update"]
+}
+# Decrypt blockchains data
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_blockchains_*" {
+  capabilities = ["create", "read", "update"]
+}
 # Encrypt wallets secrets
 path "transit/encrypt/<%= @config['app']['name'].downcase %>_wallets_*" {
   capabilities = ["create", "read", "update"]
