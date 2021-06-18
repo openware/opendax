@@ -6,6 +6,14 @@ app:
   show_landing: true
   opendax_addr: https://www.opendax.cloud
   wizard_enabled: true
+plugins:
+  organization:
+    enabled: false
+    signup_email: ''
+    signup_telegram: ''
+    extraAbilities:
+      roles: []
+      permissions: {}
 render_protect: false
 csrfEnabled: true
 ssl:
