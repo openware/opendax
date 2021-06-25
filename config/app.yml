@@ -27,15 +27,15 @@ kyc:
   sandbox_mode: true
   api_endpoint: https://api.kycaid.com/
 vault:
-  root_token: s.ebOpxSfzIv9iLD2PT9Rl5iQ2
-  peatio_rails_token: s.BK2DthB29Rs0x1p75ICDwcoW
-  peatio_crypto_token: s.LXSlwG2vdNopqoZvcqXlU9u1
-  peatio_upstream_token: s.wKKNgdD89QwUnrZbnZ4Wsryw
-  peatio_matching_token: s.mA1QGlPvBPQNLCvTQF5PFETr
-  barong_token: s.W6lCchKW8CIGadgrYoUO3Lsg
-  finex_engine_token: s.N5yUIklbHe0K3cZO7OJgZuPf
-  kaigara_token: s.NClJWXGxEJtUnuqfRVVNzVvV
-  sonic_token: s.mtCB4E4YJXkkZCyeGcp6uglU
+  root_token: changeme
+  peatio_rails_token: changeme
+  peatio_crypto_token: changeme
+  peatio_upstream_token: changeme
+  peatio_matching_token: changeme
+  barong_token: changeme
+  finex_engine_token: changeme
+  kaigara_token: changeme
+  sonic_token: changeme
 database:
   host: db
   adapter: mysql
