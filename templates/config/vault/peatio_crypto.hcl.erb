@@ -14,6 +14,14 @@ path "transit/decrypt/<%= @config['app']['name'].downcase %>_payment_addresses_*
 path "transit/decrypt/<%= @config['app']['name'].downcase %>_wallets_*" {
   capabilities = ["create", "read", "update"]
 }
+# Encrypt blockchains data
+path "transit/encrypt/<%= @config['app']['name'].downcase %>_blockchains_*" {
+  capabilities = ["create", "read", "update"]
+}
+# Decrypt blockchains data
+path "transit/decrypt/<%= @config['app']['name'].downcase %>_blockchains_*" {
+  capabilities = ["create", "read", "update"]
+}
 # Renew tokens
 path "auth/token/renew" {
   capabilities = ["update"]
