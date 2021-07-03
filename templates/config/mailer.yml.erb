@@ -71,6 +71,15 @@ events:
       subject: Deposit Accepted
       template_path: deposit_accepted.en.html.erb
 
+- name: Deposit Rejected
+  key: deposit.updated
+  exchange: peatio
+  expression: changes.state == "rejected" && record.state == "rejected"
+  templates:
+    EN:
+      subject: Deposit Rejected
+      template_path: deposit_accepted.en.html.erb
+
 - name: Session Create
   key: session.create
   exchange: barong_system
@@ -82,10 +91,37 @@ events:
 - name: Withdrawal Succeed
   key: withdraw.updated
   exchange: peatio
-  expression: changes.state in ["succeed", "rejected", "canceled", "failed", "accepted"] && record.state in ["succeed", "rejected", "canceled", "failed"]
+  expression: changes.state in ["succeed", "accepted"] && record.state == "succeed"
   templates:
     EN:
       subject: Withdrawal Succeed
+      template_path: withdraw_succeed.en.html.erb
+
+- name: Withdrawal Rejected
+  key: withdraw.updated
+  exchange: peatio
+  expression: changes.state == "rejected" && record.state == "rejected"
+  templates:
+    EN:
+      subject: Withdrawal Rejected
+      template_path: withdraw_succeed.en.html.erb
+
+- name: Withdrawal Canceled
+  key: withdraw.updated
+  exchange: peatio
+  expression: changes.state == "canceled" && record.state == "canceled"
+  templates:
+    EN:
+      subject: Withdrawal Canceled
+      template_path: withdraw_succeed.en.html.erb
+
+- name: Withdrawal Failed
+  key: withdraw.updated
+  exchange: peatio
+  expression: changes.state == "failed" && record.state == "failed"
+  templates:
+    EN:
+      subject: Withdrawal Failed
       template_path: withdraw_succeed.en.html.erb
 
 - name: New Beneficiary
