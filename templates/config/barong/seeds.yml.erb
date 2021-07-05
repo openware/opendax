@@ -371,6 +371,11 @@ permissions:
 - { role: member, verb: all, path: api/v2/applogic, action: accept }
 # get abilities
 - { role: member, verb: get, path: api/v2/finex/abilities, action: accept }
+<%- if @config.dig('plugins', 'organization', 'enabled') -%>
+# organization feature
+- { role: member, verb: get, path: api/v2/barong/organization/switch_session_ability, action: accept }
+- { role: member, verb: get, path: api/v2/barong/organization/accounts, action: accept }
+<%- end -%>
 
 # MAKER
 - { role: maker, verb: all, path: api/v2/peatio/account, action: accept }
@@ -424,3 +429,80 @@ permissions:
 - { role: sa_maker, verb: all, path: api/v2/applogic, action: accept }    
 # get abilities
 - { role: maker, verb: get, path: api/v2/finex/abilities, action: accept }
+
+<%- if @config.dig('plugins', 'organization', 'enabled') -%>
+# ORG-ADMIN
+# has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+- { role: org-admin, verb: all, path: api/v2/peatio/account, action: accept }
+- { role: org-admin, verb: all, path: api/v2/peatio/market, action: accept }
+- { role: org-admin, verb: all, path: api/v2/finex/market, action: accept }
+- { role: org-admin, verb: all, path: api/v2/barong/resource, action: accept }
+- { role: org-admin, verb: all, path: api/v2/peatio/account/internal_transfers, action: accept }    
+- { role: org-admin, verb: all, path: api/v2/finex/qe, action: accept } 
+- { role: org-admin, verb: all, path: api/v2/peatio/swagger, action: accept }
+- { role: org-admin, verb: all, path: api/v2/resource, action: accept }
+# Drop Peatio order endpoint requests
+- { role: org-admin, verb: post, path: api/v2/peatio/market/orders, action: drop }
+- { role: org-admin, verb: post, path: api/v2/peatio/admin/orders, action: drop }
+# ranger access
+- { role: org-admin, verb: get, path: api/v2/ranger, action: accept }
+# Finex upstream access
+- { role: org-admin, verb: get, path: api/v2/open_finance, action: accept }
+# applogic access
+- { role: org-admin, verb: all, path: api/v2/applogic, action: accept }
+# get abilities
+- { role: org-admin, verb: get, path: api/v2/finex/abilities, action: accept }
+# organization feature
+- { role: org-admin, verb: get, path: api/v2/barong/organization/switch_session_ability, action: accept }
+- { role: org-admin, verb: get, path: api/v2/barong/organization/accounts, action: accept }
+
+# ORG-MEMBER
+# has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+- { role: org-member, verb: all, path: api/v2/peatio/account, action: accept }
+- { role: org-member, verb: all, path: api/v2/peatio/market, action: accept }
+- { role: org-member, verb: all, path: api/v2/finex/market, action: accept }
+- { role: org-member, verb: all, path: api/v2/barong/resource, action: accept }
+- { role: org-member, verb: all, path: api/v2/peatio/account/internal_transfers, action: accept }    
+- { role: org-member, verb: all, path: api/v2/finex/qe, action: accept } 
+- { role: org-member, verb: all, path: api/v2/peatio/swagger, action: accept }
+- { role: org-member, verb: all, path: api/v2/resource, action: accept }
+# Drop Peatio order endpoint requests
+- { role: org-member, verb: post, path: api/v2/peatio/market/orders, action: drop }
+- { role: org-member, verb: post, path: api/v2/peatio/admin/orders, action: drop }
+# ranger access
+- { role: org-member, verb: get, path: api/v2/ranger, action: accept }
+# Finex upstream access
+- { role: org-member, verb: get, path: api/v2/open_finance, action: accept }
+# applogic access
+- { role: org-member, verb: all, path: api/v2/applogic, action: accept }
+# get abilities
+- { role: org-member, verb: get, path: api/v2/finex/abilities, action: accept }
+# organization feature
+- { role: org-member, verb: get, path: api/v2/barong/organization/switch_session_ability, action: accept }
+- { role: org-member, verb: get, path: api/v2/barong/organization/accounts, action: accept }
+
+# ORG-ACCOUNTANT
+# has standard user permissions to ACCOUNT, MARKET, RESOURCE modules
+- { role: org-accountant, verb: all, path: api/v2/peatio/account, action: accept }
+- { role: org-accountant, verb: all, path: api/v2/peatio/market, action: accept }
+- { role: org-accountant, verb: all, path: api/v2/finex/market, action: accept }
+- { role: org-accountant, verb: all, path: api/v2/barong/resource, action: accept }
+- { role: org-accountant, verb: all, path: api/v2/peatio/account/internal_transfers, action: accept }    
+- { role: org-accountant, verb: all, path: api/v2/finex/qe, action: accept } 
+- { role: org-accountant, verb: all, path: api/v2/peatio/swagger, action: accept }
+- { role: org-accountant, verb: all, path: api/v2/resource, action: accept }
+# Drop Peatio order endpoint requests
+- { role: org-accountant, verb: post, path: api/v2/peatio/market/orders, action: drop }
+- { role: org-accountant, verb: post, path: api/v2/peatio/admin/orders, action: drop }
+# ranger access
+- { role: org-accountant, verb: get, path: api/v2/ranger, action: accept }
+# Finex upstream access
+- { role: org-accountant, verb: get, path: api/v2/open_finance, action: accept }
+# applogic access
+- { role: org-accountant, verb: all, path: api/v2/applogic, action: accept }
+# get abilities
+- { role: org-accountant, verb: get, path: api/v2/finex/abilities, action: accept }
+# organization feature
+- { role: org-accountant, verb: get, path: api/v2/barong/organization/switch_session_ability, action: accept }
+- { role: org-accountant, verb: get, path: api/v2/barong/organization/accounts, action: accept }
+<%- end -%>

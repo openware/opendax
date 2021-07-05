@@ -5,6 +5,13 @@ roles:
   - accountant
   - compliance
   - support
+<%- if @config.dig('plugins', 'organization', 'enabled') -%>
+organization_roles:
+  - org-admin
+  - org-member
+  - org-accountant
+  <%= @config.dig('plugins', 'organization', 'extraAbilities', 'roles').to_yaml[3..].gsub(/\n/,"\n  ")[3..-3] -%>
+<%- end -%>
 
 admin_permissions:
   superadmin:
@@ -19,6 +26,9 @@ admin_permissions:
       - Permission
       - Restriction
       - Document
+      <%- if @config.dig('plugins', 'organization', 'enabled') -%>
+      - Organization
+      <%- end -%>
   admin:
     read:
       - Activity    
@@ -31,6 +41,9 @@ admin_permissions:
       - APIKey
       - Restriction
       - Document
+      <%- if @config.dig('plugins', 'organization', 'enabled') -%>
+      - Organization
+      <%- end -%>
   technical:
     read:
       - Ability
@@ -68,3 +81,29 @@ admin_permissions:
       - Activity
     manage:
       - User
+
+<%- if @config.dig('plugins', 'organization', 'enabled') -%>
+organization_permissions:
+  superadmin:
+    manage:
+      - AdminSwitchSession
+  admin:
+    manage:
+      - AdminSwitchSession
+  member:
+    manage:
+      - OrganizationSwitchSession
+      - SubunitSwitchSession
+  org-admin:
+    manage:
+      - OrganizationSwitchSession
+      - SubunitSwitchSession
+  org-member:
+    manage:
+      - SubunitSwitchSession
+  org-accountant:
+    read:
+      - OrganizationSwitchSession
+      - SubunitSwitchSession
+  <%= @config.dig('plugins', 'organization', 'extraAbilities', 'permissions').to_yaml[3..].gsub(/\n/,"\n  ")[3..-3] %>
+<%- end -%>
