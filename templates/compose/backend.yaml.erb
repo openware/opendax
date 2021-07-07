@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: <%= @config['database']['password'] %>
     <%- end %>
 
-  influxdb:
+  influx-0-0:
     image: influxdb:1.7.10
     restart: always
     volumes:
@@ -31,6 +31,21 @@ services:
       - ../config/arke/historical_data:/data/historical_data
     environment:
        INFLUXDB_ADMIN_ENABLED: "true"
+  <%- if @config['influx']['replica'] > 0 %>
+  <%- for i in 0..@config['influx']['replica']-1 do %>
+  influx-0-<%= i + 1 %>:
+    image: influxdb:1.7.10
+    restart: always
+    volumes:
+      - influx_data:/var/lib/influxdb
+      - ../config/influxdb/build_candles.sql:/build_candles.sql
+      - ../config/influxdb/arke.sql:/arke.sql
+      - ../config/influxdb/peatio.sql:/peatio.sql
+      - ../config/arke/historical_data:/data/historical_data
+    environment:
+      INFLUXDB_ADMIN_ENABLED: "true"
+  <%- end %>
+  <%- end %>
 
   redis:
     image: redis:4.0.10

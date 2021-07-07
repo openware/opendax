@@ -42,6 +42,8 @@ database:
   port: 3306
   user: root
   password: changeme
+influx:
+  replica: 0
 storage:
   provider: Google
   bucketName: opendax-barong-docs-bucket
