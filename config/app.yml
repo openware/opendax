@@ -13,7 +13,7 @@ ssl:
   email: support@example.com
 updateVersions: false
 images:
-  peatio: quay.io/openware/peatio:3.0.13
+  peatio: quay.io/openware/peatio:3.1.0-ada4174
   barong: quay.io/openware/barong:3.0.5
   sonic: quay.io/openware/baseapp:d61d0626
   tower: quay.io/openware/tower:3.0.44

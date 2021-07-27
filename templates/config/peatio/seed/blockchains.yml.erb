@@ -1,14 +1,16 @@
-- key:               eth-<%= @config['parity']['network'] %>
-  name:              Ethereum <%= @config['parity']['network'].capitalize %>
-  client:            parity
-  server:            http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
-  height:            8670000
-  protocol:          ERC-20
-  min_confirmations: 6
+- key:                  eth-<%= @config['parity']['network'] %>
+  name:                 Ethereum <%= @config['parity']['network'].capitalize %>
+  client:               parity
+  server:               http://<%= @config['parity']['address'] %>:<%= @config['parity']['rpcport'] %>
+  height:               8670000
+  protocol:             ERC-20
+  min_confirmations:    6
   explorer:
-    address:         https://etherscan.io/address/#{address}
-    transaction:     https://etherscan.io/tx/#{txid}
-  status:            active
+    address:            https://etherscan.io/address/#{address}
+    transaction:        https://etherscan.io/tx/#{txid}
+  status:               active
+  collection_gas_speed: standard
+  withdrawal_gas_speed: standard
 
 - key:               opendax-cloud
   name:              Opendax Cloud Blockchain
