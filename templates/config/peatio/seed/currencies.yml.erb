@@ -1,1 +1,36 @@
-[]
+- id:                     eth
+  name:                   Ethereum
+  type:                   coin
+  status:                 enabled
+  precision:              8
+  position:               1
+  networks:
+    - blockchain_key: eth-<%= @config['parity']['network'] %>
+      base_factor: 1_000_000_000_000_000_000
+      options:
+        gas_limit: 21_000
+
+- id:                     usdt
+  name:                   Tether
+  type:                   coin
+  status:                 enabled
+  precision:              8
+  position:               2
+  networks:
+    - blockchain_key: eth-<%= @config['parity']['network'] %>
+      parent_id: eth
+      base_factor: 1_000_000_000_000_000_000
+      options:
+        gas_limit: 90_000
+
+<% if @config['bitcoind']['enabled'] %>
+- id:                     btc
+  name:                   Bitcoin
+  type:                   coin
+  status:                 enabled
+  precision:              8
+  position:               3
+  networks:
+    - blockchain_key:  btc-<%= @config['bitcoind']['network'] %>
+      base_factor: 100_000_000
+<% end %>
