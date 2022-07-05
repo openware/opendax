@@ -1,4 +1,4 @@
-FROM ruby:2.6.1
+FROM ruby:latest
 
 ENV APP_HOME=/home/app
 
