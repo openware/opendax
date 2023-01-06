@@ -1,8 +1,8 @@
 ---
 app:
-  name: OpenDAX
-  domain: app.local
-  subdomain: www
+  name: Axes
+  domain: axes.co
+  subdomain: app
   show_landing: true
   opendax_addr: https://www.opendax.cloud
   wizard_enabled: true
@@ -20,7 +20,7 @@ images:
   rango: quay.io/openware/rango:3.0.1
   finex: quay.io/openware/openfinex:3.0.0-74d3b52
 vendor:
-  frontend: git@github.com:openware/baseapp.git
+  frontend: git@github.com:Axes-co/axesexchange.git
 kyc:
   provider: local
   authorization_token: changeme
